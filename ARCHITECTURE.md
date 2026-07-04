@@ -21,6 +21,24 @@ morphing, and 95% IoU is *hard-won*. With STEP the exact numbers are in the file
 95% is a **floor**. The engine's job is: read the exact surfaces, decide the cleanest
 parametric expression, emit readable `.scad`, and verify.
 
+### Organic ≠ free-form (it's primitives all the way down)
+
+A real STEP B-rep only exists because the part was **designed in parametric CAD**
+(Fusion / SolidWorks / Onshape) from sketches → extrude / revolve / loft / fillet /
+boolean. The "organic" look of a prosthetic shell **emerges from primitives + blends**,
+not from arbitrary sculpting — so even the shell's B-rep is overwhelmingly analytic
+faces (planes, cylinders, cones, tori). Reconstruction therefore stays primitive/CSG
+the whole way through; the real task is **recovering the construction intent**.
+
+The one genuine nuance: **loft** operations produce B-spline faces (a surface skinned
+between sketch profiles). These are *not* free-form — they're **bounded,
+profile-to-profile** lofts, reconstructed as a parametric `skin()`/`hull()`/BOSL2 sweep
+between two recovered profiles. Still readable, still parametric, no point dump.
+
+⚠️ A raw `polyhedron` vertex-dump in the output is a **smell**: it usually means the
+input wasn't a true B-rep (someone exported a tessellated mesh as STEP). Treat it as a
+last resort, not a strategy — 95% should be reachable with primitives + lofts.
+
 ## Pipeline
 
 ```
@@ -76,12 +94,53 @@ Per body, choose the cleanest parametric form:
   `linear_extrude()` of the 2D section.
 - **Primitive assembly** → CSG `union`/`difference`/`intersection` of cylinders,
   boxes, spheres; chamfers/fillets from cone/torus faces.
-- **Free-form** → `hull()`/`skin()` loft or `polyhedron`, scoped to that region only.
+- **Lofted / "organic"** → parametric loft (`skin()` / `hull()` / BOSL2 sweep) between
+  the two recovered profiles bounding each B-spline face. Raw `polyhedron` only as a
+  last resort (and a signal the input may be a mesh, not a true B-rep).
 
 ### 3. Build (.scad emitter)
 Emit a parametric file: a top-of-file named-variable block (radii, thicknesses,
 spacings, counts) feeding modules per feature. Holes from cylinder faces, chamfers
 from cones, rounds from tori, flats from planes. Readable primitives > point dumps.
+
+#### Organic-body build recipe: MASS → HULL → SUBTRACT
+
+The canonical parametric pattern for an "organic" functional part (e.g. the palm /
+gauntlet shells — the bodies ingest flags as loft-heavy / high-bspline-area). It is
+the exact way these parts were designed in CAD, run in reverse. Four steps
+(cf. makerblock, "OpenSCAD intermediates: complex organic shapes"):
+
+```
+   MASS            →     HULL           →   SUBTRACT channels →  SUBTRACT bores
+   place primitives      hull() them into    difference() the      difference() the
+   at their anchors      one smooth shell    slots/tendon paths    pivot/pin holes
+```
+
+1. **MASS** — position the massing primitives that ingest already extracted: the palm
+   body as a flattened ellipsoid/dome, the knuckle mounds as discs (cylinders), the
+   front knuckle bar as a cylinder, the thumb mound as its own block/sphere. These are
+   the exact analytic solids from the B-rep — nothing invented.
+2. **HULL** — `hull()` the masses **in segments** (pairwise / centre-to-satellite, NOT
+   one big hull — a single hull is only convex and shrink-wraps everything into a blob).
+   Segmented hulls give the smooth, branching, concave organic skin. Varying primitive
+   radii along a chain gives natural tapering.
+3. **SUBTRACT channels** — `difference()` the functional negatives: tendon/finger
+   channels across the front lip, cable routes, cavities. Sourced from the planar-slot
+   and pocket faces in the B-rep.
+4. **SUBTRACT bores** — `difference()` the round through-holes: finger-hinge axle bores
+   (which segment the front bar into individual knuckles), pin holes, pivot holes.
+   Sourced directly from the cylinder faces (exact axis + radius).
+
+Everything stays parametric and human-editable — no `polyhedron` dump anywhere.
+
+**Worked target — the palm.** The sibling STL workspace hit a **~0.90 IoU primitive
+ceiling** on this exact part, because it built the dome and its surrounding primitives
+*separately* and they never blended. Step 2 (segmented `hull()` of the masses into one
+continuous shell) is precisely the move that reproduces the original CAD loft and is
+the concrete path *past* 0.90. This is the emitter's flagship organic case.
+
+> Emitter note: the classifier's `freeform` strategy label denotes this organic case —
+> route those bodies to the MASS → HULL → SUBTRACT emitter, not to a `polyhedron`.
 
 ### 4–5. Export, align, measure, render
 Render STL; align to the original (centroid + principal axes, ICP refine);
@@ -107,5 +166,9 @@ src/
 ## Open questions / risks
 - B-rep backend: pythonocc-core vs FreeCAD headless (pick one, wrap behind `ingest/`).
 - Assembly placement: STEP assemblies carry per-instance transforms — preserve them.
-- Free-form surfaces (organic prosthetic shells) are the only place 95% is at risk;
-  keep those regions small and measured, not guessed.
+- Lofted B-spline faces (from CAD loft operations) are the main modelling challenge —
+  not because they're free-form, but because recovering the two bounding profiles +
+  the sweep path is fiddlier than reading a cylinder radius. They stay parametric.
+- A STEP that is actually a tessellated mesh (all tiny facets, no analytic faces) is
+  out of scope for primitive reconstruction — detect it early and flag it, don't dump
+  it into a `polyhedron`.

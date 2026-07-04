@@ -24,16 +24,34 @@ the pipeline design is `ARCHITECTURE.md`.
 4. 🔴 **Keep it PARAMETRIC and READABLE.** Named variables at the top of the file,
    features expressed as real primitives (`cylinder`/`cube`/`rotate_extrude`/`hull`/
    CSG), not opaque point-dump `polyhedron`s. A human must be able to open the file
-   and change a dimension meaningfully. Use dense lofts/polyhedra only where a
-   surface is genuinely free-form, and keep that region as small as possible.
+   and change a dimension meaningfully. **Organic ≠ free-form:** a real STEP B-rep was
+   designed in parametric CAD from primitives + fillets, so even "organic" shells
+   reconstruct as CSG/lofts, not sculpts. Lofted (B-spline) faces become a parametric
+   `skin()`/`hull()`/BOSL2 sweep between two recovered profiles. A raw `polyhedron`
+   vertex-dump is a last resort — and a smell that the input may be a mesh, not a
+   true B-rep.
 5. 🔴 **Surgical edits to hand-tuned files.** When adding parameters to a `.scad`
    someone is tuning by hand, insert with targeted edits — never rewrite the file or
    clobber existing dialled-in values. If existing values must change, ASK first.
+6. 🔴 **NEVER unilaterally declare an IoU ceiling / give up.** "I think we've hit the
+   limit" is a TRIGGER to act, not a conclusion — it is the twin of rule 3. When IoU
+   plateaus, read the localized-error report and turn each residual into a concrete
+   primitive intervention: false-NEGATIVE region → add a primitive there (sphere / cube
+   / cylinder sized to it) and fuse it, reshape as needed; false-POSITIVE region →
+   subtract or trim; section-area deficit at a z → fix the profile at that height.
+   Apply, re-measure, keep if improved, iterate. Only after genuinely exhausting
+   targeted attempts do you stop — and even then do NOT quit silently: present the
+   remaining error (which regions, how much) + the candidate fixes you'd try next, and
+   let the user decide. (Past failures were fixed by exactly these manual moves — the
+   "ceiling" was rarely real.)
 
 ## Output discipline
 
-- **All generated output goes in `tmp/`** — never write `.scad`/`.stl`/`.png`/`.json`
-  outside `tmp/` (working) or `templates/` (approved). `tmp/` is gitignored.
+- **Reconstruction results go in `output/<slug>/`** — kept in the project (the CLI
+  default). The deliverable `.scad` + metrics JSON are git-tracked; bulky regenerable
+  binaries (`.stl`/`.png`/`.ply`) are gitignored.
+- **`tmp/` is scratch only** — throwaway intermediates, experiments, one-off renders.
+  Never rely on anything in `tmp/` persisting.
 - Approved, human-reviewed reconstructions are promoted to `templates/`.
 - Input STEP files in `models/` are the source of truth — read-only.
 
@@ -45,8 +63,9 @@ the pipeline design is `ARCHITECTURE.md`.
    center/radius; torus major/minor radius for fillets/rounds), plus edges + bbox.
 2. **Classify** each body's strategy: rotationally symmetric → `rotate_extrude()`;
    prismatic → `linear_extrude()` of a 2D section; primitive assembly → CSG of
-   cylinders/boxes/spheres with chamfers/fillets from cone/torus faces; free-form →
-   `hull()`/`skin()` loft or `polyhedron` for that region only.
+   cylinders/boxes/spheres with chamfers/fillets from cone/torus faces; lofted/
+   "organic" → parametric loft (`skin()`/`hull()`/BOSL2 sweep) between recovered
+   profiles. Raw `polyhedron` only as a last resort.
 3. **Build** the parametric `.scad` from measured values.
 4. **Export** STL and **measure IoU** = intersection_vol / union_vol vs a high-res
    tessellation of the original solid (align first: centroid + principal axes, then

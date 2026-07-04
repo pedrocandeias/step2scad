@@ -1,10 +1,16 @@
-# All generated output
+# Scratch / intermediate only
 tmp/
-*.stl
-!models/*.stl
-*.png
-*.json
-!eval/**/*.json
+
+# Derived split components (regenerable via scripts/split_step.py) — keep the manifest
+models/phoenix_components/*.step
+
+# Reconstruction results live in output/ and are KEPT in the project.
+# Track the deliverable .scad + metrics JSON; skip bulky regenerable binaries.
+output/**/*.stl
+output/**/*.png
+output/**/*.ply
+# large regenerable B-rep dump; keep the small .scad + eval.json
+output/**/features.json
 
 # Python
 __pycache__/

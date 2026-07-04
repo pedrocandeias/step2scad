@@ -28,9 +28,10 @@ src/           reconstruction engine (B-rep reader, classifiers, .scad emitters)
 prompts/       the Fable 5 agent prompt(s)
 scripts/       CLI entry points / pipeline automation
 templates/     approved, human-reviewed .scad reconstructions
+output/        reconstruction results per model — KEPT (.scad + metrics tracked)
 eval/          IoU harness + regression cases
 docs/          notes
-tmp/           ALL generated output (.scad/.stl/.png/.json) — gitignored
+tmp/           scratch only (throwaway intermediates) — gitignored
 ```
 
 ## Quickstart
@@ -38,8 +39,8 @@ tmp/           ALL generated output (.scad/.stl/.png/.json) — gitignored
 _Engine is under construction — see ARCHITECTURE.md for the target pipeline._
 
 ```bash
-# (target CLI)
-python -m step2scad models/e_nable_phoenix_hand_v3.step --out tmp/output --iou 0.95
+# results land in output/<model>/ (kept in the project)
+PYTHONPATH=src python -m step2scad models/F695-2Z.step
 ```
 
 ## Status

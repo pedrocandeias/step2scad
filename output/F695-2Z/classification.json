@@ -1,0 +1,22 @@
+{
+  "source": "models/F695-2Z.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "rotate_extrude",
+      "reasoning": "46% of area is rotational faces sharing one axis (dir [0.0, 0.0, -1.0], 14 faces); 100% of all area conforms to that axis (incl. planar caps normal to it) -> RZ profile rotate_extrude.",
+      "axis": {
+        "origin": [
+          0.0,
+          0.0,
+          1.2500000000000047
+        ],
+        "dir": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      }
+    }
+  ]
+}

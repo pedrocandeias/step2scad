@@ -1,0 +1,189 @@
+{
+  "source": "models/e_nable_phoenix_hand_v3.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cone, cylinder, plane, sphere, torus) with no single dominant axis (largest coaxial cluster covers only 1%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 1,
+      "strategy": "freeform",
+      "reasoning": "42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 2,
+      "strategy": "freeform",
+      "reasoning": "42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 3,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 4,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 5,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 6,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 7,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 8,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 9,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 10,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 11,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 12,
+      "strategy": "rotate_extrude",
+      "reasoning": "62% of area is rotational faces sharing one axis (dir [0.0, -0.0, -1.0], 5 faces); 100% of all area conforms to that axis (incl. planar caps normal to it) -> RZ profile rotate_extrude.",
+      "axis": {
+        "origin": [
+          -29.3435308080334,
+          40.6897065321635,
+          2.70466909517558
+        ],
+        "dir": [
+          0.0,
+          -1.22464679914735e-16,
+          -1.0
+        ]
+      }
+    },
+    {
+      "body_id": 13,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 37%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 14,
+      "strategy": "rotate_extrude",
+      "reasoning": "62% of area is rotational faces sharing one axis (dir [0.0, -0.0, -1.0], 5 faces); 100% of all area conforms to that axis (incl. planar caps normal to it) -> RZ profile rotate_extrude.",
+      "axis": {
+        "origin": [
+          -29.3435308080334,
+          58.1039843869869,
+          2.70466909517562
+        ],
+        "dir": [
+          0.0,
+          -1.22464679914735e-16,
+          -1.0
+        ]
+      }
+    },
+    {
+      "body_id": 15,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 48%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 16,
+      "strategy": "freeform",
+      "reasoning": "32% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 17,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 18,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 19,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 20,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 21,
+      "strategy": "csg",
+      "reasoning": "analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 22,
+      "strategy": "freeform",
+      "reasoning": "34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 23,
+      "strategy": "freeform",
+      "reasoning": "34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 24,
+      "strategy": "freeform",
+      "reasoning": "36% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 25,
+      "strategy": "freeform",
+      "reasoning": "34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 26,
+      "strategy": "freeform",
+      "reasoning": "34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 27,
+      "strategy": "freeform",
+      "reasoning": "62% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 28,
+      "strategy": "freeform",
+      "reasoning": "59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 29,
+      "strategy": "freeform",
+      "reasoning": "58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 30,
+      "strategy": "freeform",
+      "reasoning": "58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    },
+    {
+      "body_id": 31,
+      "strategy": "freeform",
+      "reasoning": "59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions."
+    }
+  ]
+}

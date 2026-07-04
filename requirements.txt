@@ -1,0 +1,12 @@
+# step2scad dependencies (all verified installed 2026-07-04)
+cadquery-ocp==7.8.1.*   # OCP: OpenCASCADE python bindings (B-rep ingest + tessellation)
+cadquery==2.7.*         # higher-level STEP fallback / utilities
+trimesh==4.12.*         # mesh handling, alignment, boolean IoU
+manifold3d              # trimesh boolean engine used for exact IoU
+numpy
+scipy
+shapely
+matplotlib              # eval: surface-distance heatmap + section-sweep plots (Agg, headless)
+rtree                   # trimesh spatial index (contains / proximity acceleration)
+# External (non-pip): OpenSCAD binary — /home/pec/bin/openscad (v2026.04),
+# override with --openscad or the STEP2SCAD_OPENSCAD env var.
