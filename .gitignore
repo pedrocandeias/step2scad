@@ -1,0 +1,20 @@
+# All generated output
+tmp/
+*.stl
+!models/*.stl
+*.png
+*.json
+!eval/**/*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# OpenSCAD
+*.scad.bak
+
+# OS
+.DS_Store

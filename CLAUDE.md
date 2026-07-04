@@ -1,0 +1,64 @@
+# step2scad — CLAUDE.md
+
+## Project
+
+Automated **STEP → parametric OpenSCAD** reconstructor. Input a `.step`/`.stp`
+B-rep solid; output a parametric `.scad` that reconstructs it to **≥95% IoU**, with
+no manual modelling. The reconstruction agent prompt is `prompts/reconstruct.md`;
+the pipeline design is `ARCHITECTURE.md`.
+
+## Non-negotiable rules
+
+1. 🔴 **RENDER + VISUALLY VERIFY before declaring anything done.** Render the `.scad`
+   from multiple angles, read the PNG, and compare against a ghost of the original.
+   Parse/compile success is NOT done. You must have *looked at the image* and
+   confirmed the geometry matches intent.
+2. 🔴 **NEVER guess a dimension. Measure it or ask.** Every number in a `.scad` comes
+   from a B-rep measurement (surface type + parameters read from the STEP) or, for
+   genuinely free-form regions only, from a mesh occupancy / section measurement.
+   No eyeballing renders, no "probably ~X", no analogy to another part. If a feature
+   is ambiguous, say so and ask — do not invent it.
+3. 🔴 **NEVER move the goalposts to claim success.** Measure IoU against the literal
+   goal. If it's 92%, report 92%. Do not switch metrics, redefine terms, or
+   generalise from one good body to call the whole part done.
+4. 🔴 **Keep it PARAMETRIC and READABLE.** Named variables at the top of the file,
+   features expressed as real primitives (`cylinder`/`cube`/`rotate_extrude`/`hull`/
+   CSG), not opaque point-dump `polyhedron`s. A human must be able to open the file
+   and change a dimension meaningfully. Use dense lofts/polyhedra only where a
+   surface is genuinely free-form, and keep that region as small as possible.
+5. 🔴 **Surgical edits to hand-tuned files.** When adding parameters to a `.scad`
+   someone is tuning by hand, insert with targeted edits — never rewrite the file or
+   clobber existing dialled-in values. If existing values must change, ASK first.
+
+## Output discipline
+
+- **All generated output goes in `tmp/`** — never write `.scad`/`.stl`/`.png`/`.json`
+  outside `tmp/` (working) or `templates/` (approved). `tmp/` is gitignored.
+- Approved, human-reviewed reconstructions are promoted to `templates/`.
+- Input STEP files in `models/` are the source of truth — read-only.
+
+## Reconstruction pipeline (run in order for every STEP)
+
+1. **Ingest** — parse the B-rep. Enumerate solids/bodies; split multi-body parts and
+   reconstruct each independently. Per face, extract surface type + exact params
+   (plane normal/origin; cylinder axis/radius; cone half-angle+ref radius; sphere
+   center/radius; torus major/minor radius for fillets/rounds), plus edges + bbox.
+2. **Classify** each body's strategy: rotationally symmetric → `rotate_extrude()`;
+   prismatic → `linear_extrude()` of a 2D section; primitive assembly → CSG of
+   cylinders/boxes/spheres with chamfers/fillets from cone/torus faces; free-form →
+   `hull()`/`skin()` loft or `polyhedron` for that region only.
+3. **Build** the parametric `.scad` from measured values.
+4. **Export** STL and **measure IoU** = intersection_vol / union_vol vs a high-res
+   tessellation of the original solid (align first: centroid + principal axes, then
+   ICP if needed).
+5. **Render** multi-angle + ghost overlay + a thin cross-section. **Look at them.**
+6. If IoU < 95%: **diagnose with measurement** (which region drives the error —
+   section-area diffs, occupancy maps), fix the responsible feature, repeat. Do not
+   stop at "close enough".
+
+## Tooling notes
+
+- B-rep reading: OpenCASCADE / `pythonocc-core`, or FreeCAD headless (`freecadcmd`).
+  STL fallback only for free-form surfaces with no analytic form.
+- Rendering: the `openscad` skill / OpenSCAD MCP (`render_single`, `compare_renders`).
+- IoU: boolean volume compare (trimesh / OpenSCAD `intersection`+`union` volumes).
