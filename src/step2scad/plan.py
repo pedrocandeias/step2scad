@@ -97,7 +97,12 @@ from pathlib import Path
 
 STRATEGIES = ("csg", "instance_of", "rotate_extrude", "linear_extrude", "freeform")
 OPS = ("union", "difference", "intersection", "hull")
-PRIMS = ("box", "cylinder", "sphere", "extrude")
+PRIMS = ("box", "cylinder", "sphere", "extrude", "sweep")
+
+# sweep height laws: h(s) along the sweep axis (v13 rib-transition idiom).
+# Fitted to measured band boundaries; the fit residual must be cited in
+# `source` (measure first, claim after).
+SWEEP_LAWS = ("arc", "linear")
 
 _EXPR_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Name,
                ast.Load, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd)
@@ -275,6 +280,26 @@ def _validate_node(node: dict, where: str, names: set[str],
         _resolve_vec(node["center"], scope, where, "center")
         _require(_is_num_or_expr(node.get("r")), where, "sphere needs 'r'")
         _require(not strict or num(node["r"], "r") > 0, where, "sphere 'r' must be > 0")
+    elif prim == "sweep":
+        # rectangular-footprint slab sweep whose TOP follows a height law
+        # h(s): arc h = zc + sqrt(R² − (s−sc)²) or linear h = m·s + b,
+        # clamped to h_max, slabs skipped where h <= z0. Compose with
+        # intersections/unions for stadium footprints etc.
+        _require(node.get("axis") in ("x", "y"), where, "sweep 'axis': 'x'|'y'")
+        for f in ("u0", "u1", "s0", "s1", "z0", "h_max"):
+            _require(_is_num_or_expr(node.get(f)), where, f"sweep needs '{f}'")
+            num(node[f], f)
+        _require(not strict or num(node["s1"], "s1") > num(node["s0"], "s0"),
+                 where, "sweep needs s1 > s0")
+        _require(isinstance(node.get("steps"), int) and node["steps"] > 0,
+                 where, "sweep needs integer 'steps' > 0")
+        law = node.get("law")
+        _require(isinstance(law, dict) and law.get("kind") in SWEEP_LAWS,
+                 where, f"sweep 'law.kind' must be one of {SWEEP_LAWS}")
+        need = ("sc", "zc", "R") if law["kind"] == "arc" else ("m", "b")
+        for f in need:
+            _require(_is_num_or_expr(law.get(f)), where, f"law needs '{f}'")
+            num(law[f], f"law.{f}")
     elif prim == "extrude":
         if "profile2d" in node:
             _require("profile" not in node, where,

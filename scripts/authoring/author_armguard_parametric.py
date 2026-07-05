@@ -310,6 +310,7 @@ modules = {
 counters = {}
 deck_children = []
 mount_top_samples = []
+ridge_bands = []
 for p in deck:
     kind, extra = classify_deck(p)
     if kind == "sphere":
@@ -317,11 +318,178 @@ for p in deck:
     if kind == "mount_circle":
         mount_top_samples.append(extra)            # replaced by knuckle_mount()
         continue
+    if kind == "ridge":
+        ridge_bands.append(p)                      # replaced by center_ridge()
+        continue
     counters[kind] = counters.get(kind, 0) + 1
     deck_children.append(layer(
         p, f"{kind.replace('_', ' ')} (measured organic layer)",
         name=f"{kind}_l{counters[kind]:02d}"))
 modules["deck_ridge"]["tree"]["children"] = deck_children
+
+# ---- center ridge: 16 measured bands -> stadium footprint + 3 height laws --
+# Per band: (z_top, y_tail, y_head, half-width). The tail retreats at ~45°
+# up to a plateau, then a circular arc; the head cap tapers on a second arc —
+# the v13 rib-transition construction, here FITTED to the measured bands.
+rb = []
+for p in sorted(ridge_bands, key=lambda q: q["z0"]):
+    a = np.array(p["profile"])
+    rb.append((p["z0"], p["z1"], float(a[:, 1].min()), float(a[:, 1].max()),
+               float(a[:, 0].min()), float(a[:, 0].max())))
+z_ridge_top = R(rb[-1][1])
+ridge_hw = R(max(x1 for *_, x1 in rb))
+head_top = max(yh for _, _, _, yh, _, _ in rb)
+ridge_head_cy = R(head_top - ridge_hw)      # stadium cap center
+
+# segment the tail sequence at the discontinuity (jump > 5 in y_tail)
+tails = [(z1, yt) for z0, z1, yt, yh, *_ in rb]
+jump = next(i for i in range(1, len(tails))
+            if tails[i][1] - tails[i - 1][1] > 5)
+low, high = tails[:jump], tails[jump:]
+
+def fit_line(pts):
+    A = np.c_[[p[1] for p in pts], np.ones(len(pts))]
+    (m, b), *_ = np.linalg.lstsq(A, [p[0] for p in pts], rcond=None)
+    res = max(abs(z - (m * y + b)) for z, y in pts)
+    return float(m), float(b), float(res)
+
+def fit_arc(pts):                            # circle through (z, y) samples
+    y = np.array([p[1] for p in pts]); z = np.array([p[0] for p in pts])
+    A = np.c_[2 * y, 2 * z, np.ones(len(pts))]
+    (cy, cz, c), *_ = np.linalg.lstsq(A, y**2 + z**2, rcond=None)
+    Rr = float(np.sqrt(c + cy**2 + cz**2))
+    res = float(np.abs(np.hypot(y - cy, z - cz) - Rr).max())
+    return float(cy), float(cz), Rr, res
+
+t_m, t_b, t_res = fit_line(low)
+assert t_res < 0.08, f"ridge tail not linear (res {t_res:.3f})"
+a_yc, a_zc, a_R, a_res = fit_arc(high)
+assert a_res < 0.05, f"ridge main ramp not an arc (res {a_res:.3f})"
+heads = [(z1, yh) for z0, z1, yt, yh, *_ in rb if yh < head_top - 0.1]
+h_yc, h_zc, h_R, h_res = fit_arc(heads)
+assert h_res < 0.05, f"ridge head taper not an arc (res {h_res:.3f})"
+
+# derived boundaries (numeric; derivation cited in the sources)
+tail_y0 = (z_plate_top - t_b) / t_m                       # 45° ramp meets plate top
+tail_y1 = (float(low[-1][0]) - t_b) / t_m                 # ramp reaches the plateau
+z_plateau = float(low[-1][0])                             # exact band level
+arc_y0 = a_yc - np.sqrt(a_R**2 - (z_plateau - a_zc)**2)   # arc leaves the plateau
+arc_y1 = a_yc - np.sqrt(max(a_R**2 - (z_ridge_top - a_zc)**2, 0))  # arc reaches full
+head_y0 = h_yc + np.sqrt(max(h_R**2 - (z_ridge_top - h_zc)**2, 0))  # taper starts
+
+# constant (x,z) cross-section, measured on the reference tessellation and
+# verified identical at y=-5/0/+4 (max delta 0.002)
+import trimesh as _tm
+_ref = _tm.load(str(OUT / "Arm_Guard_ref.stl"), force="mesh")
+_sec = _ref.section(plane_origin=[0, 0, 0], plane_normal=[0, 1, 0])
+_loop = max(_sec.discrete, key=len)
+_mask = (np.abs(_loop[:, 0]) < 6.5) & (_loop[:, 2] > z_plate_top + 0.05)
+_idx = np.where(_mask)[0]
+_start = next(i for i in _idx if (i - 1) % len(_loop) not in _idx)
+_run = []
+_i = _start
+while _mask[_i]:
+    _run.append(_i)
+    _i = (_i + 1) % len(_loop)
+_lobe = _loop[_run][:, [0, 2]]
+_prof = [[R(q[0]), R(q[1])] for q in _lobe]
+ridge_xsection = ([[R(_lobe[0][0]), R(z_plate_top)]] + _prof
+                  + [[R(_lobe[-1][0]), R(z_plate_top)]])
+# decimate collinear points
+def _dec(loop, tol=0.02):
+    out = list(loop)
+    ch = True
+    while ch and len(out) > 6:
+        ch = False
+        for i in range(len(out)):
+            a, b_, c = np.array(out[i-1]), np.array(out[i]), np.array(out[(i+1) % len(out)])
+            ab = c - a
+            n = np.linalg.norm(ab)
+            if n > 1e-9 and abs(ab[0]*(b_-a)[1] - ab[1]*(b_-a)[0]) / n < tol:
+                out.pop(i); ch = True; break
+    return out
+ridge_xsection = _dec(ridge_xsection)
+
+ridge_params = [
+    ("ridge_hw", ridge_hw, "measured ridge half-width (constant across all 16 bands)"),
+    ("ridge_head_cy", ridge_head_cy, "stadium head-cap center: measured head apex - ridge_hw"),
+    ("z_ridge_top", z_ridge_top, "exact B-rep plane: ridge crest top"),
+    ("z_ridge_plateau", R(z_plateau), "exact B-rep band level: tail plateau height"),
+    ("ridge_tail_m", R(t_m), f"measured 45-deg tail ramp slope (linear fit, res {t_res:.3f})"),
+    ("ridge_tail_b", R(t_b), "measured tail ramp intercept (same fit)"),
+    ("ridge_arc_yc", R(a_yc), f"main ramp fitted circular arc center y (res {a_res:.3f} over {len(high)} bands)"),
+    ("ridge_arc_zc", R(a_zc), "main ramp arc center z (same fit)"),
+    ("ridge_arc_R", R(a_R), "main ramp arc radius (same fit)"),
+    ("ridge_head_yc", R(h_yc), f"head taper fitted arc center y (res {h_res:.3f})"),
+    ("ridge_head_zc", R(h_zc), "head taper arc center z (same fit)"),
+    ("ridge_head_R", R(h_R), "head taper arc radius (same fit)"),
+    ("ridge_tail_y0", R(tail_y0), "derived: tail ramp meets the plate top (from the fit)"),
+    ("ridge_tail_y1", R(tail_y1), "derived: tail ramp reaches the plateau (from the fit)"),
+    ("ridge_arc_y0", R(arc_y0), "derived: main arc leaves the plateau level"),
+    ("ridge_arc_y1", R(arc_y1), "derived: main arc reaches the crest height"),
+    ("ridge_head_y0", R(head_y0), "derived: head taper leaves the crest height"),
+]
+params += [{"name": n, "value": v, "source": s} for n, v, s in ridge_params]
+
+modules["center_ridge"] = {
+    "args": [],
+    "doc": "center ridge: stadium footprint INTERSECTED with (45-deg tail ramp "
+           "+ plateau + fitted-arc main ramp + full section + fitted-arc head "
+           "taper) — the v13 rib-transition construction, laws fitted to the "
+           "16 measured bands (residuals in the param sources)",
+    "tree": {"op": "intersection", "children": [
+        {"prim": "extrude", "axis": "y", "name": "ridge_xsec",
+         "source": "measured constant (x,z) cross-section (hourglass: ±5.0 "
+                   "base, ±3.60 waist at z=2.9, ±4.81 crest) — verified "
+                   "identical at y=-5/0/+4 on the reference tessellation",
+         "profile": [[q[1], q[0]] for q in ridge_xsection],
+         "z0": "ridge_tail_y0", "z1": "ridge_head_cy + ridge_hw + 0.2"},
+        {"op": "hull", "children": [
+            {"prim": "cylinder", "name": "ridge_cap",
+             "source": "stadium head cap (measured half-width radius)",
+             "p0": [0, "ridge_head_cy", "z_plate_top"],
+             "p1": [0, "ridge_head_cy", "z_ridge_top"], "r": "ridge_hw"},
+            {"prim": "box", "name": "ridge_bar",
+             "source": "stadium bar to the measured tail end",
+             "min": ["-ridge_hw", "ridge_tail_y0", "z_plate_top"],
+             "size": ["2*ridge_hw", "ridge_head_cy - ridge_tail_y0",
+                      "z_ridge_top - z_plate_top"]},
+        ]},
+        {"op": "union", "children": [
+            {"prim": "sweep", "name": "ridge_tail45", "axis": "y",
+             "source": "45-deg tail ramp: measured linear law (res in params)",
+             "u0": "-ridge_hw", "u1": "ridge_hw",
+             "s0": "ridge_tail_y0", "s1": "ridge_tail_y1",
+             "z0": "z_plate_top", "h_max": "z_ridge_plateau", "steps": 8,
+             "law": {"kind": "linear", "m": "ridge_tail_m", "b": "ridge_tail_b"}},
+            {"prim": "box", "name": "ridge_plateau",
+             "source": "tail plateau at the exact band level",
+             "min": ["-ridge_hw", "ridge_tail_y1", "z_plate_top"],
+             "size": ["2*ridge_hw", "ridge_arc_y0 - ridge_tail_y1",
+                      "z_ridge_plateau - z_plate_top"]},
+            {"prim": "sweep", "name": "ridge_main_arc", "axis": "y",
+             "source": "main ramp: fitted circular arc (residual in params)",
+             "u0": "-ridge_hw", "u1": "ridge_hw",
+             "s0": "ridge_arc_y0", "s1": "ridge_arc_y1",
+             "z0": "z_plate_top", "h_max": "z_ridge_top", "steps": 24,
+             "law": {"kind": "arc", "sc": "ridge_arc_yc", "zc": "ridge_arc_zc",
+                     "R": "ridge_arc_R"}},
+            {"prim": "box", "name": "ridge_full",
+             "source": "full-height section between the two fitted arcs",
+             "min": ["-ridge_hw", "ridge_arc_y1", "z_plate_top"],
+             "size": ["2*ridge_hw", "ridge_head_y0 - ridge_arc_y1",
+                      "z_ridge_top - z_plate_top"]},
+            {"prim": "sweep", "name": "ridge_head_arc", "axis": "y",
+             "source": "head taper: fitted circular arc (residual in params)",
+             "u0": "-ridge_hw", "u1": "ridge_hw",
+             "s0": "ridge_head_y0", "s1": "ridge_head_cy + ridge_hw + 0.2",
+             "z0": "z_plate_top", "h_max": "z_ridge_top", "steps": 16,
+             "law": {"kind": "arc", "sc": "ridge_head_yc", "zc": "ridge_head_zc",
+                     "R": "ridge_head_R"}},
+        ]},
+    ]},
+}
+print(f"center_ridge: 16 bandas -> 3 leis (res {t_res:.3f}/{a_res:.3f}/{h_res:.3f})")
 
 # top blend: measured band circle radii interpolated at the EXACT B-rep plane
 # levels between the bands → chain of frustum segments (both mounts share it)
@@ -410,6 +578,7 @@ plan = {"version": 1, "source": feats["source"], "bodies": [{
         {"op": "union", "children": [
             {"call": "plate", "name": "plate_i", "args": {}},
             {"call": "deck_ridge", "name": "deck_i", "args": {}},
+            {"call": "center_ridge", "name": "ridge_i", "args": {}},
             {"call": "knuckle_mount", "name": "mount_left",
              "args": {"cx": "mountL_x"}},
             {"call": "knuckle_mount", "name": "mount_right",

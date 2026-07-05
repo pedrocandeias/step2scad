@@ -4,6 +4,27 @@ All notable changes to **step2scad** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions are project milestones (no releases published yet).
 
+## [Unreleased]
+
+### Added
+- **`sweep` primitive** (plan schema): rectangular-footprint slab sweep whose
+  top follows a fitted height law — circular `arc` (`h = zc + √(R²−(s−sc)²)`)
+  or `linear` — clamped to `h_max`, emitted as the v13 rib-transition
+  for-loop idiom. Laws must be FITTED to measured band boundaries and the
+  residual cited in the provenance.
+- Arm_Guard pilot: the 16 measured ridge layers became a parametric
+  `center_ridge()` — measured constant (x,z) cross-section (hourglass,
+  verified identical at 3 stations) ∩ plan stadium ∩ (45° tail ramp, res
+  0.054 + plateau + main arc, res **0.005** + full section + head-taper arc,
+  res 0.019). IoU 0.9852 (vs 0.9857 with raw layers — the fitted arcs replace
+  the mid-sampled staircase at equal fidelity).
+
+### Fixed
+- Bounding boxes lie about widths: the ridge half-width sequence from band
+  bboxes suggested a constant ±5.0; the actual cross-section necks to ±3.60.
+  Cross-sections are now measured directly (section slice at verified-constant
+  stations), not inferred from per-band extents.
+
 ## [0.4.0] — 2026-07-05 · Semantic parametric stage
 
 The output stops being merely geometry-faithful and becomes **human-editable**.

@@ -232,6 +232,31 @@ def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
         lines.append(f"{ind}{orient}translate([0, 0, {_sv(node['z0'])}]) "
                      f"linear_extrude({_sdiff(node['z1'], node['z0'])}) "
                      f"{shape};")
+    elif prim == "sweep":
+        # v13 rib-transition idiom: slab stack whose top follows h(s)
+        law = node["law"]
+        s0, s1 = _sv(node["s0"]), _sv(node["s1"])
+        u0 = _sv(node["u0"])
+        du = _sdiff(node["u1"], node["u0"])
+        steps = node["steps"]
+        if law["kind"] == "arc":
+            h_expr = (f"min({_sv(law['zc'])} + sqrt(max(0, {_sv(law['R'])}*{_sv(law['R'])}"
+                      f" - (sm - {_sv(law['sc'])})*(sm - {_sv(law['sc'])}))), "
+                      f"{_sv(node['h_max'])})")
+        else:
+            h_expr = f"min({_sv(law['m'])}*sm + {_sv(law['b'])}, {_sv(node['h_max'])})"
+        slab = (f"translate([{u0}, si, {_sv(node['z0'])}]) "
+                f"cube([{du}, ds, h - ({_sv(node['z0'])})])"
+                if node["axis"] == "y" else
+                f"translate([si, {u0}, {_sv(node['z0'])}]) "
+                f"cube([ds, {du}, h - ({_sv(node['z0'])})])")
+        lines.append(f"{ind}for (i = [0 : {steps} - 1]) {{")
+        lines.append(f"{ind}    ds = (({s1}) - ({s0})) / {steps};")
+        lines.append(f"{ind}    si = ({s0}) + i * ds;")
+        lines.append(f"{ind}    sm = si + ds / 2;")
+        lines.append(f"{ind}    h  = {h_expr};")
+        lines.append(f"{ind}    if (h > {_sv(node['z0'])}) {slab};")
+        lines.append(f"{ind}}}")
 
 
 def _emit_sem_node(node: dict, lines: list[str], depth: int, fn_var: str,
