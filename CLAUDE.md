@@ -64,6 +64,11 @@ the pipeline design is `ARCHITECTURE.md`.
   Never rely on anything in `tmp/` persisting.
 - Approved, human-reviewed reconstructions are promoted to `templates/`.
 - Input STEP files in `models/` are the source of truth — read-only.
+- **Keep `CHANGELOG.md` current**: whenever a new reconstruction tool, method,
+  schema capability, eval path or recipe lands (or a measurement trap is
+  discovered), add it to the changelog in the same change set — under the
+  current milestone's Added/Changed/Fixed. Results tables update when a part's
+  measured IoU changes.
 
 ## Reconstruction pipeline (run in order for every STEP)
 
