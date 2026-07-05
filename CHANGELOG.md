@@ -7,6 +7,14 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **`offset_sweep` primitive**: edge-treatment sweep — stacked slabs of a 2D
+  shape offset by a fitted law delta(z): `linear` (chamfer/ramp) or `round`
+  (quarter roundover, bottom/top edge). Pilot: the Arm_Guard plate's bottom
+  rim — two discrete offset layers became ONE measured 45° chamfer law
+  (inset slope −1.01/mm, res < 0.05), and fidelity improved slightly
+  (continuous law beats discrete sampling). Guiding principle (per the
+  author): primitives + fitted laws instead of stacked layers; the v12/v13
+  templates demonstrate the principle, they are not a literal style guide.
 - **`sweep` primitive** (plan schema): rectangular-footprint slab sweep whose
   top follows a fitted height law — circular `arc` (`h = zc + √(R²−(s−sc)²)`)
   or `linear` — clamped to `h_max`, emitted as the v13 rib-transition

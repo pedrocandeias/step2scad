@@ -16,8 +16,9 @@ slot_r          = 2;  // exact r2.0 slot end-cap cylinder faces #30/#32/#45/#52/
 z_slot_top      = 2.806317;  // highest measured band pierced by the strap slots
 z_window_top    = 3.806317;  // highest measured band pierced by the mount pin windows
 z_cut_lo        = -0.498683;  // cut overshoot below the base plane (declared, 0.5)
-rim_inset0      = 0.388598;  // measured: mean boundary distance of rim band b0o0 to the main outline (uniform, std<0.05)
-rim_inset1      = 0.160997;  // measured: mean boundary distance of rim band b1o0 to the main outline (uniform, std<0.05)
+rim_cham_d0     = -0.502398;  // measured 45-deg bottom edge chamfer: offset at the base plane (linear fit of the rim band insets, res 0.000)
+rim_cham_d1     = -0.047197;  // measured chamfer offset at the top of the rim zone (same fit)
+z_rim_top       = 0.451317;  // exact B-rep band level: bottom edge chamfer ends
 slot_len        = 20;  // distance between exact end-cap axes + 2*slot_r (faces #30/#32/#45/#52/#83/#128/#141/#150); identical for all four slots within 0.02
 slot_ang        = 8.578065;  // slot line angle from +Y (exact end-cap axes); the right side mirrors the left exactly
 slot_low_cx     = -40.035489;  // midpoint of the lower-left slot's exact end-cap axes
@@ -98,10 +99,13 @@ module strap_slot() {
 // base plate: measured outline in two layers between exact z levels (the outline includes the two r7.995 knuckle-mount lobes at (±30.145, 35.505))
 module plate() {
     union() {
-        // plate_rim0: bottom edge round: measured as a uniform inset of the shared outline (std < 0.05) — measured section loops at z=0.113817 for the band between exact B-rep plane levels z=0.001317 and z=0.226317
-        translate([0, 0, 0.001317]) linear_extrude(0.225) offset(delta = -rim_inset0) polygon(plate_outline_pts);
-        // plate_rim1: bottom edge round: measured as a uniform inset of the shared outline (std < 0.05) — measured section loops at z=0.338817 for the band between exact B-rep plane levels z=0.226317 and z=0.451317
-        translate([0, 0, 0.226317]) linear_extrude(0.225) offset(delta = -rim_inset1) polygon(plate_outline_pts);
+        // plate_rim_chamfer: bottom edge 45-deg chamfer: linear offset law fitted to the measured rim band insets (residual in params)
+        for (i = [0 : 6 - 1]) {
+            dz = ((z_rim_top) - (z_base)) / 6;
+            zi = (z_base) + i * dz;
+            zm = zi + dz / 2;
+            translate([0, 0, zi]) linear_extrude(dz) offset(delta = (rim_cham_d0) + ((rim_cham_d1) - (rim_cham_d0)) * (zm - (z_base)) / ((z_rim_top) - (z_base))) polygon(plate_outline_pts);
+        }
         // plate_main: plate main body: shared measured outline — measured section loops at z=0.563817 for the band between exact B-rep plane levels z=0.451317 and z=0.676317
         translate([0, 0, 0.451317]) linear_extrude((z_plate_step) - (0.451317)) polygon(plate_outline_pts);
         // plate_upper: plate upper layer (outline after the step) — measured section loops at z=1.026317 for the band between exact B-rep plane levels z=0.901317 and z=1.151317

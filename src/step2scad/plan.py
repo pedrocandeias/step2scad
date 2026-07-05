@@ -97,7 +97,7 @@ from pathlib import Path
 
 STRATEGIES = ("csg", "instance_of", "rotate_extrude", "linear_extrude", "freeform")
 OPS = ("union", "difference", "intersection", "hull")
-PRIMS = ("box", "cylinder", "sphere", "extrude", "sweep")
+PRIMS = ("box", "cylinder", "sphere", "extrude", "sweep", "offset_sweep")
 
 # sweep height laws: h(s) along the sweep axis (v13 rib-transition idiom).
 # Fitted to measured band boundaries; the fit residual must be cited in
@@ -300,6 +300,32 @@ def _validate_node(node: dict, where: str, names: set[str],
         for f in need:
             _require(_is_num_or_expr(law.get(f)), where, f"law needs '{f}'")
             num(law[f], f"law.{f}")
+    elif prim == "offset_sweep":
+        # edge-treatment sweep: stacked slabs of a 2D shape offset by a law
+        # delta(z) — "linear" {d0, d1} = chamfer/ramp; "round" {r} = quarter
+        # roundover ("edge": "bottom" | "top"). Laws are fitted to measured
+        # band insets; cite the residual in `source`.
+        _require("profile2d" in node, where, "offset_sweep needs 'profile2d'")
+        _validate_2d(node["profile2d"], f"{where}.profile2d", scope, profiles)
+        for f in ("z0", "z1"):
+            _require(_is_num_or_expr(node.get(f)), where, f"offset_sweep needs '{f}'")
+            num(node[f], f)
+        _require(not strict or num(node["z1"], "z1") > num(node["z0"], "z0"),
+                 where, "offset_sweep needs z1 > z0")
+        _require(isinstance(node.get("steps"), int) and node["steps"] > 0,
+                 where, "offset_sweep needs integer 'steps' > 0")
+        law = node.get("law")
+        _require(isinstance(law, dict) and law.get("kind") in ("linear", "round"),
+                 where, "offset_sweep 'law.kind' must be 'linear' or 'round'")
+        if law["kind"] == "linear":
+            for f in ("d0", "d1"):
+                _require(_is_num_or_expr(law.get(f)), where, f"law needs '{f}'")
+                num(law[f], f"law.{f}")
+        else:
+            _require(_is_num_or_expr(law.get("r")), where, "round law needs 'r'")
+            _require(not strict or num(law["r"], "r") > 0, where, "'r' must be > 0")
+            _require(law.get("edge", "bottom") in ("bottom", "top"), where,
+                     "round law 'edge' must be 'bottom' or 'top'")
     elif prim == "extrude":
         if "profile2d" in node:
             _require("profile" not in node, where,

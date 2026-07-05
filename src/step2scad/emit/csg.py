@@ -232,8 +232,30 @@ def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
         lines.append(f"{ind}{orient}translate([0, 0, {_sv(node['z0'])}]) "
                      f"linear_extrude({_sdiff(node['z1'], node['z0'])}) "
                      f"{shape};")
+    elif prim == "offset_sweep":
+        # edge treatment: stacked slabs of a 2D shape offset by delta(z)
+        law = node["law"]
+        z0, z1 = _sv(node["z0"]), _sv(node["z1"])
+        steps = node["steps"]
+        shape = _render_2d(node["profile2d"], fn_var)
+        if law["kind"] == "linear":
+            d_expr = (f"({_sv(law['d0'])}) + (({_sv(law['d1'])}) - "
+                      f"({_sv(law['d0'])})) * (zm - ({z0})) / (({z1}) - ({z0}))")
+        elif law.get("edge", "bottom") == "bottom":
+            r = _sv(law["r"])
+            d_expr = f"-(({r}) - sqrt(max(0, ({r})*({r}) - (zm - ({z0}) - ({r}))*(zm - ({z0}) - ({r})))))"
+        else:
+            r = _sv(law["r"])
+            d_expr = f"-(({r}) - sqrt(max(0, ({r})*({r}) - (zm - ({z0}))*(zm - ({z0})))))"
+        lines.append(f"{ind}for (i = [0 : {steps} - 1]) {{")
+        lines.append(f"{ind}    dz = (({z1}) - ({z0})) / {steps};")
+        lines.append(f"{ind}    zi = ({z0}) + i * dz;")
+        lines.append(f"{ind}    zm = zi + dz / 2;")
+        lines.append(f"{ind}    translate([0, 0, zi]) linear_extrude(dz) "
+                     f"offset(delta = {d_expr}) {shape};")
+        lines.append(f"{ind}}}")
     elif prim == "sweep":
-        # v13 rib-transition idiom: slab stack whose top follows h(s)
+        # slab stack whose top follows h(s)
         law = node["law"]
         s0, s1 = _sv(node["s0"]), _sv(node["s1"])
         u0 = _sv(node["u0"])

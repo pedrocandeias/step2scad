@@ -174,9 +174,14 @@ the exact way these parts were designed in CAD, run in reverse. Four steps
 Everything stays parametric and human-editable — no `polyhedron` dump anywhere.
 
 **Human-readable target style (plan schema v2/v3, piloted on Arm_Guard at
-IoU 0.9857).** Style reference: the hand-tuned
-`openscad-parametric-reconstructor/templates/arm-guard-v12/v13.scad`. The
-pattern language, now expressible in plan.json and emitted by `emit/csg.py`:
+IoU 0.9857).** Guiding principle: **primitives and fitted laws instead of
+stacked measured layers** — ramps/chamfers/roundovers/transitions become
+`sweep`/`offset_sweep` laws (linear or circular) fitted to measurements with
+residuals cited. The hand-tuned
+`openscad-parametric-reconstructor/templates/arm-guard-v12/v13.scad`
+templates demonstrate the principle (they are a demonstration, not a literal
+style guide). The pattern language, expressible in plan.json and emitted by
+`emit/csg.py`:
 
 - **One shared measured outline** (`profiles`), with zones DERIVED from it by
   2D ops (`offset(delta=…)` insets — validate the inset is uniform, std<0.05,

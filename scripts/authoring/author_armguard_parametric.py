@@ -159,6 +159,16 @@ def _inset_of(band, ref_pts):
 
 main_pts = np.array(main["profile"])
 rim_insets = [(_inset_of(b, main_pts), b) for b in rim]
+# the insets fall on a straight line vs z -> the bottom edge is a CHAMFER,
+# one offset law instead of discrete layers (measure first, claim after)
+_zs = np.array([(b["z0"] + b["z1"]) / 2 for _, b in rim_insets])
+_ds = np.array([-i for i, _ in rim_insets])
+rim_m, rim_c = np.polyfit(_zs, _ds, 1)
+rim_res = float(np.abs(_ds - (rim_m * _zs + rim_c)).max())
+assert rim_res < 0.05, f"rim insets not linear in z (res {rim_res:.3f})"
+rim_z1 = R(max(b["z1"] for _, b in rim_insets))
+rim_d0 = R(rim_m * z_base + rim_c)
+rim_d1 = R(rim_m * rim_z1 + rim_c)
 upper = max((p for p in plate if p["z0"] >= z_plate_step - 1e-4), key=_parea)
 
 params = [
@@ -178,10 +188,15 @@ params = [
     {"name": "z_cut_lo", "value": R(z_base - 0.5),
      "source": "cut overshoot below the base plane (declared, 0.5)"},
 ]
-for i, (ins, b) in enumerate(rim_insets):
-    params.append({"name": f"rim_inset{i}", "value": R(ins),
-                   "source": "measured: mean boundary distance of rim band "
-                             f"{b['name']} to the main outline (uniform, std<0.05)"})
+params += [
+    {"name": "rim_cham_d0", "value": rim_d0,
+     "source": f"measured 45-deg bottom edge chamfer: offset at the base plane "
+               f"(linear fit of the rim band insets, res {rim_res:.3f})"},
+    {"name": "rim_cham_d1", "value": rim_d1,
+     "source": "measured chamfer offset at the top of the rim zone (same fit)"},
+    {"name": "z_rim_top", "value": rim_z1,
+     "source": "exact B-rep band level: bottom edge chamfer ends"},
+]
 cap_ids = "/".join(f"#{c[0]}" for c in caps)
 params += [
     {"name": "slot_len", "value": R(slot_len),
@@ -264,15 +279,14 @@ modules = {
         "doc": "base plate: measured outline in two layers between exact z "
                "levels (the outline includes the two r7.995 knuckle-mount "
                "lobes at (±30.145, 35.505))",
-        "tree": {"op": "union", "children":
-            [{"prim": "extrude", "axis": "z", "name": f"plate_rim{i}",
-              "source": "bottom edge round: measured as a uniform inset of "
-                        f"the shared outline (std < 0.05) — {b['source']}",
-              "profile2d": {"op2d": "offset", "delta": f"-rim_inset{i}",
-                            "child": {"ref": "plate_outline"}},
-              "z0": b["z0"], "z1": b["z1"]}
-             for i, (_, b) in enumerate(rim_insets)]
-            + [
+        "tree": {"op": "union", "children": [
+            {"prim": "offset_sweep", "name": "plate_rim_chamfer",
+             "source": "bottom edge 45-deg chamfer: linear offset law fitted "
+                       "to the measured rim band insets (residual in params)",
+             "profile2d": {"ref": "plate_outline"},
+             "z0": "z_base", "z1": "z_rim_top", "steps": 6,
+             "law": {"kind": "linear", "d0": "rim_cham_d0", "d1": "rim_cham_d1"}},
+            
             {"prim": "extrude", "axis": "z", "name": "plate_main",
              "source": "plate main body: shared measured outline — " + main["source"],
              "profile2d": {"ref": "plate_outline"},

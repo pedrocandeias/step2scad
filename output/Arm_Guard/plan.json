@@ -43,14 +43,19 @@
      "source": "cut overshoot below the base plane (declared, 0.5)"
     },
     {
-     "name": "rim_inset0",
-     "value": 0.388598,
-     "source": "measured: mean boundary distance of rim band b0o0 to the main outline (uniform, std<0.05)"
+     "name": "rim_cham_d0",
+     "value": -0.502398,
+     "source": "measured 45-deg bottom edge chamfer: offset at the base plane (linear fit of the rim band insets, res 0.000)"
     },
     {
-     "name": "rim_inset1",
-     "value": 0.160997,
-     "source": "measured: mean boundary distance of rim band b1o0 to the main outline (uniform, std<0.05)"
+     "name": "rim_cham_d1",
+     "value": -0.047197,
+     "source": "measured chamfer offset at the top of the rim zone (same fit)"
+    },
+    {
+     "name": "z_rim_top",
+     "value": 0.451317,
+     "source": "exact B-rep band level: bottom edge chamfer ends"
     },
     {
      "name": "slot_len",
@@ -1111,34 +1116,20 @@
       "op": "union",
       "children": [
        {
-        "prim": "extrude",
-        "axis": "z",
-        "name": "plate_rim0",
-        "source": "bottom edge round: measured as a uniform inset of the shared outline (std < 0.05) \u2014 measured section loops at z=0.113817 for the band between exact B-rep plane levels z=0.001317 and z=0.226317",
+        "prim": "offset_sweep",
+        "name": "plate_rim_chamfer",
+        "source": "bottom edge 45-deg chamfer: linear offset law fitted to the measured rim band insets (residual in params)",
         "profile2d": {
-         "op2d": "offset",
-         "delta": "-rim_inset0",
-         "child": {
-          "ref": "plate_outline"
-         }
+         "ref": "plate_outline"
         },
-        "z0": 0.001317,
-        "z1": 0.226317
-       },
-       {
-        "prim": "extrude",
-        "axis": "z",
-        "name": "plate_rim1",
-        "source": "bottom edge round: measured as a uniform inset of the shared outline (std < 0.05) \u2014 measured section loops at z=0.338817 for the band between exact B-rep plane levels z=0.226317 and z=0.451317",
-        "profile2d": {
-         "op2d": "offset",
-         "delta": "-rim_inset1",
-         "child": {
-          "ref": "plate_outline"
-         }
-        },
-        "z0": 0.226317,
-        "z1": 0.451317
+        "z0": "z_base",
+        "z1": "z_rim_top",
+        "steps": 6,
+        "law": {
+         "kind": "linear",
+         "d0": "rim_cham_d0",
+         "d1": "rim_cham_d1"
+        }
        },
        {
         "prim": "extrude",

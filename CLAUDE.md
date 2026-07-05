@@ -92,8 +92,13 @@ the pipeline design is `ARCHITECTURE.md`.
 
 ## Emitted-code style (binding — piloted on Arm_Guard, details in ARCHITECTURE.md)
 
-Style reference: `~/dev/openscad-parametric-reconstructor/templates/arm-guard-v13.scad`
-(hand-tuned, user-approved). The emitted `.scad` must read like it:
+**The principle: geometry built from primitives and fitted laws, not from
+countless stacked layers.** Ramps, chamfers, roundovers and transitions are
+edge/height LAWS (`sweep`, `offset_sweep` — linear or circular), fitted to
+measurements with residuals cited. The hand-tuned templates
+`~/dev/openscad-parametric-reconstructor/templates/arm-guard-v12/v13.scad`
+DEMONSTRATE this principle — they are not a literal style guide to copy;
+apply the idea wherever the measurements support it. Concretely:
 
 - **Semantic names only** — `mount_skirt_L_l01`, never `b8o2`. Classify leftover
   organic layers by position and name them.
