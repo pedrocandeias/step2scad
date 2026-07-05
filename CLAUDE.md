@@ -85,9 +85,35 @@ the pipeline design is `ARCHITECTURE.md`.
    section-area diffs, occupancy maps), fix the responsible feature, repeat. Do not
    stop at "close enough".
 
+## Emitted-code style (binding — piloted on Arm_Guard, details in ARCHITECTURE.md)
+
+Style reference: `~/dev/openscad-parametric-reconstructor/templates/arm-guard-v13.scad`
+(hand-tuned, user-approved). The emitted `.scad` must read like it:
+
+- **Semantic names only** — `mount_skirt_L_l01`, never `b8o2`. Classify leftover
+  organic layers by position and name them.
+- **Recognize primitives before dumping polygons**: fit circles/capsules/spheres to
+  measured loops and match them to exact B-rep faces. A 44-point "organic" loop was
+  the exact r7.995 mount cylinder; five crest bands were an exact B-rep sphere.
+- **One shared outline** (`profiles` in plan.json) + zones derived via 2D ops
+  (`offset` insets — only after MEASURING the inset uniform, std<0.05; rect/poly clips).
+- **Exploit symmetry after verifying it by measurement**: feature module at the
+  origin + `transform`/`mirror` instances with shared params (4 slots = 1 module +
+  2 centers + `slot_len`/`slot_ang`/`slot_r`).
+- **Derived params** via `"expr"` keep relationships explicit
+  (`fillet_rc = mount_r - fillet_r`).
+- Plan schema: `src/step2scad/plan.py` (v2 params/modules/expressions; v3 profiles/
+  profile2d/transform). Authoring reference: `scripts/authoring/author_armguard_parametric.py`.
+
 ## Tooling notes
 
 - B-rep reading: OpenCASCADE / `pythonocc-core`, or FreeCAD headless (`freecadcmd`).
   STL fallback only for free-form surfaces with no analytic form.
 - Rendering: the `openscad` skill / OpenSCAD MCP (`render_single`, `compare_renders`).
 - IoU: boolean volume compare (trimesh / OpenSCAD `intersection`+`union` volumes).
+- ⚠️ Tangency-heavy recons (stacked coincident layers) corrupt in EVERY mesh tool's
+  STL round-trip (openscad-import, trimesh, manifold3d gave three different wrong
+  volumes). Trust `boolean(openscad-native-csg)` (`use <recon.scad>` wrapper) and
+  section overlays; `contains()`-based diagnostics (voxel FP/FN, raycast segment
+  classification) report PHANTOMS on such meshes — verify residuals with section
+  overlays or orig-vs-recon probe hits before acting (rule 6).

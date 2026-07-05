@@ -23,7 +23,7 @@ solid bodies), including the "organic" palm shells:
 | F695-2Z (bearing) | 0.9978 | exact RZ profile (`rotate_extrude`) |
 | Tensioner_Pins | 0.9991 | intersection of 3 measured octagonal prisms + slot + bore |
 | Tensioner_Block | 0.9984 | prismatic tower + flange + exact sphere − channels |
-| Arm_Guard | 0.9930 | 2.5D band stack between exact B-rep z-planes |
+| Arm_Guard | 0.9930 / 0.9857* | 2.5D band stack; *semantic parametric form (modules, shared outline, symmetry) |
 | Snap_Pins | 0.9792 | hull-lofts + silhouette cutters (13 bodies) |
 | Distals | 0.9839 | hull-loft shell + 9 exact cuts (5 bodies) |
 | Proximals | 0.9796 | three-zone lofts + fork/tunnel/pin cuts (5 bodies) |
@@ -31,7 +31,11 @@ solid bodies), including the "organic" palm shells:
 | Palm_right | 0.9652 | mechanical x-mirror of the verified Palm_left plan |
 
 All IoU values are **exact boolean** intersection/union volume ratios, not
-voxel estimates. Full methodology (in Portuguese, with per-script detail):
+voxel estimates. Beyond geometric fidelity, plans can be **semanticized** into
+human-editable form — named parameters with provenance, feature modules,
+symmetry via `mirror`, zones derived from one shared outline — piloted on
+Arm_Guard (`slot_len`/`slot_ang`/`mount_r` are real, editable parameters).
+Full methodology (in Portuguese, with per-script detail):
 [`docs/reconstruction_protocol_phoenix_hand.md`](docs/reconstruction_protocol_phoenix_hand.md).
 
 ### How it works

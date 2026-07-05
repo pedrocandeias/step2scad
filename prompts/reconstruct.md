@@ -33,12 +33,21 @@ from the B-rep; use mesh sampling only for genuinely free-form surfaces.
    `linear_extrude()` of the section; primitive assembly → CSG of cylinders/boxes/
    spheres with chamfers (cones) and fillets (tori); free-form → loft/`polyhedron`
    for that region only.
-3. **Build** the parametric `.scad` from measured values.
-4. **Export** STL; **align** (centroid + principal axes, ICP refine); **measure**
-   `IoU = intersection_vol / union_vol` vs a high-res tessellation of the original.
+3. **Build** the parametric `.scad` from measured values — as an auditable
+   `plan.json` (schema: `src/step2scad/plan.py`) executed by the emitter, never
+   hand-written geometry. Author with `report.py` + `probe.py` as your senses.
+4. **Export** STL; **align** (identity — the emitters build in original coords);
+   **measure** `IoU = intersection_vol / union_vol` vs a high-res tessellation.
 5. **Render** multi-angle + ghost overlay + thin cross-section. Look at them.
 6. **IoU < 95% →** localise the error by measurement (section-area diffs, occupancy
    deltas), attribute it to a feature, fix that feature, repeat. Never "close enough".
+7. **Semanticize** (once ≥95%): re-express the plan in the human style (CLAUDE.md
+   § Emitted-code style): semantic names (never `b8o2`), primitives recognized from
+   measured loops (circle/capsule/sphere fits matched to exact B-rep faces), ONE
+   shared outline + 2D ops (measured-uniform `offset` insets, clips), symmetry
+   verified by measurement then expressed as origin-modules + `transform`/`mirror`
+   with shared params, derived params via `expr`. Re-measure after: the semantic
+   form must stay ≥95% (report the fidelity delta vs the geometric plan honestly).
 
 ## Deliverables per part
 - `templates/<part>.scad` — parametric, commented, top-of-file variable block.

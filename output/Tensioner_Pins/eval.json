@@ -3,7 +3,7 @@
   "intersection_volume": 1544.2833047648285,
   "union_volume": 1545.6913919981819,
   "iou": 0.9990890243417005,
-  "alignment": "identity",
+  "alignment": "identity(pinned)",
   "reference_volume": 1545.4779979456735,
   "candidate_volume": 1544.4968518840424,
   "reference_watertight": true,
@@ -1465,7 +1465,7 @@
           "recon": [
             {
               "plane": "principal[0]",
-              "score": 0.8813,
+              "score": 0.8694,
               "symmetric": false
             },
             {
@@ -1475,7 +1475,7 @@
             },
             {
               "plane": "principal[2]",
-              "score": 0.9953,
+              "score": 0.995,
               "symmetric": true
             }
           ]
@@ -1489,7 +1489,7 @@
                 1.0,
                 -0.0002
               ],
-              "score": 0.8713,
+              "score": 0.8717,
               "symmetric": false
             },
             {
@@ -1509,7 +1509,7 @@
                 0.0002,
                 1.0
               ],
-              "score": 0.9958,
+              "score": 0.9939,
               "symmetric": true
             }
           ]
@@ -1525,5 +1525,5 @@
       }
     ]
   },
-  "seconds": 2.497
+  "seconds": 2.291
 }

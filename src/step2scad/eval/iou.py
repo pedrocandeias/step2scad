@@ -109,8 +109,15 @@ def _repaired(mesh: trimesh.Trimesh) -> trimesh.Trimesh:
     return m
 
 
-def _openscad_boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh) -> dict:
-    """Exact boolean volumes via the OpenSCAD Manifold backend (STL round-trip)."""
+def _openscad_boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh,
+                          a_path=None, b_path=None) -> dict:
+    """Exact boolean volumes via the OpenSCAD Manifold backend (STL round-trip).
+
+    When a_path/b_path are given they are used DIRECTLY: re-exporting a
+    trimesh-processed mesh (merged vertices on tangency edges) can corrupt
+    the geometry OpenSCAD receives — measured on Arm_Guard as a ~500 mm³
+    phantom loss. Paths are only valid for identity alignment.
+    """
     import tempfile
     from pathlib import Path
 
@@ -119,8 +126,16 @@ def _openscad_boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh) -> dict:
     osc = find_openscad()
     with tempfile.TemporaryDirectory(prefix="step2scad-iou-") as td:
         td = Path(td)
-        a.export(td / "a.stl")
-        b.export(td / "b.stl")
+        if a_path:
+            import shutil as _sh
+            _sh.copy(a_path, td / "a.stl")
+        else:
+            a.export(td / "a.stl")
+        if b_path:
+            import shutil as _sh
+            _sh.copy(b_path, td / "b.stl")
+        else:
+            b.export(td / "b.stl")
         vols = {}
         for op in ("intersection", "union"):
             scad = td / f"{op}.scad"
@@ -138,9 +153,50 @@ def _openscad_boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh) -> dict:
     }
 
 
-def boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh) -> dict:
-    """Exact boolean IoU (manifold engine); repair-retry, then OpenSCAD
-    boolean, then voxel fallback."""
+def _openscad_native_iou(scad_path, module_names, ref_path) -> dict:
+    """Exact boolean volumes with the candidate kept in NATIVE CSG.
+
+    STL round-trips of tangency-heavy reconstructions (stacked coincident
+    layers, module reuse) corrupt in every mesh tool's vertex re-merge —
+    OpenSCAD import, trimesh and manifold3d each gave a different wrong
+    volume on the semantic Arm_Guard. Wrapping the emitted .scad with
+    `use <>` and booleaning against the imported (watertight) reference
+    avoids the candidate round-trip entirely.
+    """
+    import tempfile
+    from pathlib import Path
+
+    from step2scad.render import find_openscad, render_stl
+
+    osc = find_openscad()
+    scad_path = Path(scad_path).resolve()
+    ref_path = Path(ref_path).resolve()
+    calls = " ".join(f"{m}();" for m in module_names)
+    with tempfile.TemporaryDirectory(prefix="step2scad-iou-") as td:
+        td = Path(td)
+        vols = {}
+        for op in ("intersection", "union"):
+            scad = td / f"{op}.scad"
+            scad.write_text(
+                f"use <{scad_path}>\n"
+                f'{op}() {{ union() {{ {calls} }} import("{ref_path}"); }}\n'
+            )
+            out = render_stl(scad, td / f"{op}.stl", osc)
+            vols[op] = float(trimesh.load(out, force="mesh").volume)
+    iv, uv = vols["intersection"], vols["union"]
+    return {
+        "method": "boolean(openscad-native-csg)",
+        "intersection_volume": iv,
+        "union_volume": uv,
+        "iou": iv / uv if uv > 0 else 0.0,
+    }
+
+
+def boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh,
+                a_path=None, b_path=None,
+                scad_path=None, module_names=None) -> dict:
+    """Exact boolean IoU (manifold engine); native-CSG OpenSCAD boolean when
+    the emitted .scad is available; then STL-import OpenSCAD; then voxel."""
     attempts = [("boolean(manifold)", a, b)]
     if not (a.is_watertight and b.is_watertight):
         attempts.append(("boolean(manifold, repaired)", _repaired(a), _repaired(b)))
@@ -158,10 +214,16 @@ def boolean_iou(a: trimesh.Trimesh, b: trimesh.Trimesh) -> dict:
             }
         except BaseException as e:  # manifold can raise non-Exception errors
             exc = e
-    # OpenSCAD fallback: its Manifold backend ingests tangency-edge meshes
-    # (e.g. coincident CSG surfaces) that trimesh flags as non-volumes.
+    # Native-CSG fallback: no candidate STL round-trip at all (see docstring).
+    if scad_path is not None and module_names and b_path is not None:
+        try:
+            return _openscad_native_iou(scad_path, module_names, b_path)
+        except BaseException as e:
+            exc = e
+    # OpenSCAD STL-import fallback: its Manifold backend ingests tangency-edge
+    # meshes that trimesh flags as non-volumes.
     try:
-        return _openscad_boolean_iou(a, b)
+        return _openscad_boolean_iou(a, b, a_path=a_path, b_path=b_path)
     except BaseException as e:
         exc = e
     # Voxel fallback: sample both meshes on a common grid.
@@ -187,14 +249,33 @@ def evaluate(
     reference: trimesh.Trimesh,
     icp_refine: bool = False,
     return_aligned: bool = False,
+    candidate_path=None,
+    reference_path=None,
+    candidate_scad=None,
+    body_modules=None,
 ):
     """Align candidate to reference and compute the IoU report dict.
 
     With return_aligned=True, returns (report, aligned_candidate) so callers
     (localized diagnostics, assertions, heatmap) reuse the same alignment.
     """
-    aligned, alignment = align_meshes(candidate, reference, icp_refine=icp_refine)
-    report = boolean_iou(aligned, reference)
+    if candidate_path is not None and not icp_refine:
+        # Our own pipeline artifacts are BUILT in the reference coordinates;
+        # the contains()-based alignment proxy is unreliable on tangency-edge
+        # meshes and can swap in a rotation that then poisons the whole eval.
+        # Pin identity: a misplaced plan shows up as a tanked IoU with
+        # localized diagnostics, which is the honest signal — a broken
+        # contains() proxy silently rotating the part is not.
+        aligned, alignment = candidate.copy(), "identity(pinned)"
+    else:
+        aligned, alignment = align_meshes(candidate, reference, icp_refine=icp_refine)
+    # raw file paths are only equivalent to the aligned meshes under identity
+    ident = alignment.startswith("identity")
+    report = boolean_iou(aligned, reference,
+                         a_path=candidate_path if ident else None,
+                         b_path=reference_path if ident else None,
+                         scad_path=candidate_scad if ident else None,
+                         module_names=body_modules)
     report.update(
         {
             "alignment": alignment,

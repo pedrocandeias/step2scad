@@ -205,13 +205,66 @@ Artefactos por peça em `output/<peça>/`: `features.json` (medições),
 (estratégia integral, cada valor com proveniência), `<peça>.scad`
 (entregável paramétrico), `eval.json` (métricas + diagnóstico + registo de
 refinamento), previews e mapa de calor. Os scripts de autoria dos planos
-estão preservados em `scripts/authoring/` (material suplementar, §7.2).
+estão preservados em `scripts/authoring/` (material suplementar, §8.2).
 A reexecução do comando do §3 regenera todos os derivados a partir do STEP
 e do plano.
 
-## 7. Detalhe dos scripts
+## 7. Etapa 2 — Parametrização semântica (pós-reconstrução)
 
-### 7.1 Módulos permanentes do pipeline (`src/step2scad/`)
+Atingido o alvo geométrico, o plano é re-expresso em forma **humanamente
+legível e genuinamente paramétrica** — o critério de estilo é um modelo
+paramétrico afinado à mão e aprovado pelo autor (o template `arm-guard-v13`
+do projeto irmão de reconstrução por STL). Piloto: Arm_Guard, IoU 0,9857
+na forma semântica (vs 0,9930 na forma geométrica em bandas; a diferença —
+boleado do rebordo simplificado e colares de chanfro omitidos — fica
+documentada no plano).
+
+Extensões ao esquema de plano (v2/v3, `src/step2scad/plan.py`) e ao emissor:
+
+1. **Parâmetros nomeados com proveniência obrigatória**, incluindo derivados
+   por expressão (`fillet_rc = mount_r - fillet_r`); expressões validadas por
+   avaliação segura e emitidas simbolicamente.
+2. **Módulos paramétricos com argumentos formais** e nós de instanciação.
+3. **Contornos partilhados + operações 2D**: cada contorno medido é declarado
+   uma única vez; as zonas derivam por `offset` (só depois de o inset ser
+   **medido uniforme**, desvio-padrão < 0,05) e por recortes retangulares/
+   poligonais — em vez de duplicar polígonos por camada.
+4. **Nós de transformação** (translate/rotate/mirror): a simetria é
+   **verificada por medição** e depois expressa — as quatro ranhuras do
+   Arm_Guard tornaram-se um módulo na origem + dois centros + parâmetros
+   partilhados (`slot_len` = 20,000; `slot_ang` = 8,578° — coincidente com o
+   valor sondado à mão no template de referência), com o lado direito por
+   `mirror`.
+5. **Reconhecimento de primitivas antes de despejar polígonos**: ajustes de
+   círculo/cápsula/esfera às camadas medidas, confrontados com as faces
+   exatas do B-rep — um lóbulo "orgânico" de 44 pontos era o cilindro exato
+   r=7,995 do montante; cinco bandas do cume eram a esfera exata do B-rep;
+   o boleado do topo do montante tornou-se uma cadeia de troncos de cone
+   medidos entre níveis de plano exatos.
+6. **Nomenclatura semântica** para o que permanece orgânico
+   (`mount_skirt_L_l01`, `rail_hump_R_l03`), classificada por posição.
+
+Parametricidade provada por edição: `slot_len` 20→30 alonga as quatro
+ranhuras coerentemente (−439 mm³) através de um único parâmetro;
+`z_plate_top` engrossa a placa; `mount_r` redimensiona ambos os montantes.
+
+**Armadilha de medição descoberta nesta etapa** (afeta qualquer ferramenta):
+o STL de uma reconstrução com camadas coincidentes corrompe-se no re-encontro
+de vértices de *todas* as ferramentas de malha testadas (importação OpenSCAD,
+trimesh, manifold3d — três volumes errados diferentes). A medição fiável
+mantém o candidato em CSG nativo (`use <recon.scad>` + booleano contra a
+referência importada) — caminho `boolean(openscad-native-csg)` do avaliador;
+os diagnósticos baseados em `contains()` produzem regiões fantasma nestas
+malhas e todos os resíduos se confirmam por sobreposição de secções.
+
+Guião de autoria: `scripts/authoring/author_armguard_parametric.py`
+(reconhecimento de primitivas, verificação de simetrias e insets, geração do
+plano semântico). O plano geométrico de bandas fica preservado
+(`plan_bandstack.json`) como variante de máxima fidelidade.
+
+## 8. Detalhe dos scripts
+
+### 8.1 Módulos permanentes do pipeline (`src/step2scad/`)
 
 Código determinístico e reutilizável — nenhuma decisão de estratégia vive
 aqui. Mesma entrada → mesma saída.
@@ -328,7 +381,7 @@ arco completo/parcial), cones/toros/esferas, b-splines com graus e
 vizinhança. É o que torna um `features.json` de 400 faces legível para
 decidir estratégia.
 
-### 7.2 Scripts de autoria de planos (`scripts/authoring/`)
+### 8.2 Scripts de autoria de planos (`scripts/authoring/`)
 
 Um por peça; escritos pelo agente durante a reconstrução e preservados como
 material suplementar. O seu papel é **derivar mecanicamente** cada valor do

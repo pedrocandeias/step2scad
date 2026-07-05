@@ -173,6 +173,36 @@ the exact way these parts were designed in CAD, run in reverse. Four steps
 
 Everything stays parametric and human-editable — no `polyhedron` dump anywhere.
 
+**Human-readable target style (plan schema v2/v3, piloted on Arm_Guard at
+IoU 0.9857).** Style reference: the hand-tuned
+`openscad-parametric-reconstructor/templates/arm-guard-v12/v13.scad`. The
+pattern language, now expressible in plan.json and emitted by `emit/csg.py`:
+
+- **One shared measured outline** (`profiles`), with zones DERIVED from it by
+  2D ops (`offset(delta=…)` insets — validate the inset is uniform, std<0.05,
+  before claiming it; half-plane/rect clips) instead of duplicating measured
+  polygons per layer.
+- **Symmetry exploited**: verify L/R feature symmetry by measurement, define
+  the feature ONCE (module at the origin), instance via `transform`
+  (translate/rotate) and `mirror` — e.g. 4 strap slots = 1 module + 2 centers
+  + shared `slot_len`/`slot_ang`/`slot_r` params.
+- **Derived params** (`"expr": "mount_r - fillet_r"`) keep relationships
+  explicit and editable.
+- **Primitive recognition before polygon dumps**: fit circles/capsules to
+  measured section loops and match them to exact B-rep faces (a 44-point
+  "organic" loop was the exact r7.995 mount cylinder; five crest bands were
+  the exact B-rep sphere). Convex top blends (torus fillets) become measured
+  frustum chains between exact plane levels.
+- **Semantic names always** (`mount_skirt_L_l01`, never `b8o2`): classify
+  leftover organic layers by position and name them accordingly.
+
+⚠️ Measurement trap discovered here: STL round-trips of tangency-heavy
+reconstructions corrupt in EVERY mesh tool's vertex re-merge (OpenSCAD
+import, trimesh, manifold3d all gave different wrong volumes). The eval's
+`boolean(openscad-native-csg)` path keeps the candidate in native CSG
+(`use <recon.scad>`) — trust it, and verify residuals with section overlays,
+not `contains()`-based diagnostics.
+
 **Proven organic-shell recipes (Distals / Palms, 2026-07-05):**
 - *Hull-loft* (convex sections — Distals fingertips): pairwise `hull()` of thin
   measured-section slabs along the sweep axis. Never clip sections at an

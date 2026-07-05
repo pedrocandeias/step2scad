@@ -117,6 +117,8 @@ def _emit_node(node: dict, prefix: str, lines: list[str], depth: int, fn_var: st
 
 def emit_csg_body(body: dict, plan_entry: dict, lines: list[str], prefix: str = "") -> str:
     """Emit one body from its plan node tree. Returns the module name."""
+    if plan_entry.get("params") or plan_entry.get("modules"):
+        return _emit_semantic_body(body, plan_entry, lines, prefix)
     bid = body["id"]
     node = plan_entry["csg"]
     lines.append(f"// ---- body {bid} (strategy: csg — agent plan) ----")
@@ -128,6 +130,205 @@ def emit_csg_body(body: dict, plan_entry: dict, lines: list[str], prefix: str = 
     lines.append("")
     lines.append(f"module body_{bid}() {{")
     _emit_node(node, prefix, lines, 1, fn_var)
+    lines.append("}")
+    return f"body_{bid}"
+
+
+# --------------------------------------------------------------------------
+# SEMANTIC MODE — plans with named params / parametric modules emit in the
+# human-editable style: a parameter block, OpenSCAD `module` definitions with
+# formal arguments, and inline geometry carrying symbolic expressions.
+# --------------------------------------------------------------------------
+
+def _sv(v) -> str:
+    """One field: number -> formatted literal; string -> verbatim expression."""
+    return _fmt(float(v)) if isinstance(v, (int, float)) else str(v)
+
+
+def _svec(v) -> str:
+    return f"[{', '.join(_sv(x) for x in v)}]"
+
+
+def _sdiff(hi, lo) -> str:
+    if isinstance(hi, (int, float)) and isinstance(lo, (int, float)):
+        return _fmt(float(hi) - float(lo))
+    return f"({_sv(hi)}) - ({_sv(lo)})"
+
+
+def _axis_of_pair(p0, p1, where: str) -> int:
+    """Index of the single differing component of an axis-aligned p0->p1."""
+    diff = [i for i in range(3)
+            if (str(p0[i]) != str(p1[i])
+                if isinstance(p0[i], str) or isinstance(p1[i], str)
+                else abs(float(p0[i]) - float(p1[i])) > 1e-9)]
+    if len(diff) != 1:
+        raise ValueError(
+            f"{where}: a cylinder with expression coordinates must be "
+            f"axis-aligned (exactly one differing p0/p1 component)")
+    return diff[0]
+
+
+_CYL_ROT = {0: "rotate([0, 90, 0]) ", 1: "rotate([-90, 0, 0]) ", 2: ""}
+
+
+def _render_2d(node, fn_var: str) -> str:
+    """Inline OpenSCAD for a 2D profile expression tree."""
+    if "ref" in node:
+        return f"polygon({node['ref']}_pts)"
+    if "poly" in node:
+        pts = ", ".join(_svec(p) for p in node["poly"])
+        return f"polygon([{pts}])"
+    if "rect" in node:
+        x0, y0, x1, y1 = node["rect"]
+        return (f"translate([{_sv(x0)}, {_sv(y0)}]) "
+                f"square([{_sdiff(x1, x0)}, {_sdiff(y1, y0)}])")
+    if node.get("op2d") == "offset":
+        return (f"offset(delta = {_sv(node['delta'])}) "
+                + _render_2d(node["child"], fn_var))
+    kids = " ".join(_render_2d(k, fn_var) + ";" for k in node["children"])
+    return f"{node['op2d']}() {{ {kids} }}"
+
+
+def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
+                   profiles: dict) -> None:
+    ind = _IND * depth
+    n, prim = node["name"], node["prim"]
+    lines.append(f"{ind}// {n}: {node['source']}")
+    if prim == "box":
+        if "min" in node:
+            lines.append(f"{ind}translate({_svec(node['min'])}) "
+                         f"cube({_svec(node['size'])});")
+        else:
+            rot = (f"rotate({_svec(node['rotate_deg'])}) "
+                   if "rotate_deg" in node else "")
+            lines.append(f"{ind}translate({_svec(node['center'])}) {rot}"
+                         f"cube({_svec(node['size'])}, center=true);")
+    elif prim == "cylinder":
+        p0, p1 = node["p0"], node["p1"]
+        numeric = all(isinstance(v, (int, float)) for v in list(p0) + list(p1))
+        r_args = (f"r1={_sv(node['r'])}, r2={_sv(node['r2'])}"
+                  if "r2" in node else f"r={_sv(node['r'])}")
+        if numeric:
+            import numpy as _np
+            orient = _orient_snippet(_np.asarray(p1, float) - _np.asarray(p0, float))
+            h = _sdiff(  # length along the axis for readable output
+                float(_np.linalg.norm(_np.asarray(p1, float) - _np.asarray(p0, float))), 0.0)
+            lines.append(f"{ind}translate({_svec(p0)}) {orient}"
+                         f"cylinder(h={h}, {r_args}, $fn={fn_var});")
+        else:
+            ax = _axis_of_pair(p0, p1, n)
+            lines.append(f"{ind}translate({_svec(p0)}) {_CYL_ROT[ax]}"
+                         f"cylinder(h={_sdiff(p1[ax], p0[ax])}, {r_args}, "
+                         f"$fn={fn_var});")
+    elif prim == "sphere":
+        lines.append(f"{ind}translate({_svec(node['center'])}) "
+                     f"sphere(r={_sv(node['r'])}, $fn={fn_var});")
+    elif prim == "extrude":
+        orient = _EXTRUDE_ROT[node.get("axis", "z")]
+        if "profile2d" in node:
+            shape = _render_2d(node["profile2d"], fn_var)
+        else:
+            shape = f"polygon({profiles[id(node)]})"
+        lines.append(f"{ind}{orient}translate([0, 0, {_sv(node['z0'])}]) "
+                     f"linear_extrude({_sdiff(node['z1'], node['z0'])}) "
+                     f"{shape};")
+
+
+def _emit_sem_node(node: dict, lines: list[str], depth: int, fn_var: str,
+                   modules: dict, prefix: str, profiles: dict) -> None:
+    ind = _IND * depth
+    if "transform" in node:
+        tf = node["transform"]
+        chain = []
+        for key, word in (("translate", "translate"), ("rotate_deg", "rotate"),
+                          ("mirror", "mirror")):
+            if key in tf:
+                chain.append(f"{word}({_svec(tf[key])})")
+        tag = f"  // {node['name']}" if node.get("name") else ""
+        lines.append(f"{ind}{' '.join(chain)} {{{tag}")
+        _emit_sem_node(node["child"], lines, depth + 1, fn_var, modules,
+                       prefix, profiles)
+        lines.append(f"{ind}}}")
+        return
+    if "call" in node:
+        mdef = modules[node["call"]]
+        args = ", ".join(_sv(node["args"][a]) for a in mdef.get("args", []))
+        lines.append(f"{ind}{prefix}{node['call']}({args});  // {node['name']}")
+        return
+    if "op" in node:
+        lines.append(f"{ind}{node['op']}() {{")
+        for kid in node["children"]:
+            _emit_sem_node(kid, lines, depth + 1, fn_var, modules, prefix, profiles)
+        lines.append(f"{ind}}}")
+        return
+    _emit_sem_prim(node, lines, depth, fn_var, profiles)
+
+
+def _collect_profiles(node: dict, modules: dict, prefix: str,
+                      profiles: dict, lines: list[str]) -> None:
+    """Long measured polygons become named file-level constants."""
+    if "transform" in node:
+        _collect_profiles(node["child"], modules, prefix, profiles, lines)
+        return
+    if "op" in node:
+        for kid in node["children"]:
+            _collect_profiles(kid, modules, prefix, profiles, lines)
+    elif "call" in node or "profile2d" in node:
+        pass
+    elif node.get("prim") == "extrude" and id(node) not in profiles:
+        pname = f"{prefix}{node['name']}_profile"
+        profiles[id(node)] = pname
+        pts = ", ".join(_vec(p) for p in node["profile"])
+        uv = {"x": "(y, z)", "y": "(z, x)", "z": "(x, y)"}[node.get("axis", "z")]
+        lines.append(f"{pname} = [{pts}];  // {uv} points — {node['source']}")
+
+
+def _emit_semantic_body(body: dict, entry: dict, lines: list[str],
+                        prefix: str = "") -> str:
+    bid = body["id"]
+    if prefix and entry.get("params"):
+        # expressions reference bare param names; prefixed emission would need
+        # token rewriting — not implemented until a multi-body semantic plan
+        # actually exists.
+        raise ValueError("semantic plans are single-body for now (prefix use)")
+    modules = entry.get("modules", {})
+    fn_var = f"{prefix}fn"
+
+    lines.append(f"// ---- body {bid} (strategy: csg — semantic parametric plan) ----")
+    if entry.get("notes"):
+        lines.append(f"// plan: {entry['notes']}")
+    lines.append("")
+    lines.append("// ======== PARAMETERS (every value measured; see source comments) ========")
+    params = entry.get("params", [])
+    width = max((len(prefix + p["name"]) for p in params), default=0) + 1
+    for p in params:
+        val = p["expr"] if "expr" in p else _fmt(float(p["value"]))
+        lines.append(f"{(prefix + p['name']).ljust(width)}= {val};"
+                     f"  // {p['source']}")
+    lines.append(f"{(fn_var).ljust(width)}= {_FN};  // curve resolution")
+    lines.append("")
+
+    for pname, pts in entry.get("profiles", {}).items():
+        joined = ", ".join(_vec(q) for q in pts)
+        lines.append(f"{prefix}{pname}_pts = [{joined}];  // measured shared outline")
+    profiles: dict[int, str] = {}
+    for mdef in modules.values():
+        _collect_profiles(mdef["tree"], modules, prefix, profiles, lines)
+    _collect_profiles(entry["csg"], modules, prefix, profiles, lines)
+    if profiles or entry.get("profiles"):
+        lines.append("")
+
+    for mname, mdef in modules.items():
+        args = ", ".join(mdef.get("args", []))
+        if mdef.get("doc"):
+            lines.append(f"// {mdef['doc']}")
+        lines.append(f"module {prefix}{mname}({args}) {{")
+        _emit_sem_node(mdef["tree"], lines, 1, fn_var, modules, prefix, profiles)
+        lines.append("}")
+        lines.append("")
+
+    lines.append(f"module body_{bid}() {{")
+    _emit_sem_node(entry["csg"], lines, 1, fn_var, modules, prefix, profiles)
     lines.append("}")
     return f"body_{bid}"
 

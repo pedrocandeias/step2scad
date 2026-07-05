@@ -136,7 +136,10 @@ def run_pipeline(
     ref_stl = out / f"{slug}_ref.stl"
     ref_mesh.export(ref_stl)
     cand_mesh = trimesh.load(recon_stl, force="mesh")
-    report, aligned = evaluate(cand_mesh, ref_mesh, icp_refine=icp, return_aligned=True)
+    body_modules = [f"body_{b['id']}" for b in features["bodies"]]
+    report, aligned = evaluate(cand_mesh, ref_mesh, icp_refine=icp, return_aligned=True,
+                               candidate_path=recon_stl, reference_path=ref_stl,
+                               candidate_scad=scad_path, body_modules=body_modules)
     _log(
         f"eval: IoU = {report['iou']:.4f}  "
         f"(∩ {report['intersection_volume']:.2f} / ∪ {report['union_volume']:.2f} mm³, "
