@@ -63,6 +63,7 @@ def maybe_refine(
     target: float = 0.95,
     max_attempts: int = 6,
     log_fn=print,
+    plan: dict | None = None,
 ):
     """Run the rule-6 refinement loop if the IoU is below `target`.
 
@@ -171,7 +172,7 @@ def maybe_refine(
                 try:
                     scad_text = emit_scad(
                         features, classification, slug,
-                        overrides={body["id"]: trial},
+                        overrides={body["id"]: trial}, plan=plan,
                     )
                     cand_scad.write_text(scad_text)
                     render.render_stl(cand_scad, cand_stl, openscad)

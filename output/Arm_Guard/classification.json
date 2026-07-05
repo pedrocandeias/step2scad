@@ -1,0 +1,10 @@
+{
+  "source": "models/phoenix_components/Arm_Guard.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "csg",
+      "reasoning": "agent plan (2.5D band stack: measured section footprints extruded between exact B-rep z-levels (ramps staircased <= 0.5 mm), then trimmed by exact bounded slanted-plane cuts); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane, sphere, torus) with no single dominant axis (largest coaxial cluster covers only 1%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    }
+  ]
+}

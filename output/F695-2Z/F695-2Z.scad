@@ -1,8 +1,8 @@
 // F695-2Z — step2scad parametric reconstruction
 // source: models/F695-2Z.step
 // rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// other strategies still use placeholder stubs (bbox) until their
-// real emitters (section linear_extrude, CSG, loft) land.
+// csg / instance_of bodies: agent-authored measured plan (plan.json);
+// strategies without a real emitter yet use placeholder stubs (bbox).
 // Every dimension below is an exact B-rep value from features.json.
 
 // ---- body 0 (strategy: rotate_extrude — exact RZ profile) ----

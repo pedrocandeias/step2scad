@@ -29,6 +29,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--openscad", default=None, help="path to the openscad binary")
     parser.add_argument(
+        "--plan",
+        default=None,
+        help="agent-authored plan.json: per-body strategy + measured CSG plan "
+        "(overrides the heuristic classification; see step2scad/plan.py)",
+    )
+    parser.add_argument(
         "--icp", action="store_true", help="enable ICP refinement after coarse alignment"
     )
     args = parser.parse_args(argv)
@@ -43,6 +49,7 @@ def main(argv: list[str] | None = None) -> int:
         until=args.until,
         openscad=args.openscad,
         icp=args.icp,
+        plan=args.plan,
     )
 
     print("\n=== step2scad summary ===")

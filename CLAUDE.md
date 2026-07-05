@@ -44,6 +44,16 @@ the pipeline design is `ARCHITECTURE.md`.
    remaining error (which regions, how much) + the candidate fixes you'd try next, and
    let the user decide. (Past failures were fixed by exactly these manual moves — the
    "ceiling" was rarely real.)
+7. 🔴 **AI agent ONLY for STRATEGY + EVALUATION; everything else is deterministic
+   scripts.** The agent (a) decides the reconstruction strategy/plan per body and the
+   refinement moves, and (b) evaluates results (reading script diagnostics/probe — its
+   senses, since it's blind to 3D) and decides accept vs. try-alternative. All
+   mechanical work — B-rep extraction, probing, emitting SCAD *from a given plan*,
+   rendering, measuring IoU/diagnostics, split/reassemble — is script-based and
+   reproducible. The agent CONTROLS the scripts (calls them, reads output, decides
+   next); it never hand-models geometry or bakes judgment into a script. Emit scripts
+   are plan-driven: they execute an explicit measured plan. This split is what makes
+   the reconstructor automatable.
 
 ## Output discipline
 

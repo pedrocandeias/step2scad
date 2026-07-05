@@ -1,0 +1,35 @@
+{
+  "source": "models/phoenix_components/Distals.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft shell from measured sections (full-back stations); exact-plane/cylinder cuts (gap, hinge, slot, scoop, top channel); post/nooks/bar re-added); heuristic suggested: freeform \u2014 62% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 1,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft shell from measured sections (full-back stations); exact-plane/cylinder cuts (gap, hinge, slot, scoop, top channel); post/nooks/bar re-added); heuristic suggested: freeform \u2014 59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 2,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft shell from measured sections (full-back stations); exact-plane/cylinder cuts (gap, hinge, slot, scoop, top channel); post/nooks/bar re-added); heuristic suggested: freeform \u2014 58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 3,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (translated instance of body 2); heuristic suggested: freeform \u2014 58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 4,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (translated instance of body 1); heuristic suggested: freeform \u2014 59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "source": "models/phoenix_components/Snap_Pins.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 1,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 2,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (instance of body 1 (differs only in engraved label)); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    },
+    {
+      "body_id": 3,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (instance of body 0 (differs only in engraved label)); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    },
+    {
+      "body_id": 4,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (instance of body 1 (differs only in engraved label)); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    },
+    {
+      "body_id": 5,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 6,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 7,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 8,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (instance of body 6 (differs only in engraved label)); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    },
+    {
+      "body_id": 9,
+      "strategy": "rotate_extrude",
+      "reasoning": "62% of area is rotational faces sharing one axis (dir [0.0, -0.0, -1.0], 5 faces); 100% of all area conforms to that axis (incl. planar caps normal to it) -> RZ profile rotate_extrude.",
+      "axis": {
+        "origin": [
+          14.42550528157,
+          -9.144297009891,
+          3.405303670944
+        ],
+        "dir": [
+          0.0,
+          -1.224646799147e-16,
+          -1.0
+        ]
+      }
+    },
+    {
+      "body_id": 10,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 37%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 11,
+      "strategy": "rotate_extrude",
+      "reasoning": "62% of area is rotational faces sharing one axis (dir [0.0, -0.0, -1.0], 5 faces); 100% of all area conforms to that axis (incl. planar caps normal to it) -> RZ profile rotate_extrude.",
+      "axis": {
+        "origin": [
+          14.42550528157,
+          8.269980844932,
+          3.405303670944
+        ],
+        "dir": [
+          0.0,
+          -1.224646799147e-16,
+          -1.0
+        ]
+      }
+    },
+    {
+      "body_id": 12,
+      "strategy": "csg",
+      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 48%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    }
+  ]
+}

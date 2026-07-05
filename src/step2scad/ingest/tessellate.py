@@ -83,4 +83,44 @@ def shape_to_trimesh(
         process=True,  # merges duplicate vertices along shared B-rep edges
     )
     mesh.merge_vertices(merge_tex=True, merge_norm=True)
+
+    # Deterministic repair: tiny sliver B-rep faces tessellate into degenerate
+    # fragments and pinholes that break watertightness (and with it the exact
+    # boolean IoU + contains()-based localization). Drop degenerate triangles
+    # and 1-2-triangle junk shards, merge near-coincident seam vertices, and
+    # close the remaining pinholes.
+    mesh.update_faces(mesh.nondegenerate_faces(height=1e-7))
+    mesh.remove_unreferenced_vertices()
+    parts = mesh.split(only_watertight=False)
+    keep = [p for p in parts if len(p.faces) > 4]
+    if keep:
+        mesh = trimesh.util.concatenate(keep)
+    if not mesh.is_watertight:
+        # OCC refuses to triangulate the odd degenerate sliver face (seen: a
+        # 0.4 mm² torus blend, a 0.05 mm² plane), leaving an open boundary
+        # ring per affected body. Cap the boundary loops body-by-body with
+        # stitch triangles (winding fixed per body so volumes stay positive).
+        # The capped area is sub-mm² — far below IoU/localization resolution.
+        try:
+            fixed = []
+            for part in mesh.split(only_watertight=False):
+                if not part.is_watertight:
+                    new_faces = trimesh.repair.stitch(part)
+                    if len(new_faces):
+                        part = trimesh.Trimesh(
+                            vertices=part.vertices,
+                            faces=np.vstack([part.faces, new_faces]),
+                            process=True,
+                        )
+                    trimesh.repair.fix_normals(part)
+                    if part.is_watertight and part.volume < 0:
+                        part.invert()
+                fixed.append(part)
+            mesh = trimesh.util.concatenate(fixed)
+            # stitching can leave zero-volume bubble shards — drop them
+            parts = [p for p in mesh.split(only_watertight=False)
+                     if abs(p.volume) > 1e-3]
+            mesh = trimesh.util.concatenate(parts)
+        except Exception:
+            pass  # non-watertight ref degrades eval to voxel mode, not fatal
     return mesh

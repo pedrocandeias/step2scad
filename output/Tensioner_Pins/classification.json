@@ -1,0 +1,22 @@
+{
+  "source": "models/phoenix_components/Tensioner_Pins.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "csg",
+      "reasoning": "agent plan (chamfered bar = intersection of three measured octagonal prisms; minus tendon slot (prismatic in x, raycast-measured conic walls); minus blind tendon bore (exact cylinder+cap)); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+    },
+    {
+      "body_id": 1,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (identical pin, +x neighbor); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    },
+    {
+      "body_id": 2,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (identical pin, -x neighbor); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori).",
+      "suggested_strategy": "csg"
+    }
+  ]
+}

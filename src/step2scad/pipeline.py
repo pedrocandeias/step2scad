@@ -32,6 +32,7 @@ from step2scad.eval import (
     run_assertions,
 )
 from step2scad.ingest import extract_features, read_step, shape_to_trimesh
+from step2scad.plan import apply_plan_to_classification, load_plan
 from step2scad.refine import maybe_refine
 
 STAGES = ("ingest", "classify", "emit", "export", "eval")
@@ -48,9 +49,18 @@ def run_pipeline(
     until: str = "eval",
     openscad: str | None = None,
     icp: bool = False,
+    plan: str | Path | dict | None = None,
 ) -> dict:
-    """Run the pipeline on one STEP file up to stage `until`. Returns summary."""
+    """Run the pipeline on one STEP file up to stage `until`. Returns summary.
+
+    `plan` (path to a plan.json, or the loaded dict) is the agent-authored
+    strategy: it overrides the heuristic classification per body and drives
+    the plan-based emitters (rule 7 — strategy belongs to the agent; this
+    pipeline only executes it).
+    """
     step_path = Path(step_path)
+    if plan is not None and not isinstance(plan, dict):
+        plan = load_plan(plan)
     slug = name or step_path.stem.replace(" ", "_")
     out = Path(out_dir) / slug
     out.mkdir(parents=True, exist_ok=True)
@@ -77,9 +87,11 @@ def run_pipeline(
     if stop < STAGES.index("classify"):
         return summary
 
-    # ---- 2. CLASSIFY (strategy heuristics) ----
+    # ---- 2. CLASSIFY (strategy: agent plan when given, else heuristics) ----
     t0 = time.perf_counter()
     classification = classify_bodies(features)
+    if plan is not None:
+        classification = apply_plan_to_classification(classification, plan)
     _write_json(out / "classification.json", classification)
     for c in classification["bodies"]:
         _log(f"classify: body {c['body_id']} -> {c['strategy']}  ({c['reasoning']})")
@@ -90,13 +102,13 @@ def run_pipeline(
     if stop < STAGES.index("emit"):
         return summary
 
-    # ---- 3. EMIT (.scad — placeholder emitters for now) ----
+    # ---- 3. EMIT (.scad — plan-driven where the agent supplied a plan) ----
     t0 = time.perf_counter()
-    scad_text = emit_scad(features, classification, slug)
+    scad_text = emit_scad(features, classification, slug, plan=plan)
     scad_path = out / f"{slug}.scad"
     scad_path.write_text(scad_text)
-    _log(f"emit: wrote {scad_path} (dispatch: rotate_extrude -> exact RZ profile; "
-         "other strategies -> placeholder stubs)")
+    _log(f"emit: wrote {scad_path} (dispatch: agent plan -> csg/instance_of; "
+         "rotate_extrude -> exact RZ profile; other strategies -> placeholder stubs)")
     summary["stages"]["emit"] = {
         "seconds": round(time.perf_counter() - t0, 3),
         "scad": str(scad_path),
@@ -145,7 +157,7 @@ def run_pipeline(
     # ---- 6. REFINE (rule 6: residual-driven targeted profile fixes) ----
     refine_log, report, aligned, refined_vd = maybe_refine(
         out, slug, features, classification, ref_mesh, report, aligned, osc,
-        icp=icp, log_fn=_log,
+        icp=icp, log_fn=_log, plan=plan,
     )
     report["refine"] = refine_log
     if refine_log["kept_overrides"]:

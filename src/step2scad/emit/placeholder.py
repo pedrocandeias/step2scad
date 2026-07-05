@@ -161,34 +161,48 @@ def emit_scad(
     classification: dict,
     name: str,
     overrides: dict[int, list[dict]] | None = None,
+    plan: dict | None = None,
 ) -> str:
     """Emit the parametric .scad for all bodies. Returns scad text.
 
-    Dispatch: rotate_extrude bodies go to the real RZ-profile emitter
-    (emit/revolve.py); other strategies keep their placeholder stubs.
-    `overrides` maps body_id -> refine-loop radial corrections (see
-    revolve.emit_revolve_body) applied by step2scad.refine (rule 6).
+    Dispatch: bodies with an agent-plan entry (see step2scad.plan) route by
+    the PLAN's strategy — csg -> emit/csg.py (plan-driven, zero judgment),
+    instance_of -> translated module reuse. rotate_extrude bodies go to the
+    real RZ-profile emitter (emit/revolve.py); remaining strategies keep
+    their placeholder stubs. `overrides` maps body_id -> refine-loop radial
+    corrections (see revolve.emit_revolve_body) applied by step2scad.refine
+    (rule 6).
     """
     # Lazy import: revolve imports this module's helpers (_fmt, _orient_snippet).
+    from step2scad.emit import csg as csg_emit
     from step2scad.emit import revolve
+    from step2scad.plan import plan_bodies
 
     cls_by_id = {c["body_id"]: c for c in classification["bodies"]}
+    plan_by_id = plan_bodies(plan)
     lines = [
         f"// {name} — step2scad parametric reconstruction",
         f"// source: {features.get('source', '?')}",
         "// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;",
-        "// other strategies still use placeholder stubs (bbox) until their",
-        "// real emitters (section linear_extrude, CSG, loft) land.",
+        "// csg / instance_of bodies: agent-authored measured plan (plan.json);",
+        "// strategies without a real emitter yet use placeholder stubs (bbox).",
         "// Every dimension below is an exact B-rep value from features.json.",
         "",
     ]
     modules = []
     for body in features["bodies"]:
         cls = cls_by_id[body["id"]]
+        entry = plan_by_id.get(body["id"])
         prefix = f"b{body['id']}_" if len(features["bodies"]) > 1 else ""
         body_lines: list[str] = []
         try:
-            if cls["strategy"] == "rotate_extrude" and "axis" in cls:
+            if entry is not None and entry["strategy"] == "csg":
+                modules.append(
+                    csg_emit.emit_csg_body(body, entry, body_lines, prefix=prefix)
+                )
+            elif entry is not None and entry["strategy"] == "instance_of":
+                modules.append(csg_emit.emit_instance_body(body, entry, body_lines))
+            elif cls["strategy"] == "rotate_extrude" and "axis" in cls:
                 try:
                     modules.append(
                         revolve.emit_revolve_body(
@@ -208,7 +222,11 @@ def emit_scad(
             else:
                 modules.append(_emit_bbox_body(body, cls, body_lines))
         except Exception:
-            # Robustness: never let one body kill the loop.
+            if entry is not None:
+                # An agent plan must execute exactly or fail loudly — a silent
+                # bbox stand-in would fake a reconstruction that isn't the plan.
+                raise
+            # Heuristic paths: never let one body kill the loop.
             body_lines = []
             modules.append(_emit_bbox_body(body, cls, body_lines))
         lines.extend(body_lines)

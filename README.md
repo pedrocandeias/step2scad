@@ -1,54 +1,118 @@
 # step2scad
 
-**Automated STEP → parametric OpenSCAD reconstructor.**
+**Automated STEP → parametric OpenSCAD reconstruction.**
+*Reconstrução automática de sólidos STEP em modelos OpenSCAD paramétricos.*
 
-Give it a STEP (`.step` / `.stp`) file; it produces a fully **parametric** OpenSCAD
-`.scad` model that reconstructs the part to **≥95% IoU** against the original solid —
-with no manual modelling.
+[English](#english) · [Português](#português)
 
-The engine is a Claude (Fable 5) agent that runs an autonomous
-analyse → build → render → measure → iterate loop. The agent prompt lives in
-[`prompts/reconstruct.md`](prompts/reconstruct.md); the design is in
-[`ARCHITECTURE.md`](ARCHITECTURE.md); the working rules the agent must obey are in
-[`CLAUDE.md`](CLAUDE.md).
+---
 
-## Why STEP (not STL)
+## English
 
-STEP is a **B-rep** format: it stores the *exact* analytic surfaces (planes,
-cylinders, cones, spheres, tori/fillets, B-splines), their exact radii/axes/origins,
-and the face/edge topology. Reconstruction reads ground-truth geometry instead of
-guessing from a triangle soup — so exact parametric dimensions come out directly, and
-95% IoU is a floor, not a stretch. See ARCHITECTURE.md § "Why STEP is easier than STL".
+Give it a STEP (`.step` / `.stp`) B-rep solid; it produces a fully **parametric,
+human-readable** OpenSCAD model that reconstructs the part to **≥95% volumetric
+IoU** against the original — with **zero manual modelling**. Every dimension in
+the output is a measured value (an exact B-rep parameter or a probe measurement
+on a high-resolution tessellation), each annotated with its provenance.
 
-## Layout
+Validated on the complete **e-NABLE Phoenix Hand v3** prosthetic (9 parts, 30
+solid bodies), including the "organic" palm shells:
 
-```
-models/        input STEP files (source of truth)
-src/           reconstruction engine (B-rep reader, classifiers, .scad emitters)
-prompts/       the Fable 5 agent prompt(s)
-scripts/       CLI entry points / pipeline automation
-templates/     approved, human-reviewed .scad reconstructions
-output/        reconstruction results per model — KEPT (.scad + metrics tracked)
-eval/          IoU harness + regression cases
-docs/          notes
-tmp/           scratch only (throwaway intermediates) — gitignored
-```
+| Part | Boolean IoU | Strategy |
+|---|---|---|
+| F695-2Z (bearing) | 0.9978 | exact RZ profile (`rotate_extrude`) |
+| Tensioner_Pins | 0.9991 | intersection of 3 measured octagonal prisms + slot + bore |
+| Tensioner_Block | 0.9984 | prismatic tower + flange + exact sphere − channels |
+| Arm_Guard | 0.9930 | 2.5D band stack between exact B-rep z-planes |
+| Snap_Pins | 0.9792 | hull-lofts + silhouette cutters (13 bodies) |
+| Distals | 0.9839 | hull-loft shell + 9 exact cuts (5 bodies) |
+| Proximals | 0.9796 | three-zone lofts + fork/tunnel/pin cuts (5 bodies) |
+| Palm_left | 0.9652 | non-convex outline-slab shell + occupancy-scanned cavity |
+| Palm_right | 0.9652 | mechanical x-mirror of the verified Palm_left plan |
 
-## Quickstart
+All IoU values are **exact boolean** intersection/union volume ratios, not
+voxel estimates. Full methodology (in Portuguese, with per-script detail):
+[`docs/reconstruction_protocol_phoenix_hand.md`](docs/reconstruction_protocol_phoenix_hand.md).
 
-_Engine is under construction — see ARCHITECTURE.md for the target pipeline._
+### How it works
+
+The system splits **strategy** from **execution**:
+
+- **Deterministic pipeline** (`ingest → classify → emit → export → eval →
+  refine`): exact B-rep feature extraction (OpenCASCADE), a geometry *probe*
+  (raycasts, sections, occupancy — active perception over any model), a
+  plan-driven `.scad` emitter, and an evaluation stack (exact boolean IoU with
+  fallbacks, localized FP/FN diagnostics, surface-distance heatmaps, structural
+  assertions).
+- **An AI agent decides only the strategy** — which primitives, booleans and
+  measurements compose each body — and records it as an auditable
+  **`plan.json`** (schema: [`src/step2scad/plan.py`](src/step2scad/plan.py));
+  the emitter executes the plan exactly, with no judgment of its own. The
+  agent then reads the eval diagnostics and iterates: each localized error
+  region becomes a concrete, measured intervention.
 
 ```bash
-# results land in output/<model>/ (kept in the project)
-PYTHONPATH=src python -m step2scad models/F695-2Z.step
+# reconstruct one part; results land in output/<part>/
+PYTHONPATH=src python3 -m step2scad models/F695-2Z.step
+# with an agent-authored plan (the strategy artifact):
+PYTHONPATH=src python3 -m step2scad models/part.step --plan output/part/plan.json
+# the agent's senses:
+PYTHONPATH=src python3 -m step2scad.report output/part/features.json
+PYTHONPATH=src python3 -m step2scad.probe models/part.step section z 3.0 --png
 ```
 
-## Status
+Requirements: Python 3.12+, `pythonocc-core` (OCP), `trimesh`, `numpy`,
+`matplotlib`, `shapely`, and an [OpenSCAD](https://openscad.org) build with the
+Manifold backend.
 
-- [x] Project scaffold
-- [x] Seed model: `models/e_nable_phoenix_hand_v3.step`
-- [ ] B-rep reader (OpenCASCADE / pythonocc / FreeCAD headless)
-- [ ] Feature classifier (revolve / extrude / primitive-CSG / free-form)
-- [ ] `.scad` emitter
-- [ ] IoU eval harness
-- [ ] Autonomous agent loop
+### Layout
+
+```
+models/            input STEP files (source of truth, read-only)
+src/step2scad/     the deterministic pipeline (ingest/plan/emit/eval/probe/report)
+scripts/authoring/ per-part plan-authoring scripts (supplementary material)
+output/<part>/     deliverables: plan.json + parametric .scad + eval.json
+docs/              the reconstruction protocol
+prompts/           the reconstruction agent prompt
+ARCHITECTURE.md    pipeline design + proven shell recipes
+```
+
+---
+
+## Português
+
+Recebe um sólido B-rep STEP (`.step`/`.stp`) e produz um modelo OpenSCAD
+totalmente **paramétrico e legível** que reconstrói a peça com **IoU
+volumétrico ≥ 95 %** face ao original — **sem modelação manual**. Todos os
+valores do modelo final são medidos (parâmetros exatos do B-rep ou medições
+sobre a tesselação de alta resolução), cada um anotado com a sua proveniência.
+
+Validado na prótese **e-NABLE Phoenix Hand v3** completa (9 peças, 30 corpos
+sólidos), incluindo as conchas "orgânicas" das palmas — resultados na tabela
+acima, todos com IoU booleano exato.
+
+O sistema separa **estratégia** de **execução**: um pipeline determinístico
+(extração B-rep exata, sonda geométrica, emissor de OpenSCAD orientado por
+plano, avaliação com IoU booleano exato + diagnóstico localizado + mapas de
+calor) e um agente de IA que decide *apenas* a estratégia por corpo,
+registando-a num **`plan.json`** auditável que o emissor executa à letra.
+Quando o IoU fica aquém, cada região de erro localizada é convertida numa
+intervenção concreta e medida — nunca se declara um "teto" de qualidade.
+
+O protocolo completo do processo, escrito para integração em contexto
+académico e com o detalhe de cada script, está em
+[`docs/reconstruction_protocol_phoenix_hand.md`](docs/reconstruction_protocol_phoenix_hand.md).
+
+---
+
+## License / Licença
+
+This repository is licensed under **[CC BY-SA 4.0](LICENSE)**
+(Attribution-ShareAlike 4.0 International).
+
+The Phoenix Hand v3 input models in `models/` derive from the
+**[e-NABLE](https://enablingthefuture.org/) Phoenix Hand** by the e-NABLE
+community, itself shared under CC BY-SA — attribution and share-alike are
+preserved here. / Os modelos STEP de entrada derivam da **Phoenix Hand** da
+comunidade **e-NABLE**, partilhada sob CC BY-SA — a atribuição e a partilha
+nos mesmos termos são preservadas neste repositório.

@@ -1,0 +1,35 @@
+{
+  "source": "models/phoenix_components/Proximals.step",
+  "bodies": [
+    {
+      "body_id": 0,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (translated instance of body 3); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 1,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (translated instance of body 3); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 2,
+      "strategy": "csg",
+      "reasoning": "agent plan (beam+crown+ridge hull-lofts from measured sections; exact tunnel/slot/bore/recess/pocket cuts); heuristic suggested: freeform \u2014 36% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 3,
+      "strategy": "csg",
+      "reasoning": "agent plan (beam+crown+ridge hull-lofts from measured sections; exact tunnel/slot/bore/recess/pocket cuts); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    },
+    {
+      "body_id": 4,
+      "strategy": "instance_of",
+      "reasoning": "agent plan (translated instance of body 3); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "suggested_strategy": "freeform"
+    }
+  ]
+}

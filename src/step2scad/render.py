@@ -33,7 +33,10 @@ def _run(cmd: list[str], timeout: int) -> None:
 
 def render_stl(scad: Path, stl: Path, openscad: str, timeout: int = 600) -> Path:
     stl.parent.mkdir(parents=True, exist_ok=True)
-    _run([openscad, "-o", str(stl), str(scad)], timeout)
+    # Manifold backend: guarantees a watertight STL (the default backend can
+    # emit non-manifold output on coincident CSG surfaces, which breaks the
+    # exact boolean IoU downstream) — and it is much faster on hull-heavy CSG.
+    _run([openscad, "-o", str(stl), "--backend", "Manifold", str(scad)], timeout)
     return stl
 
 
