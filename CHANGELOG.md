@@ -4,6 +4,19 @@ All notable changes to **step2scad** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions are project milestones (no releases published yet).
 
+## [Unreleased]
+
+### Added
+- **`fitting.decimate_stations`** — loft-station decimation to parametric
+  CONTROL sections: an interior station survives only if the hull of its
+  neighbors cannot reproduce it within tolerance (support-function
+  interpolation, exact for convex hull cross-sections; greedy min-error
+  removal). Distals: 45/47/45 measured stations → 16/13/13 control sections
+  per finger at tol 0.30; measured cost curve cited in the plan notes
+  (28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 — 0.30 chosen per
+  the parametric-preferred policy). Each surviving section is an editable
+  vectorized profile; the Proximals crown loft is the next candidate.
+
 ## [0.5.0] — 2026-07-06 · Fleet semanticization + smooth laws
 
 **All eight CSG parts are now human-readable and truly parametric** (schema

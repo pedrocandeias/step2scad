@@ -167,3 +167,50 @@ def z_cylinder_circles(faces) -> list[tuple]:
             out.append((f["index"], p["axis_origin"][0], p["axis_origin"][1],
                         p["radius"]))
     return out
+
+# --------------------------------------------------------------------------
+# loft-station decimation: keep only CONTROL sections
+# --------------------------------------------------------------------------
+
+def _support(poly, thetas):
+    """Support function h(theta) of a (convex) polygon."""
+    p = np.asarray(poly, float)
+    return (p[:, 0][None, :] * np.cos(thetas)[:, None]
+            + p[:, 1][None, :] * np.sin(thetas)[:, None]).max(axis=1)
+
+
+def decimate_stations(stations, tol=0.12, angles=180):
+    """Reduce a measured loft chain to its parametric CONTROL sections.
+
+    stations: [(s, polygon2d), ...] ordered along the loft axis. An interior
+    station is dropped when the hull of its surviving neighbors reproduces it
+    within `tol`: the cross-section of hull(A@sa, B@sb) at s is the Minkowski
+    blend (1-t)A + tB (exact for convex profiles), whose support function is
+    the linear blend of the two supports. Greedy min-error removal
+    (Douglas-Peucker in profile space).
+
+    -> (kept_indices, max_interp_error_over_dropped)
+    """
+    n = len(stations)
+    if n <= 2:
+        return list(range(n)), 0.0
+    thetas = np.linspace(0, 2 * np.pi, angles, endpoint=False)
+    S = [float(s) for s, _ in stations]
+    H = [_support(p, thetas) for _, p in stations]
+
+    kept = list(range(n))
+
+    def interp_err(i_prev, i, i_next):
+        t = (S[i] - S[i_prev]) / (S[i_next] - S[i_prev])
+        return float(np.abs(H[i] - ((1 - t) * H[i_prev] + t * H[i_next])).max())
+
+    worst_dropped = 0.0
+    while len(kept) > 2:
+        errs = [(interp_err(kept[k - 1], kept[k], kept[k + 1]), k)
+                for k in range(1, len(kept) - 1)]
+        e, k = min(errs)
+        if e >= tol:
+            break
+        worst_dropped = max(worst_dropped, e)
+        kept.pop(k)
+    return kept, worst_dropped

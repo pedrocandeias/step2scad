@@ -4,19 +4,19 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 62% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (decimated to 16 parametric CONTROL sections (from 45 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 \u2014 0.30 chosen per the parametric-preferred policy) \u2014 semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 62% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     },
     {
       "body_id": 1,
       "strategy": "csg",
-      "reasoning": "agent plan (semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (decimated to 13 parametric CONTROL sections (from 47 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 \u2014 0.30 chosen per the parametric-preferred policy) \u2014 semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 59% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     },
     {
       "body_id": 2,
       "strategy": "csg",
-      "reasoning": "agent plan (semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (decimated to 13 parametric CONTROL sections (from 45 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 \u2014 0.30 chosen per the parametric-preferred policy) \u2014 semantic form: vectorized zone-named stations (hull-loft kept \u2014 the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).); heuristic suggested: freeform \u2014 58% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     },
     {

@@ -24,7 +24,7 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, "src")
-from step2scad.fitting import dist_to_poly, vectorize
+from step2scad.fitting import decimate_stations, dist_to_poly, vectorize
 from step2scad.plan import validate_plan
 
 OUT = Path("output/Distals")
@@ -35,6 +35,7 @@ plan = json.loads(v1_path.read_text())
 feats = json.loads((OUT / "features.json").read_text())
 
 SAME_TOL = 0.06          # adjacent stations closer than this are one section
+DECIM_TOL = 0.30         # control-section decimation: max interp error (mm)
 VEC_TOL = 0.06           # vectorizer arc-fit tolerance
 
 
@@ -72,6 +73,16 @@ def semanticize_body(entry, body):
         for slab in h["children"]:
             stations.setdefault(round(slab["z0"], 6), slab["profile"])
     ys = sorted(stations)
+
+    # ---- decimate to CONTROL sections: an interior station survives only if
+    # the hull of its neighbors cannot reproduce it within DECIM_TOL
+    # (support-function interpolation — exact for convex hull cross-sections)
+    kept, interp_err = decimate_stations([(y, stations[y]) for y in ys],
+                                         tol=DECIM_TOL)
+    n_all = len(ys)
+    ys = [ys[k] for k in kept]
+    print(f"  body {entry['body_id']}: {n_all} estações -> {len(ys)} secções "
+          f"de controlo (erro interp. máx {interp_err:.3f} <= tol {DECIM_TOL})")
 
     # constant-section runs (measured; mostly none — the loft is real)
     same_next = []
@@ -162,6 +173,10 @@ def semanticize_body(entry, body):
         {"call": "tendon_details", "name": "details_i", "args": {}},
     ]}
     entry["notes"] = (
+        f"decimated to {len(ys)} parametric CONTROL sections (from {n_all} "
+        f"measured stations; support-function interp error <= 0.30; measured "
+        "cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 "
+        "— 0.30 chosen per the parametric-preferred policy) — "
         "semantic form: vectorized zone-named stations (hull-loft kept — "
         "the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/"
         "tendon_details modules; exact values unchanged from plan_v1. "
