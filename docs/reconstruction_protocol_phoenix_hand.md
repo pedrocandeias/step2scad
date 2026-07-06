@@ -262,6 +262,36 @@ Guião de autoria: `scripts/authoring/author_armguard_parametric.py`
 plano semântico). O plano geométrico de bandas fica preservado
 (`plan_bandstack.json`) como variante de máxima fidelidade.
 
+### 7.x Resultados da semanticização da frota (marco 0.5.0)
+
+A fase semântica foi aplicada às oito peças CSG por scripts de autoria
+dedicados (`scripts/authoring/author_*_parametric.py`), todos assentes na
+biblioteca de medição `src/step2scad/fitting.py` (ajustes de círculo/reta/
+cápsula com resíduos, teste de offset uniforme, vetorizador de polígonos com
+snap a faces exatas). O custo de fidelidade de cada parametrização foi
+quantificado contra o plano geométrico v1 (política: preferir a forma
+paramétrica editável, mantendo IoU ≥ 0,95 e citando o delta):
+
+| Peça | IoU v1 | IoU semântico | Δ | Nota |
+|---|---|---|---|---|
+| Tensioner_Pins | 0,9991 | 0,9987 | −0,0004 | paredes do slot = 2 arcos quase concêntricos ajustados |
+| Tensioner_Block | 0,9984 | 0,9904 | −0,0080 | canais laterais espelho exato; tol de vetorização 0,02 |
+| Arm_Guard | 0,9930 | 0,9844 | −0,0086 | 100% paramétrico: cones exatos, leis 45°, secção-ampulheta |
+| Snap_Pins | 0,9792 | **0,9818** | **+0,0026** | cadeias de cilindros-patamar cortadas por planos exatos |
+| Distals | 0,9839 | 0,9809 | −0,0030 | estações vetorizadas; loft mantido (afunilamento real) |
+| Proximals | 0,9796 | 0,9762 | −0,0034 | lóbulos r=6,000 concêntricos com os furos; 754→212 primitivas |
+| Palm_left | 0,9652 | 0,9641 | −0,0011 | 665 lâminas colapsadas; cúpula honestamente orgânica |
+| Palm_right | 0,9652 | 0,9641 | −0,0011 | espelho único do plano semântico esquerdo |
+
+O caso Snap_Pins merece destaque metodológico: a semanticização **subiu** o
+IoU — a exigência de exprimir cada pino como primitivas nomeadas revelou que
+as secções eram círculos achatados por planos exatos, que os hulls do v1
+circunscreviam como círculos completos. A legibilidade não foi um custo:
+foi um instrumento de medição adicional. Nos casos contrários (afunilamento
+dos Distals, curvatura da cúpula das palmas), a medição negou a existência de
+leis dentro das tolerâncias e as regiões mantiveram-se como bandas medidas
+com nomes semânticos — o resíduo do ajuste é sempre o árbitro.
+
 ## 8. Detalhe dos scripts
 
 ### 8.1 Módulos permanentes do pipeline (`src/step2scad/`)
