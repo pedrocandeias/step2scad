@@ -368,16 +368,76 @@ def _collect_profiles(node: dict, modules: dict, prefix: str,
         lines.append(f"{pname} = [{pts}];  // {uv} points — {node['source']}")
 
 
+
+def _prefix_entry(entry: dict, prefix: str) -> dict:
+    """Bake the body prefix into every name-like token of a semantic plan
+    entry (params, profile keys/refs, module keys/calls, node names, and all
+    identifiers inside expressions) so multi-body plans emit collision-free.
+    Module formal args shadow params and are NOT rewritten inside their tree.
+    """
+    import copy
+    import re
+
+    e = copy.deepcopy(entry)
+    pnames = {q["name"] for q in e.get("params", [])}
+    profs = set(e.get("profiles", {}))
+    mods = set(e.get("modules", {}))
+
+    def rw_expr(expr, exclude):
+        names = (pnames - exclude)
+        if not names or not isinstance(expr, str):
+            return expr
+        pat = re.compile(r"\b(" + "|".join(sorted(names, key=len, reverse=True))
+                         + r")\b")
+        return pat.sub(lambda m: prefix + m.group(1), expr)
+
+    def walk(n, exclude):
+        if isinstance(n, dict):
+            out = {}
+            for k, v in n.items():
+                if k == "ref" and isinstance(v, str):
+                    out[k] = prefix + v if v in profs else v
+                elif k == "call" and isinstance(v, str):
+                    out[k] = prefix + v if v in mods else v
+                elif k == "name" and isinstance(v, str):
+                    out[k] = prefix + v
+                elif k in ("source", "doc", "notes", "kind", "axis", "edge"):
+                    out[k] = v
+                else:
+                    out[k] = walk(v, exclude)
+            return out
+        if isinstance(n, list):
+            return [walk(v, exclude) for v in n]
+        if isinstance(n, str):
+            return rw_expr(n, exclude)
+        return n
+
+    for q in e.get("params", []):
+        if "expr" in q:
+            q["expr"] = rw_expr(q["expr"], frozenset())
+    e["profiles"] = {prefix + k: walk(v, frozenset())
+                     for k, v in e.get("profiles", {}).items()}
+    new_mods = {}
+    for mname, mdef in e.get("modules", {}).items():
+        args = frozenset(mdef.get("args", []))
+        new_mods[prefix + mname] = {**mdef, "tree": walk(mdef["tree"], args)}
+    e["modules"] = new_mods
+    e["csg"] = walk(e["csg"], frozenset())
+    for q in e.get("params", []):
+        q["name"] = prefix + q["name"]
+    return e
+
 def _emit_semantic_body(body: dict, entry: dict, lines: list[str],
                         prefix: str = "") -> str:
     bid = body["id"]
-    if prefix and entry.get("params"):
-        # expressions reference bare param names; prefixed emission would need
-        # token rewriting — not implemented until a multi-body semantic plan
-        # actually exists.
-        raise ValueError("semantic plans are single-body for now (prefix use)")
-    modules = entry.get("modules", {})
     fn_var = f"{prefix}fn"
+    if prefix:
+        # bake the body prefix into every name/expression, then emit bare —
+        # this is what makes multi-body semantic plans (params, shared
+        # profiles, modules) collision-free
+        entry = _prefix_entry(entry, prefix)
+        prefix = ""
+    modules = entry.get("modules", {})
 
     lines.append(f"// ---- body {bid} (strategy: csg — semantic parametric plan) ----")
     if entry.get("notes"):
