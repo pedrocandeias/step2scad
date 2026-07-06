@@ -292,6 +292,20 @@ dos Distals, curvatura da cúpula das palmas), a medição negou a existência d
 leis dentro das tolerâncias e as regiões mantiveram-se como bandas medidas
 com nomes semânticos — o resíduo do ajuste é sempre o árbitro.
 
+### 7.y Sólidos-lei: máquina vs afinação manual (Proximals)
+
+A decomposição secção-parâmetro-lei foi confrontada com o template afinado à
+mão (`openscad-parametric-reconstructor/templates/Proximals.scad`). O
+resultado valida a *linguagem* e corrige os *valores*: o autor humano acertou
+na forma de todas as leis (domo longitudinal cilíndrico, scoops côncavos no
+ventre, afunilamento linear), mas a máquina mediu domo r=52,34 (não 60),
+scoops assimétricos (traseiro r=11,76; frontal r=7,57 com resíduo 0,009 — um
+círculo quase exato que o olho leu como simétrico) e inclinação da pala
+−6,4° (não −6,0°). As features pequenas do template (knuckle r6,0; furo 2,33;
+túnel 1,12) correspondem às faces exatas do B-rep (6,000; 2,300/2,375;
+1,125). IoU 0,9716 (custo −0,0046, citado), crown de 46 primitivas → 9
+sólidos-lei + 11 parâmetros.
+
 ## 8. Detalhe dos scripts
 
 ### 8.1 Módulos permanentes do pipeline (`src/step2scad/`)

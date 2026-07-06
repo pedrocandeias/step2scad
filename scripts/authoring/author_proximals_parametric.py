@@ -499,3 +499,9 @@ for entry in plan["bodies"]:
         print(f"body {bid}: IoU offline (CSG nativo) = {iou:.4f}  "
               f"(∩ {vols['intersection']:.1f} / ∪ {vols['union']:.1f})")
 print("RESUMO:", ", ".join(f"body {b}: {i:.4f}" for b, i in report))
+
+
+# ---- crown stage: replace the measured crown loft with fitted law-solids ---
+import subprocess
+subprocess.run([sys.executable, "scripts/authoring/crownlaws_proximals.py"],
+               check=True)

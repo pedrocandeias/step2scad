@@ -7,6 +7,22 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Section-parameter-law decomposition (law-solids)** — the automated
+  version of what the hand-tuned Proximals template does by eye: fit each
+  measured cross-section as a parametric composition, fit LAWS along the
+  axis to the section parameters, and emit the shell as an INTERSECTION of
+  law-solids. Pilot on the Proximals crown ("no clean law" last pass):
+  46 measured prims → 9 law-solids + 11 named params (hull of 4 control
+  slices ∩ longitudinal arc roof [box−cylinder r=52.34] − two underside
+  scoops + fin lip sweep). IoU 0.9716 (−0.0046, within policy).
+  **Machine-vs-hand headline:** the template got the SHAPES of every law
+  right (independent validation of the decomposition language) but the
+  machine corrected the VALUES — dome r=52.34 not 60; the scoops are
+  asymmetric (rear r=11.76, front r=7.57 with residual 0.009 — a near-exact
+  circle the eye read as symmetric); fin top slope −6.4° not −6.0°.
+  New stage: `scripts/authoring/crownlaws_proximals.py` (re-measures on
+  every run, residual asserts). Noted follow-ups: thumb body still on the
+  old crown; `sweep` arc law could grow a `branch` field for concave roofs.
 - **`fitting.decimate_stations`** — loft-station decimation to parametric
   CONTROL sections: an interior station survives only if the hull of its
   neighbors cannot reproduce it within tolerance (support-function

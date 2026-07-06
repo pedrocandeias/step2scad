@@ -22,7 +22,7 @@
     {
       "body_id": 3,
       "strategy": "csg",
-      "reasoning": "agent plan (semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized | crown REPLACED by law-solids (template-style): hull of 4 vectorized control slabs INTERSECT measured ceiling arc MINUS measured underside scoops PLUS sloped fin lip \u2014 every law fitted with residual cited); heuristic suggested: freeform \u2014 34% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     },
     {
