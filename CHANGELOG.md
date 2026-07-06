@@ -7,6 +7,12 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **`src/step2scad/fitting.py`**: the fitting/vectorizing utilities promoted
+  from the Arm_Guard authoring script to a shared library — circle/line/
+  capsule fits (all returning residuals), `dist_to_poly`, `uniform_offset`
+  (assert-guarded), the polygon `vectorize`r with every hard-learned guard,
+  and `z_cylinder_circles` (the exact-face snap pool). All per-part
+  semanticization scripts build on it.
 - **Smooth law emission — no more slab stairs**: `sweep` and `offset_sweep`
   no longer discretize their laws into stepped slabs (the staircase artifacts
   the author spotted in renders). Each law now emits its EXACT smooth
