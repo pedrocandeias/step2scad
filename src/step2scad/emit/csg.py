@@ -182,6 +182,24 @@ def _render_2d(node, fn_var: str) -> str:
         x0, y0, x1, y1 = node["rect"]
         return (f"translate([{_sv(x0)}, {_sv(y0)}]) "
                 f"square([{_sdiff(x1, x0)}, {_sdiff(y1, y0)}])")
+    if "path" in node:
+        parts = []
+        for s in node["path"]:
+            if "to" in s:
+                parts.append(f"[{_svec(s['to'])}]")
+            else:
+                a = s["arc"]
+                cx, cy = a["c"]
+                span = f"(({_sv(a['a1'])}) - ({_sv(a['a0'])}))"
+                # k starts at 1: the arc's first point IS the previous
+                # segment's endpoint (contiguous path, no duplicate vertices)
+                parts.append(
+                    f"[for (k = [1 : {a['n']}]) [({_sv(cx)}) + ({_sv(a['r'])})"
+                    f"*cos(({_sv(a['a0'])}) + k*{span}/{a['n']}), "
+                    f"({_sv(cy)}) + ({_sv(a['r'])})"
+                    f"*sin(({_sv(a['a0'])}) + k*{span}/{a['n']})]]")
+        joined = ",\n            ".join(parts)
+        return f"polygon(concat(\n            {joined}))"
     if node.get("op2d") == "offset":
         return (f"offset(delta = {_sv(node['delta'])}) "
                 + _render_2d(node["child"], fn_var))
@@ -356,8 +374,13 @@ def _emit_semantic_body(body: dict, entry: dict, lines: list[str],
     lines.append("")
 
     for pname, pts in entry.get("profiles", {}).items():
-        joined = ", ".join(_vec(q) for q in pts)
-        lines.append(f"{prefix}{pname}_pts = [{joined}];  // measured shared outline")
+        if isinstance(pts, dict) and "path" in pts:
+            body = _render_2d(pts, "fn")[len("polygon("):-1]
+            src = pts.get("source", "vectorized shared outline (lines + fitted arcs)")
+            lines.append(f"{prefix}{pname}_pts = {body};  // {src}")
+        else:
+            joined = ", ".join(_vec(q) for q in pts)
+            lines.append(f"{prefix}{pname}_pts = [{joined}];  // measured shared outline")
     profiles: dict[int, str] = {}
     for mdef in modules.values():
         _collect_profiles(mdef["tree"], modules, prefix, profiles, lines)

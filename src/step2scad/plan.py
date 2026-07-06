@@ -177,6 +177,31 @@ def _validate_2d(node, where: str, scope: dict, profiles: set) -> None:
         _require(_is_vec_e(node["rect"], 4), where, "'rect' is [x0,y0,x1,y1]")
         _resolve_vec(node["rect"], scope, where, "rect")
         return
+    if "path" in node:
+        # vectorized profile: closed path of line/arc segments (each segment
+        # starts where the previous ended; the polygon closes itself). Arcs
+        # carry fitted or exact-face circles; residuals cited in the parent's
+        # `source`. Rendered as polygon(concat(...)) with list comprehensions.
+        segs = node["path"]
+        _require(isinstance(segs, list) and len(segs) >= 2, where,
+                 "'path' needs >= 2 segments")
+        for i, s in enumerate(segs):
+            w = f"{where}.path[{i}]"
+            if "to" in s:
+                _require(_is_vec_e(s["to"], 2), w, "'to' is [x, y]")
+                _resolve_vec(s["to"], scope, w, "to")
+            elif "arc" in s:
+                a = s["arc"]
+                _require(_is_vec_e(a.get("c", None), 2), w, "arc needs 'c' [x,y]")
+                _resolve_vec(a["c"], scope, w, "c")
+                for f in ("r", "a0", "a1"):
+                    _require(_is_num_or_expr(a.get(f)), w, f"arc needs '{f}'")
+                    _resolve(a[f], scope, w, f)
+                _require(isinstance(a.get("n"), int) and a["n"] >= 2, w,
+                         "arc needs integer 'n' >= 2")
+            else:
+                _require(False, w, "path segment is {'to': ...} or {'arc': ...}")
+        return
     op = node.get("op2d")
     if op == "offset":
         _require(_is_num_or_expr(node.get("delta")), where, "offset needs 'delta'")
@@ -383,9 +408,12 @@ def validate_plan(plan: dict) -> dict:
             profiles = set()
             for pname, pts in b.get("profiles", {}).items():
                 w = f"{where}.profiles[{pname}]"
-                _require(isinstance(pts, list) and len(pts) >= 3
-                         and all(_is_vec(q, 2) for q in pts), w,
-                         "profile needs >= 3 numeric [x,y] points")
+                if isinstance(pts, dict) and "path" in pts:
+                    _validate_2d(pts, w, scope, set())
+                else:
+                    _require(isinstance(pts, list) and len(pts) >= 3
+                             and all(_is_vec(q, 2) for q in pts), w,
+                             "profile needs >= 3 numeric [x,y] points")
                 profiles.add(pname)
             modules = b.get("modules", {})
             for mname, mdef in modules.items():

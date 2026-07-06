@@ -7,6 +7,22 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Profile vectorizer + `path` 2D node**: measured polygon dumps decompose
+  into LINES + FITTED ARCS (circle fits with guards: max radius, monotonic
+  sweep, dense sampling, corner-anchored walk), arcs snapped to exact
+  z-axis B-rep cylinder faces when center+radius agree (angles recomputed
+  from the snapped center). Emitted as `polygon(concat(..., [for (k=...)
+  arc points]))` — the v13 `boss_profile_2d` idiom. Arm_Guard: the 97-point
+  plate outline is now 64 line vertices + 4 exact-face arcs (r6 corners
+  #54/#70, r7.995 mount lobes); windows and rail base likewise. IoU
+  unchanged at 0.9838 (vectorization is fidelity-neutral).
+
+### Fixed
+- Vectorizer traps found while stabilizing it: greedy arc windows must not
+  wrap past the wrapped start (duplicate overlapping arcs = self-intersecting
+  polygon), snapped arcs must recompute their angles from the exact center,
+  and PCA rect fits mis-assign axes on near-square loops (the pin windows
+  reverted to vectorized measured paths after a 163 mm³ overcut).
 - **Arm_Guard 100% parametric** (IoU 0.9838): the last organic layers fell —
   mount skirts are the EXACT 45° cone faces #29/#105 (frustum r 8.995→7.995,
   z 1.8013→2.8014; band circles matched the cone law to 0.005); the plate rim

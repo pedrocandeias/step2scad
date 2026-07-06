@@ -157,6 +157,109 @@ def _inset_of(band, ref_pts):
     assert d.std() < 0.05, f"{band['name']}: rim not a uniform offset (std {d.std():.3f})"
     return float(d.mean())
 
+# ---- VECTORIZER: measured polygon -> path of lines + fitted arcs -----------
+# Arcs are circle-fitted (tol) and matched to exact z-axis B-rep cylinder
+# faces when center+radius agree; residual/citation goes into the source.
+_zcyls = []
+for f in faces:
+    if f["type"] == "cylinder" and abs(abs(f["params"]["axis_dir"][2]) - 1) < 1e-3:
+        pp = f["params"]
+        _zcyls.append((f["index"], pp["axis_origin"][0], pp["axis_origin"][1],
+                       pp["radius"]))
+
+def _cfit(pts):
+    x, y = pts[:, 0], pts[:, 1]
+    A = np.c_[2 * x, 2 * y, np.ones(len(pts))]
+    try:
+        (cx, cy, c), *_ = np.linalg.lstsq(A, x**2 + y**2, rcond=None)
+    except Exception:
+        return None
+    r = float(np.sqrt(max(c + cx**2 + cy**2, 1e-12)))
+    res = float(np.abs(np.hypot(x - cx, y - cy) - r).max())
+    return float(cx), float(cy), r, res
+
+def vectorize(points, tol=0.06, min_arc=4):
+    """Closed polygon -> [{'to':[x,y]} | {'arc':{c,r,a0,a1,n}}] path segments."""
+    pts = [list(map(float, q)) for q in points]
+    n = len(pts)
+    # start the walk at the sharpest corner so no arc straddles index 0
+    P = np.array(pts)
+    v1 = P - np.roll(P, 1, axis=0)
+    v2 = np.roll(P, -1, axis=0) - P
+    turn = np.abs(np.cross(v1, v2) / (np.linalg.norm(v1, axis=1)
+                                      * np.linalg.norm(v2, axis=1) + 1e-12))
+    start = int(np.argmax(turn))
+    pts = pts[start:] + pts[:start]
+    segs, i = [], 0
+    arcs_cited = []
+    def _ok_arc(window, fit):
+        if fit is None or fit[3] > tol or fit[2] > 60:
+            return False
+        gaps = np.linalg.norm(np.diff(window, axis=0), axis=1)
+        if gaps.max() > 4.6:                       # arcs are densely sampled
+            return False
+        cx, cy, r, _ = fit
+        ang = np.unwrap(np.arctan2(window[:, 1] - cy, window[:, 0] - cx))
+        d = np.diff(ang)
+        if not (np.all(d > 0) or np.all(d < 0)):   # monotonic sweep
+            return False
+        # midpoint sanity: fitted arc midpoint must sit on the data
+        amid = (ang[0] + ang[-1]) / 2
+        pm = np.array([cx + r * np.cos(amid), cy + r * np.sin(amid)])
+        if np.abs(np.linalg.norm(window - pm, axis=1)).min() > max(0.4, 3 * tol):
+            return False
+        return True
+    while i < n:
+        best = None
+        j = i + min_arc - 1
+        while j <= n:                      # NO wrap past the rotated start
+            window = np.array([pts[k % n] for k in range(i, j + 1)])
+            fit = _cfit(window)
+            if not _ok_arc(window, fit):
+                break
+            best = (j, fit)
+            j += 1
+        if best and best[0] - i + 1 >= min_arc:
+            j, (cx, cy, r, res) = best
+            window = np.array([pts[k % n] for k in range(i, j + 1)])
+            ang = np.unwrap(np.arctan2(window[:, 1] - cy, window[:, 0] - cx))
+            a0, a1 = float(np.degrees(ang[0])), float(np.degrees(ang[-1]))
+            src = f"fitted arc r={r:.3f} (res {res:.3f})"
+            for fi, fx, fy, fr in _zcyls:      # snap to an exact face
+                if abs(fx - cx) < 0.12 and abs(fy - cy) < 0.12 and abs(fr - r) < 0.08:
+                    cx, cy, r = fx, fy, fr
+                    src = f"EXACT cylinder face #{fi} (r={fr})"
+                    # angles MUST be recomputed from the snapped center
+                    ang = np.unwrap(np.arctan2(window[:, 1] - cy,
+                                               window[:, 0] - cx))
+                    a0, a1 = float(np.degrees(ang[0])), float(np.degrees(ang[-1]))
+                    break
+            arcs_cited.append(src)
+            segs.append({"arc": {"c": [R(cx), R(cy)], "r": R(r), "a0": R(a0),
+                                 "a1": R(a1),
+                                 "n": max(3, int(abs(a1 - a0) // 6) + 1)},
+                         "_src": src})
+            i = j
+        else:
+            segs.append({"to": [R(pts[(i + 1) % n][0]), R(pts[(i + 1) % n][1])]})
+            i += 1
+        if i >= n:
+            break
+    return segs, arcs_cited
+
+def as_path(points, label):
+    segs, cited = vectorize(points)
+    n_arc = sum(1 for s in segs if "arc" in s)
+    n_line = len(segs) - n_arc
+    for s in segs:
+        s.pop("_src", None)
+    exact = sum(1 for c in cited if c.startswith("EXACT"))
+    print(f"  vectorize {label}: {len(points)} pts -> {n_line} linhas + {n_arc} arcos ({exact} exatos)")
+    return {"path": segs,
+            "source": f"vectorized measured outline: {n_line} lines + {n_arc} "
+                      f"fitted arcs ({exact} snapped to exact B-rep faces), "
+                      "fit tol 0.06"}
+
 main_pts = np.array(main["profile"])
 rim_insets = [(_inset_of(b, main_pts), b) for b in rim]
 # the insets fall on a straight line vs z -> the bottom edge is a CHAMFER,
@@ -645,11 +748,24 @@ right_slots = {"transform": {"mirror": [1, 0, 0]}, "name": "slots_right",
                    slot_instance("slotR_low", "slot_low_cx", "slot_low_cy"),
                    slot_instance("slotR_high", "slot_high_cx", "slot_high_cy")]}}
 cuts = [left_slots, right_slots]
+def rect_fit(pts):
+    a = np.array(pts); c = a.mean(axis=0); q = a - c
+    _, _, vt = np.linalg.svd(q, full_matrices=False)
+    u, v = q @ vt[0], q @ vt[1]
+    w, h2 = u.max() - u.min(), v.max() - v.min()
+    du = np.minimum(np.abs(u - u.min()), np.abs(u - u.max()))
+    dv = np.minimum(np.abs(v - v.min()), np.abs(v - v.max()))
+    res = float(np.minimum(du, dv).max())
+    ang = float(np.degrees(np.arctan2(vt[0][1], vt[0][0])))
+    return [R(c[0]), R(c[1])], R(w), R(h2), R(ang), res
+
 for key, h in win_profiles.items():
     cuts.append({"prim": "extrude", "axis": "z", "name": f"pin_window_{key[-1]}",
-                 "source": "knuckle-mount pin window: measured wall loop — "
-                           + h["source"],
-                 "profile": h["profile"], "z0": "z_cut_lo", "z1": "z_window_top"})
+                 "source": "knuckle-mount pin window: measured wall loop, "
+                           "vectorized (a rotated ~5x5 square with one small "
+                           "chamfered corner) — " + h["source"],
+                 "profile2d": as_path(h["profile"], f"pin_window_{key}"),
+                 "z0": "z_cut_lo", "z1": "z_window_top"})
 
 plan = {"version": 1, "source": feats["source"], "bodies": [{
     "body_id": 0, "strategy": "csg",
@@ -658,9 +774,9 @@ plan = {"version": 1, "source": feats["source"], "bodies": [{
              "deck/ridge staircase preserved as measured profiles; hole-edge "
              "chamfers deliberately omitted (sub-1% volume)",
     "params": params,
-    "profiles": {"plate_outline": main["profile"],
-                 "plate_upper_outline": upper["profile"],
-                 "rail_strip_base": strip_base["profile"]},
+    "profiles": {"plate_outline": as_path(main["profile"], "plate_outline"),
+                 "plate_upper_outline": as_path(upper["profile"], "plate_upper_outline"),
+                 "rail_strip_base": as_path(strip_base["profile"], "rail_strip_base")},
     "modules": modules,
     "csg": {"op": "difference", "children": [
         {"op": "union", "children": [
