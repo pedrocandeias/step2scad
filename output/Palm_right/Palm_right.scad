@@ -1,26 +1,52 @@
+// ====================================================================
 // Palm_right — step2scad parametric reconstruction
 // source: models/phoenix_components/Palm_right.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: x-mirror of the semantic Palm_left plan (single mirror transform; params/modules shared verbatim); semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Palm_right_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   x-mirror of the semantic Palm_left plan (single mirror transform;
+//   params/modules shared verbatim); semantic parametric palm:
+//   shell/cavity as run-collapsed + vectorized measured bands in named
+//   modules; cuts grouped into semantic modules; exact cylinder radii
+//   as named params
+// Anatomy (modules):
+//   palm_shell() — outer shell: constant-outline runs collapsed to single extrudes
+//   palm_cavity() — interior cavity (CUT): same run-collapse treatment as the shell
+//   bottom_grid() — ventilation/lattice grid of the bottom plate (105 measured holes,...
+//   finger_slots() — four finger clevis slots: measured void-run rows (material OR-ed...
+//   thumb_clevis() — thumb clevis: exact skew pin/counterbores/relief + measured void-run...
+//   knuckle_pins() — knuckle pin bores + head counterbores (exact cylinder faces)
+//   wrist_cuts() — wrist axle bore (exact) + tensioner bay (measured tilted walls)
+//   tendon_tubes() — tendon channels: every reversed exact cylinder face, segment-exact
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- knuckle ---
 knuckle_pin1_r     = 2.5;  // knuckle pin bore: exact r2.5 faces 219/220/228/338 at (y=39.05, z=10.62)
 knuckle_pin2_r     = 2.5;  // knuckle pin bore: exact r2.5 faces 286/288/290 at (y=35.05, z=10.62)
 knuckle_pin3_r     = 2.5;  // knuckle pin bore: exact r2.5 faces 234/242/324 at (y=29.05, z=10.62)
+// --- pin ---
 pin_counterbore1_r = 3.25;  // pin-head counterbore: exact r3.25 face 318
 pin_counterbore2_r = 3.25;  // pin-head counterbore: exact r3.25 face 249
 pin_counterbore3_r = 3.25;  // pin-head counterbore: exact r3.25 face 248
+// --- wrist ---
 wrist_bore_r       = 3;  // wrist axle bore: exact r3 faces 93/246 at (y=-38.95, z=12.62)
+wrist_barrel_r     = 8;  // wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)
+// --- thumb ---
 thumb_pin_r        = 2.5;  // thumb pin bore: exact r2.5 face 184 axis (z=10.424), cut through both ears
 thumb_cb1_r        = 2.7;  // thumb counterbore: exact r2.7 face 226 segment
 thumb_cb2_r        = 2.7;  // thumb counterbore: exact r2.7 faces 319/320 segment
 thumb_relief_r     = 7.5;  // thumb knuckle relief: exact r7.5 face 524 (o 31.196,-5.878,10.624, v ±3)
-wrist_barrel_r     = 8;  // wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)
 fn                 = 96;  // curve resolution
 
 barrelcut_profile = [[2.5, -32.93], [22.5, -33.45], [22.5, 18.54], [2.5, 18.02]];  // (z, x) points — tensioner bay between wrist tabs: raycast-measured tilted walls (two z stations each side), back = exact shell plane
@@ -17736,3 +17762,4 @@ module body_0() {
 
 // full part = union of all bodies
 body_0();
+if (show_original) %import(original_stl);
