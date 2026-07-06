@@ -1,14 +1,29 @@
+// ====================================================================
 // Snap_Pins — step2scad parametric reconstruction
 // source: models/phoenix_components/Snap_Pins.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Snap_Pins_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along y from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b0 ---
 b0_axis_x   = 27.792511;  // pin axis position (median of measured station centers, std < 0.001)
 b0_axis_z   = 2.430429;  // pin axis height (median of measured station centers)
 b0_tip_r    = 2.609331;  // plateau of 1 measured station circles (r spread < 0.012)
@@ -153,10 +168,18 @@ module body_0() {
     }
 }
 
-// ---- body 1 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 1 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along x from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b1 ---
 b1_axis_y    = 5.650405;  // pin axis position (median of measured station centers, std < 0.001)
 b1_axis_z    = 2.033255;  // pin axis height (median of measured station centers)
 b1_shaft_r   = 2;  // EXACT cylinder face #32 (r=2.0)
@@ -319,10 +342,18 @@ module body_4() {
     translate(b4_offset) body_1();
 }
 
-// ---- body 5 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 5 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along x from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b5 ---
 b5_axis_y    = 16.106303;  // pin axis position (median of measured station centers, std < 0.001)
 b5_axis_z    = 2.230303;  // pin axis height (median of measured station centers)
 b5_shaft_r   = 2;  // EXACT cylinder face #31 (r=2.0)
@@ -473,10 +504,18 @@ module body_5() {
     }
 }
 
-// ---- body 6 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 6 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along y from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b6 ---
 b6_axis_x   = -26.854375;  // pin axis position (median of measured station centers, std < 0.001)
 b6_axis_z   = 2.180301;  // pin axis height (median of measured station centers)
 b6_tip_r    = 2.009169;  // plateau of 1 measured station circles (r spread < 0.012)
@@ -631,10 +670,20 @@ module body_6() {
     }
 }
 
-// ---- body 7 (strategy: csg — semantic parametric plan) ----
-// plan: VERIFIED y-mirror of body 1 about y=-4.7474 (every axis dim equal within 0.003) — kept own params: the plan schema has no cross-body module refs; semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 7 — semantic parametric plan
+//   VERIFIED y-mirror of body 1 about y=-4.7474 (every axis dim equal
+//   within 0.003) — kept own params: the plan schema has no cross-body
+//   module refs; semantic parametric pin: measured station circles
+//   segmented into named plateau cylinders (exact faces where they
+//   agree) + transition frustums; head stations and cutters
+//   vectorized; engraved digit labels excluded by design — hull-loft
+//   along x from measured sections; plan-view concavity cutters (fork
+//   slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b7 ---
 b7_axis_y    = -15.145295;  // pin axis position (median of measured station centers, std < 0.001)
 b7_axis_z    = 2.03325;  // pin axis height (median of measured station centers)
 b7_shaft_r   = 2;  // EXACT cylinder face #32 (r=2.0)
@@ -814,10 +863,18 @@ module body_9() {
         ]);
 }
 
-// ---- body 10 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 10 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along x from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b10 ---
 b10_axis_y   = 16.456581;  // pin axis position (median of measured station centers, std < 0.001)
 b10_axis_z   = 2.180302;  // pin axis height (median of measured station centers)
 b10_tip_r    = 2.008027;  // plateau of 1 measured station circles (r spread < 0.012)
@@ -1009,10 +1066,18 @@ module body_11() {
         ]);
 }
 
-// ---- body 12 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design — hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (
+// --------------------------------------------------------------------
+// BODY 12 — semantic parametric plan
+//   semantic parametric pin: measured station circles segmented into
+//   named plateau cylinders (exact faces where they agree) +
+//   transition frustums; head stations and cutters vectorized;
+//   engraved digit labels excluded by design — hull-loft along y from
+//   measured sections; plan-view concavity cutters (fork slot/barb
+//   notches); engraved label grooves (
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b12 ---
 b12_axis_x   = -18.540155;  // pin axis position (median of measured station centers, std < 0.001)
 b12_axis_z   = 2.180301;  // pin axis height (median of measured station centers)
 b12_tip_r    = 2.00915;  // plateau of 1 measured station circles (r spread < 0.012)
@@ -1181,3 +1246,4 @@ body_9();
 body_10();
 body_11();
 body_12();
+if (show_original) %import(original_stl);

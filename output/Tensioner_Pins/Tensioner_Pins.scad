@@ -1,14 +1,29 @@
+// ====================================================================
 // Tensioner_Pins — step2scad parametric reconstruction
 // source: models/phoenix_components/Tensioner_Pins.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: fully parametric: expression octagons over exact plane dims; slot walls as fitted arcs (res 0.036/0.005); exact bore. IoU 0.9987 vs v1 0.9991 (parametric cost -0.0004)
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Tensioner_Pins_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   fully parametric: expression octagons over exact plane dims; slot
+//   walls as fitted arcs (res 0.036/0.005); exact bore. IoU 0.9987 vs
+//   v1 0.9991 (parametric cost -0.0004)
+// Anatomy (modules):
+//   b0_hex_bar() — chamfered bar = intersection of three octagonal prisms whose...
+//   b0_tendon_slot() — curved tendon slot between the two bspline walls — both walls are...
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b0 ---
 b0_bar_hw       = 2.377583;  // exact wall planes #0/#31 (x = ±bar_hw)
 b0_bar_z0       = 0.659863;  // exact bottom plane #24
 b0_bar_z1       = 5.413925;  // exact top plane #15
@@ -76,3 +91,4 @@ module body_2() {
 body_0();
 body_1();
 body_2();
+if (show_original) %import(original_stl);

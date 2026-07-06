@@ -1630,7 +1630,7 @@
           "recon": [
             {
               "plane": "principal[0]",
-              "score": 0.867,
+              "score": 0.8774,
               "symmetric": false
             },
             {
@@ -1640,7 +1640,7 @@
             },
             {
               "plane": "principal[2]",
-              "score": 0.9963,
+              "score": 0.997,
               "symmetric": true
             }
           ]
@@ -1654,7 +1654,7 @@
                 1.0,
                 -0.0002
               ],
-              "score": 0.8663,
+              "score": 0.875,
               "symmetric": false
             },
             {
@@ -1664,7 +1664,7 @@
                 -0.0,
                 -0.0
               ],
-              "score": 0.9996,
+              "score": 1.0,
               "symmetric": true
             },
             {
@@ -1674,7 +1674,7 @@
                 0.0002,
                 1.0
               ],
-              "score": 0.997,
+              "score": 0.9983,
               "symmetric": true
             }
           ]
@@ -1690,5 +1690,5 @@
       }
     ]
   },
-  "seconds": 2.584
+  "seconds": 3.587
 }

@@ -181,14 +181,28 @@ def emit_scad(
     cls_by_id = {c["body_id"]: c for c in classification["bodies"]}
     plan_by_id = plan_bodies(plan)
     lines = [
+        "// " + "=" * 68,
         f"// {name} — step2scad parametric reconstruction",
         f"// source: {features.get('source', '?')}",
-        "// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;",
-        "// csg / instance_of bodies: agent-authored measured plan (plan.json);",
-        "// strategies without a real emitter yet use placeholder stubs (bbox).",
-        "// Every dimension below is an exact B-rep value from features.json.",
+        "// Every dimension is measured from the STEP B-rep (exact faces) or a",
+        "// fitted law with its residual cited — see the source comment on each",
+        "// parameter. Edit named parameters; geometry follows.",
+        "// " + "=" * 68,
         "",
     ]
+    any_semantic = any(
+        e.get("params") or e.get("modules")
+        for e in plan_by_id.values() if isinstance(e, dict))
+    if any_semantic:
+        lines += [
+            "// --- Display options ---",
+            "show_colors   = true;    // tint top-level features (preview aid)",
+            "show_original = false;   // ghost the original tessellation overlay",
+            f'original_stl  = "{name}_ref.stl";',
+            "module tint(c) { if (show_colors) color(c) children(); "
+            "else children(); }",
+            "",
+        ]
     modules = []
     for body in features["bodies"]:
         cls = cls_by_id[body["id"]]
@@ -234,5 +248,7 @@ def emit_scad(
     lines.append("// full part = union of all bodies")
     for m in modules:
         lines.append(f"{m}();")
+    if any_semantic:
+        lines.append("if (show_original) %import(original_stl);")
     lines.append("")
     return "\n".join(lines)

@@ -1,34 +1,64 @@
+// ====================================================================
 // Arm_Guard — step2scad parametric reconstruction
 // source: models/phoenix_components/Arm_Guard.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: semantic parametric form: named z levels, parametric strap-slot module (4 instances), plate as two exact-z layers, organic deck/ridge staircase preserved as measured profiles; hole-edge chamfers deliberately omitted (sub-1% volume)
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Arm_Guard_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   semantic parametric form: named z levels, parametric strap-slot
+//   module (4 instances), plate as two exact-z layers, organic
+//   deck/ridge staircase preserved as measured profiles; hole-edge
+//   chamfers deliberately omitted (sub-1% volume)
+// Anatomy (modules):
+//   strap_slot() — strap slot at the origin, long axis +Y: capsule = hull of the two...
+//   plate() — base plate: measured outline in two layers between exact z levels...
+//   knuckle_mount() — knuckle-mount post: exact r7.995 cylinder up to the exact...
+//   center_ridge() — center ridge: stadium footprint INTERSECTED with (45-deg tail ramp +...
+//   rail_hump() — outer wing + strap rail (right side
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- z ---
 z_base          = 0.001317;  // exact B-rep bottom plane level
 z_plate_step    = 0.901317;  // exact B-rep plane: outline steps in at this level
 z_plate_top     = 1.401317;  // exact B-rep plane: top of the flat plate, deck pads start
-slot_r          = 2;  // exact r2.0 slot end-cap cylinder faces #30/#32/#45/#52/#83/#128/#141/#150
 z_slot_top      = 2.806317;  // highest measured band pierced by the strap slots
 z_window_top    = 3.806317;  // highest measured band pierced by the mount pin windows
 z_cut_lo        = -0.498683;  // cut overshoot below the base plane (declared, 0.5)
-rim_cham_d0     = -0.5;  // EXACT 45-deg bottom edge chamfer: cone faces #93/#114 span r 7.495->7.995 (fitted rim insets agreed: slope res 0.000)
-rim_cham_d1     = 0;  // exact: chamfer vanishes at its top level
 z_rim_top       = 0.501317;  // EXACT cone faces #93/#114 upper extent (z=0.5013)
+z_ridge_top     = 4.881293;  // exact B-rep plane: ridge crest top
+z_ridge_plateau = 2.881317;  // exact B-rep band level: tail plateau height
+z_wing_top      = 1.801317;  // exact B-rep plane level: top of the wing zone
+z_rail_top      = 2.801317;  // exact B-rep plane level: top of the rail strips
+z_blend0        = 2.80145;  // exact: 45° cone faces #29/#105 meet the mount cylinder
+z_blend1        = 2.881317;  // exact B-rep plane level (mount top-blend band)
+z_blend2        = 3.111317;  // exact B-rep plane level (mount top-blend band)
+z_blend3        = 3.341317;  // exact B-rep plane level (mount top-blend band)
+z_blend4        = 3.571317;  // exact B-rep plane level (mount top-blend band)
+z_blend5        = 3.801317;  // exact B-rep plane: top of the knuckle mounts
+// --- slot ---
+slot_r          = 2;  // exact r2.0 slot end-cap cylinder faces #30/#32/#45/#52/#83/#128/#141/#150
 slot_len        = 20;  // distance between exact end-cap axes + 2*slot_r (faces #30/#32/#45/#52/#83/#128/#141/#150); identical for all four slots within 0.02
 slot_ang        = 8.578065;  // slot line angle from +Y (exact end-cap axes); the right side mirrors the left exactly
 slot_low_cx     = -40.035489;  // midpoint of the lower-left slot's exact end-cap axes
 slot_low_cy     = -27.612057;  // midpoint of the lower-left slot's exact end-cap axes
 slot_high_cx    = -35.041098;  // midpoint of the upper-left slot's exact end-cap axes
 slot_high_cy    = 5.497538;  // midpoint of the upper-left slot's exact end-cap axes
+// --- rim ---
+rim_cham_d0     = -0.5;  // EXACT 45-deg bottom edge chamfer: cone faces #93/#114 span r 7.495->7.995 (fitted rim insets agreed: slope res 0.000)
+rim_cham_d1     = 0;  // exact: chamfer vanishes at its top level
+// --- ridge ---
 ridge_hw        = 4.999003;  // measured ridge half-width (constant across all 16 bands)
 ridge_head_cy   = 6.499411;  // stadium head-cap center: measured head apex - ridge_hw
-z_ridge_top     = 4.881293;  // exact B-rep plane: ridge crest top
-z_ridge_plateau = 2.881317;  // exact B-rep band level: tail plateau height
 ridge_tail_m    = 0.98156;  // measured 45-deg tail ramp slope (linear fit, res 0.054)
 ridge_tail_b    = 44.295174;  // measured tail ramp intercept (same fit)
 ridge_arc_yc    = -19.66685;  // main ramp fitted circular arc center y (res 0.005 over 9 bands)
@@ -42,27 +72,24 @@ ridge_tail_y1   = -42.191879;  // derived: tail ramp reaches the plateau (from t
 ridge_arc_y0    = -28.012252;  // derived: main arc leaves the plateau level
 ridge_arc_y1    = -21.75412;  // derived: main arc reaches the crest height
 ridge_head_y0   = 8.101476;  // derived: head taper leaves the crest height
+// --- wing ---
 wing_x_cut      = 14.2;  // measured wing inner boundary (decimated to one straight vertical segment in the band footprint)
-z_wing_top      = 1.801317;  // exact B-rep plane level: top of the wing zone
-z_rail_top      = 2.801317;  // exact B-rep plane level: top of the rail strips
+// --- rail ---
 rail_d0         = 0.125;  // 45-deg rail edge law: offset at the wing top (uniform-shrink measurement, std 0.012)
 rail_d1         = -0.875;  // 45-deg rail edge law: offset at the rail top (same measurement)
+// --- mount ---
 mount_y         = 35.5048;  // exact mount cylinder faces #92/#98 axis y
-mountL_x        = -30.145;  // exact mount cylinder face #98 axis x
-mountR_x        = 30.145;  // exact mount cylinder face #92 axis x
 mount_r         = 7.995;  // exact mount cylinder faces #92/#98 radius
-z_blend0        = 2.80145;  // exact: 45° cone faces #29/#105 meet the mount cylinder
 mount_rb0       = 7.995;  // exact mount cylinder radius (blend tangent)
-z_blend1        = 2.881317;  // exact B-rep plane level (mount top-blend band)
 mount_rb1       = 7.972472;  // measured: mount top-blend circle fit at this level
-z_blend2        = 3.111317;  // exact B-rep plane level (mount top-blend band)
 mount_rb2       = 7.900118;  // measured: mount top-blend circle fit at this level
-z_blend3        = 3.341317;  // exact B-rep plane level (mount top-blend band)
 mount_rb3       = 7.778773;  // measured: mount top-blend circle fit at this level
-z_blend4        = 3.571317;  // exact B-rep plane level (mount top-blend band)
 mount_rb4       = 7.544214;  // measured: mount top-blend circle fit at this level
-z_blend5        = 3.801317;  // exact B-rep plane: top of the knuckle mounts
 mount_rb5       = 7.233536;  // measured: mount top-blend circle fit at this level
+// --- mountL ---
+mountL_x        = -30.145;  // exact mount cylinder face #98 axis x
+// --- mountR ---
+mountR_x        = 30.145;  // exact mount cylinder face #92 axis x
 fn              = 96;  // curve resolution
 
 plate_outline_pts = concat(
@@ -368,3 +395,4 @@ module body_0() {
 
 // full part = union of all bodies
 body_0();
+if (show_original) %import(original_stl);

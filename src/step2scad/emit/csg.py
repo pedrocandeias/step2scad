@@ -439,14 +439,57 @@ def _emit_semantic_body(body: dict, entry: dict, lines: list[str],
         prefix = ""
     modules = entry.get("modules", {})
 
-    lines.append(f"// ---- body {bid} (strategy: csg — semantic parametric plan) ----")
+    import textwrap
+    lines.append("// " + "-" * 68)
+    lines.append(f"// BODY {bid} — semantic parametric plan")
     if entry.get("notes"):
-        lines.append(f"// plan: {entry['notes']}")
+        for ln in textwrap.wrap(entry["notes"], 66):
+            lines.append(f"//   {ln}")
+    if modules:
+        lines.append("// Anatomy (modules):")
+        for mname, mdef in modules.items():
+            doc = (mdef.get("doc") or "").split(";")[0].split(". ")[0]
+            if len(doc) > 72:
+                doc = doc[:69].rsplit(" ", 1)[0] + "..."
+            lines.append(f"//   {mname}() — {doc}" if doc else f"//   {mname}()")
+    lines.append("// " + "-" * 68)
     lines.append("")
-    lines.append("// ======== PARAMETERS (every value measured; see source comments) ========")
+    lines.append("// ======== PARAMETERS (every value measured; sources cited) ========")
     params = entry.get("params", [])
     width = max((len(prefix + p["name"]) for p in params), default=0) + 1
+    group_of = lambda nm: nm.split("_", 1)[0]
+    # stable group sort (groups in first-appearance order), then repair any
+    # forward expression references — OpenSCAD evaluates assignments in order
+    import re as _re
+    seen_groups = []
     for p in params:
+        g = group_of(p["name"])
+        if g not in seen_groups:
+            seen_groups.append(g)
+    ordered = [p for g in seen_groups for p in params if group_of(p["name"]) == g]
+    names = {p["name"] for p in params}
+    for _ in range(len(ordered)):
+        pos = {p["name"]: i for i, p in enumerate(ordered)}
+        moved = False
+        for p in list(ordered):
+            if "expr" not in p:
+                continue
+            deps = [d for d in _re.findall(r"[A-Za-z_]\w*", str(p["expr"]))
+                    if d in names]
+            latest = max((pos[d] for d in deps), default=-1)
+            if latest > pos[p["name"]]:
+                ordered.remove(p)
+                ordered.insert(latest, p)
+                moved = True
+                break
+        if not moved:
+            break
+    last_group = None
+    for p in ordered:
+        g = group_of(p["name"])
+        if g != last_group:
+            lines.append(f"// --- {g} ---")
+            last_group = g
         val = p["expr"] if "expr" in p else _fmt(float(p["value"]))
         lines.append(f"{(prefix + p['name']).ljust(width)}= {val};"
                      f"  // {p['source']}")
@@ -478,7 +521,18 @@ def _emit_semantic_body(body: dict, entry: dict, lines: list[str],
         lines.append("")
 
     lines.append(f"module body_{bid}() {{")
-    _emit_sem_node(entry["csg"], lines, 1, fn_var, modules, prefix, profiles)
+    root = entry["csg"]
+    if root.get("op") == "union" and len(root.get("children", [])) > 1:
+        palette = ("SteelBlue", "MediumSeaGreen", "Orange", "Crimson",
+                   "MediumPurple", "Goldenrod", "Teal", "RosyBrown")
+        lines.append(f"{_IND}union() {{")
+        for i, kid in enumerate(root["children"]):
+            lines.append(f'{_IND * 2}tint("{palette[i % len(palette)]}") {{')
+            _emit_sem_node(kid, lines, 3, fn_var, modules, prefix, profiles)
+            lines.append(f"{_IND * 2}}}")
+        lines.append(f"{_IND}}}")
+    else:
+        _emit_sem_node(root, lines, 1, fn_var, modules, prefix, profiles)
     lines.append("}")
     return f"body_{bid}"
 

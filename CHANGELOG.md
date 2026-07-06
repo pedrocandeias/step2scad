@@ -7,6 +7,14 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Humanizer emission layer**: generated `.scad` files now read like the
+  hand-written templates — narrative file header, per-body anatomy block
+  (notes + module inventory with docs), parameters grouped by feature with
+  section separators (stable group sort with forward-reference repair —
+  OpenSCAD evaluates assignments in order), top-level feature tinting
+  (`show_colors` + `tint()` palette), and a ghost-overlay toggle
+  (`show_original` + `%import(<part>_ref.stl)`). Fidelity-neutral by
+  construction (regressions across the fleet unchanged).
 - **Section-parameter-law decomposition (law-solids)** — the automated
   version of what the hand-tuned Proximals template does by eye: fit each
   measured cross-section as a parametric composition, fit LAWS along the

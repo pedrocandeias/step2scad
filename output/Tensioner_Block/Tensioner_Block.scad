@@ -1,17 +1,34 @@
+// ====================================================================
 // Tensioner_Block — step2scad parametric reconstruction
 // source: models/phoenix_components/Tensioner_Block.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: fully parametric: vectorized outlines (tol 0.02), channels as measured rectangles (side pair mirrored, verified exact), exact z planes/bores/sphere. IoU 0.9904 vs v1 0.9984 (parametric cost -0.0080, mostly outline vectorization)
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Tensioner_Block_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   fully parametric: vectorized outlines (tol 0.02), channels as
+//   measured rectangles (side pair mirrored, verified exact), exact z
+//   planes/bores/sphere. IoU 0.9904 vs v1 0.9984 (parametric cost
+//   -0.0080, mostly outline vectorization)
+// Anatomy (modules):
+//   side_channel() — side pin channel (right
+//   flange_bore() — flange pin bore: exact r1.5 cylinder, bottom overshoot 0.5
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- z ---
 z_bot         = 0.000976;  // exact bottom plane #9
 z_ledge       = 1.297944;  // exact ledge plane #27/#37/#4 (flange top, channel floors)
 z_top         = 27.999562;  // exact top plane #35
+// --- chan ---
 chan_side_cx  = 6.161516;  // side pin-channel rect center x (rect fit res 0.000; left channel = exact mirror, max delta 0.0000)
 chan_side_cy  = -0.563786;  // side pin-channel rect center y (same fit)
 chan_side_w   = 5.004034;  // side channel width (same fit)
@@ -20,6 +37,7 @@ chan_side_ang = 4.998501;  // side channel tilt about z (same fit)
 chan_ctr_cy   = -0.866656;  // center channel rect center y (rect fit res 0.000; axis-aligned within 0.2°)
 chan_ctr_w    = 4.898075;  // center channel width (same fit)
 chan_ctr_h    = 5.004002;  // center channel depth (same fit)
+// --- bore ---
 bore_r        = 1.5;  // exact flange bore cylinder faces (r=1.5, full circle)
 bore_side_x   = 6.146556;  // exact side bore axes (±x)
 bore_side_y   = -0.580505;  // exact side bore axes y
@@ -115,3 +133,4 @@ module body_0() {
 
 // full part = union of all bodies
 body_0();
+if (show_original) %import(original_stl);

@@ -1,14 +1,36 @@
+// ====================================================================
 // Distals — step2scad parametric reconstruction
 // source: models/phoenix_components/Distals.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
 
-// ---- body 0 (strategy: csg — semantic parametric plan) ----
-// plan: decimated to 16 parametric CONTROL sections (from 45 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 — 0.30 chosen per the parametric-preferred policy) — semantic form: vectorized zone-named stations (hull-loft kept — the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Distals_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// --------------------------------------------------------------------
+// BODY 0 — semantic parametric plan
+//   decimated to 16 parametric CONTROL sections (from 45 measured
+//   stations; support-function interp error <= 0.30; measured cost
+//   curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 —
+//   0.30 chosen per the parametric-preferred policy) — semantic form:
+//   vectorized zone-named stations (hull-loft kept — the taper is
+//   real), cuts/adds grouped into
+//   hinge_cuts/tendon_cuts/tendon_details modules; exact values
+//   unchanged from plan_v1. Body-level named params unavailable
+//   (multi-body plan; emitter restriction).
+// Anatomy (modules):
+//   b0_shell_loft() — outer shell: hull-loft between vectorized measured sections...
+//   b0_hinge_cuts() — hinge system: clevis gap + knuckle relief + pin bore + snap-pin...
+//   b0_tendon_cuts() — tendon path: bottom slot, top cord scoop and the top channel flat...
+//   b0_tendon_details() — material re-added inside the tendon path: post, slot front-corner...
+// --------------------------------------------------------------------
+
+// ======== PARAMETERS (every value measured; sources cited) ========
 b0_fn= 96;  // curve resolution
 
 b0_gap_profile = [[-23.818959, 0.118182], [-9.006638, 0.118182], [-7.147225, 17.856367], [-23.818959, 17.856367]];  // (y, z) points — clevis gap between exact inner-wall planes #79/#8; front wall = exact tilted plane #45
@@ -518,19 +540,38 @@ module b0_tendon_details() {
 
 module body_0() {
     union() {
-        difference() {
-            b0_shell_loft();  // b0_shell_i
-            b0_hinge_cuts();  // b0_hinge_i
-            b0_tendon_cuts();  // b0_tendon_i
+        tint("SteelBlue") {
+            difference() {
+                b0_shell_loft();  // b0_shell_i
+                b0_hinge_cuts();  // b0_hinge_i
+                b0_tendon_cuts();  // b0_tendon_i
+            }
         }
-        b0_tendon_details();  // b0_details_i
+        tint("MediumSeaGreen") {
+            b0_tendon_details();  // b0_details_i
+        }
     }
 }
 
-// ---- body 1 (strategy: csg — semantic parametric plan) ----
-// plan: decimated to 13 parametric CONTROL sections (from 47 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 — 0.30 chosen per the parametric-preferred policy) — semantic form: vectorized zone-named stations (hull-loft kept — the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).
+// --------------------------------------------------------------------
+// BODY 1 — semantic parametric plan
+//   decimated to 13 parametric CONTROL sections (from 47 measured
+//   stations; support-function interp error <= 0.30; measured cost
+//   curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 —
+//   0.30 chosen per the parametric-preferred policy) — semantic form:
+//   vectorized zone-named stations (hull-loft kept — the taper is
+//   real), cuts/adds grouped into
+//   hinge_cuts/tendon_cuts/tendon_details modules; exact values
+//   unchanged from plan_v1. Body-level named params unavailable
+//   (multi-body plan; emitter restriction).
+// Anatomy (modules):
+//   b1_shell_loft() — outer shell: hull-loft between vectorized measured sections...
+//   b1_hinge_cuts() — hinge system: clevis gap + knuckle relief + pin bore + snap-pin...
+//   b1_tendon_cuts() — tendon path: bottom slot, top cord scoop and the top channel flat...
+//   b1_tendon_details() — material re-added inside the tendon path: post, slot front-corner...
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
 b1_fn= 96;  // curve resolution
 
 b1_gap_profile = [[-24.319974, 0.118182], [-9.486902, 0.118182], [-7.615707, 17.968768], [-24.319974, 17.968768]];  // (y, z) points — clevis gap between exact inner-wall planes #52/#8; front wall = exact tilted plane #57
@@ -906,19 +947,38 @@ module b1_tendon_details() {
 
 module body_1() {
     union() {
-        difference() {
-            b1_shell_loft();  // b1_shell_i
-            b1_hinge_cuts();  // b1_hinge_i
-            b1_tendon_cuts();  // b1_tendon_i
+        tint("SteelBlue") {
+            difference() {
+                b1_shell_loft();  // b1_shell_i
+                b1_hinge_cuts();  // b1_hinge_i
+                b1_tendon_cuts();  // b1_tendon_i
+            }
         }
-        b1_tendon_details();  // b1_details_i
+        tint("MediumSeaGreen") {
+            b1_tendon_details();  // b1_details_i
+        }
     }
 }
 
-// ---- body 2 (strategy: csg — semantic parametric plan) ----
-// plan: decimated to 13 parametric CONTROL sections (from 45 measured stations; support-function interp error <= 0.30; measured cost curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 — 0.30 chosen per the parametric-preferred policy) — semantic form: vectorized zone-named stations (hull-loft kept — the taper is real), cuts/adds grouped into hinge_cuts/tendon_cuts/tendon_details modules; exact values unchanged from plan_v1. Body-level named params unavailable (multi-body plan; emitter restriction).
+// --------------------------------------------------------------------
+// BODY 2 — semantic parametric plan
+//   decimated to 13 parametric CONTROL sections (from 45 measured
+//   stations; support-function interp error <= 0.30; measured cost
+//   curve: 28 sections @ IoU 0.9809 / ~14 @ 0.9714 / ~10 @ 0.9615 —
+//   0.30 chosen per the parametric-preferred policy) — semantic form:
+//   vectorized zone-named stations (hull-loft kept — the taper is
+//   real), cuts/adds grouped into
+//   hinge_cuts/tendon_cuts/tendon_details modules; exact values
+//   unchanged from plan_v1. Body-level named params unavailable
+//   (multi-body plan; emitter restriction).
+// Anatomy (modules):
+//   b2_shell_loft() — outer shell: hull-loft between vectorized measured sections...
+//   b2_hinge_cuts() — hinge system: clevis gap + knuckle relief + pin bore + snap-pin...
+//   b2_tendon_cuts() — tendon path: bottom slot, top cord scoop and the top channel flat...
+//   b2_tendon_details() — material re-added inside the tendon path: post, slot front-corner...
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
 b2_fn= 96;  // curve resolution
 
 b2_gap_profile = [[-23.807268, 0.118182], [-8.941781, 0.118182], [-7.179898, 16.925963], [-23.807268, 16.925963]];  // (y, z) points — clevis gap between exact inner-wall planes #14/#9; front wall = exact tilted plane #63
@@ -1309,12 +1369,16 @@ module b2_tendon_details() {
 
 module body_2() {
     union() {
-        difference() {
-            b2_shell_loft();  // b2_shell_i
-            b2_hinge_cuts();  // b2_hinge_i
-            b2_tendon_cuts();  // b2_tendon_i
+        tint("SteelBlue") {
+            difference() {
+                b2_shell_loft();  // b2_shell_i
+                b2_hinge_cuts();  // b2_hinge_i
+                b2_tendon_cuts();  // b2_tendon_i
+            }
         }
-        b2_tendon_details();  // b2_details_i
+        tint("MediumSeaGreen") {
+            b2_tendon_details();  // b2_details_i
+        }
     }
 }
 
@@ -1338,3 +1402,4 @@ body_1();
 body_2();
 body_3();
 body_4();
+if (show_original) %import(original_stl);
