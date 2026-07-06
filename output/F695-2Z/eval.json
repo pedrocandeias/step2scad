@@ -1625,7 +1625,7 @@
             },
             {
               "plane": "principal[2]",
-              "score": 0.8512,
+              "score": 0.8387,
               "symmetric": false
             }
           ]
@@ -1659,7 +1659,7 @@
                 -0.0,
                 1.0
               ],
-              "score": 0.835,
+              "score": 0.8378,
               "symmetric": false
             }
           ]
@@ -1675,5 +1675,5 @@
       }
     ]
   },
-  "seconds": 1.639
+  "seconds": 1.866
 }

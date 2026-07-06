@@ -251,51 +251,71 @@ def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
                      f"linear_extrude({_sdiff(node['z1'], node['z0'])}) "
                      f"{shape};")
     elif prim == "offset_sweep":
-        # edge treatment: stacked slabs of a 2D shape offset by delta(z)
+        # SMOOTH edge treatment (no slab stairs): minkowski of the base shape
+        # (inset by min(d0,d1)) with a cone/roundover bit. Corner joins are
+        # round (minkowski) — outline corners are arcs anyway.
         law = node["law"]
         z0, z1 = _sv(node["z0"]), _sv(node["z1"])
-        steps = node["steps"]
+        h = _sdiff(node["z1"], node["z0"])
         shape = _render_2d(node["profile2d"], fn_var)
         if law["kind"] == "linear":
-            d_expr = (f"({_sv(law['d0'])}) + (({_sv(law['d1'])}) - "
-                      f"({_sv(law['d0'])})) * (zm - ({z0})) / (({z1}) - ({z0}))")
-        elif law.get("edge", "bottom") == "bottom":
-            r = _sv(law["r"])
-            d_expr = f"-(({r}) - sqrt(max(0, ({r})*({r}) - (zm - ({z0}) - ({r}))*(zm - ({z0}) - ({r})))))"
+            d0, d1 = _sv(law["d0"]), _sv(law["d1"])
+            dmin = f"min({d0}, {d1})"
+            bit = (f"cylinder(h = {h}, r1 = ({d0}) - ({dmin}) + 0.0005, "
+                   f"r2 = ({d1}) - ({dmin}) + 0.0005, $fn = {fn_var})")
         else:
             r = _sv(law["r"])
-            d_expr = f"-(({r}) - sqrt(max(0, ({r})*({r}) - (zm - ({z0}))*(zm - ({z0})))))"
-        lines.append(f"{ind}for (i = [0 : {steps} - 1]) {{")
-        lines.append(f"{ind}    dz = (({z1}) - ({z0})) / {steps};")
-        lines.append(f"{ind}    zi = ({z0}) + i * dz;")
-        lines.append(f"{ind}    zm = zi + dz / 2;")
-        lines.append(f"{ind}    translate([0, 0, zi]) linear_extrude(dz) "
-                     f"offset(delta = {d_expr}) {shape};")
+            dmin = f"-({r})"
+            if law.get("edge", "bottom") == "bottom":
+                arc = (f"[for (k = [0 : 24]) [({r})*sin(k*90/24), "
+                       f"({r}) - ({r})*cos(k*90/24)]]")
+            else:
+                arc = (f"[for (k = [0 : 24]) [({r})*cos(k*90/24), "
+                       f"({r})*sin(k*90/24)]]")
+            bit = (f"rotate_extrude($fn = {fn_var}) "
+                   f"polygon(concat([[0, 0]], {arc}))")
+        lines.append(f"{ind}minkowski() {{")
+        lines.append(f"{ind}    translate([0, 0, {z0}]) linear_extrude(0.001) "
+                     f"offset(delta = {dmin}) {shape};")
+        lines.append(f"{ind}    {bit};")
         lines.append(f"{ind}}}")
     elif prim == "sweep":
-        # slab stack whose top follows h(s)
+        # SMOOTH height-law sweep (no slab stairs): the law becomes an exact
+        # clip solid — a linear law is a tilted half-space; an ARC law IS a
+        # horizontal cylinder (axis along the cross direction) + under-fill.
         law = node["law"]
         s0, s1 = _sv(node["s0"]), _sv(node["s1"])
         u0 = _sv(node["u0"])
         du = _sdiff(node["u1"], node["u0"])
-        steps = node["steps"]
-        if law["kind"] == "arc":
-            h_expr = (f"min({_sv(law['zc'])} + sqrt(max(0, {_sv(law['R'])}*{_sv(law['R'])}"
-                      f" - (sm - {_sv(law['sc'])})*(sm - {_sv(law['sc'])}))), "
-                      f"{_sv(node['h_max'])})")
+        ds = _sdiff(node["s1"], node["s0"])
+        z0, hm = _sv(node["z0"]), _sv(node["h_max"])
+        ax = node["axis"]
+        prism = (f"translate([{u0}, {s0}, {z0}]) "
+                 f"cube([{du}, {ds}, ({hm}) - ({z0})])"
+                 if ax == "y" else
+                 f"translate([{s0}, {u0}, {z0}]) "
+                 f"cube([{ds}, {du}, ({hm}) - ({z0})])")
+        lines.append(f"{ind}intersection() {{")
+        lines.append(f"{ind}    {prism};")
+        if law["kind"] == "linear":
+            m, b = _sv(law["m"]), _sv(law["b"])
+            tilt = (f"rotate([atan({m}), 0, 0])" if ax == "y"
+                    else f"rotate([0, -atan({m}), 0])")
+            lines.append(f"{ind}    translate([0, 0, {b}]) {tilt} "
+                         f"translate([-500, -500, -1000]) cube([1000, 1000, 1000]);")
         else:
-            h_expr = f"min({_sv(law['m'])}*sm + {_sv(law['b'])}, {_sv(node['h_max'])})"
-        slab = (f"translate([{u0}, si, {_sv(node['z0'])}]) "
-                f"cube([{du}, ds, h - ({_sv(node['z0'])})])"
-                if node["axis"] == "y" else
-                f"translate([si, {u0}, {_sv(node['z0'])}]) "
-                f"cube([ds, {du}, h - ({_sv(node['z0'])})])")
-        lines.append(f"{ind}for (i = [0 : {steps} - 1]) {{")
-        lines.append(f"{ind}    ds = (({s1}) - ({s0})) / {steps};")
-        lines.append(f"{ind}    si = ({s0}) + i * ds;")
-        lines.append(f"{ind}    sm = si + ds / 2;")
-        lines.append(f"{ind}    h  = {h_expr};")
-        lines.append(f"{ind}    if (h > {_sv(node['z0'])}) {slab};")
+            sc, zc, R_ = _sv(law["sc"]), _sv(law["zc"]), _sv(law["R"])
+            if ax == "y":
+                cyl = (f"translate([({u0}) - 1, {sc}, {zc}]) rotate([0, 90, 0]) "
+                       f"cylinder(h = ({du}) + 2, r = {R_}, $fn = 4*{fn_var})")
+            else:
+                cyl = (f"translate([{sc}, ({u0}) - 1, {zc}]) rotate([-90, 0, 0]) "
+                       f"cylinder(h = ({du}) + 2, r = {R_}, $fn = 4*{fn_var})")
+            lines.append(f"{ind}    union() {{")
+            lines.append(f"{ind}        {cyl};")
+            lines.append(f"{ind}        translate([-500, -500, ({zc}) - 1000]) "
+                         f"cube([1000, 1000, 1000]);")
+            lines.append(f"{ind}    }}")
         lines.append(f"{ind}}}")
 
 

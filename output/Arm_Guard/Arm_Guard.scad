@@ -230,11 +230,9 @@ module strap_slot() {
 module plate() {
     union() {
         // plate_rim_chamfer: bottom edge 45-deg chamfer: linear offset law fitted to the measured rim band insets (residual in params)
-        for (i = [0 : 6 - 1]) {
-            dz = ((z_rim_top) - (z_base)) / 6;
-            zi = (z_base) + i * dz;
-            zm = zi + dz / 2;
-            translate([0, 0, zi]) linear_extrude(dz) offset(delta = (rim_cham_d0) + ((rim_cham_d1) - (rim_cham_d0)) * (zm - (z_base)) / ((z_rim_top) - (z_base))) polygon(plate_outline_pts);
+        minkowski() {
+            translate([0, 0, z_base]) linear_extrude(0.001) offset(delta = min(rim_cham_d0, rim_cham_d1)) polygon(plate_outline_pts);
+            cylinder(h = (z_rim_top) - (z_base), r1 = (rim_cham_d0) - (min(rim_cham_d0, rim_cham_d1)) + 0.0005, r2 = (rim_cham_d1) - (min(rim_cham_d0, rim_cham_d1)) + 0.0005, $fn = fn);
         }
         // plate_main: plate main body: shared measured outline — measured section loops at z=0.563817 for the band between exact B-rep plane levels z=0.451317 and z=0.676317
         translate([0, 0, 0.451317]) linear_extrude((z_plate_step) - (0.451317)) polygon(plate_outline_pts);
@@ -276,32 +274,29 @@ module center_ridge() {
         }
         union() {
             // ridge_tail45: 45-deg tail ramp: measured linear law (res in params)
-            for (i = [0 : 8 - 1]) {
-                ds = ((ridge_tail_y1) - (ridge_tail_y0)) / 8;
-                si = (ridge_tail_y0) + i * ds;
-                sm = si + ds / 2;
-                h  = min(ridge_tail_m*sm + ridge_tail_b, z_ridge_plateau);
-                if (h > z_plate_top) translate([-ridge_hw, si, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), ds, h - (z_plate_top)]);
+            intersection() {
+                translate([-ridge_hw, ridge_tail_y0, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), (ridge_tail_y1) - (ridge_tail_y0), (z_ridge_plateau) - (z_plate_top)]);
+                translate([0, 0, ridge_tail_b]) rotate([atan(ridge_tail_m), 0, 0]) translate([-500, -500, -1000]) cube([1000, 1000, 1000]);
             }
             // ridge_plateau: tail plateau at the exact band level
             translate([-ridge_hw, ridge_tail_y1, z_plate_top]) cube([2*ridge_hw, ridge_arc_y0 - ridge_tail_y1, z_ridge_plateau - z_plate_top]);
             // ridge_main_arc: main ramp: fitted circular arc (residual in params)
-            for (i = [0 : 24 - 1]) {
-                ds = ((ridge_arc_y1) - (ridge_arc_y0)) / 24;
-                si = (ridge_arc_y0) + i * ds;
-                sm = si + ds / 2;
-                h  = min(ridge_arc_zc + sqrt(max(0, ridge_arc_R*ridge_arc_R - (sm - ridge_arc_yc)*(sm - ridge_arc_yc))), z_ridge_top);
-                if (h > z_plate_top) translate([-ridge_hw, si, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), ds, h - (z_plate_top)]);
+            intersection() {
+                translate([-ridge_hw, ridge_arc_y0, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), (ridge_arc_y1) - (ridge_arc_y0), (z_ridge_top) - (z_plate_top)]);
+                union() {
+                    translate([(-ridge_hw) - 1, ridge_arc_yc, ridge_arc_zc]) rotate([0, 90, 0]) cylinder(h = ((ridge_hw) - (-ridge_hw)) + 2, r = ridge_arc_R, $fn = 4*fn);
+                    translate([-500, -500, (ridge_arc_zc) - 1000]) cube([1000, 1000, 1000]);
+                }
             }
             // ridge_full: full-height section between the two fitted arcs
             translate([-ridge_hw, ridge_arc_y1, z_plate_top]) cube([2*ridge_hw, ridge_head_y0 - ridge_arc_y1, z_ridge_top - z_plate_top]);
             // ridge_head_arc: head taper: fitted circular arc (residual in params)
-            for (i = [0 : 16 - 1]) {
-                ds = ((ridge_head_cy + ridge_hw + 0.2) - (ridge_head_y0)) / 16;
-                si = (ridge_head_y0) + i * ds;
-                sm = si + ds / 2;
-                h  = min(ridge_head_zc + sqrt(max(0, ridge_head_R*ridge_head_R - (sm - ridge_head_yc)*(sm - ridge_head_yc))), z_ridge_top);
-                if (h > z_plate_top) translate([-ridge_hw, si, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), ds, h - (z_plate_top)]);
+            intersection() {
+                translate([-ridge_hw, ridge_head_y0, z_plate_top]) cube([(ridge_hw) - (-ridge_hw), (ridge_head_cy + ridge_hw + 0.2) - (ridge_head_y0), (z_ridge_top) - (z_plate_top)]);
+                union() {
+                    translate([(-ridge_hw) - 1, ridge_head_yc, ridge_head_zc]) rotate([0, 90, 0]) cylinder(h = ((ridge_hw) - (-ridge_hw)) + 2, r = ridge_head_R, $fn = 4*fn);
+                    translate([-500, -500, (ridge_head_zc) - 1000]) cube([1000, 1000, 1000]);
+                }
             }
         }
     }
@@ -313,11 +308,9 @@ module rail_hump() {
         // wing: wing zone: shared outline INTERSECT x >= wing_x_cut (inner edge measured straight; largest wing band footprint)
         translate([0, 0, z_plate_top]) linear_extrude((z_wing_top) - (z_plate_top)) intersection() { polygon(plate_upper_outline_pts); translate([wing_x_cut, -50]) square([(50) - (wing_x_cut), 100]); };
         // rail_strip: strap rail: measured base footprint with the uniform 45-deg shrink law (dist-to-base = dz, std 0.012)
-        for (i = [0 : 8 - 1]) {
-            dz = ((z_rail_top) - (z_wing_top)) / 8;
-            zi = (z_wing_top) + i * dz;
-            zm = zi + dz / 2;
-            translate([0, 0, zi]) linear_extrude(dz) offset(delta = (rail_d0) + ((rail_d1) - (rail_d0)) * (zm - (z_wing_top)) / ((z_rail_top) - (z_wing_top))) polygon(rail_strip_base_pts);
+        minkowski() {
+            translate([0, 0, z_wing_top]) linear_extrude(0.001) offset(delta = min(rail_d0, rail_d1)) polygon(rail_strip_base_pts);
+            cylinder(h = (z_rail_top) - (z_wing_top), r1 = (rail_d0) - (min(rail_d0, rail_d1)) + 0.0005, r2 = (rail_d1) - (min(rail_d0, rail_d1)) + 0.0005, $fn = fn);
         }
     }
 }

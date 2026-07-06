@@ -7,6 +7,16 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Smooth law emission — no more slab stairs**: `sweep` and `offset_sweep`
+  no longer discretize their laws into stepped slabs (the staircase artifacts
+  the author spotted in renders). Each law now emits its EXACT smooth
+  geometric equivalent: a linear height law is a tilted half-space clip; an
+  ARC height law IS a horizontal cylinder (axis along the cross direction) +
+  under-fill; an offset chamfer/roundover is a `minkowski` with a cone /
+  revolved-arc bit (round corner joins — outline corners are arcs anyway).
+  Arm_Guard: IoU 0.9838 → **0.9844** (smooth is truer than mid-sampled
+  stairs) and the recon mesh got clean enough that voxel diagnostics jumped
+  from 0.20 to 0.87 (far fewer tangency phantoms).
 - **Profile vectorizer + `path` 2D node**: measured polygon dumps decompose
   into LINES + FITTED ARCS (circle fits with guards: max radius, monotonic
   sweep, dense sampling, corner-anchored walk), arcs snapped to exact
