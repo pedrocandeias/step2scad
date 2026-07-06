@@ -49,7 +49,11 @@ def render_png(
     timeout: int = 300,
 ) -> Path:
     png.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [openscad, "-o", str(png), f"--imgsize={imgsize}", "--autocenter", "--viewall"]
+    # --render: the OpenCSG preview mode silently produces BLANK images on
+    # tangency-heavy CSG (seen on Palm_left and Proximals); full render is
+    # slower but always correct.
+    cmd = [openscad, "-o", str(png), "--render",
+           f"--imgsize={imgsize}", "--autocenter", "--viewall"]
     if camera:
         cmd.append(f"--camera={camera}")
     cmd.append(str(scad))
