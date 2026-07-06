@@ -5,302 +5,310 @@
   {
    "body_id": 0,
    "strategy": "csg",
-   "notes": "chamfered bar = intersection of three measured octagonal prisms; minus tendon slot (prismatic in x, raycast-measured conic walls); minus blind tendon bore (exact cylinder+cap)",
-   "csg": {
-    "op": "difference",
-    "children": [
-     {
+   "notes": "fully parametric: expression octagons over exact plane dims; slot walls as fitted arcs (res 0.036/0.005); exact bore. IoU 0.9987 vs v1 0.9991 (parametric cost -0.0004)",
+   "params": [
+    {
+     "name": "bar_hw",
+     "value": 2.377583,
+     "source": "exact wall planes #0/#31 (x = \u00b1bar_hw)"
+    },
+    {
+     "name": "bar_z0",
+     "value": 0.659863,
+     "source": "exact bottom plane #24"
+    },
+    {
+     "name": "bar_z1",
+     "value": 5.413925,
+     "source": "exact top plane #15"
+    },
+    {
+     "name": "bar_y_end",
+     "value": 16.559241,
+     "source": "exact end planes #16/#23 (y = \u00b1bar_y_end)"
+    },
+    {
+     "name": "cham_xz",
+     "value": 0.278416,
+     "source": "exact 45\u00b0 long-edge chamfer width (cone of planes #13/#25/#14/#30; top height differs by 0.0014)"
+    },
+    {
+     "name": "cham_top_h",
+     "value": 0.277311,
+     "source": "exact top chamfer axial height (planes #14/#30)"
+    },
+    {
+     "name": "end_cham",
+     "value": 0.44193,
+     "source": "exact 45\u00b0 end/corner chamfer width (planes #4/#7/#26/#28 + #17/#18/#20/#21; equal within 2e-3)"
+    },
+    {
+     "name": "slot_hw",
+     "value": 1.455185,
+     "source": "exact slot wall planes #9/#10 (x = \u00b1slot_hw)"
+    },
+    {
+     "name": "slot_head_cy",
+     "value": -16.167652,
+     "source": "fitted arc center of the head-side slot wall (15 raycast samples, res 0.036)"
+    },
+    {
+     "name": "slot_head_cz",
+     "value": 3.146764,
+     "source": "same fit"
+    },
+    {
+     "name": "slot_head_r",
+     "value": 3.012252,
+     "source": "same fit"
+    },
+    {
+     "name": "slot_bar_cy",
+     "value": -16.102972,
+     "source": "fitted arc center of the bar-side slot wall (15 raycast samples, res 0.005)"
+    },
+    {
+     "name": "slot_bar_cz",
+     "value": 3.156136,
+     "source": "same fit"
+    },
+    {
+     "name": "slot_bar_r",
+     "value": 5.980054,
+     "source": "same fit"
+    },
+    {
+     "name": "bore_r",
+     "value": 1.507237,
+     "source": "exact bore cylinder face #2"
+    },
+    {
+     "name": "bore_y_cap",
+     "value": -8.770356,
+     "source": "exact blind-end cap plane #1"
+    },
+    {
+     "name": "bore_z",
+     "value": 3.037447,
+     "source": "exact bore axis height (face #2)"
+    },
+    {
+     "name": "pin_pitch",
+     "value": 5.8765,
+     "source": "exact centroid delta between adjacent pins"
+    }
+   ],
+   "modules": {
+    "hex_bar": {
+     "args": [],
+     "doc": "chamfered bar = intersection of three octagonal prisms whose vertices are EXPRESSIONS over the exact plane dimensions (change bar_hw / cham_xz / end_cham and the whole bar follows)",
+     "tree": {
       "op": "intersection",
       "children": [
        {
         "prim": "extrude",
         "axis": "y",
         "name": "xsec",
-        "source": "XZ octagon: exact plane faces 0/31 (walls x=\u00b12.377583), 15 (top z=5.413925), 24 (bottom z=0.659863), 13/25 (45\u00b0 bottom chamfers), 14/30 (top chamfers); vertices = plane-pair intersections",
-        "profile": [
-         [
-          0.659863,
-          2.099167
-         ],
-         [
-          0.938279,
-          2.377583
-         ],
-         [
-          5.136614,
-          2.377583
-         ],
-         [
-          5.413925,
-          2.099167
-         ],
-         [
-          5.413925,
-          -2.099168
-         ],
-         [
-          5.136614,
-          -2.377583
-         ],
-         [
-          0.938279,
-          -2.377583
-         ],
-         [
-          0.659863,
-          -2.099168
+        "source": "XZ octagon: exact wall/top/bottom planes + 45\u00b0 chamfers",
+        "profile2d": {
+         "poly": [
+          [
+           "bar_z0",
+           "bar_hw - cham_xz"
+          ],
+          [
+           "bar_z0 + cham_xz",
+           "bar_hw"
+          ],
+          [
+           "bar_z1 - cham_top_h",
+           "bar_hw"
+          ],
+          [
+           "bar_z1",
+           "bar_hw - cham_xz"
+          ],
+          [
+           "bar_z1",
+           "-(bar_hw - cham_xz)"
+          ],
+          [
+           "bar_z1 - cham_top_h",
+           "-bar_hw"
+          ],
+          [
+           "bar_z0 + cham_xz",
+           "-bar_hw"
+          ],
+          [
+           "bar_z0",
+           "-(bar_hw - cham_xz)"
+          ]
          ]
-        ],
-        "z0": -16.559241,
-        "z1": 16.559241
+        },
+        "z0": "-bar_y_end",
+        "z1": "bar_y_end"
        },
        {
         "prim": "extrude",
         "axis": "z",
         "name": "plan_xy",
-        "source": "XY octagon: exact plane faces 0/31, 16/23 (ends y=\u00b116.559241), 4/7/26/28 (45\u00b0 corner chamfers)",
-        "profile": [
-         [
-          2.377583,
-          16.117311
-         ],
-         [
-          1.935653,
-          16.559241
-         ],
-         [
-          -1.935653,
-          16.559241
-         ],
-         [
-          -2.377583,
-          16.117311
-         ],
-         [
-          -2.377583,
-          -16.117311
-         ],
-         [
-          -1.935653,
-          -16.559241
-         ],
-         [
-          1.935653,
-          -16.559241
-         ],
-         [
-          2.377583,
-          -16.117311
+        "source": "XY octagon: exact walls/ends + 45\u00b0 corner chamfers",
+        "profile2d": {
+         "poly": [
+          [
+           "bar_hw",
+           "bar_y_end - end_cham"
+          ],
+          [
+           "bar_hw - end_cham",
+           "bar_y_end"
+          ],
+          [
+           "-(bar_hw - end_cham)",
+           "bar_y_end"
+          ],
+          [
+           "-bar_hw",
+           "bar_y_end - end_cham"
+          ],
+          [
+           "-bar_hw",
+           "-(bar_y_end - end_cham)"
+          ],
+          [
+           "-(bar_hw - end_cham)",
+           "-bar_y_end"
+          ],
+          [
+           "bar_hw - end_cham",
+           "-bar_y_end"
+          ],
+          [
+           "bar_hw",
+           "-(bar_y_end - end_cham)"
+          ]
          ]
-        ],
-        "z0": 0.0,
-        "z1": 6.0
+        },
+        "z0": "bar_z0 - 0.5",
+        "z1": "bar_z1 + 0.5"
        },
        {
         "prim": "extrude",
         "axis": "x",
         "name": "side_yz",
-        "source": "YZ octagon: exact plane faces 16/23, 15, 24, 17/20 (top end chamfers), 18/21 (bottom end chamfers)",
-        "profile": [
-         [
-          16.117311,
-          0.659863
-         ],
-         [
-          16.559241,
-          1.101793
-         ],
-         [
-          16.559241,
-          4.971995
-         ],
-         [
-          16.117311,
-          5.413925
-         ],
-         [
-          -16.117311,
-          5.413925
-         ],
-         [
-          -16.559241,
-          4.971995
-         ],
-         [
-          -16.559241,
-          1.101793
-         ],
-         [
-          -16.117311,
-          0.659863
+        "source": "YZ octagon: exact ends/top/bottom + 45\u00b0 end chamfers",
+        "profile2d": {
+         "poly": [
+          [
+           "bar_y_end - end_cham",
+           "bar_z0"
+          ],
+          [
+           "bar_y_end",
+           "bar_z0 + end_cham"
+          ],
+          [
+           "bar_y_end",
+           "bar_z1 - end_cham"
+          ],
+          [
+           "bar_y_end - end_cham",
+           "bar_z1"
+          ],
+          [
+           "-(bar_y_end - end_cham)",
+           "bar_z1"
+          ],
+          [
+           "-bar_y_end",
+           "bar_z1 - end_cham"
+          ],
+          [
+           "-bar_y_end",
+           "bar_z0 + end_cham"
+          ],
+          [
+           "-(bar_y_end - end_cham)",
+           "bar_z0"
+          ]
          ]
-        ],
-        "z0": -2.5,
-        "z1": 2.5
+        },
+        "z0": "-bar_hw - 0.5",
+        "z1": "bar_hw + 0.5"
        }
       ]
-     },
-     {
+     }
+    },
+    "tendon_slot": {
+     "args": [],
+     "doc": "curved tendon slot between the two bspline walls \u2014 both walls are circular ARCS (fit residuals in the params), near-concentric around the tendon bend center; cut spans the exact slot wall planes in x",
+     "tree": {
       "prim": "extrude",
       "axis": "x",
-      "name": "slot",
-      "source": "tendon slot between bspline faces 11/12: wall y(z) raycast-measured at x=0 (prismatic: <0.003mm variation across x); x span = exact plane faces 9/10 (x=\u00b11.455185); z overshoot 0.3/5.8 extrapolates the last measured segment",
-      "profile": [
-       [
-        -14.722041,
-        0.3
-       ],
-       [
-        -14.348953,
-        0.7
-       ],
-       [
-        -14.069137,
-        1.0
-       ],
-       [
-        -13.751725,
-        1.4
-       ],
-       [
-        -13.501885,
-        1.8
-       ],
-       [
-        -13.318744,
-        2.2
-       ],
-       [
-        -13.197268,
-        2.6
-       ],
-       [
-        -13.141806,
-        3.0
-       ],
-       [
-        -13.137367,
-        3.2
-       ],
-       [
-        -13.150415,
-        3.4
-       ],
-       [
-        -13.21782,
-        3.8
-       ],
-       [
-        -13.352434,
-        4.2
-       ],
-       [
-        -13.551634,
-        4.6
-       ],
-       [
-        -13.814756,
-        5.0
-       ],
-       [
-        -14.060239,
-        5.3
-       ],
-       [
-        -14.147448,
-        5.4
-       ],
-       [
-        -14.496284,
-        5.8
-       ],
-       [
-        -10.702936,
-        5.8
-       ],
-       [
-        -10.557256,
-        5.4
-       ],
-       [
-        -10.520836,
-        5.3
-       ],
-       [
-        -10.416808,
-        5.0
-       ],
-       [
-        -10.299863,
-        4.6
-       ],
-       [
-        -10.216109,
-        4.2
-       ],
-       [
-        -10.159263,
-        3.8
-       ],
-       [
-        -10.123424,
-        3.4
-       ],
-       [
-        -10.122524,
-        3.2
-       ],
-       [
-        -10.12681,
-        3.0
-       ],
-       [
-        -10.146129,
-        2.6
-       ],
-       [
-        -10.200298,
-        2.2
-       ],
-       [
-        -10.281356,
-        1.8
-       ],
-       [
-        -10.384704,
-        1.4
-       ],
-       [
-        -10.530743,
-        1.0
-       ],
-       [
-        -10.646316,
-        0.7
-       ],
-       [
-        -10.800413,
-        0.3
+      "name": "slot_cut",
+      "source": "slot profile: two fitted wall arcs swept between declared z overshoots 0.40/5.70",
+      "profile2d": {
+       "path": [
+        {
+         "arc": {
+          "c": [
+           "slot_head_cy",
+           "slot_head_cz"
+          ],
+          "r": "slot_head_r",
+          "a0": -65.76421,
+          "a1": 57.95342,
+          "n": 16
+         }
+        },
+        {
+         "arc": {
+          "c": [
+           "slot_bar_cy",
+           "slot_bar_cz"
+          ],
+          "r": "slot_bar_r",
+          "a0": 25.175441,
+          "a1": -27.444433,
+          "n": 16
+         }
+        }
        ]
-      ],
-      "z0": -1.455185,
-      "z1": 1.455184
+      },
+      "z0": "-slot_hw",
+      "z1": "slot_hw"
+     }
+    }
+   },
+   "csg": {
+    "op": "difference",
+    "children": [
+     {
+      "call": "hex_bar",
+      "name": "bar_i",
+      "args": {}
+     },
+     {
+      "call": "tendon_slot",
+      "name": "slot_i",
+      "args": {}
      },
      {
       "prim": "cylinder",
-      "name": "bore",
-      "source": "blind tendon bore: exact cylinder face 2 (r=1.507237, axis [0,-1,0] through x=0 z=3.037447) + planar cap face 1 at y=-8.770356; +y end overshoots the exit face 16 by ~1mm",
+      "name": "tendon_bore",
+      "source": "blind tendon bore: exact cylinder face #2 + cap plane #1; +y end overshoots the exit by 1",
       "p0": [
-       0.0,
-       -8.770356,
-       3.037447
+       0,
+       "bore_y_cap",
+       "bore_z"
       ],
       "p1": [
-       0.0,
-       17.559241,
-       3.037447
+       0,
+       "bar_y_end + 1",
+       "bore_z"
       ],
-      "r": 1.507237
+      "r": "bore_r"
      }
     ]
    }
@@ -314,7 +322,7 @@
     0.0,
     0.0
    ],
-   "source": "exact centroid delta body1-body0 (identical volume/faces)",
+   "source": "exact centroid delta (= pin_pitch param)",
    "notes": "identical pin, +x neighbor"
   },
   {
@@ -324,9 +332,9 @@
    "translate": [
     -5.8765,
     0.0,
-    -0.0
+    0.0
    ],
-   "source": "exact centroid delta body2-body0 (identical volume/faces)",
+   "source": "exact centroid delta (= -pin_pitch)",
    "notes": "identical pin, -x neighbor"
   }
  ]

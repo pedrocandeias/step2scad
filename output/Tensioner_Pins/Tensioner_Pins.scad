@@ -5,51 +5,68 @@
 // strategies without a real emitter yet use placeholder stubs (bbox).
 // Every dimension below is an exact B-rep value from features.json.
 
-// ---- body 0 (strategy: csg — agent plan) ----
-// plan: chamfered bar = intersection of three measured octagonal prisms; minus tendon slot (prismatic in x, raycast-measured conic walls); minus blind tendon bore (exact cylinder+cap)
-b0_xsec_profile = [[0.659863, 2.099167], [0.938279, 2.377583], [5.136614, 2.377583], [5.413925, 2.099167], [5.413925, -2.099168], [5.136614, -2.377583], [0.938279, -2.377583], [0.659863, -2.099168]];  // (z, x) points — XZ octagon: exact plane faces 0/31 (walls x=±2.377583), 15 (top z=5.413925), 24 (bottom z=0.659863), 13/25 (45° bottom chamfers), 14/30 (top chamfers); vertices = plane-pair intersections
-b0_xsec_z0 = -16.559241;  // extent along y
-b0_xsec_z1 = 16.559241;
-b0_plan_xy_profile = [[2.377583, 16.117311], [1.935653, 16.559241], [-1.935653, 16.559241], [-2.377583, 16.117311], [-2.377583, -16.117311], [-1.935653, -16.559241], [1.935653, -16.559241], [2.377583, -16.117311]];  // (x, y) points — XY octagon: exact plane faces 0/31, 16/23 (ends y=±16.559241), 4/7/26/28 (45° corner chamfers)
-b0_plan_xy_z0 = 0;  // extent along z
-b0_plan_xy_z1 = 6;
-b0_side_yz_profile = [[16.117311, 0.659863], [16.559241, 1.101793], [16.559241, 4.971995], [16.117311, 5.413925], [-16.117311, 5.413925], [-16.559241, 4.971995], [-16.559241, 1.101793], [-16.117311, 0.659863]];  // (y, z) points — YZ octagon: exact plane faces 16/23, 15, 24, 17/20 (top end chamfers), 18/21 (bottom end chamfers)
-b0_side_yz_z0 = -2.5;  // extent along x
-b0_side_yz_z1 = 2.5;
-b0_slot_profile = [[-14.722041, 0.3], [-14.348953, 0.7], [-14.069137, 1], [-13.751725, 1.4], [-13.501885, 1.8], [-13.318744, 2.2], [-13.197268, 2.6], [-13.141806, 3], [-13.137367, 3.2], [-13.150415, 3.4], [-13.21782, 3.8], [-13.352434, 4.2], [-13.551634, 4.6], [-13.814756, 5], [-14.060239, 5.3], [-14.147448, 5.4], [-14.496284, 5.8], [-10.702936, 5.8], [-10.557256, 5.4], [-10.520836, 5.3], [-10.416808, 5], [-10.299863, 4.6], [-10.216109, 4.2], [-10.159263, 3.8], [-10.123424, 3.4], [-10.122524, 3.2], [-10.12681, 3], [-10.146129, 2.6], [-10.200298, 2.2], [-10.281356, 1.8], [-10.384704, 1.4], [-10.530743, 1], [-10.646316, 0.7], [-10.800413, 0.3]];  // (y, z) points — tendon slot between bspline faces 11/12: wall y(z) raycast-measured at x=0 (prismatic: <0.003mm variation across x); x span = exact plane faces 9/10 (x=±1.455185); z overshoot 0.3/5.8 extrapolates the last measured segment
-b0_slot_z0 = -1.455185;  // extent along x
-b0_slot_z1 = 1.455184;
-b0_bore_p0 = [0, -8.770356, 3.037447];  // blind tendon bore: exact cylinder face 2 (r=1.507237, axis [0,-1,0] through x=0 z=3.037447) + planar cap face 1 at y=-8.770356; +y end overshoots the exit face 16 by ~1mm
-b0_bore_p1 = [0, 17.559241, 3.037447];
-b0_bore_r  = 1.507237;
-b0_fn = 96;  // curve resolution
+// ---- body 0 (strategy: csg — semantic parametric plan) ----
+// plan: fully parametric: expression octagons over exact plane dims; slot walls as fitted arcs (res 0.036/0.005); exact bore. IoU 0.9987 vs v1 0.9991 (parametric cost -0.0004)
+
+// ======== PARAMETERS (every value measured; see source comments) ========
+b0_bar_hw       = 2.377583;  // exact wall planes #0/#31 (x = ±bar_hw)
+b0_bar_z0       = 0.659863;  // exact bottom plane #24
+b0_bar_z1       = 5.413925;  // exact top plane #15
+b0_bar_y_end    = 16.559241;  // exact end planes #16/#23 (y = ±bar_y_end)
+b0_cham_xz      = 0.278416;  // exact 45° long-edge chamfer width (cone of planes #13/#25/#14/#30; top height differs by 0.0014)
+b0_cham_top_h   = 0.277311;  // exact top chamfer axial height (planes #14/#30)
+b0_end_cham     = 0.44193;  // exact 45° end/corner chamfer width (planes #4/#7/#26/#28 + #17/#18/#20/#21; equal within 2e-3)
+b0_slot_hw      = 1.455185;  // exact slot wall planes #9/#10 (x = ±slot_hw)
+b0_slot_head_cy = -16.167652;  // fitted arc center of the head-side slot wall (15 raycast samples, res 0.036)
+b0_slot_head_cz = 3.146764;  // same fit
+b0_slot_head_r  = 3.012252;  // same fit
+b0_slot_bar_cy  = -16.102972;  // fitted arc center of the bar-side slot wall (15 raycast samples, res 0.005)
+b0_slot_bar_cz  = 3.156136;  // same fit
+b0_slot_bar_r   = 5.980054;  // same fit
+b0_bore_r       = 1.507237;  // exact bore cylinder face #2
+b0_bore_y_cap   = -8.770356;  // exact blind-end cap plane #1
+b0_bore_z       = 3.037447;  // exact bore axis height (face #2)
+b0_pin_pitch    = 5.8765;  // exact centroid delta between adjacent pins
+b0_fn           = 96;  // curve resolution
+
+// chamfered bar = intersection of three octagonal prisms whose vertices are EXPRESSIONS over the exact plane dimensions (change bar_hw / cham_xz / end_cham and the whole bar follows)
+module b0_hex_bar() {
+    intersection() {
+        // b0_xsec: XZ octagon: exact wall/top/bottom planes + 45° chamfers
+        rotate([0, -90, -90]) translate([0, 0, -b0_bar_y_end]) linear_extrude((b0_bar_y_end) - (-b0_bar_y_end)) polygon([[b0_bar_z0, b0_bar_hw - b0_cham_xz], [b0_bar_z0 + b0_cham_xz, b0_bar_hw], [b0_bar_z1 - b0_cham_top_h, b0_bar_hw], [b0_bar_z1, b0_bar_hw - b0_cham_xz], [b0_bar_z1, -(b0_bar_hw - b0_cham_xz)], [b0_bar_z1 - b0_cham_top_h, -b0_bar_hw], [b0_bar_z0 + b0_cham_xz, -b0_bar_hw], [b0_bar_z0, -(b0_bar_hw - b0_cham_xz)]]);
+        // b0_plan_xy: XY octagon: exact walls/ends + 45° corner chamfers
+        translate([0, 0, b0_bar_z0 - 0.5]) linear_extrude((b0_bar_z1 + 0.5) - (b0_bar_z0 - 0.5)) polygon([[b0_bar_hw, b0_bar_y_end - b0_end_cham], [b0_bar_hw - b0_end_cham, b0_bar_y_end], [-(b0_bar_hw - b0_end_cham), b0_bar_y_end], [-b0_bar_hw, b0_bar_y_end - b0_end_cham], [-b0_bar_hw, -(b0_bar_y_end - b0_end_cham)], [-(b0_bar_hw - b0_end_cham), -b0_bar_y_end], [b0_bar_hw - b0_end_cham, -b0_bar_y_end], [b0_bar_hw, -(b0_bar_y_end - b0_end_cham)]]);
+        // b0_side_yz: YZ octagon: exact ends/top/bottom + 45° end chamfers
+        rotate([90, 0, 90]) translate([0, 0, -b0_bar_hw - 0.5]) linear_extrude((b0_bar_hw + 0.5) - (-b0_bar_hw - 0.5)) polygon([[b0_bar_y_end - b0_end_cham, b0_bar_z0], [b0_bar_y_end, b0_bar_z0 + b0_end_cham], [b0_bar_y_end, b0_bar_z1 - b0_end_cham], [b0_bar_y_end - b0_end_cham, b0_bar_z1], [-(b0_bar_y_end - b0_end_cham), b0_bar_z1], [-b0_bar_y_end, b0_bar_z1 - b0_end_cham], [-b0_bar_y_end, b0_bar_z0 + b0_end_cham], [-(b0_bar_y_end - b0_end_cham), b0_bar_z0]]);
+    }
+}
+
+// curved tendon slot between the two bspline walls — both walls are circular ARCS (fit residuals in the params), near-concentric around the tendon bend center; cut spans the exact slot wall planes in x
+module b0_tendon_slot() {
+    // b0_slot_cut: slot profile: two fitted wall arcs swept between declared z overshoots 0.40/5.70
+    rotate([90, 0, 90]) translate([0, 0, -b0_slot_hw]) linear_extrude((b0_slot_hw) - (-b0_slot_hw)) polygon(concat(
+            [for (k = [1 : 16]) [(b0_slot_head_cy) + (b0_slot_head_r)*cos((-65.76421) + k*((57.95342) - (-65.76421))/16), (b0_slot_head_cz) + (b0_slot_head_r)*sin((-65.76421) + k*((57.95342) - (-65.76421))/16)]],
+            [for (k = [1 : 16]) [(b0_slot_bar_cy) + (b0_slot_bar_r)*cos((25.175441) + k*((-27.444433) - (25.175441))/16), (b0_slot_bar_cz) + (b0_slot_bar_r)*sin((25.175441) + k*((-27.444433) - (25.175441))/16)]]));
+}
 
 module body_0() {
     difference() {
-        intersection() {
-            // xsec: XZ octagon: exact plane faces 0/31 (walls x=±2.377583), 15 (top z=5.413925), 24 (bottom z=0.659863), 13/25 (45° bottom chamfers), 14/30 (top chamfers); vertices = plane-pair intersections
-            rotate([0, -90, -90]) translate([0, 0, b0_xsec_z0]) linear_extrude(b0_xsec_z1 - b0_xsec_z0) polygon(b0_xsec_profile);
-            // plan_xy: XY octagon: exact plane faces 0/31, 16/23 (ends y=±16.559241), 4/7/26/28 (45° corner chamfers)
-            translate([0, 0, b0_plan_xy_z0]) linear_extrude(b0_plan_xy_z1 - b0_plan_xy_z0) polygon(b0_plan_xy_profile);
-            // side_yz: YZ octagon: exact plane faces 16/23, 15, 24, 17/20 (top end chamfers), 18/21 (bottom end chamfers)
-            rotate([90, 0, 90]) translate([0, 0, b0_side_yz_z0]) linear_extrude(b0_side_yz_z1 - b0_side_yz_z0) polygon(b0_side_yz_profile);
-        }
-        // slot: tendon slot between bspline faces 11/12: wall y(z) raycast-measured at x=0 (prismatic: <0.003mm variation across x); x span = exact plane faces 9/10 (x=±1.455185); z overshoot 0.3/5.8 extrapolates the last measured segment
-        rotate([90, 0, 90]) translate([0, 0, b0_slot_z0]) linear_extrude(b0_slot_z1 - b0_slot_z0) polygon(b0_slot_profile);
-        // bore: blind tendon bore: exact cylinder face 2 (r=1.507237, axis [0,-1,0] through x=0 z=3.037447) + planar cap face 1 at y=-8.770356; +y end overshoots the exit face 16 by ~1mm
-        translate(b0_bore_p0) rotate(a=90, v=[-1, 0, 0]) cylinder(h=norm(b0_bore_p1 - b0_bore_p0), r=b0_bore_r, $fn=b0_fn);
+        b0_hex_bar();  // b0_bar_i
+        b0_tendon_slot();  // b0_slot_i
+        // b0_tendon_bore: blind tendon bore: exact cylinder face #2 + cap plane #1; +y end overshoots the exit by 1
+        translate([0, b0_bore_y_cap, b0_bore_z]) rotate([-90, 0, 0]) cylinder(h=(b0_bar_y_end + 1) - (b0_bore_y_cap), r=b0_bore_r, $fn=b0_fn);
     }
 }
 
 // ---- body 1 (strategy: instance_of body 0 — agent plan) ----
-b1_offset = [5.8765, 0, 0];  // exact centroid delta body1-body0 (identical volume/faces)
+b1_offset = [5.8765, 0, 0];  // exact centroid delta (= pin_pitch param)
 
 module body_1() {
     translate(b1_offset) body_0();
 }
 
 // ---- body 2 (strategy: instance_of body 0 — agent plan) ----
-b2_offset = [-5.8765, 0, 0];  // exact centroid delta body2-body0 (identical volume/faces)
+b2_offset = [-5.8765, 0, 0];  // exact centroid delta (= -pin_pitch)
 
 module body_2() {
     translate(b2_offset) body_0();

@@ -4,12 +4,12 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 1,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 2,
@@ -32,17 +32,17 @@
     {
       "body_id": 5,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 6,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 34%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 7,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (VERIFIED y-mirror of body 1 about y=-4.7474 (every axis dim equal within 0.003) \u2014 kept own params: the plan schema has no cross-body module refs; semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (cylinder, plane, torus) with no single dominant axis (largest coaxial cluster covers only 31%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 8,
@@ -70,7 +70,7 @@
     {
       "body_id": 10,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 37%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along x from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 37%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 11,
@@ -92,7 +92,7 @@
     {
       "body_id": 12,
       "strategy": "csg",
-      "reasoning": "agent plan (hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (<0.3 mm\u00b3) intentionally omitted); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 48%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (semantic parametric pin: measured station circles segmented into named plateau cylinders (exact faces where they agree) + transition frustums; head stations and cutters vectorized; engraved digit labels excluded by design \u2014 hull-loft along y from measured sections; plan-view concavity cutters (fork slot/barb notches); engraved label grooves (); heuristic suggested: csg \u2014 analytic surfaces (bspline, cone, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 48%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     }
   ]
 }

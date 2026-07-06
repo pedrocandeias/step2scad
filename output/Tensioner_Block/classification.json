@@ -4,7 +4,7 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (prismatic tower + flange (measured outlines) + exact sphere detent, minus 3 prismatic pin channels + 3 exact flange bores); heuristic suggested: freeform \u2014 32% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (fully parametric: vectorized outlines (tol 0.02), channels as measured rectangles (side pair mirrored, verified exact), exact z planes/bores/sphere. IoU 0.9904 vs v1 0.9984 (parametric cost -0.0080, mostly outline vectorization)); heuristic suggested: freeform \u2014 32% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     }
   ]

@@ -111,6 +111,9 @@ Concretely:
 - **Recognize primitives before dumping polygons**: fit circles/capsules/spheres to
   measured loops and match them to exact B-rep faces. A 44-point "organic" loop was
   the exact r7.995 mount cylinder; five crest bands were an exact B-rep sphere.
+  ⚠ Circle fits are BLIND to flats: a flat-topped section's vertices all lie on the
+  fitted circle (res 0.000) — authorize circles by vertex count (true decimated
+  circles keep ≥6) and confirm flats against exact plane faces.
 - **One shared outline** (`profiles` in plan.json) + zones derived via 2D ops
   (`offset` insets — only after MEASURING the inset uniform, std<0.05; rect/poly clips).
 - **Exploit symmetry after verifying it by measurement**: feature module at the

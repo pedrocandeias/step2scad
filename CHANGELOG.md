@@ -4,7 +4,25 @@ All notable changes to **step2scad** are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions are project milestones (no releases published yet).
 
-## [Unreleased]
+## [0.5.0] — 2026-07-06 · Fleet semanticization + smooth laws
+
+**All eight CSG parts are now human-readable and truly parametric** (schema
+v2/v3: named sourced params, modules, mirrors, vectorized outlines, fitted
+laws with smooth emission). The parametrization cost was quantified per part
+(decision policy: prefer editable, cite the delta):
+
+| Part | v1 IoU | Semantic IoU | Δ | Highlights |
+|---|---|---|---|---|
+| Tensioner_Pins | 0.9991 | 0.9987 | −0.0004 | slot walls = 2 near-concentric fitted arcs; expression octagons; 78-line scad |
+| Tensioner_Block | 0.9984 | 0.9904 | −0.0080 | exact-mirror side channels; vectorize tol tightened 0.06→0.02 after costing |
+| Arm_Guard | 0.9930 | 0.9844 | −0.0086 | fully parametric: exact cones, 45° laws, hourglass ridge, vectorized outlines |
+| Snap_Pins | 0.9792 | **0.9818** | **+0.0026** | pins = plateau-cylinder revolve chains clipped by exact plane flats (v1 hulls had circumscribed the flats!) |
+| Distals | 0.9839 | 0.9809 | −0.0030 | zone-named vectorized stations; hull-loft kept — taper measured as real |
+| Proximals | 0.9796 | 0.9762 | −0.0034 | knuckle lobes r=6.000 exactly concentric with pin bores; 754→212 prims |
+| Palm_left | 0.9652 | 0.9641 | −0.0011 | 619+46 constant-outline runs collapsed; 1938→1405 prims; dome honestly organic |
+| Palm_right | 0.9652 | 0.9641 | −0.0011 | single mirror-wrap of the left semantic plan |
+
+(F695-2Z bearing stays 0.9978 — exact RZ revolve, semantic by construction.)
 
 ### Added
 - **`src/step2scad/fitting.py`**: the fitting/vectorizing utilities promoted
@@ -33,7 +51,22 @@ versions are project milestones (no releases published yet).
   #54/#70, r7.995 mount lobes); windows and rail base likewise. IoU
   unchanged at 0.9838 (vectorization is fidelity-neutral).
 
+- **Multi-body semantic emission**: `_prefix_entry` bakes the body prefix
+  into every name-like token (params, profile keys/refs, module keys/calls,
+  node names, expression identifiers; module formal args shadow) — unblocks
+  params/modules/refs for multi-body parts. Found by the Distals agent.
+- Per-part authoring scripts under `scripts/authoring/author_*_parametric.py`
+  (all import `fitting.py`); `mirror_palm_plan.py` gained the v2/v3
+  mirror-wrap mode.
+
 ### Fixed
+- Preview PNGs render with `--render`: the OpenCSG preview silently produces
+  BLANK images on tangency-heavy CSG (found on Palm_left and Proximals).
+- Circle-fit blindness to flats: any convex profile whose VERTICES lie on a
+  circle fits as that circle (res 0.000) — flats live in edges. Authorize
+  circles by vertex count and confirm flats against exact plane faces
+  (Snap_Pins v1 had circumscribed flat-topped sections as full circles; the
+  semantic pass fixed it and GAINED 0.26pp).
 - Vectorizer traps found while stabilizing it: greedy arc windows must not
   wrap past the wrapped start (duplicate overlapping arcs = self-intersecting
   polygon), snapped arcs must recompute their angles from the exact center,

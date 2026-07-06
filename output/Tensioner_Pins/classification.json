@@ -4,7 +4,7 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (chamfered bar = intersection of three measured octagonal prisms; minus tendon slot (prismatic in x, raycast-measured conic walls); minus blind tendon bore (exact cylinder+cap)); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
+      "reasoning": "agent plan (fully parametric: expression octagons over exact plane dims; slot walls as fitted arcs (res 0.036/0.005); exact bore. IoU 0.9987 vs v1 0.9991 (parametric cost -0.0004)); heuristic suggested: csg \u2014 analytic surfaces (bspline, cylinder, plane) with no single dominant axis (largest coaxial cluster covers only 26%) and no prismatic direction -> CSG assembly of primitives with chamfers (cones) / fillets (tori)."
     },
     {
       "body_id": 1,

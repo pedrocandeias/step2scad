@@ -46,6 +46,29 @@ def mirror_node(n):
 
 
 body = L["bodies"][0]
+
+if body.get("params") or body.get("modules"):
+    # v2/v3 semantic plan: field-level negation is fragile with expressions
+    # and shared modules — mirror the WHOLE tree with one transform instead
+    # (exactly how a human writes the mirrored part; mirror relationship
+    # proven: volume delta 8 ppm, centroids x-negated).
+    plan = {"version": 1,
+            "source": "models/phoenix_components/Palm_right.step",
+            "bodies": [{
+                "body_id": 0, "strategy": "csg",
+                "notes": "x-mirror of the semantic Palm_left plan (single "
+                         "mirror transform; params/modules shared verbatim); "
+                         + body.get("notes", ""),
+                "params": body.get("params", []),
+                "profiles": body.get("profiles", {}),
+                "modules": body.get("modules", {}),
+                "csg": {"transform": {"mirror": [1, 0, 0]},
+                        "name": "mirrored_left_palm",
+                        "child": body["csg"]},
+            }]}
+    json.dump(plan, open("output/Palm_right/plan.json", "w"), indent=1)
+    print("wrote output/Palm_right/plan.json (semantic mirror-wrap mode)")
+    raise SystemExit(0)
 plan = {"version": 1, "source": "models/phoenix_components/Palm_right.step",
         "bodies": [{
             "body_id": 0, "strategy": "csg",

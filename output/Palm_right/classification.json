@@ -4,7 +4,7 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (x-mirror of the measured Palm_left plan (exact mirror part: volume delta 8 ppm, centroids x-negated); palm: main+thumb hull-lofts + exact wrist barrel; cavity as measured non-convex loop slabs (ribs preserved); exact cuts for grid holes, finger slots, pins, barrel bay, thumb clevis, tendon channels); heuristic suggested: freeform \u2014 42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (x-mirror of the semantic Palm_left plan (single mirror transform; params/modules shared verbatim); semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params); heuristic suggested: freeform \u2014 42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     }
   ]
