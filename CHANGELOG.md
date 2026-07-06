@@ -7,6 +7,17 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Arm_Guard 100% parametric** (IoU 0.9838): the last organic layers fell —
+  mount skirts are the EXACT 45° cone faces #29/#105 (frustum r 8.995→7.995,
+  z 1.8013→2.8014; band circles matched the cone law to 0.005); the plate rim
+  chamfer's fitted law was cross-validated as the EXACT cone faces #93/#114
+  (r 7.495→7.995); wings = shared outline ∩ measured straight clip
+  (wing_x_cut); strap rails = measured base footprint under a uniform 45°
+  offset law (shrink == dz, std 0.012). Five modules, 54 named params, zero
+  `bNoM` layers. **Decision policy adopted:** prefer the parametric editable
+  form over organic layers when the quantified cost is acceptable — measured
+  here: −0.0019 IoU vs semantic-with-layers (0.9857), −0.0092 vs the raw band
+  stack (0.9930).
 - **`offset_sweep` primitive**: edge-treatment sweep — stacked slabs of a 2D
   shape offset by a fitted law delta(z): `linear` (chamfer/ramp) or `round`
   (quarter roundover, bottom/top edge). Pilot: the Arm_Guard plate's bottom

@@ -189,13 +189,13 @@ params = [
      "source": "cut overshoot below the base plane (declared, 0.5)"},
 ]
 params += [
-    {"name": "rim_cham_d0", "value": rim_d0,
-     "source": f"measured 45-deg bottom edge chamfer: offset at the base plane "
-               f"(linear fit of the rim band insets, res {rim_res:.3f})"},
-    {"name": "rim_cham_d1", "value": rim_d1,
-     "source": "measured chamfer offset at the top of the rim zone (same fit)"},
-    {"name": "z_rim_top", "value": rim_z1,
-     "source": "exact B-rep band level: bottom edge chamfer ends"},
+    {"name": "rim_cham_d0", "value": -0.5,
+     "source": "EXACT 45-deg bottom edge chamfer: cone faces #93/#114 span "
+               f"r 7.495->7.995 (fitted rim insets agreed: slope res {rim_res:.3f})"},
+    {"name": "rim_cham_d1", "value": 0.0,
+     "source": "exact: chamfer vanishes at its top level"},
+    {"name": "z_rim_top", "value": 0.501317,
+     "source": "EXACT cone faces #93/#114 upper extent (z=0.5013)"},
 ]
 cap_ids = "/".join(f"#{c[0]}" for c in caps)
 params += [
@@ -308,14 +308,14 @@ modules = {
              "source": "exact cylinder faces #92/#98 (r=7.995) at y=35.5048",
              "p0": ["cx", "mount_y", "z_plate_top"],
              "p1": ["cx", "mount_y", "z_blend0"], "r": "mount_r"},
+            {"prim": "cylinder", "name": "skirt",
+             "source": "EXACT 45-deg skirt: cone faces #29/#105 span "
+                       "r 8.995@z1.8013 -> 7.995@z2.8014 (skirt band circles "
+                       "matched the cone law to 0.005)",
+             "p0": ["cx", "mount_y", "z_wing_top"],
+             "p1": ["cx", "mount_y", "z_blend0"],
+             "r": "mount_r + 1.0", "r2": "mount_r"},
         ]},   # blend segments appended below from measured radii
-    },
-    "deck_ridge": {
-        "args": [],
-        "doc": "raised deck pads, mount skirts and central ridge: organic "
-               "45-degree blends kept as measured layers with semantic names "
-               "(base/top heights are exact B-rep plane levels)",
-        "tree": {"op": "union", "children": []},   # filled below
     },
 }
 
@@ -325,6 +325,7 @@ counters = {}
 deck_children = []
 mount_top_samples = []
 ridge_bands = []
+rail_layers = {}
 for p in deck:
     kind, extra = classify_deck(p)
     if kind == "sphere":
@@ -335,11 +336,16 @@ for p in deck:
     if kind == "ridge":
         ridge_bands.append(p)                      # replaced by center_ridge()
         continue
+    if kind.startswith("mount_skirt"):
+        continue                                   # replaced by the exact cone frustum
+    if kind.startswith("rail_hump"):
+        rail_layers.setdefault(kind[-1], []).append(p)   # wing+strip, parametrized below
+        continue
     counters[kind] = counters.get(kind, 0) + 1
     deck_children.append(layer(
         p, f"{kind.replace('_', ' ')} (measured organic layer)",
         name=f"{kind}_l{counters[kind]:02d}"))
-modules["deck_ridge"]["tree"]["children"] = deck_children
+assert not deck_children, f"unexpected organic layers remain: {[c['name'] for c in deck_children]}"''
 
 # ---- center ridge: 16 measured bands -> stadium footprint + 3 height laws --
 # Per band: (z_top, y_tail, y_head, half-width). The tail retreats at ~45°
@@ -505,6 +511,73 @@ modules["center_ridge"] = {
 }
 print(f"center_ridge: 16 bandas -> 3 leis (res {t_res:.3f}/{a_res:.3f}/{h_res:.3f})")
 
+# ---- rail humps: wing prism + 45-deg offset-sweep strip (fully parametric) --
+# Measured: strip footprints shrink UNIFORMLY with z (dist to the base
+# footprint = dz within std 0.012 -> 45-deg edge law on ALL sides); the wing
+# is the outline clipped at a vertical line (its inner edge decimated to a
+# single straight segment).
+railsR = sorted(rail_layers["R"], key=lambda q: q["z0"])
+railsL = sorted(rail_layers["L"], key=lambda q: q["z0"])
+wingsR = [q for q in railsR if q["z0"] < 1.79]
+stripsR = [q for q in railsR if q["z0"] >= 1.79]
+# L/R mirror check (areas)
+for qr, ql in zip(railsR, railsL):
+    ar, al = _parea(qr), _parea(ql)
+    assert abs(ar - al) < 0.05 * ar, f"rail L/R assimetria: {qr['name']} {ar:.0f} vs {al:.0f}"
+
+wing = max(wingsR, key=_parea)
+wa = np.array(wing["profile"])
+# inner edge = the long near-vertical segment closest to the center
+segs = [(A, B) for A, B in zip(wa, np.roll(wa, -1, axis=0))
+        if abs(B[1] - A[1]) > 20 and abs(B[0] - A[0]) < 1.0]
+inner_seg = min(segs, key=lambda s: abs(s[0][0]))
+wing_x_cut = R((inner_seg[0][0] + inner_seg[1][0]) / 2)
+z_wing_top = R(max(q["z1"] for q in wingsR))          # exact B-rep level
+
+strip_base = min(stripsR, key=lambda q: q["z0"])       # lowest strip band
+z_strip_mid = (strip_base["z0"] + strip_base["z1"]) / 2
+z_rail_top = R(max(q["z1"] for q in stripsR))          # exact level (= z_blend0)
+# uniform-offset law: delta(z) = z_strip_mid - z (45 deg), validated above
+strip_d0 = R(z_strip_mid - z_wing_top)                 # slight outward pad at base
+strip_d1 = R(z_strip_mid - z_rail_top)
+
+params += [
+    {"name": "wing_x_cut", "value": wing_x_cut,
+     "source": "measured wing inner boundary (decimated to one straight "
+               "vertical segment in the band footprint)"},
+    {"name": "z_wing_top", "value": z_wing_top,
+     "source": "exact B-rep plane level: top of the wing zone"},
+    {"name": "z_rail_top", "value": z_rail_top,
+     "source": "exact B-rep plane level: top of the rail strips"},
+    {"name": "rail_d0", "value": strip_d0,
+     "source": "45-deg rail edge law: offset at the wing top (uniform-shrink "
+               "measurement, std 0.012)"},
+    {"name": "rail_d1", "value": strip_d1,
+     "source": "45-deg rail edge law: offset at the rail top (same measurement)"},
+]
+
+modules["rail_hump"] = {
+    "args": [],
+    "doc": "outer wing + strap rail (right side; the left side is mirrored): "
+           "wing = outline clipped at wing_x_cut; rail strip = measured base "
+           "footprint shrinking at the measured 45-deg edge law on all sides",
+    "tree": {"op": "union", "children": [
+        {"prim": "extrude", "axis": "z", "name": "wing",
+         "source": "wing zone: shared outline INTERSECT x >= wing_x_cut "
+                   "(inner edge measured straight; largest wing band footprint)",
+         "profile2d": {"op2d": "intersection", "children": [
+             {"ref": "plate_upper_outline"},
+             {"rect": ["wing_x_cut", -50, 50, 50]}]},
+         "z0": "z_plate_top", "z1": "z_wing_top"},
+        {"prim": "offset_sweep", "name": "rail_strip",
+         "source": "strap rail: measured base footprint with the uniform "
+                   "45-deg shrink law (dist-to-base = dz, std 0.012)",
+         "profile2d": {"ref": "rail_strip_base"},
+         "z0": "z_wing_top", "z1": "z_rail_top", "steps": 8,
+         "law": {"kind": "linear", "d0": "rail_d0", "d1": "rail_d1"}},
+    ]},
+}
+
 # top blend: measured band circle radii interpolated at the EXACT B-rep plane
 # levels between the bands → chain of frustum segments (both mounts share it)
 # both mounts sample the same bands — average the two radii per z level
@@ -586,13 +659,16 @@ plan = {"version": 1, "source": feats["source"], "bodies": [{
              "chamfers deliberately omitted (sub-1% volume)",
     "params": params,
     "profiles": {"plate_outline": main["profile"],
-                 "plate_upper_outline": upper["profile"]},
+                 "plate_upper_outline": upper["profile"],
+                 "rail_strip_base": strip_base["profile"]},
     "modules": modules,
     "csg": {"op": "difference", "children": [
         {"op": "union", "children": [
             {"call": "plate", "name": "plate_i", "args": {}},
-            {"call": "deck_ridge", "name": "deck_i", "args": {}},
             {"call": "center_ridge", "name": "ridge_i", "args": {}},
+            {"call": "rail_hump", "name": "rail_right", "args": {}},
+            {"transform": {"mirror": [1, 0, 0]}, "name": "rail_left",
+             "child": {"call": "rail_hump", "name": "rail_left_i", "args": {}}},
             {"call": "knuckle_mount", "name": "mount_left",
              "args": {"cx": "mountL_x"}},
             {"call": "knuckle_mount", "name": "mount_right",

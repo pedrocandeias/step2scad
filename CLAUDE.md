@@ -98,7 +98,13 @@ edge/height LAWS (`sweep`, `offset_sweep` — linear or circular), fitted to
 measurements with residuals cited. The hand-tuned templates
 `~/dev/openscad-parametric-reconstructor/templates/arm-guard-v12/v13.scad`
 DEMONSTRATE this principle — they are not a literal style guide to copy;
-apply the idea wherever the measurements support it. Concretely:
+apply the idea wherever the measurements support it. **Decision policy
+(author's): when a boundary is "organic" (no clean law), PREFER the
+parametric primitive-based, human-editable form over measured layers, as
+long as the part stays >=0.95 and the fidelity cost is QUANTIFIED and logged
+(measured on Arm_Guard: full parametrization cost 0.0019 IoU vs the
+semantic-with-layers form, 0.0092 vs the raw band stack — accepted).**
+Concretely:
 
 - **Semantic names only** — `mount_skirt_L_l01`, never `b8o2`. Classify leftover
   organic layers by position and name them.
