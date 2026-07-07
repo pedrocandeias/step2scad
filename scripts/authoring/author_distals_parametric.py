@@ -196,3 +196,8 @@ for entry in plan["bodies"]:
 validate_plan(plan)
 (OUT / "plan.json").write_text(json.dumps(plan, indent=1))
 print("wrote output/Distals/plan.json (semantic)")
+
+# ---- law-solid stage: shell -> control slices + fitted ceiling/scoop laws --
+import subprocess
+subprocess.run([sys.executable, "scripts/authoring/lawsolids_distals.py"],
+               check=True)

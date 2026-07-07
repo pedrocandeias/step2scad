@@ -7,6 +7,17 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Distals shell on law-solids — IoU GAIN**: 0.9714 → **0.9772** (+0.0058).
+  Each finger shell = pairwise control-slice hulls ∩ three WINDOWED roof
+  laws that tile without gaps (straight mid-roof + valley arc [box−cyl,
+  lower branch] + dorsal boss arc [cyl∪box, upper branch]) − a gentle
+  measured underside wrap (arc r≈75-100 — NOT the r13 scoop the hand
+  template assumed; law kind auto-selected line/arc by residual). Family
+  feature: the mid-roof slope is shared across all three unique fingers
+  (−0.057..−0.061). Architecture lessons measured: global hulls bridge
+  concavities (+943 mm³ FP — pairwise chains + law shaving is the safe
+  base); law windows must tile; tips/heels stay honestly on slices.
+  New stage `scripts/authoring/lawsolids_distals.py`; 160 prims / 45 params.
 - **Palm law-solid scan — auditable negative result**
   (`scripts/authoring/lawsolids_palm.py`, ~10 s, plan-neutral): four law
   families tested against the remaining 602+137 palm bands (arc offset laws
