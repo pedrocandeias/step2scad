@@ -90,7 +90,10 @@ the pipeline design is `ARCHITECTURE.md`.
    tessellation of the original solid (align first: centroid + principal axes, then
    ICP if needed).
 5. **Render** multi-angle + ghost overlay + a thin cross-section. **Look at them.**
-6. If IoU < 95%: **diagnose with measurement** (which region drives the error —
+6. **Coverage audit**: `report.unclaimed_faces` lists exact faces no plan
+   source cites — unexploited primitive potential (fin sockets, mating
+   channels). Claim top-area faces or document why not; cite faces as #N.
+7. If IoU < 95%: **diagnose with measurement** (which region drives the error —
    section-area diffs, occupancy maps), fix the responsible feature, repeat. Do not
    stop at "close enough".
 

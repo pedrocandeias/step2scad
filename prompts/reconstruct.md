@@ -65,6 +65,16 @@ from the B-rep; use mesh sampling only for genuinely free-form surfaces.
 _Tooling: B-rep via OpenCASCADE / pythonocc-core or FreeCAD headless (`freecadcmd`);
 render via the `openscad` skill / OpenSCAD MCP; IoU via trimesh boolean volumes._
 
+### Coverage audit (mandatory before declaring a body done)
+
+Run `report.unclaimed_faces(features_body, plan_entry)` — every analytic
+face with meaningful area that no plan `source` cites is unexploited
+primitive potential (fin sockets, mating channels, tilted clevis families
+were all found this way on Palm_left). Work the area-ranked list top-down:
+claim it with an exact primitive, or document in the plan notes why it
+stays approximated. Cite face ids as '#N' in sources — that is what the
+audit keys on.
+
 ### Round-region check (mandatory before any band/slab strategy)
 
 Read `round_regions_perp_z` in the report digest (report.py): families of

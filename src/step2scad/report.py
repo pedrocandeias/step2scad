@@ -219,6 +219,50 @@ def _round_regions(faces: list[dict], band_axis: str = "z") -> list[dict]:
                           "law-solid")
     return out
 
+
+def unclaimed_faces(features_body: dict, plan_entry: dict,
+                    min_area: float = 3.0) -> list[dict]:
+    """Coverage audit: exact analytic faces NOT cited by any plan provenance.
+
+    Plans cite the faces they exploit as '#N' in `source` strings; every
+    analytic face (plane/cylinder/cone/sphere/torus) with meaningful area
+    that no source cites is unexploited primitive potential — group and rank
+    them. (Lesson: the author kept spotting exact geometry — palm posts,
+    ears, fin sockets — that authoring left under band approximations.)
+    """
+    import re
+
+    cited: set[int] = set()
+
+    def walk(n):
+        if isinstance(n, dict):
+            for k, v in n.items():
+                if k in ("source", "doc", "notes") and isinstance(v, str):
+                    cited.update(int(m) for m in re.findall(r"#(\d+)", v))
+                else:
+                    walk(v)
+        elif isinstance(n, list):
+            for v in n:
+                walk(v)
+
+    walk(plan_entry)
+    out = []
+    for f in features_body["faces"]:
+        if f["type"] == "bspline" or f["index"] in cited:
+            continue
+        if float(f.get("area", 0.0)) < min_area:
+            continue
+        p = f.get("params", {})
+        out.append({"index": f["index"], "type": f["type"],
+                    "area": _r6(f.get("area", 0.0)),
+                    "radius": _r6(p["radius"]) if "radius" in p else None,
+                    "origin": _v6(p.get("axis_origin", p.get("origin",
+                                        [0, 0, 0]))),
+                    "axis": _v6(p.get("axis_dir", p.get("normal",
+                                      [0, 0, 0])))})
+    out.sort(key=lambda q: -q["area"])
+    return out
+
 def body_report(body: dict) -> dict:
     faces = body["faces"]
     total_area = sum(f["area"] for f in faces) or 1.0
