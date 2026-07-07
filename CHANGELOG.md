@@ -7,6 +7,15 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Thumb proximal on law-solids** (crownlaws generalized per-body, control
+  slices auto-selected via `decimate_stations`, 37→12): thumb crown = 12
+  slices ∩ arc roof (r=36.22) − scoops r=8.44/7.42. Thumb offline 0.9718
+  (−0.0028), whole part 0.9708 (−0.0008). Anatomy comparison: the thumb is
+  more curved (dome 36 vs 52) and the ~r7.5 front scoop is a FAMILY feature
+  (near-exact circle on fingers and thumb, res 0.009/0.017). Trap logged:
+  law-fit sampling windows must exclude out-of-feature points (rear scoop
+  res 0.378→0.011 after windowing) — windows are per-body config constants
+  with justification comments.
 - **Humanizer emission layer**: generated `.scad` files now read like the
   hand-written templates — narrative file header, per-body anatomy block
   (notes + module inventory with docs), parameters grouped by feature with

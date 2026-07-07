@@ -1,15 +1,25 @@
-// ---- body 2 (strategy: csg — semantic parametric plan) ----
-// plan: semantic laws: beam = exact wall window × envelope laws (top res 0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window × fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized
+// --------------------------------------------------------------------
+// BODY 2 — semantic parametric plan
+//   semantic laws: beam = exact wall window × envelope laws (top res
+//   0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with
+//   the exact pin bores); ridge stem/cap = window × fitted laws; crown
+//   kept as measured loft (no clean law); recess/web profiles
+//   vectorized
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- beam ---
 beam_wall_x0     = -30.00011;  // beam side-wall plane (median of 230 station footprints; end roundings in x are absorbed)
 beam_wall_x1     = -24.80011;  // beam side-wall plane (median of 230 station footprints)
+// --- knuckle ---
 knuckle_palm_y   = -11.42562;  // exact pin-bore axis y, face #61 (lobe arc fit agrees within 0.1)
 knuckle_palm_z   = 6.008731;  // exact pin-bore axis z, face #61
 knuckle_lobe_r   = 6;  // outer radius of both knuckle lobes (arc fits r=6.000 / r=5.997, res 0.002/0.003 -> nominal 6.0)
 knuckle_distal_y = 11.57438;  // exact pin-bore axis y, face #23
 knuckle_distal_z = 6.008731;  // exact pin-bore axis z, face #23
+// --- tendon ---
 tendon_tunnel_r  = 1.125;  // exact tendon-tunnel bore radius — tendon tunnel: exact full-circle cylinder face #26
+// --- pin ---
 pin_palm_r       = 2.3;  // exact palm pin-bore radius — knuckle pin bore: exact cylinder face #61
 pin_distal_r     = 2.375;  // exact distal pin-bore radius — knuckle pin bore: exact cylinder face #23
 fn               = 96;  // curve resolution

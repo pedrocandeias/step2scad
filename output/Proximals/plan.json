@@ -5,7 +5,7 @@
   {
    "body_id": 3,
    "strategy": "csg",
-   "notes": "semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized | crown REPLACED by law-solids (template-style): hull of 4 vectorized control slabs INTERSECT measured ceiling arc MINUS measured underside scoops PLUS sloped fin lip \u2014 every law fitted with residual cited",
+   "notes": "semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized | crown REPLACED by law-solids (template-style): hull of vectorized control slabs INTERSECT measured ceiling arc MINUS measured underside scoops PLUS sloped fin lip \u2014 every law fitted with residual cited",
    "params": [
     {
      "name": "beam_wall_x0",
@@ -59,23 +59,23 @@
     },
     {
      "name": "dome_r",
-     "value": 52.342152,
-     "source": "lengthwise ceiling arc radius (fit over 60 stations, res 0.243; the hand-tuned template guessed 60)"
+     "value": 54.112284,
+     "source": "lengthwise ceiling arc radius (fit over 60 stations, res 0.247)"
     },
     {
      "name": "dome_cy",
-     "value": 5.305281,
+     "value": 5.575018,
      "source": "ceiling arc center y (same fit)"
     },
     {
      "name": "dome_cz",
-     "value": 66.377488,
+     "value": 68.129323,
      "source": "ceiling arc center z \u2014 ABOVE the part: the ceiling is the circle's lower branch"
     },
     {
      "name": "scoop_rear_r",
      "value": 11.763629,
-     "source": "rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.263 (template: 13.7 hand-tuned)"
+     "source": "rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.263"
     },
     {
      "name": "scoop_rear_cy",
@@ -90,7 +90,7 @@
     {
      "name": "scoop_front_r",
      "value": 7.570562,
-     "source": "front underside scoop radius, res 0.009 \u2014 nearly exact circle; the real part is asymmetric (template reused 13.7 on both ends)"
+     "source": "front underside scoop radius, res 0.009 \u2014 nearly exact circle"
     },
     {
      "name": "scoop_front_cy",
@@ -105,7 +105,7 @@
     {
      "name": "fin_top_m",
      "value": -0.112916,
-     "source": "rear clip-lip top slope (linear fit res 0.104; -6.4 deg \u2014 the template hand-tuned -6.0)"
+     "source": "rear clip-lip top slope (linear fit res 0.104)"
     },
     {
      "name": "fin_top_b",
@@ -1138,7 +1138,7 @@
                 "prim": "extrude",
                 "axis": "y",
                 "name": "crown_ctrl_0",
-                "source": "parametric CONTROL section at y=-8.0 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)",
+                "source": "parametric CONTROL section at y=-8.0 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
                 "profile2d": {
                  "path": [
                   {
@@ -1210,7 +1210,7 @@
                 "prim": "extrude",
                 "axis": "y",
                 "name": "crown_ctrl_1",
-                "source": "parametric CONTROL section at y=-3.4 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)",
+                "source": "parametric CONTROL section at y=-3.4 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
                 "profile2d": {
                  "path": [
                   {
@@ -1360,7 +1360,7 @@
                 "prim": "extrude",
                 "axis": "y",
                 "name": "crown_ctrl_2",
-                "source": "parametric CONTROL section at y=3.4 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)",
+                "source": "parametric CONTROL section at y=3.4 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
                 "profile2d": {
                  "path": [
                   {
@@ -1504,7 +1504,7 @@
                 "prim": "extrude",
                 "axis": "y",
                 "name": "crown_ctrl_3",
-                "source": "parametric CONTROL section at y=6.82 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)",
+                "source": "parametric CONTROL section at y=6.82 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
                 "profile2d": {
                  "path": [
                   {
@@ -2064,7 +2064,7 @@
   {
    "body_id": 2,
    "strategy": "csg",
-   "notes": "semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized",
+   "notes": "semantic laws: beam = exact wall window \u00d7 envelope laws (top res 0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window \u00d7 fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized | crown REPLACED by law-solids (template-style): hull of vectorized control slabs INTERSECT measured ceiling arc MINUS measured underside scoops \u2014 every law fitted with residual cited",
    "params": [
     {
      "name": "beam_wall_x0",
@@ -2115,6 +2115,51 @@
      "name": "pin_distal_r",
      "value": 2.375,
      "source": "exact distal pin-bore radius \u2014 knuckle pin bore: exact cylinder face #23"
+    },
+    {
+     "name": "dome_r",
+     "value": 36.2208,
+     "source": "lengthwise ceiling arc radius (fit over 60 stations, res 0.267)"
+    },
+    {
+     "name": "dome_cy",
+     "value": 4.903342,
+     "source": "ceiling arc center y (same fit)"
+    },
+    {
+     "name": "dome_cz",
+     "value": 50.225417,
+     "source": "ceiling arc center z \u2014 ABOVE the part: the ceiling is the circle's lower branch"
+    },
+    {
+     "name": "scoop_rear_r",
+     "value": 8.43581,
+     "source": "rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.011"
+    },
+    {
+     "name": "scoop_rear_cy",
+     "value": -12.520848,
+     "source": "rear scoop center y (same fit)"
+    },
+    {
+     "name": "scoop_rear_cz",
+     "value": 5.819099,
+     "source": "rear scoop center z (same fit)"
+    },
+    {
+     "name": "scoop_front_r",
+     "value": 7.422916,
+     "source": "front underside scoop radius, res 0.017 \u2014 nearly exact circle"
+    },
+    {
+     "name": "scoop_front_cy",
+     "value": 11.778239,
+     "source": "front scoop center y (same fit)"
+    },
+    {
+     "name": "scoop_front_cz",
+     "value": 5.886084,
+     "source": "front scoop center z (same fit)"
     }
    ],
    "csg": {
@@ -2913,3129 +2958,1387 @@
         "op": "union",
         "children": [
          {
-          "op": "hull",
+          "op": "difference",
           "children": [
            {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr00a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-7.372351 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              12.5277,
-              -19.68475
-             ],
-             [
-              13.67096,
-              -20.3074
-             ],
-             [
-              14.44365,
-              -21.28328
-             ],
-             [
-              16.22675,
-              -26.07933
-             ],
-             [
-              16.23331,
-              -28.72132
-             ],
-             [
-              14.31903,
-              -33.56473
-             ],
-             [
-              13.26455,
-              -34.75388
-             ],
-             [
-              12.51068,
-              -35.14596
-             ]
-            ],
-            "z0": -7.372351,
-            "z1": -7.352351
+            "op": "intersection",
+            "children": [
+             {
+              "op": "hull",
+              "children": [
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_0",
+                "source": "parametric CONTROL section at y=-7.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    12.484854,
+                    -19.675002
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     11.531863,
+                     -22.837472
+                    ],
+                    "r": 3.304442,
+                    "a0": 73.230136,
+                    "a1": 18.636063,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "to": [
+                    16.193878,
+                    -26.079349
+                   ]
+                  },
+                  {
+                   "to": [
+                    16.195059,
+                    -26.555189
+                   ]
+                  },
+                  {
+                   "to": [
+                    16.200423,
+                    -28.717221
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.705251,
+                    -32.694211
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     11.138146,
+                     -31.742136
+                    ],
+                    "r": 3.674411,
+                    "a0": -14.944106,
+                    "a1": -68.450559,
+                    "n": 9
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  }
+                 ]
+                },
+                "z0": -7.342,
+                "z1": -7.322
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_1",
+                "source": "parametric CONTROL section at y=-6.542 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    11.774502,
+                    -19.561359
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     11.206703,
+                     -23.132722
+                    ],
+                    "r": 3.604558,
+                    "a0": 80.96635,
+                    "a1": 13.332834,
+                    "n": 12
+                   }
+                  },
+                  {
+                   "to": [
+                    15.902784,
+                    -26.079126
+                   ]
+                  },
+                  {
+                   "to": [
+                    15.906295,
+                    -27.494015
+                   ]
+                  },
+                  {
+                   "to": [
+                    15.90933,
+                    -28.717185
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.654956,
+                    -32.47854
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.907793,
+                     -31.544427
+                    ],
+                    "r": 3.847313,
+                    "a0": -13.997703,
+                    "a1": -76.988914,
+                    "n": 11
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  }
+                 ]
+                },
+                "z0": -6.542,
+                "z1": -6.522
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_2",
+                "source": "parametric CONTROL section at y=-5.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    10.255542,
+                    -19.404869
+                   ]
+                  },
+                  {
+                   "to": [
+                    10.310864,
+                    -19.410407
+                   ]
+                  },
+                  {
+                   "to": [
+                    11.458337,
+                    -19.594475
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.918066,
+                     -23.344075
+                    ],
+                    "r": 3.768969,
+                    "a0": 81.800817,
+                    "a1": 9.735263,
+                    "n": 13
+                   }
+                  },
+                  {
+                   "to": [
+                    14.843613,
+                    -23.4623
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.847116,
+                    -23.476724
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     3.939716,
+                     -27.427532
+                    ],
+                    "r": 11.600873,
+                    "a0": 19.911076,
+                    "a1": -6.235221,
+                    "n": 5
+                   }
+                  },
+                  {
+                   "to": [
+                    14.595231,
+                    -32.079622
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.424482,
+                     -31.169373
+                    ],
+                    "r": 4.256861,
+                    "a0": -12.311525,
+                    "a1": -92.360771,
+                    "n": 14
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  }
+                 ]
+                },
+                "z0": -5.342,
+                "z1": -5.322
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_3",
+                "source": "parametric CONTROL section at y=-4.542 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    8.563751,
+                    -19.284379
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.325009,
+                     -31.457903
+                    ],
+                    "r": 12.171059,
+                    "a0": 88.876485,
+                    "a1": 71.29637,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.823982,
+                     -23.418935
+                    ],
+                    "r": 3.769931,
+                    "a0": 68.078606,
+                    "a1": 7.6967,
+                    "n": 11
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     -3.594839,
+                     -27.308487
+                    ],
+                    "r": 18.720212,
+                    "a0": 13.596167,
+                    "a1": 0.559471,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "to": [
+                    15.134073,
+                    -27.536711
+                   ]
+                  },
+                  {
+                   "to": [
+                    15.134073,
+                    -27.625199
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.882213,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.879679,
+                    -30.019105
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.433055,
+                     -30.001863
+                    ],
+                    "r": 6.400777,
+                    "a0": -0.153239,
+                    "a1": -44.394742,
+                    "n": 8
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.601353,
+                     -29.229184
+                    ],
+                    "r": 6.230176,
+                    "a0": -57.120656,
+                    "a1": -91.400404,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "to": [
+                    8.780253,
+                    -35.526663
+                   ]
+                  },
+                  {
+                   "to": [
+                    8.562229,
+                    -35.526177
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  }
+                 ]
+                },
+                "z0": -4.542,
+                "z1": -4.522
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_4",
+                "source": "parametric CONTROL section at y=-4.142 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  },
+                  {
+                   "to": [
+                    6.743132,
+                    -19.296661
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.974732,
+                     -31.800113
+                    ],
+                    "r": 12.538046,
+                    "a0": 95.625535,
+                    "a1": 67.834223,
+                    "n": 5
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.72974,
+                     -24.218792
+                    ],
+                    "r": 5.035127,
+                    "a0": 53.508023,
+                    "a1": 1.541029,
+                    "n": 9
+                   }
+                  },
+                  {
+                   "to": [
+                    14.870431,
+                    -24.652056
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.895007,
+                    -24.847565
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.834205,
+                    -29.952688
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.51349,
+                     -29.984968
+                    ],
+                    "r": 6.275819,
+                    "a0": 0.292613,
+                    "a1": -46.501948,
+                    "n": 8
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.351625,
+                     -28.633851
+                    ],
+                    "r": 6.821419,
+                    "a0": -59.54928,
+                    "a1": -89.111187,
+                    "n": 5
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.376286,
+                     -22.214725
+                    ],
+                    "r": 13.30187,
+                    "a0": -85.336207,
+                    "a1": -96.740711,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  }
+                 ]
+                },
+                "z0": -4.142,
+                "z1": -4.122
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_5",
+                "source": "parametric CONTROL section at y=-3.742 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "arc": {
+                    "c": [
+                     5.969654,
+                     -29.705685
+                    ],
+                    "r": 10.315122,
+                    "a0": 108.352478,
+                    "a1": 95.428662,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.493853,
+                     -36.611335
+                    ],
+                    "r": 17.332928,
+                    "a0": 98.282071,
+                    "a1": 79.79887,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.453334,
+                     -23.767629
+                    ],
+                    "r": 4.150835,
+                    "a0": 88.553921,
+                    "a1": 32.176466,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.495557,
+                     -24.91402
+                    ],
+                    "r": 7.271864,
+                    "a0": 27.405487,
+                    "a1": 9.60775,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     2.613651,
+                     -26.045641
+                    ],
+                    "r": 12.281687,
+                    "a0": 11.011858,
+                    "a1": 4.854995,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "to": [
+                    14.794323,
+                    -29.794239
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.788242,
+                    -29.843619
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     6.779436,
+                     -29.459451
+                    ],
+                    "r": 8.008519,
+                    "a0": -2.746276,
+                    "a1": -26.650798,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     10.192262,
+                     -31.01932
+                    ],
+                    "r": 4.276039,
+                    "a0": -28.491363,
+                    "a1": -90.075206,
+                    "n": 11
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.188477,
+                     -21.261083
+                    ],
+                    "r": 14.238785,
+                    "a0": -81.924572,
+                    "a1": -100.892414,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.354121,
+                     -21.728799
+                    ],
+                    "r": 13.65748,
+                    "a0": -97.824538,
+                    "a1": -108.115647,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "to": [
+                    2.732038,
+                    -34.560102
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  },
+                  {
+                   "to": [
+                    2.722458,
+                    -19.917154
+                   ]
+                  }
+                 ]
+                },
+                "z0": -3.742,
+                "z1": -3.722
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_6",
+                "source": "parametric CONTROL section at y=-3.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    0.008731,
+                    -29.979177
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -21.995393
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     4.520437,
+                     -25.131314
+                    ],
+                    "r": 5.529717,
+                    "a0": 145.198262,
+                    "a1": 94.613381,
+                    "n": 9
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.112903,
+                     -37.484198
+                    ],
+                    "r": 18.154395,
+                    "a0": 99.639586,
+                    "a1": 91.90249,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.893142,
+                     -30.917119
+                    ],
+                    "r": 11.626298,
+                    "a0": 96.811281,
+                    "a1": 64.353812,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.92326,
+                     -24.622592
+                    ],
+                    "r": 5.793895,
+                    "a0": 46.172833,
+                    "a1": -1.649168,
+                    "n": 8
+                   }
+                  },
+                  {
+                   "to": [
+                    14.791873,
+                    -25.073562
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.820724,
+                    -25.32487
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.763027,
+                    -29.474347
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.73059,
+                    -29.743461
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.682674,
+                    -30.131842
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.225778,
+                     -30.270142
+                    ],
+                    "r": 5.411365,
+                    "a0": 1.451799,
+                    "a1": -55.214469,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.077262,
+                     -23.897009
+                    ],
+                    "r": 11.603041,
+                    "a0": -68.672378,
+                    "a1": -103.22059,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.480083,
+                     -20.988339
+                    ],
+                    "r": 14.38764,
+                    "a0": -98.250149,
+                    "a1": -107.828123,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     5.046679,
+                     -28.434396
+                    ],
+                    "r": 6.552619,
+                    "a0": -107.506028,
+                    "a1": -127.210823,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     3.779471,
+                     -30.197064
+                    ],
+                    "r": 4.380864,
+                    "a0": -127.952854,
+                    "a1": -149.374112,
+                    "n": 4
+                   }
+                  }
+                 ]
+                },
+                "z0": -3.342,
+                "z1": -3.322
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_7",
+                "source": "parametric CONTROL section at y=4.258 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "arc": {
+                    "c": [
+                     5.067908,
+                     -26.483831
+                    ],
+                    "r": 6.451406,
+                    "a0": 142.10104,
+                    "a1": 84.782499,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     6.881472,
+                     -34.693833
+                    ],
+                    "r": 14.681453,
+                    "a0": 94.783525,
+                    "a1": 71.4408,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.324017,
+                     -24.709697
+                    ],
+                    "r": 4.516082,
+                    "a0": 60.360672,
+                    "a1": 1.034195,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "to": [
+                    14.07226,
+                    -27.342516
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     13.679649,
+                     -27.392265
+                    ],
+                    "r": 0.395751,
+                    "a0": 7.221585,
+                    "a1": -2.118003,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     0.286647,
+                     -27.51753
+                    ],
+                    "r": 13.788927,
+                    "a0": 0.459731,
+                    "a1": -9.891851,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.094322,
+                     -29.499435
+                    ],
+                    "r": 5.758195,
+                    "a0": -3.831815,
+                    "a1": -47.213803,
+                    "n": 8
+                   }
+                  },
+                  {
+                   "to": [
+                    10.966709,
+                    -34.199063
+                   ]
+                  },
+                  {
+                   "to": [
+                    10.933646,
+                    -34.214489
+                   ]
+                  },
+                  {
+                   "to": [
+                    10.869585,
+                    -34.238753
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.881446,
+                     -24.895549
+                    ],
+                    "r": 9.809367,
+                    "a0": -72.26471,
+                    "a1": -86.701026,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.357684,
+                     -20.685186
+                    ],
+                    "r": 14.043124,
+                    "a0": -85.556292,
+                    "a1": -111.241685,
+                    "n": 5
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     4.243328,
+                     -29.08948
+                    ],
+                    "r": 5.081119,
+                    "a0": -112.843934,
+                    "a1": -146.504693,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.731938
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -22.545517
+                   ]
+                  }
+                 ]
+                },
+                "z0": 4.258,
+                "z1": 4.278
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_8",
+                "source": "parametric CONTROL section at y=4.658 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  },
+                  {
+                   "to": [
+                    7.95858,
+                    -20.118689
+                   ]
+                  },
+                  {
+                   "to": [
+                    8.240675,
+                    -20.135131
+                   ]
+                  },
+                  {
+                   "to": [
+                    8.276518,
+                    -20.139388
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.532585,
+                     -26.78153
+                    ],
+                    "r": 6.608175,
+                    "a0": 92.207764,
+                    "a1": 52.44962,
+                    "n": 7
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     8.758475,
+                     -24.925384
+                    ],
+                    "r": 5.069915,
+                    "a0": 41.606405,
+                    "a1": 3.442522,
+                    "n": 7
+                   }
+                  },
+                  {
+                   "to": [
+                    14.039144,
+                    -27.212274
+                   ]
+                  },
+                  {
+                   "to": [
+                    14.046587,
+                    -27.381377
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     3.188736,
+                     -27.845163
+                    ],
+                    "r": 10.85012,
+                    "a0": 2.445869,
+                    "a1": -26.347998,
+                    "n": 5
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.435689,
+                     -30.262557
+                    ],
+                    "r": 4.223828,
+                    "a0": -34.639963,
+                    "a1": -86.558313,
+                    "n": 9
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     7.516338,
+                     -21.740034
+                    ],
+                    "r": 12.950434,
+                    "a0": -80.334027,
+                    "a1": -87.995149,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  }
+                 ]
+                },
+                "z0": 4.658,
+                "z1": 4.678
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_9",
+                "source": "parametric CONTROL section at y=5.458 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    9.792414,
+                    -20.382327
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.025086,
+                     -25.830924
+                    ],
+                    "r": 5.500389,
+                    "a0": 81.983736,
+                    "a1": 59.849306,
+                    "n": 4
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.251307,
+                     -24.782832
+                    ],
+                    "r": 4.510298,
+                    "a0": 55.625579,
+                    "a1": 1.574875,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     0.751804,
+                     -27.309419
+                    ],
+                    "r": 13.257322,
+                    "a0": 11.50761,
+                    "a1": -22.396897,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.444055,
+                     -30.347683
+                    ],
+                    "r": 4.075945,
+                    "a0": -29.489882,
+                    "a1": -85.110173,
+                    "n": 10
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  }
+                 ]
+                },
+                "z0": 5.458,
+                "z1": 5.478
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_10",
+                "source": "parametric CONTROL section at y=6.258 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  },
+                  {
+                   "to": [
+                    10.86967,
+                    -20.708384
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.425525,
+                     -24.693542
+                    ],
+                    "r": 4.249047,
+                    "a0": 70.08045,
+                    "a1": 1.012767,
+                    "n": 12
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     0.655006,
+                     -27.284182
+                    ],
+                    "r": 13.300615,
+                    "a0": 11.535801,
+                    "a1": -22.171824,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "to": [
+                    12.946267,
+                    -32.303781
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.634842,
+                     -30.523356
+                    ],
+                    "r": 3.760514,
+                    "a0": -28.265209,
+                    "a1": -70.804786,
+                    "n": 8
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  }
+                 ]
+                },
+                "z0": 6.258,
+                "z1": 6.278
+               },
+               {
+                "prim": "extrude",
+                "axis": "y",
+                "name": "crown_ctrl_11",
+                "source": "parametric CONTROL section at y=7.458 (convex hull of the measured section, vectorized lines+arcs tol 0.05)",
+                "profile2d": {
+                 "path": [
+                  {
+                   "to": [
+                    0.008731,
+                    -24.800108
+                   ]
+                  },
+                  {
+                   "to": [
+                    11.953159,
+                    -21.382498
+                   ]
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.210688,
+                     -24.814691
+                    ],
+                    "r": 4.40937,
+                    "a0": 51.373637,
+                    "a1": 2.646286,
+                    "n": 9
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     -3.336653,
+                     -27.219221
+                    ],
+                    "r": 17.183143,
+                    "a0": 8.735231,
+                    "a1": -0.173591,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     -0.097048,
+                     -27.49972
+                    ],
+                    "r": 13.942287,
+                    "a0": 0.938641,
+                    "a1": -15.50481,
+                    "n": 3
+                   }
+                  },
+                  {
+                   "arc": {
+                    "c": [
+                     9.215132,
+                     -30.044971
+                    ],
+                    "r": 4.283027,
+                    "a0": -15.995607,
+                    "a1": -50.186436,
+                    "n": 6
+                   }
+                  },
+                  {
+                   "to": [
+                    0.008731,
+                    -30.000107
+                   ]
+                  }
+                 ]
+                },
+                "z0": 7.458,
+                "z1": 7.478
+               }
+              ]
+             },
+             {
+              "op": "difference",
+              "children": [
+               {
+                "prim": "box",
+                "name": "dome_below",
+                "source": "everything below the ceiling-arc center plane",
+                "min": [
+                 -36,
+                 -12,
+                 -1
+                ],
+                "size": [
+                 18,
+                 24,
+                 "dome_cz + 1"
+                ]
+               },
+               {
+                "prim": "cylinder",
+                "name": "dome_arc",
+                "source": "lengthwise ceiling: x-axis cylinder, LOWER branch (center above the part) \u2014 residual in dome_r param",
+                "p0": [
+                 -36,
+                 "dome_cy",
+                 "dome_cz"
+                ],
+                "p1": [
+                 -19,
+                 "dome_cy",
+                 "dome_cz"
+                ],
+                "r": "dome_r"
+               }
+              ]
+             }
+            ]
            },
            {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr00b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-7.072351 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              12.22,
-              -19.6318
-             ],
-             [
-              14.00921,
-              -20.70515
-             ],
-             [
-              14.69314,
-              -21.93249
-             ],
-             [
-              16.11759,
-              -26.07924
-             ],
-             [
-              16.12415,
-              -28.72177
-             ],
-             [
-              14.13005,
-              -33.79898
-             ],
-             [
-              12.49329,
-              -35.12644
-             ],
-             [
-              12.26927,
-              -35.1974
-             ]
+            "prim": "cylinder",
+            "name": "scoop_rear",
+            "source": "rear underside scoop: measured x-axis cylinder (see scoop_rear_* params)",
+            "p0": [
+             -36,
+             "scoop_rear_cy",
+             "scoop_rear_cz"
             ],
-            "z0": -7.072351,
-            "z1": -7.052351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr01a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-7.072351 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              12.22,
-              -19.6318
-             ],
-             [
-              14.00921,
-              -20.70515
-             ],
-             [
-              14.69314,
-              -21.93249
-             ],
-             [
-              16.11759,
-              -26.07924
-             ],
-             [
-              16.12415,
-              -28.72177
-             ],
-             [
-              14.13005,
-              -33.79898
-             ],
-             [
-              12.49329,
-              -35.12644
-             ],
-             [
-              12.26927,
-              -35.1974
-             ]
+            "p1": [
+             -19,
+             "scoop_rear_cy",
+             "scoop_rear_cz"
             ],
-            "z0": -7.072351,
-            "z1": -7.052351
+            "r": "scoop_rear_r"
            },
            {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr01b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.772351 (full-width crown)",
-            "profile": [
-             [
-              11.94803,
-              -35.25842
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.94712,
-              -19.58774
-             ],
-             [
-              13.20581,
-              -20.06869
-             ],
-             [
-              13.98036,
-              -20.74678
-             ],
-             [
-              14.66284,
-              -21.98386
-             ],
-             [
-              16.00843,
-              -26.07914
-             ],
-             [
-              16.01499,
-              -28.72222
-             ],
-             [
-              13.9347,
-              -33.99136
-             ],
-             [
-              12.71251,
-              -34.99388
-             ]
+            "prim": "cylinder",
+            "name": "scoop_front",
+            "source": "front underside scoop: measured x-axis cylinder (see scoop_front_* params)",
+            "p0": [
+             -36,
+             "scoop_front_cy",
+             "scoop_front_cz"
             ],
-            "z0": -6.772351,
-            "z1": -6.752351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr02a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.772351 (full-width crown)",
-            "profile": [
-             [
-              11.94803,
-              -35.25842
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.94712,
-              -19.58774
-             ],
-             [
-              13.20581,
-              -20.06869
-             ],
-             [
-              13.98036,
-              -20.74678
-             ],
-             [
-              14.66284,
-              -21.98386
-             ],
-             [
-              16.00843,
-              -26.07914
-             ],
-             [
-              16.01499,
-              -28.72222
-             ],
-             [
-              13.9347,
-              -33.99136
-             ],
-             [
-              12.71251,
-              -34.99388
-             ]
+            "p1": [
+             -19,
+             "scoop_front_cy",
+             "scoop_front_cz"
             ],
-            "z0": -6.772351,
-            "z1": -6.752351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr02b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.472351 (full-width crown)",
-            "profile": [
-             [
-              11.64649,
-              -35.30793
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.64666,
-              -19.54136
-             ],
-             [
-              12.74241,
-              -19.87632
-             ],
-             [
-              14.08334,
-              -20.9534
-             ],
-             [
-              14.69049,
-              -22.20697
-             ],
-             [
-              15.89927,
-              -26.07905
-             ],
-             [
-              15.90583,
-              -28.72267
-             ],
-             [
-              14.10175,
-              -33.66765
-             ],
-             [
-              13.15428,
-              -34.68543
-             ]
-            ],
-            "z0": -6.472351,
-            "z1": -6.452351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr03a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.472351 (full-width crown)",
-            "profile": [
-             [
-              11.64649,
-              -35.30793
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.64666,
-              -19.54136
-             ],
-             [
-              12.74241,
-              -19.87632
-             ],
-             [
-              14.08334,
-              -20.9534
-             ],
-             [
-              14.69049,
-              -22.20697
-             ],
-             [
-              15.89927,
-              -26.07905
-             ],
-             [
-              15.90583,
-              -28.72267
-             ],
-             [
-              14.10175,
-              -33.66765
-             ],
-             [
-              13.15428,
-              -34.68543
-             ]
-            ],
-            "z0": -6.472351,
-            "z1": -6.452351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr03b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.172351 (full-width crown)",
-            "profile": [
-             [
-              11.31223,
-              -35.35539
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.45461,
-              -19.51286
-             ],
-             [
-              13.12445,
-              -20.11904
-             ],
-             [
-              13.77899,
-              -20.65294
-             ],
-             [
-              14.68322,
-              -22.32441
-             ],
-             [
-              15.79011,
-              -26.07895
-             ],
-             [
-              15.79667,
-              -28.72311
-             ],
-             [
-              14.26096,
-              -33.2955
-             ],
-             [
-              12.67895,
-              -34.92384
-             ]
-            ],
-            "z0": -6.172351,
-            "z1": -6.152351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr04a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-6.172351 (full-width crown)",
-            "profile": [
-             [
-              11.31223,
-              -35.35539
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.45461,
-              -19.51286
-             ],
-             [
-              13.12445,
-              -20.11904
-             ],
-             [
-              13.77899,
-              -20.65294
-             ],
-             [
-              14.68322,
-              -22.32441
-             ],
-             [
-              15.79011,
-              -26.07895
-             ],
-             [
-              15.79667,
-              -28.72311
-             ],
-             [
-              14.26096,
-              -33.2955
-             ],
-             [
-              12.67895,
-              -34.92384
-             ]
-            ],
-            "z0": -6.172351,
-            "z1": -6.152351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr04b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-5.872351 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.09849,
-              -19.47026
-             ],
-             [
-              13.54146,
-              -20.48231
-             ],
-             [
-              14.4232,
-              -21.7501
-             ],
-             [
-              15.68095,
-              -26.07885
-             ],
-             [
-              15.68752,
-              -28.72356
-             ],
-             [
-              14.20493,
-              -33.30039
-             ],
-             [
-              13.22483,
-              -34.52277
-             ],
-             [
-              11.85879,
-              -35.21457
-             ],
-             [
-              11.01788,
-              -35.3907
-             ]
-            ],
-            "z0": -5.872351,
-            "z1": -5.852351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr05a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-5.872351 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.09849,
-              -19.47026
-             ],
-             [
-              13.54146,
-              -20.48231
-             ],
-             [
-              14.4232,
-              -21.7501
-             ],
-             [
-              15.68095,
-              -26.07885
-             ],
-             [
-              15.68752,
-              -28.72356
-             ],
-             [
-              14.20493,
-              -33.30039
-             ],
-             [
-              13.22483,
-              -34.52277
-             ],
-             [
-              11.85879,
-              -35.21457
-             ],
-             [
-              11.01788,
-              -35.3907
-             ]
-            ],
-            "z0": -5.872351,
-            "z1": -5.852351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr05b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-5.072351 (full-width crown)",
-            "profile": [
-             [
-              9.67279,
-              -35.49245
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              9.67407,
-              -19.35821
-             ],
-             [
-              12.17218,
-              -19.83521
-             ],
-             [
-              13.24854,
-              -20.3947
-             ],
-             [
-              14.41626,
-              -22.05227
-             ],
-             [
-              14.82946,
-              -23.53047
-             ],
-             [
-              15.39015,
-              -26.19658
-             ],
-             [
-              15.39613,
-              -28.6065
-             ],
-             [
-              14.35,
-              -32.70036
-             ],
-             [
-              13.50933,
-              -34.08732
-             ],
-             [
-              12.54041,
-              -34.8274
-             ],
-             [
-              10.93427,
-              -35.34594
-             ]
-            ],
-            "z0": -5.072351,
-            "z1": -5.052351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr06a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-5.072351 (full-width crown)",
-            "profile": [
-             [
-              9.67279,
-              -35.49245
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              9.67407,
-              -19.35821
-             ],
-             [
-              12.17218,
-              -19.83521
-             ],
-             [
-              13.24854,
-              -20.3947
-             ],
-             [
-              14.41626,
-              -22.05227
-             ],
-             [
-              14.82946,
-              -23.53047
-             ],
-             [
-              15.39015,
-              -26.19658
-             ],
-             [
-              15.39613,
-              -28.6065
-             ],
-             [
-              14.35,
-              -32.70036
-             ],
-             [
-              13.50933,
-              -34.08732
-             ],
-             [
-              12.54041,
-              -34.8274
-             ],
-             [
-              10.93427,
-              -35.34594
-             ]
-            ],
-            "z0": -5.072351,
-            "z1": -5.052351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr06b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-4.272351 (full-width crown)",
-            "profile": [
-             [
-              7.29083,
-              -35.47194
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              7.2772,
-              -19.27689
-             ],
-             [
-              11.32771,
-              -19.68517
-             ],
-             [
-              13.19229,
-              -20.50168
-             ],
-             [
-              14.10082,
-              -21.64399
-             ],
-             [
-              14.57647,
-              -22.94281
-             ],
-             [
-              14.91713,
-              -24.81217
-             ],
-             [
-              14.66724,
-              -31.25061
-             ],
-             [
-              13.97022,
-              -33.20296
-             ],
-             [
-              13.15326,
-              -34.26706
-             ],
-             [
-              11.44795,
-              -35.14452
-             ],
-             [
-              8.83775,
-              -35.52001
-             ]
-            ],
-            "z0": -4.272351,
-            "z1": -4.252351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr07a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-4.272351 (full-width crown)",
-            "profile": [
-             [
-              7.29083,
-              -35.47194
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              7.2772,
-              -19.27689
-             ],
-             [
-              11.32771,
-              -19.68517
-             ],
-             [
-              13.19229,
-              -20.50168
-             ],
-             [
-              14.10082,
-              -21.64399
-             ],
-             [
-              14.57647,
-              -22.94281
-             ],
-             [
-              14.91713,
-              -24.81217
-             ],
-             [
-              14.66724,
-              -31.25061
-             ],
-             [
-              13.97022,
-              -33.20296
-             ],
-             [
-              13.15326,
-              -34.26706
-             ],
-             [
-              11.44795,
-              -35.14452
-             ],
-             [
-              8.83775,
-              -35.52001
-             ]
-            ],
-            "z0": -4.272351,
-            "z1": -4.252351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr07b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-3.472351 (full-width crown)",
-            "profile": [
-             [
-              4.25031,
-              -35.02463
-             ],
-             [
-              1.84106,
-              -34.15967
-             ],
-             [
-              0.41805,
-              -33.01604
-             ],
-             [
-              0.00873,
-              -32.43328
-             ],
-             [
-              0.01407,
-              -21.98261
-             ],
-             [
-              1.16054,
-              -20.71733
-             ],
-             [
-              3.37336,
-              -19.72659
-             ],
-             [
-              7.04155,
-              -19.30378
-             ],
-             [
-              9.91603,
-              -19.45807
-             ],
-             [
-              12.79438,
-              -20.36272
-             ],
-             [
-              13.45974,
-              -20.92717
-             ],
-             [
-              14.30864,
-              -22.46375
-             ],
-             [
-              14.83617,
-              -25.14709
-             ],
-             [
-              14.67385,
-              -30.58392
-             ],
-             [
-              14.08114,
-              -32.70342
-             ],
-             [
-              12.66099,
-              -34.49399
-             ],
-             [
-              11.40831,
-              -35.0602
-             ],
-             [
-              8.78763,
-              -35.49692
-             ]
-            ],
-            "z0": -3.472351,
-            "z1": -3.452351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr08a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-3.472351 (full-width crown)",
-            "profile": [
-             [
-              4.25031,
-              -35.02463
-             ],
-             [
-              1.84106,
-              -34.15967
-             ],
-             [
-              0.41805,
-              -33.01604
-             ],
-             [
-              0.00873,
-              -32.43328
-             ],
-             [
-              0.01407,
-              -21.98261
-             ],
-             [
-              1.16054,
-              -20.71733
-             ],
-             [
-              3.37336,
-              -19.72659
-             ],
-             [
-              7.04155,
-              -19.30378
-             ],
-             [
-              9.91603,
-              -19.45807
-             ],
-             [
-              12.79438,
-              -20.36272
-             ],
-             [
-              13.45974,
-              -20.92717
-             ],
-             [
-              14.30864,
-              -22.46375
-             ],
-             [
-              14.83617,
-              -25.14709
-             ],
-             [
-              14.67385,
-              -30.58392
-             ],
-             [
-              14.08114,
-              -32.70342
-             ],
-             [
-              12.66099,
-              -34.49399
-             ],
-             [
-              11.40831,
-              -35.0602
-             ],
-             [
-              8.78763,
-              -35.49692
-             ]
-            ],
-            "z0": -3.472351,
-            "z1": -3.452351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr08b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-2.672351 (full-width crown)",
-            "profile": [
-             [
-              4.05383,
-              -34.94786
-             ],
-             [
-              1.70744,
-              -34.05343
-             ],
-             [
-              0.12579,
-              -32.59347
-             ],
-             [
-              0.00873,
-              -32.40623
-             ],
-             [
-              0.00873,
-              -22.02328
-             ],
-             [
-              0.95614,
-              -20.90574
-             ],
-             [
-              2.09031,
-              -20.20053
-             ],
-             [
-              4.97573,
-              -19.46587
-             ],
-             [
-              9.55563,
-              -19.45671
-             ],
-             [
-              12.61273,
-              -20.38075
-             ],
-             [
-              13.72739,
-              -21.49364
-             ],
-             [
-              14.36121,
-              -23.03587
-             ],
-             [
-              14.73128,
-              -25.22409
-             ],
-             [
-              14.4758,
-              -31.05278
-             ],
-             [
-              13.733,
-              -33.10512
-             ],
-             [
-              12.29292,
-              -34.5848
-             ],
-             [
-              8.95858,
-              -35.43443
-             ],
-             [
-              8.49704,
-              -35.46278
-             ]
-            ],
-            "z0": -2.672351,
-            "z1": -2.652351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr09a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-2.672351 (full-width crown)",
-            "profile": [
-             [
-              4.05383,
-              -34.94786
-             ],
-             [
-              1.70744,
-              -34.05343
-             ],
-             [
-              0.12579,
-              -32.59347
-             ],
-             [
-              0.00873,
-              -32.40623
-             ],
-             [
-              0.00873,
-              -22.02328
-             ],
-             [
-              0.95614,
-              -20.90574
-             ],
-             [
-              2.09031,
-              -20.20053
-             ],
-             [
-              4.97573,
-              -19.46587
-             ],
-             [
-              9.55563,
-              -19.45671
-             ],
-             [
-              12.61273,
-              -20.38075
-             ],
-             [
-              13.72739,
-              -21.49364
-             ],
-             [
-              14.36121,
-              -23.03587
-             ],
-             [
-              14.73128,
-              -25.22409
-             ],
-             [
-              14.4758,
-              -31.05278
-             ],
-             [
-              13.733,
-              -33.10512
-             ],
-             [
-              12.29292,
-              -34.5848
-             ],
-             [
-              8.95858,
-              -35.43443
-             ],
-             [
-              8.49704,
-              -35.46278
-             ]
-            ],
-            "z0": -2.672351,
-            "z1": -2.652351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr09b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-1.872351 (full-width crown)",
-            "profile": [
-             [
-              2.88846,
-              -34.56198
-             ],
-             [
-              1.03685,
-              -33.55013
-             ],
-             [
-              0.00873,
-              -32.36841
-             ],
-             [
-              0.03646,
-              -22.01826
-             ],
-             [
-              1.11181,
-              -20.82356
-             ],
-             [
-              3.88083,
-              -19.67186
-             ],
-             [
-              8.50053,
-              -19.41214
-             ],
-             [
-              9.96784,
-              -19.62444
-             ],
-             [
-              12.20713,
-              -20.2829
-             ],
-             [
-              13.19602,
-              -21.00474
-             ],
-             [
-              13.83131,
-              -21.9368
-             ],
-             [
-              14.61046,
-              -25.06647
-             ],
-             [
-              14.46113,
-              -30.46618
-             ],
-             [
-              13.35867,
-              -33.44725
-             ],
-             [
-              12.12599,
-              -34.54999
-             ],
-             [
-              8.26686,
-              -35.41166
-             ]
-            ],
-            "z0": -1.872351,
-            "z1": -1.852351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr10a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-1.872351 (full-width crown)",
-            "profile": [
-             [
-              2.88846,
-              -34.56198
-             ],
-             [
-              1.03685,
-              -33.55013
-             ],
-             [
-              0.00873,
-              -32.36841
-             ],
-             [
-              0.03646,
-              -22.01826
-             ],
-             [
-              1.11181,
-              -20.82356
-             ],
-             [
-              3.88083,
-              -19.67186
-             ],
-             [
-              8.50053,
-              -19.41214
-             ],
-             [
-              9.96784,
-              -19.62444
-             ],
-             [
-              12.20713,
-              -20.2829
-             ],
-             [
-              13.19602,
-              -21.00474
-             ],
-             [
-              13.83131,
-              -21.9368
-             ],
-             [
-              14.61046,
-              -25.06647
-             ],
-             [
-              14.46113,
-              -30.46618
-             ],
-             [
-              13.35867,
-              -33.44725
-             ],
-             [
-              12.12599,
-              -34.54999
-             ],
-             [
-              8.26686,
-              -35.41166
-             ]
-            ],
-            "z0": -1.872351,
-            "z1": -1.852351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr10b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-1.072351 (full-width crown)",
-            "profile": [
-             [
-              4.69443,
-              -34.99298
-             ],
-             [
-              2.28107,
-              -34.26592
-             ],
-             [
-              0.59971,
-              -33.09505
-             ],
-             [
-              0.00873,
-              -32.32257
-             ],
-             [
-              0.05776,
-              -22.03492
-             ],
-             [
-              1.08381,
-              -20.89527
-             ],
-             [
-              2.2933,
-              -20.19765
-             ],
-             [
-              4.05066,
-              -19.68664
-             ],
-             [
-              7.96741,
-              -19.45378
-             ],
-             [
-              9.87861,
-              -19.69431
-             ],
-             [
-              12.48993,
-              -20.56736
-             ],
-             [
-              13.36903,
-              -21.40224
-             ],
-             [
-              14.1177,
-              -23.01527
-             ],
-             [
-              14.55019,
-              -26.0826
-             ],
-             [
-              14.25917,
-              -30.94916
-             ],
-             [
-              13.49087,
-              -33.02742
-             ],
-             [
-              12.57969,
-              -34.08906
-             ],
-             [
-              11.42771,
-              -34.75838
-             ],
-             [
-              9.04081,
-              -35.28003
-             ],
-             [
-              8.28988,
-              -35.34096
-             ]
-            ],
-            "z0": -1.072351,
-            "z1": -1.052351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr11a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-1.072351 (full-width crown)",
-            "profile": [
-             [
-              4.69443,
-              -34.99298
-             ],
-             [
-              2.28107,
-              -34.26592
-             ],
-             [
-              0.59971,
-              -33.09505
-             ],
-             [
-              0.00873,
-              -32.32257
-             ],
-             [
-              0.05776,
-              -22.03492
-             ],
-             [
-              1.08381,
-              -20.89527
-             ],
-             [
-              2.2933,
-              -20.19765
-             ],
-             [
-              4.05066,
-              -19.68664
-             ],
-             [
-              7.96741,
-              -19.45378
-             ],
-             [
-              9.87861,
-              -19.69431
-             ],
-             [
-              12.48993,
-              -20.56736
-             ],
-             [
-              13.36903,
-              -21.40224
-             ],
-             [
-              14.1177,
-              -23.01527
-             ],
-             [
-              14.55019,
-              -26.0826
-             ],
-             [
-              14.25917,
-              -30.94916
-             ],
-             [
-              13.49087,
-              -33.02742
-             ],
-             [
-              12.57969,
-              -34.08906
-             ],
-             [
-              11.42771,
-              -34.75838
-             ],
-             [
-              9.04081,
-              -35.28003
-             ],
-             [
-              8.28988,
-              -35.34096
-             ]
-            ],
-            "z0": -1.072351,
-            "z1": -1.052351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr11b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-0.272351 (full-width crown)",
-            "profile": [
-             [
-              3.53388,
-              -34.65762
-             ],
-             [
-              1.4862,
-              -33.7692
-             ],
-             [
-              0.1645,
-              -32.50035
-             ],
-             [
-              0.00873,
-              -32.26402
-             ],
-             [
-              0.00873,
-              -22.17982
-             ],
-             [
-              1.64054,
-              -20.58662
-             ],
-             [
-              3.6352,
-              -19.82833
-             ],
-             [
-              8.05842,
-              -19.5386
-             ],
-             [
-              9.99452,
-              -19.81332
-             ],
-             [
-              11.78232,
-              -20.31324
-             ],
-             [
-              13.08213,
-              -21.23431
-             ],
-             [
-              13.89423,
-              -22.68103
-             ],
-             [
-              14.45303,
-              -26.09087
-             ],
-             [
-              14.18685,
-              -30.73746
-             ],
-             [
-              13.45303,
-              -32.86059
-             ],
-             [
-              12.20538,
-              -34.22596
-             ],
-             [
-              11.07284,
-              -34.77782
-             ],
-             [
-              8.035,
-              -35.2651
-             ]
-            ],
-            "z0": -0.272351,
-            "z1": -0.252351
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr12a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=-0.272351 (full-width crown)",
-            "profile": [
-             [
-              3.53388,
-              -34.65762
-             ],
-             [
-              1.4862,
-              -33.7692
-             ],
-             [
-              0.1645,
-              -32.50035
-             ],
-             [
-              0.00873,
-              -32.26402
-             ],
-             [
-              0.00873,
-              -22.17982
-             ],
-             [
-              1.64054,
-              -20.58662
-             ],
-             [
-              3.6352,
-              -19.82833
-             ],
-             [
-              8.05842,
-              -19.5386
-             ],
-             [
-              9.99452,
-              -19.81332
-             ],
-             [
-              11.78232,
-              -20.31324
-             ],
-             [
-              13.08213,
-              -21.23431
-             ],
-             [
-              13.89423,
-              -22.68103
-             ],
-             [
-              14.45303,
-              -26.09087
-             ],
-             [
-              14.18685,
-              -30.73746
-             ],
-             [
-              13.45303,
-              -32.86059
-             ],
-             [
-              12.20538,
-              -34.22596
-             ],
-             [
-              11.07284,
-              -34.77782
-             ],
-             [
-              8.035,
-              -35.2651
-             ]
-            ],
-            "z0": -0.272351,
-            "z1": -0.252351
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr12b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=0.527649 (full-width crown)",
-            "profile": [
-             [
-              3.5675,
-              -34.60282
-             ],
-             [
-              1.00002,
-              -33.34105
-             ],
-             [
-              0.00873,
-              -32.20488
-             ],
-             [
-              0.00873,
-              -22.24489
-             ],
-             [
-              1.27315,
-              -20.88797
-             ],
-             [
-              2.48104,
-              -20.24461
-             ],
-             [
-              4.38689,
-              -19.75929
-             ],
-             [
-              7.57174,
-              -19.60225
-             ],
-             [
-              11.29982,
-              -20.23485
-             ],
-             [
-              12.47869,
-              -20.82914
-             ],
-             [
-              13.62753,
-              -22.30263
-             ],
-             [
-              14.1884,
-              -24.26839
-             ],
-             [
-              14.36245,
-              -26.18587
-             ],
-             [
-              14.10022,
-              -30.62484
-             ],
-             [
-              13.23769,
-              -32.99263
-             ],
-             [
-              11.35827,
-              -34.56894
-             ],
-             [
-              7.99311,
-              -35.17387
-             ]
-            ],
-            "z0": 0.527649,
-            "z1": 0.547649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr13a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=0.527649 (full-width crown)",
-            "profile": [
-             [
-              3.5675,
-              -34.60282
-             ],
-             [
-              1.00002,
-              -33.34105
-             ],
-             [
-              0.00873,
-              -32.20488
-             ],
-             [
-              0.00873,
-              -22.24489
-             ],
-             [
-              1.27315,
-              -20.88797
-             ],
-             [
-              2.48104,
-              -20.24461
-             ],
-             [
-              4.38689,
-              -19.75929
-             ],
-             [
-              7.57174,
-              -19.60225
-             ],
-             [
-              11.29982,
-              -20.23485
-             ],
-             [
-              12.47869,
-              -20.82914
-             ],
-             [
-              13.62753,
-              -22.30263
-             ],
-             [
-              14.1884,
-              -24.26839
-             ],
-             [
-              14.36245,
-              -26.18587
-             ],
-             [
-              14.10022,
-              -30.62484
-             ],
-             [
-              13.23769,
-              -32.99263
-             ],
-             [
-              11.35827,
-              -34.56894
-             ],
-             [
-              7.99311,
-              -35.17387
-             ]
-            ],
-            "z0": 0.527649,
-            "z1": 0.547649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr13b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=1.327649 (full-width crown)",
-            "profile": [
-             [
-              3.96189,
-              -34.62848
-             ],
-             [
-              1.25317,
-              -33.46547
-             ],
-             [
-              0.00873,
-              -32.13433
-             ],
-             [
-              0.00873,
-              -22.31337
-             ],
-             [
-              0.59224,
-              -21.53725
-             ],
-             [
-              1.84953,
-              -20.61272
-             ],
-             [
-              3.3713,
-              -20.03519
-             ],
-             [
-              7.95184,
-              -19.72268
-             ],
-             [
-              11.45638,
-              -20.39209
-             ],
-             [
-              12.9342,
-              -21.4041
-             ],
-             [
-              13.45417,
-              -22.17768
-             ],
-             [
-              14.15258,
-              -24.67344
-             ],
-             [
-              14.25545,
-              -28.49125
-             ],
-             [
-              13.76924,
-              -31.56018
-             ],
-             [
-              12.919,
-              -33.24895
-             ],
-             [
-              12.17446,
-              -33.97312
-             ],
-             [
-              10.78852,
-              -34.6564
-             ],
-             [
-              7.73996,
-              -35.07894
-             ]
-            ],
-            "z0": 1.327649,
-            "z1": 1.347649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr14a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=1.327649 (full-width crown)",
-            "profile": [
-             [
-              3.96189,
-              -34.62848
-             ],
-             [
-              1.25317,
-              -33.46547
-             ],
-             [
-              0.00873,
-              -32.13433
-             ],
-             [
-              0.00873,
-              -22.31337
-             ],
-             [
-              0.59224,
-              -21.53725
-             ],
-             [
-              1.84953,
-              -20.61272
-             ],
-             [
-              3.3713,
-              -20.03519
-             ],
-             [
-              7.95184,
-              -19.72268
-             ],
-             [
-              11.45638,
-              -20.39209
-             ],
-             [
-              12.9342,
-              -21.4041
-             ],
-             [
-              13.45417,
-              -22.17768
-             ],
-             [
-              14.15258,
-              -24.67344
-             ],
-             [
-              14.25545,
-              -28.49125
-             ],
-             [
-              13.76924,
-              -31.56018
-             ],
-             [
-              12.919,
-              -33.24895
-             ],
-             [
-              12.17446,
-              -33.97312
-             ],
-             [
-              10.78852,
-              -34.6564
-             ],
-             [
-              7.73996,
-              -35.07894
-             ]
-            ],
-            "z0": 1.327649,
-            "z1": 1.347649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr14b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=2.127649 (full-width crown)",
-            "profile": [
-             [
-              3.41723,
-              -34.40378
-             ],
-             [
-              0.85937,
-              -33.06841
-             ],
-             [
-              0.00873,
-              -32.0637
-             ],
-             [
-              0.00873,
-              -22.38456
-             ],
-             [
-              2.08369,
-              -20.57808
-             ],
-             [
-              5.46316,
-              -19.81195
-             ],
-             [
-              10.83721,
-              -20.2875
-             ],
-             [
-              13.48904,
-              -22.46662
-             ],
-             [
-              14.0985,
-              -24.97294
-             ],
-             [
-              13.78869,
-              -31.14534
-             ],
-             [
-              12.57082,
-              -33.4983
-             ],
-             [
-              10.56548,
-              -34.61097
-             ],
-             [
-              7.67943,
-              -34.97497
-             ]
-            ],
-            "z0": 2.127649,
-            "z1": 2.147649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr15a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=2.127649 (full-width crown)",
-            "profile": [
-             [
-              3.41723,
-              -34.40378
-             ],
-             [
-              0.85937,
-              -33.06841
-             ],
-             [
-              0.00873,
-              -32.0637
-             ],
-             [
-              0.00873,
-              -22.38456
-             ],
-             [
-              2.08369,
-              -20.57808
-             ],
-             [
-              5.46316,
-              -19.81195
-             ],
-             [
-              10.83721,
-              -20.2875
-             ],
-             [
-              13.48904,
-              -22.46662
-             ],
-             [
-              14.0985,
-              -24.97294
-             ],
-             [
-              13.78869,
-              -31.14534
-             ],
-             [
-              12.57082,
-              -33.4983
-             ],
-             [
-              10.56548,
-              -34.61097
-             ],
-             [
-              7.67943,
-              -34.97497
-             ]
-            ],
-            "z0": 2.127649,
-            "z1": 2.147649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr15b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=2.927649 (full-width crown)",
-            "profile": [
-             [
-              4.75173,
-              -34.62518
-             ],
-             [
-              2.17564,
-              -33.85446
-             ],
-             [
-              0.95036,
-              -33.06834
-             ],
-             [
-              0.00873,
-              -31.99341
-             ],
-             [
-              0.00873,
-              -22.45222
-             ],
-             [
-              0.62371,
-              -21.66583
-             ],
-             [
-              1.94029,
-              -20.73332
-             ],
-             [
-              4.64205,
-              -19.98279
-             ],
-             [
-              6.94532,
-              -19.88403
-             ],
-             [
-              10.59954,
-              -20.31998
-             ],
-             [
-              11.77517,
-              -20.75422
-             ],
-             [
-              12.97,
-              -21.76146
-             ],
-             [
-              13.69423,
-              -23.25344
-             ],
-             [
-              14.16969,
-              -27.38937
-             ],
-             [
-              13.92958,
-              -30.13899
-             ],
-             [
-              13.36365,
-              -32.12873
-             ],
-             [
-              12.44256,
-              -33.50752
-             ],
-             [
-              11.48692,
-              -34.16425
-             ],
-             [
-              9.55832,
-              -34.71218
-             ],
-             [
-              7.52869,
-              -34.87117
-             ]
-            ],
-            "z0": 2.927649,
-            "z1": 2.947649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr16a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=2.927649 (full-width crown)",
-            "profile": [
-             [
-              4.75173,
-              -34.62518
-             ],
-             [
-              2.17564,
-              -33.85446
-             ],
-             [
-              0.95036,
-              -33.06834
-             ],
-             [
-              0.00873,
-              -31.99341
-             ],
-             [
-              0.00873,
-              -22.45222
-             ],
-             [
-              0.62371,
-              -21.66583
-             ],
-             [
-              1.94029,
-              -20.73332
-             ],
-             [
-              4.64205,
-              -19.98279
-             ],
-             [
-              6.94532,
-              -19.88403
-             ],
-             [
-              10.59954,
-              -20.31998
-             ],
-             [
-              11.77517,
-              -20.75422
-             ],
-             [
-              12.97,
-              -21.76146
-             ],
-             [
-              13.69423,
-              -23.25344
-             ],
-             [
-              14.16969,
-              -27.38937
-             ],
-             [
-              13.92958,
-              -30.13899
-             ],
-             [
-              13.36365,
-              -32.12873
-             ],
-             [
-              12.44256,
-              -33.50752
-             ],
-             [
-              11.48692,
-              -34.16425
-             ],
-             [
-              9.55832,
-              -34.71218
-             ],
-             [
-              7.52869,
-              -34.87117
-             ]
-            ],
-            "z0": 2.927649,
-            "z1": 2.947649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr16b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=3.727649 (full-width crown)",
-            "profile": [
-             [
-              3.19941,
-              -34.18655
-             ],
-             [
-              1.54575,
-              -33.43532
-             ],
-             [
-              0.00873,
-              -31.92822
-             ],
-             [
-              0.00873,
-              -22.51163
-             ],
-             [
-              1.84159,
-              -20.86112
-             ],
-             [
-              3.67595,
-              -20.2227
-             ],
-             [
-              5.54796,
-              -19.98626
-             ],
-             [
-              7.84538,
-              -20.02429
-             ],
-             [
-              11.78292,
-              -20.86249
-             ],
-             [
-              13.30684,
-              -22.45486
-             ],
-             [
-              13.95417,
-              -25.00618
-             ],
-             [
-              13.89866,
-              -29.97427
-             ],
-             [
-              12.78747,
-              -32.98858
-             ],
-             [
-              12.0256,
-              -33.75305
-             ],
-             [
-              9.64631,
-              -34.60964
-             ],
-             [
-              7.39328,
-              -34.77717
-             ]
-            ],
-            "z0": 3.727649,
-            "z1": 3.747649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr17a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=3.727649 (full-width crown)",
-            "profile": [
-             [
-              3.19941,
-              -34.18655
-             ],
-             [
-              1.54575,
-              -33.43532
-             ],
-             [
-              0.00873,
-              -31.92822
-             ],
-             [
-              0.00873,
-              -22.51163
-             ],
-             [
-              1.84159,
-              -20.86112
-             ],
-             [
-              3.67595,
-              -20.2227
-             ],
-             [
-              5.54796,
-              -19.98626
-             ],
-             [
-              7.84538,
-              -20.02429
-             ],
-             [
-              11.78292,
-              -20.86249
-             ],
-             [
-              13.30684,
-              -22.45486
-             ],
-             [
-              13.95417,
-              -25.00618
-             ],
-             [
-              13.89866,
-              -29.97427
-             ],
-             [
-              12.78747,
-              -32.98858
-             ],
-             [
-              12.0256,
-              -33.75305
-             ],
-             [
-              9.64631,
-              -34.60964
-             ],
-             [
-              7.39328,
-              -34.77717
-             ]
-            ],
-            "z0": 3.727649,
-            "z1": 3.747649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr17b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=4.527649 (full-width crown)",
-            "profile": [
-             [
-              7.21611,
-              -34.70571
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              7.21497,
-              -20.06022
-             ],
-             [
-              11.52614,
-              -20.82502
-             ],
-             [
-              12.94176,
-              -22.00045
-             ],
-             [
-              13.68707,
-              -23.7668
-             ],
-             [
-              14.05139,
-              -28.01807
-             ],
-             [
-              13.73532,
-              -30.47315
-             ],
-             [
-              12.6611,
-              -33.03028
-             ],
-             [
-              11.22677,
-              -34.08385
-             ],
-             [
-              9.0083,
-              -34.62027
-             ]
-            ],
-            "z0": 4.527649,
-            "z1": 4.547649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr18a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=4.527649 (full-width crown)",
-            "profile": [
-             [
-              7.21611,
-              -34.70571
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              7.21497,
-              -20.06022
-             ],
-             [
-              11.52614,
-              -20.82502
-             ],
-             [
-              12.94176,
-              -22.00045
-             ],
-             [
-              13.68707,
-              -23.7668
-             ],
-             [
-              14.05139,
-              -28.01807
-             ],
-             [
-              13.73532,
-              -30.47315
-             ],
-             [
-              12.6611,
-              -33.03028
-             ],
-             [
-              11.22677,
-              -34.08385
-             ],
-             [
-              9.0083,
-              -34.62027
-             ]
-            ],
-            "z0": 4.527649,
-            "z1": 4.547649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr18b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=5.327649 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              9.46472,
-              -20.32015
-             ],
-             [
-              11.99254,
-              -21.18773
-             ],
-             [
-              12.87015,
-              -22.02613
-             ],
-             [
-              13.3936,
-              -23.00401
-             ],
-             [
-              13.69257,
-              -24.08827
-             ],
-             [
-              14.00505,
-              -27.515
-             ],
-             [
-              13.44652,
-              -31.29433
-             ],
-             [
-              12.58545,
-              -33.00334
-             ],
-             [
-              11.66833,
-              -33.79293
-             ],
-             [
-              9.93914,
-              -34.41334
-             ],
-             [
-              9.53193,
-              -34.49433
-             ]
-            ],
-            "z0": 5.327649,
-            "z1": 5.347649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr19a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=5.327649 (full-width crown)",
-            "profile": [
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              9.46472,
-              -20.32015
-             ],
-             [
-              11.99254,
-              -21.18773
-             ],
-             [
-              12.87015,
-              -22.02613
-             ],
-             [
-              13.3936,
-              -23.00401
-             ],
-             [
-              13.69257,
-              -24.08827
-             ],
-             [
-              14.00505,
-              -27.515
-             ],
-             [
-              13.44652,
-              -31.29433
-             ],
-             [
-              12.58545,
-              -33.00334
-             ],
-             [
-              11.66833,
-              -33.79293
-             ],
-             [
-              9.93914,
-              -34.41334
-             ],
-             [
-              9.53193,
-              -34.49433
-             ]
-            ],
-            "z0": 5.327649,
-            "z1": 5.347649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr19b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=6.127649 (full-width crown)",
-            "profile": [
-             [
-              10.65249,
-              -34.16933
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              10.65369,
-              -20.61781
-             ],
-             [
-              12.40583,
-              -21.61198
-             ],
-             [
-              13.13614,
-              -22.57668
-             ],
-             [
-              13.77914,
-              -24.99706
-             ],
-             [
-              13.8971,
-              -28.6635
-             ],
-             [
-              13.46883,
-              -31.05161
-             ],
-             [
-              12.25132,
-              -33.25458
-             ]
-            ],
-            "z0": 6.127649,
-            "z1": 6.147649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr20a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=6.127649 (full-width crown)",
-            "profile": [
-             [
-              10.65249,
-              -34.16933
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              10.65369,
-              -20.61781
-             ],
-             [
-              12.40583,
-              -21.61198
-             ],
-             [
-              13.13614,
-              -22.57668
-             ],
-             [
-              13.77914,
-              -24.99706
-             ],
-             [
-              13.8971,
-              -28.6635
-             ],
-             [
-              13.46883,
-              -31.05161
-             ],
-             [
-              12.25132,
-              -33.25458
-             ]
-            ],
-            "z0": 6.127649,
-            "z1": 6.147649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr20b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=6.927649 (full-width crown)",
-            "profile": [
-             [
-              11.48519,
-              -33.73882
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.52203,
-              -21.04844
-             ],
-             [
-              12.74635,
-              -22.07754
-             ],
-             [
-              13.57843,
-              -24.06047
-             ],
-             [
-              13.86602,
-              -28.2083
-             ],
-             [
-              13.23987,
-              -31.59048
-             ],
-             [
-              12.73475,
-              -32.56481
-             ]
-            ],
-            "z0": 6.927649,
-            "z1": 6.947649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr21a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=6.927649 (full-width crown)",
-            "profile": [
-             [
-              11.48519,
-              -33.73882
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.52203,
-              -21.04844
-             ],
-             [
-              12.74635,
-              -22.07754
-             ],
-             [
-              13.57843,
-              -24.06047
-             ],
-             [
-              13.86602,
-              -28.2083
-             ],
-             [
-              13.23987,
-              -31.59048
-             ],
-             [
-              12.73475,
-              -32.56481
-             ]
-            ],
-            "z0": 6.927649,
-            "z1": 6.947649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr21b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=7.227649 (full-width crown)",
-            "profile": [
-             [
-              11.73811,
-              -33.54156
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.75915,
-              -21.21658
-             ],
-             [
-              12.91649,
-              -22.35897
-             ],
-             [
-              13.57953,
-              -24.15326
-             ],
-             [
-              13.83946,
-              -28.26963
-             ],
-             [
-              13.33518,
-              -31.26517
-             ],
-             [
-              12.52049,
-              -32.8111
-             ]
-            ],
-            "z0": 7.227649,
-            "z1": 7.247649
-           }
-          ]
-         },
-         {
-          "op": "hull",
-          "children": [
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr22a",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=7.227649 (full-width crown)",
-            "profile": [
-             [
-              11.73811,
-              -33.54156
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.75915,
-              -21.21658
-             ],
-             [
-              12.91649,
-              -22.35897
-             ],
-             [
-              13.57953,
-              -24.15326
-             ],
-             [
-              13.83946,
-              -28.26963
-             ],
-             [
-              13.33518,
-              -31.26517
-             ],
-             [
-              12.52049,
-              -32.8111
-             ]
-            ],
-            "z0": 7.227649,
-            "z1": 7.247649
-           },
-           {
-            "prim": "extrude",
-            "axis": "y",
-            "name": "crown_cr22b",
-            "source": "crown loft station (measured; kept organic \u2014 no clean law found across stations) \u2014 measured section hull at y=7.518651 (full-width crown)",
-            "profile": [
-             [
-              11.95792,
-              -33.33378
-             ],
-             [
-              0.00873,
-              -30.00011
-             ],
-             [
-              0.00873,
-              -24.80011
-             ],
-             [
-              11.95668,
-              -21.38205
-             ],
-             [
-              13.05998,
-              -22.6525
-             ],
-             [
-              13.58059,
-              -24.24326
-             ],
-             [
-              13.84415,
-              -26.93128
-             ],
-             [
-              13.6768,
-              -29.68587
-             ],
-             [
-              13.21175,
-              -31.57078
-             ],
-             [
-              12.52954,
-              -32.7624
-             ]
-            ],
-            "z0": 7.518651,
-            "z1": 7.538651
+            "r": "scoop_front_r"
            }
           ]
          }

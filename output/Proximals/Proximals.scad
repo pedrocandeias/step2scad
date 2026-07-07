@@ -1,9 +1,16 @@
+// ====================================================================
 // Proximals — step2scad parametric reconstruction
 // source: models/phoenix_components/Proximals.step
-// rotate_extrude bodies: exact RZ profile from the B-rep coaxial faces;
-// csg / instance_of bodies: agent-authored measured plan (plan.json);
-// strategies without a real emitter yet use placeholder stubs (bbox).
-// Every dimension below is an exact B-rep value from features.json.
+// Every dimension is measured from the STEP B-rep (exact faces) or a
+// fitted law with its residual cited — see the source comment on each
+// parameter. Edit named parameters; geometry follows.
+// ====================================================================
+
+// --- Display options ---
+show_colors   = true;    // tint top-level features (preview aid)
+show_original = false;   // ghost the original tessellation overlay
+original_stl  = "Proximals_ref.stl";
+module tint(c) { if (show_colors) color(c) children(); else children(); }
 
 // ---- body 0 (strategy: instance_of body 3 — agent plan) ----
 b0_offset = [13.747466, 0.001308, 0.000444];  // exact centroid delta body0-body3 (volumes match within 0.31 mm³ = 0.012%)
@@ -19,10 +26,19 @@ module body_1() {
     translate(b1_offset) body_3();
 }
 
-// ---- body 2 (strategy: csg — semantic parametric plan) ----
-// plan: semantic laws: beam = exact wall window × envelope laws (top res 0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window × fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized
+// --------------------------------------------------------------------
+// BODY 2 — semantic parametric plan
+//   semantic laws: beam = exact wall window × envelope laws (top res
+//   0.090, bottom res 0.092; knuckle lobes are r6 arcs concentric with
+//   the exact pin bores); ridge stem/cap = window × fitted laws; crown
+//   kept as measured loft (no clean law); recess/web profiles
+//   vectorized | crown REPLACED by law-solids (template-style): hull
+//   of vectorized control slabs INTERSECT measured ceiling arc MINUS
+//   measured underside scoops — every law fitted with residual cited
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b2 ---
 b2_beam_wall_x0     = -30.00011;  // beam side-wall plane (median of 230 station footprints; end roundings in x are absorbed)
 b2_beam_wall_x1     = -24.80011;  // beam side-wall plane (median of 230 station footprints)
 b2_knuckle_palm_y   = -11.42562;  // exact pin-bore axis y, face #61 (lobe arc fit agrees within 0.1)
@@ -33,54 +49,16 @@ b2_knuckle_distal_z = 6.008731;  // exact pin-bore axis z, face #23
 b2_tendon_tunnel_r  = 1.125;  // exact tendon-tunnel bore radius — tendon tunnel: exact full-circle cylinder face #26
 b2_pin_palm_r       = 2.3;  // exact palm pin-bore radius — knuckle pin bore: exact cylinder face #61
 b2_pin_distal_r     = 2.375;  // exact distal pin-bore radius — knuckle pin bore: exact cylinder face #23
+b2_dome_r           = 36.2208;  // lengthwise ceiling arc radius (fit over 60 stations, res 0.267)
+b2_dome_cy          = 4.903342;  // ceiling arc center y (same fit)
+b2_dome_cz          = 50.225417;  // ceiling arc center z — ABOVE the part: the ceiling is the circle's lower branch
+b2_scoop_rear_r     = 8.43581;  // rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.011
+b2_scoop_rear_cy    = -12.520848;  // rear scoop center y (same fit)
+b2_scoop_rear_cz    = 5.819099;  // rear scoop center z (same fit)
+b2_scoop_front_r    = 7.422916;  // front underside scoop radius, res 0.017 — nearly exact circle
+b2_scoop_front_cy   = 11.778239;  // front scoop center y (same fit)
+b2_scoop_front_cz   = 5.886084;  // front scoop center z (same fit)
 b2_fn               = 96;  // curve resolution
-
-b2_crown_cr00a_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [12.5277, -19.68475], [13.67096, -20.3074], [14.44365, -21.28328], [16.22675, -26.07933], [16.23331, -28.72132], [14.31903, -33.56473], [13.26455, -34.75388], [12.51068, -35.14596]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.372351 (full-width crown)
-b2_crown_cr00b_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [12.22, -19.6318], [14.00921, -20.70515], [14.69314, -21.93249], [16.11759, -26.07924], [16.12415, -28.72177], [14.13005, -33.79898], [12.49329, -35.12644], [12.26927, -35.1974]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.072351 (full-width crown)
-b2_crown_cr01a_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [12.22, -19.6318], [14.00921, -20.70515], [14.69314, -21.93249], [16.11759, -26.07924], [16.12415, -28.72177], [14.13005, -33.79898], [12.49329, -35.12644], [12.26927, -35.1974]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.072351 (full-width crown)
-b2_crown_cr01b_profile = [[11.94803, -35.25842], [0.00873, -30.00011], [0.00873, -24.80011], [11.94712, -19.58774], [13.20581, -20.06869], [13.98036, -20.74678], [14.66284, -21.98386], [16.00843, -26.07914], [16.01499, -28.72222], [13.9347, -33.99136], [12.71251, -34.99388]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.772351 (full-width crown)
-b2_crown_cr02a_profile = [[11.94803, -35.25842], [0.00873, -30.00011], [0.00873, -24.80011], [11.94712, -19.58774], [13.20581, -20.06869], [13.98036, -20.74678], [14.66284, -21.98386], [16.00843, -26.07914], [16.01499, -28.72222], [13.9347, -33.99136], [12.71251, -34.99388]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.772351 (full-width crown)
-b2_crown_cr02b_profile = [[11.64649, -35.30793], [0.00873, -30.00011], [0.00873, -24.80011], [11.64666, -19.54136], [12.74241, -19.87632], [14.08334, -20.9534], [14.69049, -22.20697], [15.89927, -26.07905], [15.90583, -28.72267], [14.10175, -33.66765], [13.15428, -34.68543]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.472351 (full-width crown)
-b2_crown_cr03a_profile = [[11.64649, -35.30793], [0.00873, -30.00011], [0.00873, -24.80011], [11.64666, -19.54136], [12.74241, -19.87632], [14.08334, -20.9534], [14.69049, -22.20697], [15.89927, -26.07905], [15.90583, -28.72267], [14.10175, -33.66765], [13.15428, -34.68543]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.472351 (full-width crown)
-b2_crown_cr03b_profile = [[11.31223, -35.35539], [0.00873, -30.00011], [0.00873, -24.80011], [11.45461, -19.51286], [13.12445, -20.11904], [13.77899, -20.65294], [14.68322, -22.32441], [15.79011, -26.07895], [15.79667, -28.72311], [14.26096, -33.2955], [12.67895, -34.92384]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.172351 (full-width crown)
-b2_crown_cr04a_profile = [[11.31223, -35.35539], [0.00873, -30.00011], [0.00873, -24.80011], [11.45461, -19.51286], [13.12445, -20.11904], [13.77899, -20.65294], [14.68322, -22.32441], [15.79011, -26.07895], [15.79667, -28.72311], [14.26096, -33.2955], [12.67895, -34.92384]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.172351 (full-width crown)
-b2_crown_cr04b_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [11.09849, -19.47026], [13.54146, -20.48231], [14.4232, -21.7501], [15.68095, -26.07885], [15.68752, -28.72356], [14.20493, -33.30039], [13.22483, -34.52277], [11.85879, -35.21457], [11.01788, -35.3907]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.872351 (full-width crown)
-b2_crown_cr05a_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [11.09849, -19.47026], [13.54146, -20.48231], [14.4232, -21.7501], [15.68095, -26.07885], [15.68752, -28.72356], [14.20493, -33.30039], [13.22483, -34.52277], [11.85879, -35.21457], [11.01788, -35.3907]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.872351 (full-width crown)
-b2_crown_cr05b_profile = [[9.67279, -35.49245], [0.00873, -30.00011], [0.00873, -24.80011], [9.67407, -19.35821], [12.17218, -19.83521], [13.24854, -20.3947], [14.41626, -22.05227], [14.82946, -23.53047], [15.39015, -26.19658], [15.39613, -28.6065], [14.35, -32.70036], [13.50933, -34.08732], [12.54041, -34.8274], [10.93427, -35.34594]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.072351 (full-width crown)
-b2_crown_cr06a_profile = [[9.67279, -35.49245], [0.00873, -30.00011], [0.00873, -24.80011], [9.67407, -19.35821], [12.17218, -19.83521], [13.24854, -20.3947], [14.41626, -22.05227], [14.82946, -23.53047], [15.39015, -26.19658], [15.39613, -28.6065], [14.35, -32.70036], [13.50933, -34.08732], [12.54041, -34.8274], [10.93427, -35.34594]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.072351 (full-width crown)
-b2_crown_cr06b_profile = [[7.29083, -35.47194], [0.00873, -30.00011], [0.00873, -24.80011], [7.2772, -19.27689], [11.32771, -19.68517], [13.19229, -20.50168], [14.10082, -21.64399], [14.57647, -22.94281], [14.91713, -24.81217], [14.66724, -31.25061], [13.97022, -33.20296], [13.15326, -34.26706], [11.44795, -35.14452], [8.83775, -35.52001]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-4.272351 (full-width crown)
-b2_crown_cr07a_profile = [[7.29083, -35.47194], [0.00873, -30.00011], [0.00873, -24.80011], [7.2772, -19.27689], [11.32771, -19.68517], [13.19229, -20.50168], [14.10082, -21.64399], [14.57647, -22.94281], [14.91713, -24.81217], [14.66724, -31.25061], [13.97022, -33.20296], [13.15326, -34.26706], [11.44795, -35.14452], [8.83775, -35.52001]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-4.272351 (full-width crown)
-b2_crown_cr07b_profile = [[4.25031, -35.02463], [1.84106, -34.15967], [0.41805, -33.01604], [0.00873, -32.43328], [0.01407, -21.98261], [1.16054, -20.71733], [3.37336, -19.72659], [7.04155, -19.30378], [9.91603, -19.45807], [12.79438, -20.36272], [13.45974, -20.92717], [14.30864, -22.46375], [14.83617, -25.14709], [14.67385, -30.58392], [14.08114, -32.70342], [12.66099, -34.49399], [11.40831, -35.0602], [8.78763, -35.49692]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-3.472351 (full-width crown)
-b2_crown_cr08a_profile = [[4.25031, -35.02463], [1.84106, -34.15967], [0.41805, -33.01604], [0.00873, -32.43328], [0.01407, -21.98261], [1.16054, -20.71733], [3.37336, -19.72659], [7.04155, -19.30378], [9.91603, -19.45807], [12.79438, -20.36272], [13.45974, -20.92717], [14.30864, -22.46375], [14.83617, -25.14709], [14.67385, -30.58392], [14.08114, -32.70342], [12.66099, -34.49399], [11.40831, -35.0602], [8.78763, -35.49692]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-3.472351 (full-width crown)
-b2_crown_cr08b_profile = [[4.05383, -34.94786], [1.70744, -34.05343], [0.12579, -32.59347], [0.00873, -32.40623], [0.00873, -22.02328], [0.95614, -20.90574], [2.09031, -20.20053], [4.97573, -19.46587], [9.55563, -19.45671], [12.61273, -20.38075], [13.72739, -21.49364], [14.36121, -23.03587], [14.73128, -25.22409], [14.4758, -31.05278], [13.733, -33.10512], [12.29292, -34.5848], [8.95858, -35.43443], [8.49704, -35.46278]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-2.672351 (full-width crown)
-b2_crown_cr09a_profile = [[4.05383, -34.94786], [1.70744, -34.05343], [0.12579, -32.59347], [0.00873, -32.40623], [0.00873, -22.02328], [0.95614, -20.90574], [2.09031, -20.20053], [4.97573, -19.46587], [9.55563, -19.45671], [12.61273, -20.38075], [13.72739, -21.49364], [14.36121, -23.03587], [14.73128, -25.22409], [14.4758, -31.05278], [13.733, -33.10512], [12.29292, -34.5848], [8.95858, -35.43443], [8.49704, -35.46278]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-2.672351 (full-width crown)
-b2_crown_cr09b_profile = [[2.88846, -34.56198], [1.03685, -33.55013], [0.00873, -32.36841], [0.03646, -22.01826], [1.11181, -20.82356], [3.88083, -19.67186], [8.50053, -19.41214], [9.96784, -19.62444], [12.20713, -20.2829], [13.19602, -21.00474], [13.83131, -21.9368], [14.61046, -25.06647], [14.46113, -30.46618], [13.35867, -33.44725], [12.12599, -34.54999], [8.26686, -35.41166]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.872351 (full-width crown)
-b2_crown_cr10a_profile = [[2.88846, -34.56198], [1.03685, -33.55013], [0.00873, -32.36841], [0.03646, -22.01826], [1.11181, -20.82356], [3.88083, -19.67186], [8.50053, -19.41214], [9.96784, -19.62444], [12.20713, -20.2829], [13.19602, -21.00474], [13.83131, -21.9368], [14.61046, -25.06647], [14.46113, -30.46618], [13.35867, -33.44725], [12.12599, -34.54999], [8.26686, -35.41166]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.872351 (full-width crown)
-b2_crown_cr10b_profile = [[4.69443, -34.99298], [2.28107, -34.26592], [0.59971, -33.09505], [0.00873, -32.32257], [0.05776, -22.03492], [1.08381, -20.89527], [2.2933, -20.19765], [4.05066, -19.68664], [7.96741, -19.45378], [9.87861, -19.69431], [12.48993, -20.56736], [13.36903, -21.40224], [14.1177, -23.01527], [14.55019, -26.0826], [14.25917, -30.94916], [13.49087, -33.02742], [12.57969, -34.08906], [11.42771, -34.75838], [9.04081, -35.28003], [8.28988, -35.34096]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.072351 (full-width crown)
-b2_crown_cr11a_profile = [[4.69443, -34.99298], [2.28107, -34.26592], [0.59971, -33.09505], [0.00873, -32.32257], [0.05776, -22.03492], [1.08381, -20.89527], [2.2933, -20.19765], [4.05066, -19.68664], [7.96741, -19.45378], [9.87861, -19.69431], [12.48993, -20.56736], [13.36903, -21.40224], [14.1177, -23.01527], [14.55019, -26.0826], [14.25917, -30.94916], [13.49087, -33.02742], [12.57969, -34.08906], [11.42771, -34.75838], [9.04081, -35.28003], [8.28988, -35.34096]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.072351 (full-width crown)
-b2_crown_cr11b_profile = [[3.53388, -34.65762], [1.4862, -33.7692], [0.1645, -32.50035], [0.00873, -32.26402], [0.00873, -22.17982], [1.64054, -20.58662], [3.6352, -19.82833], [8.05842, -19.5386], [9.99452, -19.81332], [11.78232, -20.31324], [13.08213, -21.23431], [13.89423, -22.68103], [14.45303, -26.09087], [14.18685, -30.73746], [13.45303, -32.86059], [12.20538, -34.22596], [11.07284, -34.77782], [8.035, -35.2651]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-0.272351 (full-width crown)
-b2_crown_cr12a_profile = [[3.53388, -34.65762], [1.4862, -33.7692], [0.1645, -32.50035], [0.00873, -32.26402], [0.00873, -22.17982], [1.64054, -20.58662], [3.6352, -19.82833], [8.05842, -19.5386], [9.99452, -19.81332], [11.78232, -20.31324], [13.08213, -21.23431], [13.89423, -22.68103], [14.45303, -26.09087], [14.18685, -30.73746], [13.45303, -32.86059], [12.20538, -34.22596], [11.07284, -34.77782], [8.035, -35.2651]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-0.272351 (full-width crown)
-b2_crown_cr12b_profile = [[3.5675, -34.60282], [1.00002, -33.34105], [0.00873, -32.20488], [0.00873, -22.24489], [1.27315, -20.88797], [2.48104, -20.24461], [4.38689, -19.75929], [7.57174, -19.60225], [11.29982, -20.23485], [12.47869, -20.82914], [13.62753, -22.30263], [14.1884, -24.26839], [14.36245, -26.18587], [14.10022, -30.62484], [13.23769, -32.99263], [11.35827, -34.56894], [7.99311, -35.17387]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=0.527649 (full-width crown)
-b2_crown_cr13a_profile = [[3.5675, -34.60282], [1.00002, -33.34105], [0.00873, -32.20488], [0.00873, -22.24489], [1.27315, -20.88797], [2.48104, -20.24461], [4.38689, -19.75929], [7.57174, -19.60225], [11.29982, -20.23485], [12.47869, -20.82914], [13.62753, -22.30263], [14.1884, -24.26839], [14.36245, -26.18587], [14.10022, -30.62484], [13.23769, -32.99263], [11.35827, -34.56894], [7.99311, -35.17387]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=0.527649 (full-width crown)
-b2_crown_cr13b_profile = [[3.96189, -34.62848], [1.25317, -33.46547], [0.00873, -32.13433], [0.00873, -22.31337], [0.59224, -21.53725], [1.84953, -20.61272], [3.3713, -20.03519], [7.95184, -19.72268], [11.45638, -20.39209], [12.9342, -21.4041], [13.45417, -22.17768], [14.15258, -24.67344], [14.25545, -28.49125], [13.76924, -31.56018], [12.919, -33.24895], [12.17446, -33.97312], [10.78852, -34.6564], [7.73996, -35.07894]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=1.327649 (full-width crown)
-b2_crown_cr14a_profile = [[3.96189, -34.62848], [1.25317, -33.46547], [0.00873, -32.13433], [0.00873, -22.31337], [0.59224, -21.53725], [1.84953, -20.61272], [3.3713, -20.03519], [7.95184, -19.72268], [11.45638, -20.39209], [12.9342, -21.4041], [13.45417, -22.17768], [14.15258, -24.67344], [14.25545, -28.49125], [13.76924, -31.56018], [12.919, -33.24895], [12.17446, -33.97312], [10.78852, -34.6564], [7.73996, -35.07894]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=1.327649 (full-width crown)
-b2_crown_cr14b_profile = [[3.41723, -34.40378], [0.85937, -33.06841], [0.00873, -32.0637], [0.00873, -22.38456], [2.08369, -20.57808], [5.46316, -19.81195], [10.83721, -20.2875], [13.48904, -22.46662], [14.0985, -24.97294], [13.78869, -31.14534], [12.57082, -33.4983], [10.56548, -34.61097], [7.67943, -34.97497]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.127649 (full-width crown)
-b2_crown_cr15a_profile = [[3.41723, -34.40378], [0.85937, -33.06841], [0.00873, -32.0637], [0.00873, -22.38456], [2.08369, -20.57808], [5.46316, -19.81195], [10.83721, -20.2875], [13.48904, -22.46662], [14.0985, -24.97294], [13.78869, -31.14534], [12.57082, -33.4983], [10.56548, -34.61097], [7.67943, -34.97497]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.127649 (full-width crown)
-b2_crown_cr15b_profile = [[4.75173, -34.62518], [2.17564, -33.85446], [0.95036, -33.06834], [0.00873, -31.99341], [0.00873, -22.45222], [0.62371, -21.66583], [1.94029, -20.73332], [4.64205, -19.98279], [6.94532, -19.88403], [10.59954, -20.31998], [11.77517, -20.75422], [12.97, -21.76146], [13.69423, -23.25344], [14.16969, -27.38937], [13.92958, -30.13899], [13.36365, -32.12873], [12.44256, -33.50752], [11.48692, -34.16425], [9.55832, -34.71218], [7.52869, -34.87117]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.927649 (full-width crown)
-b2_crown_cr16a_profile = [[4.75173, -34.62518], [2.17564, -33.85446], [0.95036, -33.06834], [0.00873, -31.99341], [0.00873, -22.45222], [0.62371, -21.66583], [1.94029, -20.73332], [4.64205, -19.98279], [6.94532, -19.88403], [10.59954, -20.31998], [11.77517, -20.75422], [12.97, -21.76146], [13.69423, -23.25344], [14.16969, -27.38937], [13.92958, -30.13899], [13.36365, -32.12873], [12.44256, -33.50752], [11.48692, -34.16425], [9.55832, -34.71218], [7.52869, -34.87117]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.927649 (full-width crown)
-b2_crown_cr16b_profile = [[3.19941, -34.18655], [1.54575, -33.43532], [0.00873, -31.92822], [0.00873, -22.51163], [1.84159, -20.86112], [3.67595, -20.2227], [5.54796, -19.98626], [7.84538, -20.02429], [11.78292, -20.86249], [13.30684, -22.45486], [13.95417, -25.00618], [13.89866, -29.97427], [12.78747, -32.98858], [12.0256, -33.75305], [9.64631, -34.60964], [7.39328, -34.77717]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=3.727649 (full-width crown)
-b2_crown_cr17a_profile = [[3.19941, -34.18655], [1.54575, -33.43532], [0.00873, -31.92822], [0.00873, -22.51163], [1.84159, -20.86112], [3.67595, -20.2227], [5.54796, -19.98626], [7.84538, -20.02429], [11.78292, -20.86249], [13.30684, -22.45486], [13.95417, -25.00618], [13.89866, -29.97427], [12.78747, -32.98858], [12.0256, -33.75305], [9.64631, -34.60964], [7.39328, -34.77717]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=3.727649 (full-width crown)
-b2_crown_cr17b_profile = [[7.21611, -34.70571], [0.00873, -30.00011], [0.00873, -24.80011], [7.21497, -20.06022], [11.52614, -20.82502], [12.94176, -22.00045], [13.68707, -23.7668], [14.05139, -28.01807], [13.73532, -30.47315], [12.6611, -33.03028], [11.22677, -34.08385], [9.0083, -34.62027]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=4.527649 (full-width crown)
-b2_crown_cr18a_profile = [[7.21611, -34.70571], [0.00873, -30.00011], [0.00873, -24.80011], [7.21497, -20.06022], [11.52614, -20.82502], [12.94176, -22.00045], [13.68707, -23.7668], [14.05139, -28.01807], [13.73532, -30.47315], [12.6611, -33.03028], [11.22677, -34.08385], [9.0083, -34.62027]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=4.527649 (full-width crown)
-b2_crown_cr18b_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [9.46472, -20.32015], [11.99254, -21.18773], [12.87015, -22.02613], [13.3936, -23.00401], [13.69257, -24.08827], [14.00505, -27.515], [13.44652, -31.29433], [12.58545, -33.00334], [11.66833, -33.79293], [9.93914, -34.41334], [9.53193, -34.49433]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=5.327649 (full-width crown)
-b2_crown_cr19a_profile = [[0.00873, -30.00011], [0.00873, -24.80011], [9.46472, -20.32015], [11.99254, -21.18773], [12.87015, -22.02613], [13.3936, -23.00401], [13.69257, -24.08827], [14.00505, -27.515], [13.44652, -31.29433], [12.58545, -33.00334], [11.66833, -33.79293], [9.93914, -34.41334], [9.53193, -34.49433]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=5.327649 (full-width crown)
-b2_crown_cr19b_profile = [[10.65249, -34.16933], [0.00873, -30.00011], [0.00873, -24.80011], [10.65369, -20.61781], [12.40583, -21.61198], [13.13614, -22.57668], [13.77914, -24.99706], [13.8971, -28.6635], [13.46883, -31.05161], [12.25132, -33.25458]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.127649 (full-width crown)
-b2_crown_cr20a_profile = [[10.65249, -34.16933], [0.00873, -30.00011], [0.00873, -24.80011], [10.65369, -20.61781], [12.40583, -21.61198], [13.13614, -22.57668], [13.77914, -24.99706], [13.8971, -28.6635], [13.46883, -31.05161], [12.25132, -33.25458]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.127649 (full-width crown)
-b2_crown_cr20b_profile = [[11.48519, -33.73882], [0.00873, -30.00011], [0.00873, -24.80011], [11.52203, -21.04844], [12.74635, -22.07754], [13.57843, -24.06047], [13.86602, -28.2083], [13.23987, -31.59048], [12.73475, -32.56481]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.927649 (full-width crown)
-b2_crown_cr21a_profile = [[11.48519, -33.73882], [0.00873, -30.00011], [0.00873, -24.80011], [11.52203, -21.04844], [12.74635, -22.07754], [13.57843, -24.06047], [13.86602, -28.2083], [13.23987, -31.59048], [12.73475, -32.56481]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.927649 (full-width crown)
-b2_crown_cr21b_profile = [[11.73811, -33.54156], [0.00873, -30.00011], [0.00873, -24.80011], [11.75915, -21.21658], [12.91649, -22.35897], [13.57953, -24.15326], [13.83946, -28.26963], [13.33518, -31.26517], [12.52049, -32.8111]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.227649 (full-width crown)
-b2_crown_cr22a_profile = [[11.73811, -33.54156], [0.00873, -30.00011], [0.00873, -24.80011], [11.75915, -21.21658], [12.91649, -22.35897], [13.57953, -24.15326], [13.83946, -28.26963], [13.33518, -31.26517], [12.52049, -32.8111]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.227649 (full-width crown)
-b2_crown_cr22b_profile = [[11.95792, -33.33378], [0.00873, -30.00011], [0.00873, -24.80011], [11.95668, -21.38205], [13.05998, -22.6525], [13.58059, -24.24326], [13.84415, -26.93128], [13.6768, -29.68587], [13.21175, -31.57078], [12.52954, -32.7624]];  // (z, x) points — crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.518651 (full-width crown)
 
 module body_2() {
     difference() {
@@ -308,143 +286,178 @@ module body_2() {
                 }
             }
             union() {
-                hull() {
-                    // b2_crown_cr00a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.372351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -7.372351]) linear_extrude(0.02) polygon(b2_crown_cr00a_profile);
-                    // b2_crown_cr00b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -7.072351]) linear_extrude(0.02) polygon(b2_crown_cr00b_profile);
-                }
-                hull() {
-                    // b2_crown_cr01a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-7.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -7.072351]) linear_extrude(0.02) polygon(b2_crown_cr01a_profile);
-                    // b2_crown_cr01b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.772351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.772351]) linear_extrude(0.02) polygon(b2_crown_cr01b_profile);
-                }
-                hull() {
-                    // b2_crown_cr02a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.772351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.772351]) linear_extrude(0.02) polygon(b2_crown_cr02a_profile);
-                    // b2_crown_cr02b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.472351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.472351]) linear_extrude(0.02) polygon(b2_crown_cr02b_profile);
-                }
-                hull() {
-                    // b2_crown_cr03a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.472351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.472351]) linear_extrude(0.02) polygon(b2_crown_cr03a_profile);
-                    // b2_crown_cr03b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.172351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.172351]) linear_extrude(0.02) polygon(b2_crown_cr03b_profile);
-                }
-                hull() {
-                    // b2_crown_cr04a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-6.172351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -6.172351]) linear_extrude(0.02) polygon(b2_crown_cr04a_profile);
-                    // b2_crown_cr04b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.872351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -5.872351]) linear_extrude(0.02) polygon(b2_crown_cr04b_profile);
-                }
-                hull() {
-                    // b2_crown_cr05a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.872351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -5.872351]) linear_extrude(0.02) polygon(b2_crown_cr05a_profile);
-                    // b2_crown_cr05b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -5.072351]) linear_extrude(0.02) polygon(b2_crown_cr05b_profile);
-                }
-                hull() {
-                    // b2_crown_cr06a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-5.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -5.072351]) linear_extrude(0.02) polygon(b2_crown_cr06a_profile);
-                    // b2_crown_cr06b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-4.272351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -4.272351]) linear_extrude(0.02) polygon(b2_crown_cr06b_profile);
-                }
-                hull() {
-                    // b2_crown_cr07a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-4.272351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -4.272351]) linear_extrude(0.02) polygon(b2_crown_cr07a_profile);
-                    // b2_crown_cr07b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-3.472351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -3.472351]) linear_extrude(0.02) polygon(b2_crown_cr07b_profile);
-                }
-                hull() {
-                    // b2_crown_cr08a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-3.472351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -3.472351]) linear_extrude(0.02) polygon(b2_crown_cr08a_profile);
-                    // b2_crown_cr08b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-2.672351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -2.672351]) linear_extrude(0.02) polygon(b2_crown_cr08b_profile);
-                }
-                hull() {
-                    // b2_crown_cr09a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-2.672351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -2.672351]) linear_extrude(0.02) polygon(b2_crown_cr09a_profile);
-                    // b2_crown_cr09b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.872351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -1.872351]) linear_extrude(0.02) polygon(b2_crown_cr09b_profile);
-                }
-                hull() {
-                    // b2_crown_cr10a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.872351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -1.872351]) linear_extrude(0.02) polygon(b2_crown_cr10a_profile);
-                    // b2_crown_cr10b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -1.072351]) linear_extrude(0.02) polygon(b2_crown_cr10b_profile);
-                }
-                hull() {
-                    // b2_crown_cr11a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-1.072351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -1.072351]) linear_extrude(0.02) polygon(b2_crown_cr11a_profile);
-                    // b2_crown_cr11b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-0.272351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -0.272351]) linear_extrude(0.02) polygon(b2_crown_cr11b_profile);
-                }
-                hull() {
-                    // b2_crown_cr12a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=-0.272351 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, -0.272351]) linear_extrude(0.02) polygon(b2_crown_cr12a_profile);
-                    // b2_crown_cr12b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=0.527649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 0.527649]) linear_extrude(0.02) polygon(b2_crown_cr12b_profile);
-                }
-                hull() {
-                    // b2_crown_cr13a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=0.527649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 0.527649]) linear_extrude(0.02) polygon(b2_crown_cr13a_profile);
-                    // b2_crown_cr13b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=1.327649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 1.327649]) linear_extrude(0.02) polygon(b2_crown_cr13b_profile);
-                }
-                hull() {
-                    // b2_crown_cr14a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=1.327649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 1.327649]) linear_extrude(0.02) polygon(b2_crown_cr14a_profile);
-                    // b2_crown_cr14b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.127649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 2.127649]) linear_extrude(0.02) polygon(b2_crown_cr14b_profile);
-                }
-                hull() {
-                    // b2_crown_cr15a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.127649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 2.127649]) linear_extrude(0.02) polygon(b2_crown_cr15a_profile);
-                    // b2_crown_cr15b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.927649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 2.927649]) linear_extrude(0.02) polygon(b2_crown_cr15b_profile);
-                }
-                hull() {
-                    // b2_crown_cr16a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=2.927649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 2.927649]) linear_extrude(0.02) polygon(b2_crown_cr16a_profile);
-                    // b2_crown_cr16b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=3.727649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 3.727649]) linear_extrude(0.02) polygon(b2_crown_cr16b_profile);
-                }
-                hull() {
-                    // b2_crown_cr17a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=3.727649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 3.727649]) linear_extrude(0.02) polygon(b2_crown_cr17a_profile);
-                    // b2_crown_cr17b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=4.527649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 4.527649]) linear_extrude(0.02) polygon(b2_crown_cr17b_profile);
-                }
-                hull() {
-                    // b2_crown_cr18a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=4.527649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 4.527649]) linear_extrude(0.02) polygon(b2_crown_cr18a_profile);
-                    // b2_crown_cr18b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=5.327649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 5.327649]) linear_extrude(0.02) polygon(b2_crown_cr18b_profile);
-                }
-                hull() {
-                    // b2_crown_cr19a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=5.327649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 5.327649]) linear_extrude(0.02) polygon(b2_crown_cr19a_profile);
-                    // b2_crown_cr19b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.127649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 6.127649]) linear_extrude(0.02) polygon(b2_crown_cr19b_profile);
-                }
-                hull() {
-                    // b2_crown_cr20a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.127649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 6.127649]) linear_extrude(0.02) polygon(b2_crown_cr20a_profile);
-                    // b2_crown_cr20b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.927649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 6.927649]) linear_extrude(0.02) polygon(b2_crown_cr20b_profile);
-                }
-                hull() {
-                    // b2_crown_cr21a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=6.927649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 6.927649]) linear_extrude(0.02) polygon(b2_crown_cr21a_profile);
-                    // b2_crown_cr21b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.227649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 7.227649]) linear_extrude(0.02) polygon(b2_crown_cr21b_profile);
-                }
-                hull() {
-                    // b2_crown_cr22a: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.227649 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 7.227649]) linear_extrude(0.02) polygon(b2_crown_cr22a_profile);
-                    // b2_crown_cr22b: crown loft station (measured; kept organic — no clean law found across stations) — measured section hull at y=7.518651 (full-width crown)
-                    rotate([0, -90, -90]) translate([0, 0, 7.518651]) linear_extrude(0.02) polygon(b2_crown_cr22b_profile);
+                difference() {
+                    intersection() {
+                        hull() {
+                            // b2_crown_ctrl_0: parametric CONTROL section at y=-7.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -7.342]) linear_extrude(0.02) polygon(concat(
+            [[12.484854, -19.675002]],
+            [for (k = [1 : 10]) [(11.531863) + (3.304442)*cos((73.230136) + k*((18.636063) - (73.230136))/10), (-22.837472) + (3.304442)*sin((73.230136) + k*((18.636063) - (73.230136))/10)]],
+            [[16.193878, -26.079349]],
+            [[16.195059, -26.555189]],
+            [[16.200423, -28.717221]],
+            [[14.705251, -32.694211]],
+            [for (k = [1 : 9]) [(11.138146) + (3.674411)*cos((-14.944106) + k*((-68.450559) - (-14.944106))/9), (-31.742136) + (3.674411)*sin((-14.944106) + k*((-68.450559) - (-14.944106))/9)]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]]));
+                            // b2_crown_ctrl_1: parametric CONTROL section at y=-6.542 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -6.542]) linear_extrude(0.02) polygon(concat(
+            [[11.774502, -19.561359]],
+            [for (k = [1 : 12]) [(11.206703) + (3.604558)*cos((80.96635) + k*((13.332834) - (80.96635))/12), (-23.132722) + (3.604558)*sin((80.96635) + k*((13.332834) - (80.96635))/12)]],
+            [[15.902784, -26.079126]],
+            [[15.906295, -27.494015]],
+            [[15.90933, -28.717185]],
+            [[14.654956, -32.47854]],
+            [for (k = [1 : 11]) [(10.907793) + (3.847313)*cos((-13.997703) + k*((-76.988914) - (-13.997703))/11), (-31.544427) + (3.847313)*sin((-13.997703) + k*((-76.988914) - (-13.997703))/11)]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]]));
+                            // b2_crown_ctrl_2: parametric CONTROL section at y=-5.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -5.342]) linear_extrude(0.02) polygon(concat(
+            [[10.255542, -19.404869]],
+            [[10.310864, -19.410407]],
+            [[11.458337, -19.594475]],
+            [for (k = [1 : 13]) [(10.918066) + (3.768969)*cos((81.800817) + k*((9.735263) - (81.800817))/13), (-23.344075) + (3.768969)*sin((81.800817) + k*((9.735263) - (81.800817))/13)]],
+            [[14.843613, -23.4623]],
+            [[14.847116, -23.476724]],
+            [for (k = [1 : 5]) [(3.939716) + (11.600873)*cos((19.911076) + k*((-6.235221) - (19.911076))/5), (-27.427532) + (11.600873)*sin((19.911076) + k*((-6.235221) - (19.911076))/5)]],
+            [[14.595231, -32.079622]],
+            [for (k = [1 : 14]) [(10.424482) + (4.256861)*cos((-12.311525) + k*((-92.360771) - (-12.311525))/14), (-31.169373) + (4.256861)*sin((-12.311525) + k*((-92.360771) - (-12.311525))/14)]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]]));
+                            // b2_crown_ctrl_3: parametric CONTROL section at y=-4.542 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -4.542]) linear_extrude(0.02) polygon(concat(
+            [[8.563751, -19.284379]],
+            [for (k = [1 : 3]) [(8.325009) + (12.171059)*cos((88.876485) + k*((71.29637) - (88.876485))/3), (-31.457903) + (12.171059)*sin((88.876485) + k*((71.29637) - (88.876485))/3)]],
+            [for (k = [1 : 11]) [(10.823982) + (3.769931)*cos((68.078606) + k*((7.6967) - (68.078606))/11), (-23.418935) + (3.769931)*sin((68.078606) + k*((7.6967) - (68.078606))/11)]],
+            [for (k = [1 : 3]) [(-3.594839) + (18.720212)*cos((13.596167) + k*((0.559471) - (13.596167))/3), (-27.308487) + (18.720212)*sin((13.596167) + k*((0.559471) - (13.596167))/3)]],
+            [[15.134073, -27.536711]],
+            [[15.134073, -27.625199]],
+            [[14.882213, -30.000107]],
+            [[14.879679, -30.019105]],
+            [for (k = [1 : 8]) [(8.433055) + (6.400777)*cos((-0.153239) + k*((-44.394742) - (-0.153239))/8), (-30.001863) + (6.400777)*sin((-0.153239) + k*((-44.394742) - (-0.153239))/8)]],
+            [for (k = [1 : 6]) [(9.601353) + (6.230176)*cos((-57.120656) + k*((-91.400404) - (-57.120656))/6), (-29.229184) + (6.230176)*sin((-57.120656) + k*((-91.400404) - (-57.120656))/6)]],
+            [[8.780253, -35.526663]],
+            [[8.562229, -35.526177]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]]));
+                            // b2_crown_ctrl_4: parametric CONTROL section at y=-4.142 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -4.142]) linear_extrude(0.02) polygon(concat(
+            [[0.008731, -24.800108]],
+            [[6.743132, -19.296661]],
+            [for (k = [1 : 5]) [(7.974732) + (12.538046)*cos((95.625535) + k*((67.834223) - (95.625535))/5), (-31.800113) + (12.538046)*sin((95.625535) + k*((67.834223) - (95.625535))/5)]],
+            [for (k = [1 : 9]) [(9.72974) + (5.035127)*cos((53.508023) + k*((1.541029) - (53.508023))/9), (-24.218792) + (5.035127)*sin((53.508023) + k*((1.541029) - (53.508023))/9)]],
+            [[14.870431, -24.652056]],
+            [[14.895007, -24.847565]],
+            [[14.834205, -29.952688]],
+            [for (k = [1 : 8]) [(8.51349) + (6.275819)*cos((0.292613) + k*((-46.501948) - (0.292613))/8), (-29.984968) + (6.275819)*sin((0.292613) + k*((-46.501948) - (0.292613))/8)]],
+            [for (k = [1 : 5]) [(9.351625) + (6.821419)*cos((-59.54928) + k*((-89.111187) - (-59.54928))/5), (-28.633851) + (6.821419)*sin((-59.54928) + k*((-89.111187) - (-59.54928))/5)]],
+            [for (k = [1 : 3]) [(8.376286) + (13.30187)*cos((-85.336207) + k*((-96.740711) - (-85.336207))/3), (-22.214725) + (13.30187)*sin((-85.336207) + k*((-96.740711) - (-85.336207))/3)]],
+            [[0.008731, -30.000107]]));
+                            // b2_crown_ctrl_5: parametric CONTROL section at y=-3.742 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -3.742]) linear_extrude(0.02) polygon(concat(
+            [for (k = [1 : 3]) [(5.969654) + (10.315122)*cos((108.352478) + k*((95.428662) - (108.352478))/3), (-29.705685) + (10.315122)*sin((108.352478) + k*((95.428662) - (108.352478))/3)]],
+            [for (k = [1 : 4]) [(7.493853) + (17.332928)*cos((98.282071) + k*((79.79887) - (98.282071))/4), (-36.611335) + (17.332928)*sin((98.282071) + k*((79.79887) - (98.282071))/4)]],
+            [for (k = [1 : 10]) [(10.453334) + (4.150835)*cos((88.553921) + k*((32.176466) - (88.553921))/10), (-23.767629) + (4.150835)*sin((88.553921) + k*((32.176466) - (88.553921))/10)]],
+            [for (k = [1 : 3]) [(7.495557) + (7.271864)*cos((27.405487) + k*((9.60775) - (27.405487))/3), (-24.91402) + (7.271864)*sin((27.405487) + k*((9.60775) - (27.405487))/3)]],
+            [for (k = [1 : 3]) [(2.613651) + (12.281687)*cos((11.011858) + k*((4.854995) - (11.011858))/3), (-26.045641) + (12.281687)*sin((11.011858) + k*((4.854995) - (11.011858))/3)]],
+            [[14.794323, -29.794239]],
+            [[14.788242, -29.843619]],
+            [for (k = [1 : 4]) [(6.779436) + (8.008519)*cos((-2.746276) + k*((-26.650798) - (-2.746276))/4), (-29.459451) + (8.008519)*sin((-2.746276) + k*((-26.650798) - (-2.746276))/4)]],
+            [for (k = [1 : 11]) [(10.192262) + (4.276039)*cos((-28.491363) + k*((-90.075206) - (-28.491363))/11), (-31.01932) + (4.276039)*sin((-28.491363) + k*((-90.075206) - (-28.491363))/11)]],
+            [for (k = [1 : 4]) [(8.188477) + (14.238785)*cos((-81.924572) + k*((-100.892414) - (-81.924572))/4), (-21.261083) + (14.238785)*sin((-81.924572) + k*((-100.892414) - (-81.924572))/4)]],
+            [for (k = [1 : 3]) [(7.354121) + (13.65748)*cos((-97.824538) + k*((-108.115647) - (-97.824538))/3), (-21.728799) + (13.65748)*sin((-97.824538) + k*((-108.115647) - (-97.824538))/3)]],
+            [[2.732038, -34.560102]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]],
+            [[2.722458, -19.917154]]));
+                            // b2_crown_ctrl_6: parametric CONTROL section at y=-3.342 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, -3.342]) linear_extrude(0.02) polygon(concat(
+            [[0.008731, -29.979177]],
+            [[0.008731, -21.995393]],
+            [for (k = [1 : 9]) [(4.520437) + (5.529717)*cos((145.198262) + k*((94.613381) - (145.198262))/9), (-25.131314) + (5.529717)*sin((145.198262) + k*((94.613381) - (145.198262))/9)]],
+            [for (k = [1 : 3]) [(7.112903) + (18.154395)*cos((99.639586) + k*((91.90249) - (99.639586))/3), (-37.484198) + (18.154395)*sin((99.639586) + k*((91.90249) - (99.639586))/3)]],
+            [for (k = [1 : 6]) [(7.893142) + (11.626298)*cos((96.811281) + k*((64.353812) - (96.811281))/6), (-30.917119) + (11.626298)*sin((96.811281) + k*((64.353812) - (96.811281))/6)]],
+            [for (k = [1 : 8]) [(8.92326) + (5.793895)*cos((46.172833) + k*((-1.649168) - (46.172833))/8), (-24.622592) + (5.793895)*sin((46.172833) + k*((-1.649168) - (46.172833))/8)]],
+            [[14.791873, -25.073562]],
+            [[14.820724, -25.32487]],
+            [[14.763027, -29.474347]],
+            [[14.73059, -29.743461]],
+            [[14.682674, -30.131842]],
+            [for (k = [1 : 10]) [(9.225778) + (5.411365)*cos((1.451799) + k*((-55.214469) - (1.451799))/10), (-30.270142) + (5.411365)*sin((1.451799) + k*((-55.214469) - (1.451799))/10)]],
+            [for (k = [1 : 6]) [(8.077262) + (11.603041)*cos((-68.672378) + k*((-103.22059) - (-68.672378))/6), (-23.897009) + (11.603041)*sin((-68.672378) + k*((-103.22059) - (-68.672378))/6)]],
+            [for (k = [1 : 3]) [(7.480083) + (14.38764)*cos((-98.250149) + k*((-107.828123) - (-98.250149))/3), (-20.988339) + (14.38764)*sin((-98.250149) + k*((-107.828123) - (-98.250149))/3)]],
+            [for (k = [1 : 4]) [(5.046679) + (6.552619)*cos((-107.506028) + k*((-127.210823) - (-107.506028))/4), (-28.434396) + (6.552619)*sin((-107.506028) + k*((-127.210823) - (-107.506028))/4)]],
+            [for (k = [1 : 4]) [(3.779471) + (4.380864)*cos((-127.952854) + k*((-149.374112) - (-127.952854))/4), (-30.197064) + (4.380864)*sin((-127.952854) + k*((-149.374112) - (-127.952854))/4)]]));
+                            // b2_crown_ctrl_7: parametric CONTROL section at y=4.258 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, 4.258]) linear_extrude(0.02) polygon(concat(
+            [for (k = [1 : 10]) [(5.067908) + (6.451406)*cos((142.10104) + k*((84.782499) - (142.10104))/10), (-26.483831) + (6.451406)*sin((142.10104) + k*((84.782499) - (142.10104))/10)]],
+            [for (k = [1 : 4]) [(6.881472) + (14.681453)*cos((94.783525) + k*((71.4408) - (94.783525))/4), (-34.693833) + (14.681453)*sin((94.783525) + k*((71.4408) - (94.783525))/4)]],
+            [for (k = [1 : 10]) [(9.324017) + (4.516082)*cos((60.360672) + k*((1.034195) - (60.360672))/10), (-24.709697) + (4.516082)*sin((60.360672) + k*((1.034195) - (60.360672))/10)]],
+            [[14.07226, -27.342516]],
+            [for (k = [1 : 3]) [(13.679649) + (0.395751)*cos((7.221585) + k*((-2.118003) - (7.221585))/3), (-27.392265) + (0.395751)*sin((7.221585) + k*((-2.118003) - (7.221585))/3)]],
+            [for (k = [1 : 3]) [(0.286647) + (13.788927)*cos((0.459731) + k*((-9.891851) - (0.459731))/3), (-27.51753) + (13.788927)*sin((0.459731) + k*((-9.891851) - (0.459731))/3)]],
+            [for (k = [1 : 8]) [(8.094322) + (5.758195)*cos((-3.831815) + k*((-47.213803) - (-3.831815))/8), (-29.499435) + (5.758195)*sin((-3.831815) + k*((-47.213803) - (-3.831815))/8)]],
+            [[10.966709, -34.199063]],
+            [[10.933646, -34.214489]],
+            [[10.869585, -34.238753]],
+            [for (k = [1 : 3]) [(7.881446) + (9.809367)*cos((-72.26471) + k*((-86.701026) - (-72.26471))/3), (-24.895549) + (9.809367)*sin((-72.26471) + k*((-86.701026) - (-72.26471))/3)]],
+            [for (k = [1 : 5]) [(7.357684) + (14.043124)*cos((-85.556292) + k*((-111.241685) - (-85.556292))/5), (-20.685186) + (14.043124)*sin((-85.556292) + k*((-111.241685) - (-85.556292))/5)]],
+            [for (k = [1 : 6]) [(4.243328) + (5.081119)*cos((-112.843934) + k*((-146.504693) - (-112.843934))/6), (-29.08948) + (5.081119)*sin((-112.843934) + k*((-146.504693) - (-112.843934))/6)]],
+            [[0.008731, -24.731938]],
+            [[0.008731, -22.545517]]));
+                            // b2_crown_ctrl_8: parametric CONTROL section at y=4.658 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, 4.658]) linear_extrude(0.02) polygon(concat(
+            [[0.008731, -24.800108]],
+            [[7.95858, -20.118689]],
+            [[8.240675, -20.135131]],
+            [[8.276518, -20.139388]],
+            [for (k = [1 : 7]) [(8.532585) + (6.608175)*cos((92.207764) + k*((52.44962) - (92.207764))/7), (-26.78153) + (6.608175)*sin((92.207764) + k*((52.44962) - (92.207764))/7)]],
+            [for (k = [1 : 7]) [(8.758475) + (5.069915)*cos((41.606405) + k*((3.442522) - (41.606405))/7), (-24.925384) + (5.069915)*sin((41.606405) + k*((3.442522) - (41.606405))/7)]],
+            [[14.039144, -27.212274]],
+            [[14.046587, -27.381377]],
+            [for (k = [1 : 5]) [(3.188736) + (10.85012)*cos((2.445869) + k*((-26.347998) - (2.445869))/5), (-27.845163) + (10.85012)*sin((2.445869) + k*((-26.347998) - (2.445869))/5)]],
+            [for (k = [1 : 9]) [(9.435689) + (4.223828)*cos((-34.639963) + k*((-86.558313) - (-34.639963))/9), (-30.262557) + (4.223828)*sin((-34.639963) + k*((-86.558313) - (-34.639963))/9)]],
+            [for (k = [1 : 3]) [(7.516338) + (12.950434)*cos((-80.334027) + k*((-87.995149) - (-80.334027))/3), (-21.740034) + (12.950434)*sin((-80.334027) + k*((-87.995149) - (-80.334027))/3)]],
+            [[0.008731, -30.000107]]));
+                            // b2_crown_ctrl_9: parametric CONTROL section at y=5.458 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, 5.458]) linear_extrude(0.02) polygon(concat(
+            [[9.792414, -20.382327]],
+            [for (k = [1 : 4]) [(9.025086) + (5.500389)*cos((81.983736) + k*((59.849306) - (81.983736))/4), (-25.830924) + (5.500389)*sin((81.983736) + k*((59.849306) - (81.983736))/4)]],
+            [for (k = [1 : 10]) [(9.251307) + (4.510298)*cos((55.625579) + k*((1.574875) - (55.625579))/10), (-24.782832) + (4.510298)*sin((55.625579) + k*((1.574875) - (55.625579))/10)]],
+            [for (k = [1 : 6]) [(0.751804) + (13.257322)*cos((11.50761) + k*((-22.396897) - (11.50761))/6), (-27.309419) + (13.257322)*sin((11.50761) + k*((-22.396897) - (11.50761))/6)]],
+            [for (k = [1 : 10]) [(9.444055) + (4.075945)*cos((-29.489882) + k*((-85.110173) - (-29.489882))/10), (-30.347683) + (4.075945)*sin((-29.489882) + k*((-85.110173) - (-29.489882))/10)]],
+            [[0.008731, -30.000107]],
+            [[0.008731, -24.800108]]));
+                            // b2_crown_ctrl_10: parametric CONTROL section at y=6.258 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, 6.258]) linear_extrude(0.02) polygon(concat(
+            [[0.008731, -24.800108]],
+            [[10.86967, -20.708384]],
+            [for (k = [1 : 12]) [(9.425525) + (4.249047)*cos((70.08045) + k*((1.012767) - (70.08045))/12), (-24.693542) + (4.249047)*sin((70.08045) + k*((1.012767) - (70.08045))/12)]],
+            [for (k = [1 : 6]) [(0.655006) + (13.300615)*cos((11.535801) + k*((-22.171824) - (11.535801))/6), (-27.284182) + (13.300615)*sin((11.535801) + k*((-22.171824) - (11.535801))/6)]],
+            [[12.946267, -32.303781]],
+            [for (k = [1 : 8]) [(9.634842) + (3.760514)*cos((-28.265209) + k*((-70.804786) - (-28.265209))/8), (-30.523356) + (3.760514)*sin((-28.265209) + k*((-70.804786) - (-28.265209))/8)]],
+            [[0.008731, -30.000107]]));
+                            // b2_crown_ctrl_11: parametric CONTROL section at y=7.458 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
+                            rotate([0, -90, -90]) translate([0, 0, 7.458]) linear_extrude(0.02) polygon(concat(
+            [[0.008731, -24.800108]],
+            [[11.953159, -21.382498]],
+            [for (k = [1 : 9]) [(9.210688) + (4.40937)*cos((51.373637) + k*((2.646286) - (51.373637))/9), (-24.814691) + (4.40937)*sin((51.373637) + k*((2.646286) - (51.373637))/9)]],
+            [for (k = [1 : 3]) [(-3.336653) + (17.183143)*cos((8.735231) + k*((-0.173591) - (8.735231))/3), (-27.219221) + (17.183143)*sin((8.735231) + k*((-0.173591) - (8.735231))/3)]],
+            [for (k = [1 : 3]) [(-0.097048) + (13.942287)*cos((0.938641) + k*((-15.50481) - (0.938641))/3), (-27.49972) + (13.942287)*sin((0.938641) + k*((-15.50481) - (0.938641))/3)]],
+            [for (k = [1 : 6]) [(9.215132) + (4.283027)*cos((-15.995607) + k*((-50.186436) - (-15.995607))/6), (-30.044971) + (4.283027)*sin((-15.995607) + k*((-50.186436) - (-15.995607))/6)]],
+            [[0.008731, -30.000107]]));
+                        }
+                        difference() {
+                            // b2_dome_below: everything below the ceiling-arc center plane
+                            translate([-36, -12, -1]) cube([18, 24, b2_dome_cz + 1]);
+                            // b2_dome_arc: lengthwise ceiling: x-axis cylinder, LOWER branch (center above the part) — residual in dome_r param
+                            translate([-36, b2_dome_cy, b2_dome_cz]) rotate([0, 90, 0]) cylinder(h=17, r=b2_dome_r, $fn=b2_fn);
+                        }
+                    }
+                    // b2_scoop_rear: rear underside scoop: measured x-axis cylinder (see scoop_rear_* params)
+                    translate([-36, b2_scoop_rear_cy, b2_scoop_rear_cz]) rotate([0, 90, 0]) cylinder(h=17, r=b2_scoop_rear_r, $fn=b2_fn);
+                    // b2_scoop_front: front underside scoop: measured x-axis cylinder (see scoop_front_* params)
+                    translate([-36, b2_scoop_front_cy, b2_scoop_front_cz]) rotate([0, 90, 0]) cylinder(h=17, r=b2_scoop_front_r, $fn=b2_fn);
                 }
             }
         }
@@ -503,10 +516,20 @@ module body_2() {
     }
 }
 
-// ---- body 3 (strategy: csg — semantic parametric plan) ----
-// plan: semantic laws: beam = exact wall window × envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window × fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized | crown REPLACED by law-solids (template-style): hull of 4 vectorized control slabs INTERSECT measured ceiling arc MINUS measured underside scoops PLUS sloped fin lip — every law fitted with residual cited
+// --------------------------------------------------------------------
+// BODY 3 — semantic parametric plan
+//   semantic laws: beam = exact wall window × envelope laws (top res
+//   0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with
+//   the exact pin bores); ridge stem/cap = window × fitted laws; crown
+//   kept as measured loft (no clean law); recess/web profiles
+//   vectorized | crown REPLACED by law-solids (template-style): hull
+//   of vectorized control slabs INTERSECT measured ceiling arc MINUS
+//   measured underside scoops PLUS sloped fin lip — every law fitted
+//   with residual cited
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- b3 ---
 b3_beam_wall_x0     = -0.74943;  // beam side-wall plane (median of 230 station footprints; end roundings in x are absorbed)
 b3_beam_wall_x1     = 4.45057;  // beam side-wall plane (median of 230 station footprints)
 b3_knuckle_palm_y   = -12.094042;  // exact pin-bore axis y, face #4 (lobe arc fit agrees within 0.1)
@@ -517,16 +540,16 @@ b3_knuckle_distal_z = 6.008731;  // exact pin-bore axis z, face #27
 b3_tendon_tunnel_r  = 1.125;  // exact tendon-tunnel bore radius — tendon tunnel: exact full-circle cylinder face #16
 b3_pin_palm_r       = 2.3;  // exact palm pin-bore radius — knuckle pin bore: exact cylinder face #4
 b3_pin_distal_r     = 2.375;  // exact distal pin-bore radius — knuckle pin bore: exact cylinder face #27
-b3_dome_r           = 52.342152;  // lengthwise ceiling arc radius (fit over 60 stations, res 0.243; the hand-tuned template guessed 60)
-b3_dome_cy          = 5.305281;  // ceiling arc center y (same fit)
-b3_dome_cz          = 66.377488;  // ceiling arc center z — ABOVE the part: the ceiling is the circle's lower branch
-b3_scoop_rear_r     = 11.763629;  // rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.263 (template: 13.7 hand-tuned)
+b3_dome_r           = 54.112284;  // lengthwise ceiling arc radius (fit over 60 stations, res 0.247)
+b3_dome_cy          = 5.575018;  // ceiling arc center y (same fit)
+b3_dome_cz          = 68.129323;  // ceiling arc center z — ABOVE the part: the ceiling is the circle's lower branch
+b3_scoop_rear_r     = 11.763629;  // rear underside scoop cylinder (x-axis) radius: circle fit to the wing shelf heights, res 0.263
 b3_scoop_rear_cy    = -16.089836;  // rear scoop center y (same fit)
 b3_scoop_rear_cz    = 4.056398;  // rear scoop center z (same fit)
-b3_scoop_front_r    = 7.570562;  // front underside scoop radius, res 0.009 — nearly exact circle; the real part is asymmetric (template reused 13.7 on both ends)
+b3_scoop_front_r    = 7.570562;  // front underside scoop radius, res 0.009 — nearly exact circle
 b3_scoop_front_cy   = 11.237027;  // front scoop center y (same fit)
 b3_scoop_front_cz   = 5.824541;  // front scoop center z (same fit)
-b3_fin_top_m        = -0.112916;  // rear clip-lip top slope (linear fit res 0.104; -6.4 deg — the template hand-tuned -6.0)
+b3_fin_top_m        = -0.112916;  // rear clip-lip top slope (linear fit res 0.104)
 b3_fin_top_b        = 14.925157;  // rear clip-lip top intercept (same fit)
 b3_fn               = 96;  // curve resolution
 
@@ -818,7 +841,7 @@ module body_3() {
                 difference() {
                     intersection() {
                         hull() {
-                            // b3_crown_ctrl_0: parametric CONTROL section at y=-8.0 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)
+                            // b3_crown_ctrl_0: parametric CONTROL section at y=-8.0 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
                             rotate([0, -90, -90]) translate([0, 0, -8]) linear_extrude(0.02) polygon(concat(
             [[12.477797, 7.853539]],
             [for (k = [1 : 12]) [(12.027379) + (3.01177)*cos((81.414945) + k*((12.071273) - (81.414945))/12), (4.870026) + (3.01177)*sin((81.414945) + k*((12.071273) - (81.414945))/12)]],
@@ -827,7 +850,7 @@ module body_3() {
             [for (k = [1 : 7]) [(11.800714) + (3.185182)*cos((-39.209671) + k*((-77.778312) - (-39.209671))/7), (-1.060617) + (3.185182)*sin((-39.209671) + k*((-77.778312) - (-39.209671))/7)]],
             [[0.008731, -0.749434]],
             [[0.008731, 4.450566]]));
-                            // b3_crown_ctrl_1: parametric CONTROL section at y=-3.4 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)
+                            // b3_crown_ctrl_1: parametric CONTROL section at y=-3.4 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
                             rotate([0, -90, -90]) translate([0, 0, -3.4]) linear_extrude(0.02) polygon(concat(
             [[0.008731, 4.711702]],
             [[0.008731, 5.097289]],
@@ -842,7 +865,7 @@ module body_3() {
             [for (k = [1 : 3]) [(8.435818) + (30.764442)*cos((-92.400205) + k*((-98.100702) - (-92.400205))/3), (26.553928) + (30.764442)*sin((-92.400205) + k*((-98.100702) - (-92.400205))/3)]],
             [for (k = [1 : 5]) [(4.737717) + (7.716688)*cos((-94.725553) + k*((-122.808955) - (-94.725553))/5), (3.802364) + (7.716688)*sin((-94.725553) + k*((-122.808955) - (-94.725553))/5)]],
             [for (k = [1 : 3]) [(3.085309) + (3.896229)*cos((-130.295535) + k*((-142.13174) - (-130.295535))/3), (0.302463) + (3.896229)*sin((-130.295535) + k*((-142.13174) - (-130.295535))/3)]]));
-                            // b3_crown_ctrl_2: parametric CONTROL section at y=3.4 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)
+                            // b3_crown_ctrl_2: parametric CONTROL section at y=3.4 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
                             rotate([0, -90, -90]) translate([0, 0, 3.4]) linear_extrude(0.02) polygon(concat(
             [[0.008731, 5.700535]],
             [for (k = [1 : 7]) [(3.143097) + (4.70958)*cos((131.958609) + k*((93.898747) - (131.958609))/7), (2.214408) + (4.70958)*sin((131.958609) + k*((93.898747) - (131.958609))/7)]],
@@ -857,7 +880,7 @@ module body_3() {
             [for (k = [1 : 6]) [(9.851607) + (6.432394)*cos((-63.650559) + k*((-97.166515) - (-63.650559))/6), (2.84869) + (6.432394)*sin((-63.650559) + k*((-97.166515) - (-63.650559))/6)]],
             [for (k = [1 : 4]) [(8.011468) + (23.345063)*cos((-87.471165) + k*((-107.681558) - (-87.471165))/4), (19.785274) + (23.345063)*sin((-87.471165) + k*((-107.681558) - (-87.471165))/4)]],
             [for (k = [1 : 4]) [(2.333963) + (3.148395)*cos((-116.410401) + k*((-137.588007) - (-116.410401))/4), (0.402796) + (3.148395)*sin((-116.410401) + k*((-137.588007) - (-116.410401))/4)]]));
-                            // b3_crown_ctrl_3: parametric CONTROL section at y=6.82 (convex hull of the measured section, fin excluded, vectorized lines+arcs tol 0.05)
+                            // b3_crown_ctrl_3: parametric CONTROL section at y=6.82 (convex hull of the measured section, vectorized lines+arcs tol 0.05)
                             rotate([0, -90, -90]) translate([0, 0, 6.82]) linear_extrude(0.02) polygon(concat(
             [[0.008731, -0.108508]],
             [[0.008731, 4.450566]],
@@ -954,3 +977,4 @@ body_1();
 body_2();
 body_3();
 body_4();
+if (show_original) %import(original_stl);

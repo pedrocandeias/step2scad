@@ -1,15 +1,25 @@
-// ---- body 3 (strategy: csg — semantic parametric plan) ----
-// plan: semantic laws: beam = exact wall window × envelope laws (top res 0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with the exact pin bores); ridge stem/cap = window × fitted laws; crown kept as measured loft (no clean law); recess/web profiles vectorized
+// --------------------------------------------------------------------
+// BODY 3 — semantic parametric plan
+//   semantic laws: beam = exact wall window × envelope laws (top res
+//   0.099, bottom res 0.093; knuckle lobes are r6 arcs concentric with
+//   the exact pin bores); ridge stem/cap = window × fitted laws; crown
+//   kept as measured loft (no clean law); recess/web profiles
+//   vectorized
+// --------------------------------------------------------------------
 
-// ======== PARAMETERS (every value measured; see source comments) ========
+// ======== PARAMETERS (every value measured; sources cited) ========
+// --- beam ---
 beam_wall_x0     = -0.74943;  // beam side-wall plane (median of 230 station footprints; end roundings in x are absorbed)
 beam_wall_x1     = 4.45057;  // beam side-wall plane (median of 230 station footprints)
+// --- knuckle ---
 knuckle_palm_y   = -12.094042;  // exact pin-bore axis y, face #4 (lobe arc fit agrees within 0.1)
 knuckle_palm_z   = 6.008731;  // exact pin-bore axis z, face #4
 knuckle_lobe_r   = 6;  // outer radius of both knuckle lobes (arc fits r=6.000 / r=5.997, res 0.002/0.003 -> nominal 6.0)
 knuckle_distal_y = 10.905958;  // exact pin-bore axis y, face #27
 knuckle_distal_z = 6.008731;  // exact pin-bore axis z, face #27
+// --- tendon ---
 tendon_tunnel_r  = 1.125;  // exact tendon-tunnel bore radius — tendon tunnel: exact full-circle cylinder face #16
+// --- pin ---
 pin_palm_r       = 2.3;  // exact palm pin-bore radius — knuckle pin bore: exact cylinder face #4
 pin_distal_r     = 2.375;  // exact distal pin-bore radius — knuckle pin bore: exact cylinder face #27
 fn               = 96;  // curve resolution
