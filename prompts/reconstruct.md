@@ -64,3 +64,13 @@ from the B-rep; use mesh sampling only for genuinely free-form surfaces.
 ---
 _Tooling: B-rep via OpenCASCADE / pythonocc-core or FreeCAD headless (`freecadcmd`);
 render via the `openscad` skill / OpenSCAD MCP; IoU via trimesh boolean volumes._
+
+### Round-region check (mandatory before any band/slab strategy)
+
+Read `round_regions_perp_z` in the report digest (report.py): families of
+coaxial cylinder faces PERPENDICULAR to the banding axis, ranked by area.
+Any region listed there must be reconstructed as a cross-axis extrude with
+the exact arc (vectorizer + the exact-circle pool for that axis) or a
+law-solid — NEVER band-stacked (bands turn exact circles into staircases;
+found by the author on Palm_left: knuckle posts r6.000, ears r8.000).
+

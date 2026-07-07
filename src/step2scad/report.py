@@ -178,6 +178,47 @@ def _bsplines(faces: list[dict]) -> list[dict]:
     return out
 
 
+
+def _round_regions(faces: list[dict], band_axis: str = "z") -> list[dict]:
+    """Families of coaxial cylinder faces whose axis is PERPENDICULAR to the
+    banding axis — regions a slab-stack strategy would slice into "slopes".
+
+    Lesson from Palm_left (author-spotted): the knuckle posts and rear ears
+    were exact x-axis r6.000/r8.000 cylinders, band-stacked into staircases
+    because authoring fit the tessellation instead of reading this list.
+    These regions must be cross-axis extrudes / law-solids, never bands.
+    """
+    import numpy as np
+    bi = "xyz".index(band_axis)
+    fams: dict[tuple, dict] = {}
+    for f in faces:
+        if f["type"] != "cylinder":
+            continue
+        ax = np.asarray(f["params"]["axis_dir"], float)
+        if abs(ax[bi]) > 0.05:                    # not perpendicular to bands
+            continue
+        o = np.asarray(f["params"]["axis_origin"], float)
+        # family key: axis direction + the axis line's position in the plane
+        # perpendicular to it + radius
+        axk = tuple(np.round(np.abs(ax), 3))
+        perp = o - (o @ ax) * ax
+        key = (axk, tuple(np.round(perp, 2)), round(f["params"]["radius"], 3))
+        fam = fams.setdefault(key, {"axis_dir": _v6(ax), "radius":
+                                    _r6(f["params"]["radius"]),
+                                    "line_point": _v6(perp), "faces": [],
+                                    "area": 0.0})
+        fam["faces"].append(f["index"])
+        fam["area"] += float(f.get("area", 0.0))
+    out = [fam for fam in fams.values() if fam["area"] > 5.0]
+    out.sort(key=lambda q: -q["area"])
+    for fam in out:
+        fam["area"] = _r6(fam["area"])
+        fam["warning"] = ("cross-axis round feature: a band/slab stack along "
+                          f"'{band_axis}' would staircase this — reconstruct "
+                          "as a cross-axis extrude with the exact arc, or a "
+                          "law-solid")
+    return out
+
 def body_report(body: dict) -> dict:
     faces = body["faces"]
     total_area = sum(f["area"] for f in faces) or 1.0
@@ -196,6 +237,7 @@ def body_report(body: dict) -> dict:
         },
         "plane_groups": _group_planes(faces),
         "cylinder_clusters": _cluster_cylinders(faces),
+        "round_regions_perp_z": _round_regions(faces, "z"),
         "cones": _list_simple(faces, "cone", {
             "axis_origin": "axis_origin", "axis_dir": "axis_dir",
             "half_angle_deg": "half_angle_deg", "ref_radius": "ref_radius",

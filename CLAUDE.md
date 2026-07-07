@@ -76,7 +76,11 @@ the pipeline design is `ARCHITECTURE.md`.
    reconstruct each independently. Per face, extract surface type + exact params
    (plane normal/origin; cylinder axis/radius; cone half-angle+ref radius; sphere
    center/radius; torus major/minor radius for fillets/rounds), plus edges + bbox.
-2. **Classify** each body's strategy: rotationally symmetric → `rotate_extrude()`;
+2. **Classify** each body's strategy — first checking `round_regions_perp_z`
+   in the report digest: coaxial cylinder families perpendicular to the
+   banding axis must become cross-axis extrudes/law-solids, never band
+   stacks (bands staircase exact circles — Palm_left posts/ears lesson).
+   Then: rotationally symmetric → `rotate_extrude()`;
    prismatic → `linear_extrude()` of a 2D section; primitive assembly → CSG of
    cylinders/boxes/spheres with chamfers/fillets from cone/torus faces; lofted/
    "organic" → parametric loft (`skin()`/`hull()`/BOSL2 sweep) between recovered
