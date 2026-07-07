@@ -128,6 +128,12 @@ Concretely:
   2 centers + `slot_len`/`slot_ang`/`slot_r`).
 - **Derived params** via `"expr"` keep relationships explicit
   (`fillet_rc = mount_r - fillet_r`).
+- **De-staircasing rule (author's)**: a band-stack staircase is never the
+  final surface. The smooth form is the ruled skin connecting the TOP edges
+  of consecutive steps (loft band_i's top outline to band_{i+1}'s — the
+  `skin` construct); when the height difference is minimal, merge into one
+  flat face (constant-run collapse). Slabs remain only where band topology
+  changes between neighbors.
 - Plan schema: `src/step2scad/plan.py` (v2 params/modules/expressions; v3 profiles/
   profile2d/transform). Authoring reference: `scripts/authoring/author_armguard_parametric.py`.
 
