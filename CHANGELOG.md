@@ -7,6 +7,14 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Snap_Pins heads on law-solids**: every head collapsed from 6-7 pairwise
+  hulls to 2 auto-selected control slices; rectangular head plates
+  RECOGNIZED as named `box` prims (4-vertex axis-aligned stations, interp
+  error 0.000); family feature: the 3.3×5.5 plate recurs on three pins.
+  Prims 148→91 (551 in v1), IoU 0.9818 with delta ±0.0000. New stage
+  `scripts/authoring/lawsolids_snap_pins.py` chained from the authoring
+  script; remaining residual (38.9 mm³, pin-head transition rounds) noted
+  as a future offset_sweep-round candidate.
 - **Thumb proximal on law-solids** (crownlaws generalized per-body, control
   slices auto-selected via `decimate_stations`, 37→12): thumb crown = 12
   slices ∩ arc roof (r=36.22) − scoops r=8.44/7.42. Thumb offline 0.9718

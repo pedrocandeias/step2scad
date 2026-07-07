@@ -25,6 +25,8 @@ sys.path.insert(0, "src")
 from step2scad.fitting import circle_fit, vectorize, z_cylinder_circles
 from step2scad.plan import validate_plan
 
+from lawsolids_snap_pins import build_head_nodes, family_report
+
 OUT = Path("output/Snap_Pins")
 R = lambda v: round(float(v), 6)
 
@@ -259,11 +261,7 @@ for bid in UNIQUE:
                 "source": f"head station (vectorized: {nl} lines + {na} arcs) — "
                           + h["source"],
                 "profile2d": p2d, "z0": h["z0"], "z1": R(h["z0"] + 0.02)}
-    for i in range(len(pin["prof"]) - 1):
-        kids.append({"op": "hull", "children": [head_slab(i, "a"),
-                                                head_slab(i + 1, "b")]})
-    if len(pin["prof"]) == 1:
-        kids.append(head_slab(0, ""))
+    kids += build_head_nodes(pin, R, head_slab, report)
     # bridge the head block to the revolve chain (the 0.4mm inter-station
     # gap was ~6 mm3 FN per pin): hull(edge head slab, thin disc at the
     # nearest plateau boundary)
@@ -373,5 +371,6 @@ for b in v1["bodies"]:
 plan = {"version": 1, "source": v1.get("source", ""), "bodies": new_bodies}
 validate_plan(plan)
 json.dump(plan, open(OUT / "plan.json", "w"), indent=1)
+report += family_report()
 print("\n".join(report))
 print(f"wrote {OUT/'plan.json'}")

@@ -56,76 +56,8 @@ module body_0() {
                 translate([b0_axis_x, b0_barb_s1, b0_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b0_shaft_s0) - (b0_barb_s1), r1=b0_barb_r, r2=b0_shaft_r, $fn=b0_fn);
                 // b0_shaft: EXACT cylinder face #14 (r=2.5)
                 translate([b0_axis_x, b0_shaft_s0, b0_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b0_shaft_s1) - (b0_shaft_s0), r=b0_shaft_r, $fn=b0_fn);
-                hull() {
-                    // b0_head_0a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-4.745 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -4.745]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                    // b0_head_1b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-4.345 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -4.345]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                }
-                hull() {
-                    // b0_head_1a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-4.345 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -4.345]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                    // b0_head_2b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.945 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.945]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                }
-                hull() {
-                    // b0_head_2a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.945 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.945]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                    // b0_head_3b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.545 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.545]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                }
-                hull() {
-                    // b0_head_3a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.545 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.545]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                    // b0_head_4b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.145 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.145]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                }
-                hull() {
-                    // b0_head_4a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-3.145 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -3.145]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                    // b0_head_5b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-2.905 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -2.905]) linear_extrude(0.02) polygon(concat(
-            [[4.9305, 24.41751]],
-            [[4.9305, 31.16751]],
-            [[0.5303, 31.16751]],
-            [[0.5303, 24.41751]]));
-                }
+                // b0_head_plate_0: head plate: constant axis-aligned rectangular section 4.40 x 6.75 over 6 measured stations (identical within 0.05; control-slice interp err <= 0.05) — measured section convex hull at y=-4.745 (high-res tessellation)
+                translate([24.41751, -4.745, 0.5303]) cube([6.75, 1.86, 4.4002]);
                 hull() {
                     // b0_head_0bridge: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-4.745 (high-res tessellation)
                     rotate([0, -90, -90]) translate([0, 0, -4.745]) linear_extrude(0.02) polygon(concat(
@@ -226,30 +158,6 @@ module body_1() {
             [[7.27118, 3.72613]],
             [[3.91132, 3.70437]],
             [for (k = [1 : 16]) [(4.887723) + (1.961842)*cos((120.191663) + k*((211.697594) - (120.191663))/16), (2.026179) + (1.961842)*sin((120.191663) + k*((211.697594) - (120.191663))/16)]],
-            [[3.55482, 0.5303]]));
-                    // b1_head_1b: head station (vectorized: 8 lines + 1 arcs) — measured section convex hull at x=-8.412 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.412]) linear_extrude(0.02) polygon(concat(
-            [[7.74646, 0.5303]],
-            [for (k = [1 : 11]) [(5.891298) + (2.407027)*cos((-39.414752) + k*((22.367858) - (-39.414752))/11), (2.054947) + (2.407027)*sin((-39.414752) + k*((22.367858) - (-39.414752))/11)]],
-            [[7.7187, 3.55641]],
-            [[7.15064, 3.73342]],
-            [[3.91132, 3.70437]],
-            [[3.40213, 3.39655]],
-            [[3.15064, 2.73342]],
-            [[3.21116, 0.99081]],
-            [[3.55482, 0.5303]]));
-                }
-                hull() {
-                    // b1_head_1a: head station (vectorized: 8 lines + 1 arcs) — measured section convex hull at x=-8.412 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.412]) linear_extrude(0.02) polygon(concat(
-            [[7.74646, 0.5303]],
-            [for (k = [1 : 11]) [(5.891298) + (2.407027)*cos((-39.414752) + k*((22.367858) - (-39.414752))/11), (2.054947) + (2.407027)*sin((-39.414752) + k*((22.367858) - (-39.414752))/11)]],
-            [[7.7187, 3.55641]],
-            [[7.15064, 3.73342]],
-            [[3.91132, 3.70437]],
-            [[3.40213, 3.39655]],
-            [[3.15064, 2.73342]],
-            [[3.21116, 0.99081]],
             [[3.55482, 0.5303]]));
                     // b1_head_2b: head station (vectorized: 9 lines + 0 arcs) — measured section convex hull at x=-8.012 (high-res tessellation)
                     rotate([90, 0, 90]) translate([0, 0, -8.012]) linear_extrude(0.02) polygon(concat(
@@ -381,90 +289,8 @@ module body_5() {
                 translate([b5_barb_s0, b5_axis_y, b5_axis_z]) rotate([0, 90, 0]) cylinder(h=(b5_barb_s1) - (b5_barb_s0), r=b5_barb_r, $fn=b5_fn);
                 // b5_barb_blend: measured transition between adjacent station plateaus (frustum)
                 translate([b5_barb_s1, b5_axis_y, b5_axis_z]) rotate([0, 90, 0]) cylinder(h=(b5_collar_s0) - (b5_barb_s1), r1=b5_barb_r, r2=b5_collar_r, $fn=b5_fn);
-                hull() {
-                    // b5_head_0a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-9.531 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -9.531]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_1b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-9.341 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -9.341]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
-                hull() {
-                    // b5_head_1a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-9.341 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -9.341]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_2b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.941 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.941]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
-                hull() {
-                    // b5_head_2a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.941 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.941]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_3b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.541 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.541]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
-                hull() {
-                    // b5_head_3a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.541 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.541]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_4b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.141 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.141]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
-                hull() {
-                    // b5_head_4a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-8.141 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.141]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_5b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-7.741 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -7.741]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
-                hull() {
-                    // b5_head_5a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-7.741 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -7.741]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                    // b5_head_6b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-7.341 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -7.341]) linear_extrude(0.02) polygon(concat(
-            [[18.6063, 0.5303]],
-            [[18.6063, 3.9303]],
-            [[13.6063, 3.9303]],
-            [[13.6063, 0.5303]]));
-                }
+                // b5_head_plate_0: head plate: constant axis-aligned rectangular section 5.00 x 3.40 over 7 measured stations (identical within 0.05; control-slice interp err <= 0.05) — measured section convex hull at x=-9.531 (high-res tessellation)
+                translate([-9.531, 13.6063, 0.5303]) cube([2.21, 5, 3.4]);
                 hull() {
                     // b5_head_-1bridge: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-7.341 (high-res tessellation)
                     rotate([90, 0, 90]) translate([0, 0, -7.341]) linear_extrude(0.02) polygon(concat(
@@ -548,90 +374,8 @@ module body_6() {
                 translate([b6_axis_x, b6_barb_s1, b6_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b6_shaft_s0) - (b6_barb_s1), r1=b6_barb_r, r2=b6_shaft_r, $fn=b6_fn);
                 // b6_shaft: EXACT cylinder face #50 (r=1.9)
                 translate([b6_axis_x, b6_shaft_s0, b6_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b6_shaft_s1) - (b6_shaft_s0), r=b6_shaft_r, $fn=b6_fn);
-                hull() {
-                    // b6_head_0a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-8.557 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -8.557]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_1b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-8.157 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -8.157]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
-                hull() {
-                    // b6_head_1a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-8.157 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -8.157]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_2b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-7.757 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -7.757]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
-                hull() {
-                    // b6_head_2a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-7.757 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -7.757]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_3b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-7.357 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -7.357]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
-                hull() {
-                    // b6_head_3a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-7.357 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -7.357]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_4b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-6.957 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -6.957]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
-                hull() {
-                    // b6_head_4a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-6.957 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -6.957]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_5b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-6.557 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -6.557]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
-                hull() {
-                    // b6_head_5a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-6.557 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -6.557]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                    // b6_head_6b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-6.267 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, -6.267]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -29.60438]],
-            [[3.8303, -24.10438]],
-            [[0.5303, -24.10438]],
-            [[0.5303, -29.60438]]));
-                }
+                // b6_head_plate_0: head plate: constant axis-aligned rectangular section 3.30 x 5.50 over 7 measured stations (identical within 0.05; control-slice interp err <= 0.05) — measured section convex hull at y=-8.557 (high-res tessellation)
+                translate([-29.60438, -8.557, 0.5303]) cube([5.5, 2.31, 3.3]);
                 hull() {
                     // b6_head_0bridge: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=-8.557 (high-res tessellation)
                     rotate([0, -90, -90]) translate([0, 0, -8.557]) linear_extrude(0.02) polygon(concat(
@@ -730,26 +474,6 @@ module body_7() {
             [for (k = [1 : 19]) [(-13.987189) + (1.590721)*cos((-32.782874) + k*((77.439525) - (-32.782874))/19), (2.197802) + (1.590721)*sin((-32.782874) + k*((77.439525) - (-32.782874))/19)]],
             [[-16.88437, 3.70437]],
             [for (k = [1 : 16]) [(-15.919478) + (1.953642)*cos((119.926444) + k*((211.923499) - (119.926444))/16), (2.028162) + (1.953642)*sin((119.926444) + k*((211.923499) - (119.926444))/16)]],
-            [[-17.24087, 0.5303]]));
-                    // b7_head_1b: head station (vectorized: 5 lines + 2 arcs) — measured section convex hull at x=-8.412 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.412]) linear_extrude(0.02) polygon(concat(
-            [[-13.04924, 0.5303]],
-            [[-12.70557, 0.99081]],
-            [[-12.64505, 1.33342]],
-            [for (k = [1 : 19]) [(-13.987189) + (1.590721)*cos((-32.782874) + k*((77.439525) - (-32.782874))/19), (2.197802) + (1.590721)*sin((-32.782874) + k*((77.439525) - (-32.782874))/19)]],
-            [[-17.03371, 3.65312]],
-            [for (k = [1 : 14]) [(-15.67001) + (2.157038)*cos((129.617782) + k*((207.928839) - (129.617782))/14), (2.005731) + (2.157038)*sin((129.617782) + k*((207.928839) - (129.617782))/14)]],
-            [[-17.24087, 0.5303]]));
-                }
-                hull() {
-                    // b7_head_1a: head station (vectorized: 5 lines + 2 arcs) — measured section convex hull at x=-8.412 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -8.412]) linear_extrude(0.02) polygon(concat(
-            [[-13.04924, 0.5303]],
-            [[-12.70557, 0.99081]],
-            [[-12.64505, 1.33342]],
-            [for (k = [1 : 19]) [(-13.987189) + (1.590721)*cos((-32.782874) + k*((77.439525) - (-32.782874))/19), (2.197802) + (1.590721)*sin((-32.782874) + k*((77.439525) - (-32.782874))/19)]],
-            [[-17.03371, 3.65312]],
-            [for (k = [1 : 14]) [(-15.67001) + (2.157038)*cos((129.617782) + k*((207.928839) - (129.617782))/14), (2.005731) + (2.157038)*sin((129.617782) + k*((207.928839) - (129.617782))/14)]],
             [[-17.24087, 0.5303]]));
                     // b7_head_2b: head station (vectorized: 10 lines + 0 arcs) — measured section convex hull at x=-8.012 (high-res tessellation)
                     rotate([90, 0, 90]) translate([0, 0, -8.012]) linear_extrude(0.02) polygon(concat(
@@ -907,90 +631,8 @@ module body_10() {
                 translate([b10_barb_s1, b10_axis_y, b10_axis_z]) rotate([0, 90, 0]) cylinder(h=(b10_shaft_s0) - (b10_barb_s1), r1=b10_barb_r, r2=b10_shaft_r, $fn=b10_fn);
                 // b10_shaft: EXACT cylinder face #24 (r=2.1)
                 translate([b10_shaft_s0, b10_axis_y, b10_axis_z]) rotate([0, 90, 0]) cylinder(h=(b10_shaft_s1) - (b10_shaft_s0), r=b10_shaft_r, $fn=b10_fn);
-                hull() {
-                    // b10_head_0a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-17.318 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -17.318]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_1b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.918 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.918]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
-                hull() {
-                    // b10_head_1a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.918 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.918]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_2b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.518 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.518]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
-                hull() {
-                    // b10_head_2a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.518 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.518]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_3b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.118 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.118]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
-                hull() {
-                    // b10_head_3a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-16.118 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -16.118]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_4b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-15.718 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -15.718]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
-                hull() {
-                    // b10_head_4a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-15.718 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -15.718]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_5b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-15.318 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -15.318]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
-                hull() {
-                    // b10_head_5a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-15.318 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -15.318]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                    // b10_head_6b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-15.228 (high-res tessellation)
-                    rotate([90, 0, 90]) translate([0, 0, -15.228]) linear_extrude(0.02) polygon(concat(
-            [[19.20662, 0.5303]],
-            [[19.20662, 3.8303]],
-            [[13.70662, 3.8303]],
-            [[13.70662, 0.5303]]));
-                }
+                // b10_head_plate_0: head plate: constant axis-aligned rectangular section 5.50 x 3.30 over 7 measured stations (identical within 0.05; control-slice interp err <= 0.05) — measured section convex hull at x=-17.318 (high-res tessellation)
+                translate([-17.318, 13.70662, 0.5303]) cube([2.11, 5.5, 3.3]);
                 hull() {
                     // b10_head_0bridge: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at x=-17.318 (high-res tessellation)
                     rotate([90, 0, 90]) translate([0, 0, -17.318]) linear_extrude(0.02) polygon(concat(
@@ -1110,90 +752,8 @@ module body_12() {
                 translate([b12_axis_x, b12_barb_s1, b12_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b12_shaft_s0) - (b12_barb_s1), r1=b12_barb_r, r2=b12_shaft_r, $fn=b12_fn);
                 // b12_shaft: EXACT cylinder face #24 (r=1.9)
                 translate([b12_axis_x, b12_shaft_s0, b12_axis_z]) rotate([-90, 0, 0]) cylinder(h=(b12_shaft_s1) - (b12_shaft_s0), r=b12_shaft_r, $fn=b12_fn);
-                hull() {
-                    // b12_head_0a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=5.736 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 5.736]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_1b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.136 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.136]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
-                hull() {
-                    // b12_head_1a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.136 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.136]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_2b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.536 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.536]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
-                hull() {
-                    // b12_head_2a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.536 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.536]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_3b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.936 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.936]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
-                hull() {
-                    // b12_head_3a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=6.936 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 6.936]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_4b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=7.336 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 7.336]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
-                hull() {
-                    // b12_head_4a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=7.336 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 7.336]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_5b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=7.736 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 7.736]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
-                hull() {
-                    // b12_head_5a: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=7.736 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 7.736]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                    // b12_head_6b: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=8.026 (high-res tessellation)
-                    rotate([0, -90, -90]) translate([0, 0, 8.026]) linear_extrude(0.02) polygon(concat(
-            [[3.8303, -21.29016]],
-            [[3.8303, -15.79016]],
-            [[0.5303, -15.79016]],
-            [[0.5303, -21.29016]]));
-                }
+                // b12_head_plate_0: head plate: constant axis-aligned rectangular section 3.30 x 5.50 over 7 measured stations (identical within 0.05; control-slice interp err <= 0.05) — measured section convex hull at y=5.736 (high-res tessellation)
+                translate([-21.29016, 5.736, 0.5303]) cube([5.5, 2.31, 3.3]);
                 hull() {
                     // b12_head_0bridge: head station (vectorized: 4 lines + 0 arcs) — measured section convex hull at y=5.736 (high-res tessellation)
                     rotate([0, -90, -90]) translate([0, 0, 5.736]) linear_extrude(0.02) polygon(concat(
