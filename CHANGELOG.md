@@ -7,6 +7,16 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Palm law-solid scan — auditable negative result**
+  (`scripts/authoring/lawsolids_palm.py`, ~10 s, plan-neutral): four law
+  families tested against the remaining 602+137 palm bands (arc offset laws
+  at the knuckle posts; sphere/cylinder caps at the tips; windowed wrist-edge
+  laws; cavity offsets) — ALL rejected by residual (stds 1.3-12.8 mm; tip
+  quadric residuals 1.9-3.1 mm; the post tops change TOPOLOGY as the clevis
+  slots begin). No substitution qualified under the ≥0.955 batch policy;
+  both palms stay 0.9641 untouched. The palm dome is genuinely organic at
+  band resolution — future gains would come from anatomical re-segmentation
+  upstream, not from more law fitting.
 - **Snap_Pins heads on law-solids**: every head collapsed from 6-7 pairwise
   hulls to 2 auto-selected control slices; rectangular head plates
   RECOGNIZED as named `box` prims (4-vertex axis-aligned stations, interp
