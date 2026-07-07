@@ -7,6 +7,12 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Model version stamp** (author's request): every emitted `.scad` starts
+  with `// VERSION: vN — <timestamp>` and `echo("*** <part> reconstruction
+  vN ***")` (visible in the OpenSCAD console on load). The counter lives in
+  `output/<part>/scad_version.json` and bumps ONLY when the emitted content
+  actually changes (hash of the unstamped text) — so the number is a true
+  modification count, not a run count.
 - **De-staircasing rule (author's) as generic constructs — palms GAIN
   fidelity**: `skin` (ruled loft through consecutive band TOP edges;
   authoring-time vertex correspondence by parameter-union rings — uniform

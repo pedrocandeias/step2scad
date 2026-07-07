@@ -42,6 +42,31 @@ def _write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2))
 
 
+def _stamp_version(text: str, out: Path, slug: str) -> str:
+    """Monotonic model version, bumped only when the emitted content changes
+    (hash of the UNstamped text). Shown in the header and echo()ed to the
+    OpenSCAD console so the user can always confirm which build is open."""
+    import datetime
+    import hashlib
+
+    vfile = out / "scad_version.json"
+    sha = hashlib.sha256(text.encode()).hexdigest()[:16]
+    cur = {"version": 0, "sha": ""}
+    if vfile.exists():
+        try:
+            cur = json.loads(vfile.read_text())
+        except Exception:
+            pass
+    if sha != cur.get("sha"):
+        cur = {"version": int(cur.get("version", 0)) + 1, "sha": sha,
+               "stamped": datetime.datetime.now().isoformat(timespec="minutes")}
+        vfile.write_text(json.dumps(cur, indent=2))
+    v = cur["version"]
+    when = cur.get("stamped", "")
+    return (f"// VERSION: v{v} — {when}\n"
+            f'echo("*** {slug} reconstruction v{v} ***");\n' + text)
+
+
 def run_pipeline(
     step_path: str | Path,
     out_dir: str | Path = "output",
@@ -105,6 +130,7 @@ def run_pipeline(
     # ---- 3. EMIT (.scad — plan-driven where the agent supplied a plan) ----
     t0 = time.perf_counter()
     scad_text = emit_scad(features, classification, slug, plan=plan)
+    scad_text = _stamp_version(scad_text, out, slug)
     scad_path = out / f"{slug}.scad"
     scad_path.write_text(scad_text)
     _log(f"emit: wrote {scad_path} (dispatch: agent plan -> csg/instance_of; "

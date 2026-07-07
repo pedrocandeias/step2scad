@@ -1,3 +1,5 @@
+// VERSION: v1 — 2026-07-07T21:28
+echo("*** Palm_left reconstruction v1 ***");
 // ====================================================================
 // Palm_left — step2scad parametric reconstruction
 // source: models/phoenix_components/Palm_left.step
