@@ -97,7 +97,7 @@ from pathlib import Path
 
 STRATEGIES = ("csg", "instance_of", "rotate_extrude", "linear_extrude", "freeform")
 OPS = ("union", "difference", "intersection", "hull")
-PRIMS = ("box", "cylinder", "sphere", "extrude", "sweep", "offset_sweep")
+PRIMS = ("box", "cylinder", "sphere", "extrude", "sweep", "offset_sweep", "heightfield", "skin")
 
 # sweep height laws: h(s) along the sweep axis (v13 rib-transition idiom).
 # Fitted to measured band boundaries; the fit residual must be cited in
@@ -325,6 +325,63 @@ def _validate_node(node: dict, where: str, names: set[str],
         for f in need:
             _require(_is_num_or_expr(law.get(f)), where, f"law needs '{f}'")
             num(law[f], f"law.{f}")
+    elif prim == "skin":
+        # ruled loft through the section outlines of consecutive stations
+        # (the author's stairs rule: connect TOP EDGES, don't stack slabs).
+        # sections: [{"at": s, "outline": [[u,v], ...]}, ...] — equal point
+        # counts with index correspondence (resampled/aligned at authoring
+        # time); profile plane follows the extrude axis convention.
+        _require(node.get("axis", "z") in ("x", "y", "z"), where,
+                 "skin 'axis' must be x|y|z")
+        secs = node.get("sections")
+        _require(isinstance(secs, list) and len(secs) >= 2, where,
+                 "skin needs >= 2 sections")
+        n0 = None
+        prev = None
+        for i, s in enumerate(secs):
+            w = f"{where}.sections[{i}]"
+            _require(isinstance(s, dict) and _is_num_or_expr(s.get("at")),
+                     w, "section needs numeric 'at'")
+            at = num(s["at"], "at")
+            _require(prev is None or at > prev, w,
+                     "'at' must be strictly increasing")
+            prev = at
+            o = s.get("outline")
+            _require(isinstance(o, list) and len(o) >= 3
+                     and all(_is_vec(q, 2) for q in o), w,
+                     "outline needs >= 3 numeric [u,v] points")
+            if n0 is None:
+                n0 = len(o)
+            _require(len(o) == n0, w,
+                     f"all outlines need the same point count ({n0})")
+            area2 = sum(o[k][0] * o[(k + 1) % len(o)][1]
+                        - o[(k + 1) % len(o)][0] * o[k][1]
+                        for k in range(len(o)))
+            _require(area2 > 0, w, "outline must be CCW in the profile plane "
+                                   "(winding feeds the polyhedron faces)")
+    elif prim == "heightfield":
+        # control-height lattice: coarse named grid of top heights over a
+        # rectangular xy grid (the 2D generalization of control sections).
+        # heights[i][j] = top z at (x0 + j*dx, y0 + i*dy); solid spans z0 up
+        # to the bilinear surface, optionally clipped by a 2D footprint.
+        for f in ("x0", "y0", "dx", "dy", "z0"):
+            _require(_is_num_or_expr(node.get(f)), where,
+                     f"heightfield needs '{f}'")
+            num(node[f], f)
+        hs = node.get("heights")
+        _require(isinstance(hs, list) and len(hs) >= 2
+                 and all(isinstance(r, list) and len(r) == len(hs[0])
+                         and len(r) >= 2 for r in hs),
+                 where, "heightfield 'heights' must be a rectangular matrix "
+                        "(>=2 rows, >=2 cols)")
+        for i, row in enumerate(hs):
+            for j, v in enumerate(row):
+                _require(_is_num_or_expr(v), where,
+                         f"heights[{i}][{j}] must be number or expression")
+                num(v, f"heights[{i}][{j}]")
+        if "footprint" in node:
+            _validate_2d(node["footprint"], f"{where}.footprint", scope,
+                         profiles)
     elif prim == "offset_sweep":
         # edge-treatment sweep: stacked slabs of a 2D shape offset by a law
         # delta(z) — "linear" {d0, d1} = chamfer/ramp; "round" {r} = quarter

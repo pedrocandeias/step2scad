@@ -250,6 +250,12 @@ def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
         lines.append(f"{ind}{orient}translate([0, 0, {_sv(node['z0'])}]) "
                      f"linear_extrude({_sdiff(node['z1'], node['z0'])}) "
                      f"{shape};")
+    elif prim == "heightfield":
+        mname = profiles.get(id(node), f"{node['name']}_hf")
+        lines.append(f"{ind}{mname}();")
+    elif prim == "skin":
+        mname = profiles.get(id(node), f"{node['name']}_skin")
+        lines.append(f"{ind}{mname}();")
     elif prim == "offset_sweep":
         # SMOOTH edge treatment (no slab stairs): minkowski of the base shape
         # (inset by min(d0,d1)) with a cone/roundover bit. Corner joins are
@@ -349,6 +355,99 @@ def _emit_sem_node(node: dict, lines: list[str], depth: int, fn_var: str,
     _emit_sem_prim(node, lines, depth, fn_var, profiles)
 
 
+
+
+
+
+# world-point mapping per skin/extrude axis: (u, v, s) -> [x, y, z] exprs
+_SKIN_MAP = {
+    "z": lambda u, v, s: f"[{u}, {v}, {s}]",
+    "y": lambda u, v, s: f"[{v}, {s}, {u}]",
+    "x": lambda u, v, s: f"[{s}, {u}, {v}]",
+}
+
+
+def _emit_skin_module(node: dict, mname: str, lines: list[str]) -> None:
+    """Ruled loft through consecutive section outlines (no slab stairs).
+
+    Sections are index-correspondent rings; side walls are quad strips
+    between consecutive rings, end rings capped with planar polygons.
+    """
+    axis = node.get("axis", "z")
+    secs = node["sections"]
+    outs = ",\n    ".join(
+        "[" + ", ".join(_vec(q) for q in s["outline"]) + "]" for s in secs)
+    ats = ", ".join(_sv(s["at"]) for s in secs)
+    lines.append(f"{mname}_rings = [\n    {outs}\n];  // section outlines — "
+                 f"{node['source']}")
+    lines.append(f"{mname}_ats = [{ats}];  // station positions along {axis}")
+    pt = _SKIN_MAP[axis]("r[0]", "r[1]", f"{mname}_ats[k]")
+    lines.append(f"""module {mname}() {{
+    rings = {mname}_rings;
+    ns = len(rings); N = len(rings[0]);
+    pts = [for (k = [0:ns-1]) for (r = rings[k]) let(s = {mname}_ats[k]) {_SKIN_MAP[axis]('r[0]', 'r[1]', 's')}];
+    side = [for (k = [0:ns-2]) for (i = [0:N-1]) each [
+        [k*N + i, (k+1)*N + (i+1)%N, k*N + (i+1)%N],
+        [k*N + i, (k+1)*N + i, (k+1)*N + (i+1)%N]]];
+    cap0 = [[for (i = [0:N-1]) i]];
+    cap1 = [[for (i = [N-1:-1:0]) (ns-1)*N + i]];
+    polyhedron(points = pts, faces = concat(side, cap0, cap1), convexity = 10);
+}}""")
+    lines.append("")
+
+def _emit_heightfield_module(node: dict, mname: str, lines: list[str]) -> None:
+    """Control-height lattice -> smooth polyhedron module (no stairs).
+
+    heights[i][j] = top z at (x0 + j*dx, y0 + i*dy); the top surface is the
+    triangulated control grid itself (bilinear structure), walls drop to z0,
+    optional 2D footprint clips the block. Heights are editable named values.
+    """
+    hs = node["heights"]
+    rows = ",\n    ".join("[" + ", ".join(_sv(v) for v in row) + "]"
+                          for row in hs)
+    lines.append(f"{mname}_heights = [\n    {rows}\n];  // control heights "
+                 f"— {node['source']}")
+    x0, y0 = _sv(node["x0"]), _sv(node["y0"])
+    dx, dy = _sv(node["dx"]), _sv(node["dy"])
+    z0 = _sv(node["z0"])
+    lines.append(f"module {mname}() {{")
+    body = f"""    hs = {mname}_heights;
+    ny = len(hs); nx = len(hs[0]); N = nx * ny;
+    pts = concat(
+        [for (i = [0:ny-1]) for (j = [0:nx-1])
+            [({x0}) + j*({dx}), ({y0}) + i*({dy}), hs[i][j]]],
+        [for (i = [0:ny-1]) for (j = [0:nx-1])
+            [({x0}) + j*({dx}), ({y0}) + i*({dy}), {z0}]]);
+    fcs = concat(
+        [for (i = [0:ny-2]) for (j = [0:nx-2]) each [
+            [i*nx+j, (i+1)*nx+j, (i+1)*nx+j+1],
+            [i*nx+j, (i+1)*nx+j+1, i*nx+j+1]]],
+        [for (i = [0:ny-2]) for (j = [0:nx-2]) each [
+            [N+i*nx+j, N+(i+1)*nx+j+1, N+(i+1)*nx+j],
+            [N+i*nx+j, N+i*nx+j+1, N+(i+1)*nx+j+1]]],
+        [for (j = [0:nx-2]) each [[j, j+1, N+j+1], [j, N+j+1, N+j]]],
+        [for (j = [0:nx-2]) each [
+            [(ny-1)*nx+j, N+(ny-1)*nx+j+1, (ny-1)*nx+j+1],
+            [(ny-1)*nx+j, N+(ny-1)*nx+j, N+(ny-1)*nx+j+1]]],
+        [for (i = [0:ny-2]) each [
+            [i*nx, N+i*nx, N+(i+1)*nx], [i*nx, N+(i+1)*nx, (i+1)*nx]]],
+        [for (i = [0:ny-2]) each [
+            [i*nx+nx-1, (i+1)*nx+nx-1, N+(i+1)*nx+nx-1],
+            [i*nx+nx-1, N+(i+1)*nx+nx-1, N+i*nx+nx-1]]]);
+"""
+    lines.append(body.rstrip())
+    if "footprint" in node:
+        fp = _render_2d(node["footprint"], "$fn")
+        lines.append("    intersection() {")
+        lines.append("        polyhedron(points = pts, faces = fcs, convexity = 10);")
+        lines.append(f"        translate([0, 0, ({z0}) - 1]) "
+                     f"linear_extrude(1000) {fp};")
+        lines.append("    }")
+    else:
+        lines.append("    polyhedron(points = pts, faces = fcs, convexity = 10);")
+    lines.append("}")
+    lines.append("")
+
 def _collect_profiles(node: dict, modules: dict, prefix: str,
                       profiles: dict, lines: list[str]) -> None:
     """Long measured polygons become named file-level constants."""
@@ -366,6 +465,14 @@ def _collect_profiles(node: dict, modules: dict, prefix: str,
         pts = ", ".join(_vec(p) for p in node["profile"])
         uv = {"x": "(y, z)", "y": "(z, x)", "z": "(x, y)"}[node.get("axis", "z")]
         lines.append(f"{pname} = [{pts}];  // {uv} points — {node['source']}")
+    elif node.get("prim") == "heightfield" and id(node) not in profiles:
+        mname = f"{prefix}{node['name']}_hf"
+        profiles[id(node)] = mname
+        _emit_heightfield_module(node, mname, lines)
+    elif node.get("prim") == "skin" and id(node) not in profiles:
+        mname = f"{prefix}{node['name']}_skin"
+        profiles[id(node)] = mname
+        _emit_skin_module(node, mname, lines)
 
 
 

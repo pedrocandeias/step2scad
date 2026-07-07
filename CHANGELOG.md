@@ -7,6 +7,19 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **De-staircasing rule (author's) as generic constructs — palms GAIN
+  fidelity**: `skin` (ruled loft through consecutive band TOP edges;
+  authoring-time vertex correspondence by parameter-union rings — uniform
+  arc resampling CUTS CORNERS, measured: 0.9506 with a 1577 mm³ FN sheet
+  before the fix; CCW + equal-count validation; watertight polyhedron
+  emission) and `heightfield` (editable control-height grid → smooth
+  bilinear polyhedron, unit-tested; available for future z(x,y) surfaces —
+  the palm ended up not needing it, skin covered dome+walls with one
+  mechanism). Palm band slabs 726 → 303 (423 collapsed into 87 skins;
+  honest slab fallback at the 36 measured topology breaks). **Both palms
+  0.9637 → 0.9654 (+0.0017)** — ruled surfaces beat 0.25 mm stairs.
+  Fill-to-plane stage deferred: the skins changed the FN landscape;
+  re-measure before building the dual of planetrims.
 - **Palm mating-architecture recognition** (coverage-audit-driven surgery,
   3 batches, both palms steady at 0.9637; auditor 671→583 unclaimed faces,
   unclaimed plane area 11289→6116 mm²). The MATING TABLE (all exact faces):

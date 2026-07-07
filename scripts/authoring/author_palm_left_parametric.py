@@ -324,3 +324,6 @@ subprocess.run([_sys.executable, "scripts/authoring/knuckleblock_palm.py"],
 # ---- exact tilted-plane trims: shave band staircase on ramp faces ----------
 subprocess.run([_sys.executable, "scripts/authoring/planetrims_palm.py"],
                check=True)
+# ---- de-staircasing (author's rule): skin consecutive band tops ------------
+subprocess.run([_sys.executable, "scripts/authoring/skinstairs_palm.py"],
+               check=True)
