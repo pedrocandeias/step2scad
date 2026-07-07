@@ -306,6 +306,27 @@ túnel 1,12) correspondem às faces exatas do B-rep (6,000; 2,300/2,375;
 1,125). IoU 0,9716 (custo −0,0046, citado), crown de 46 primitivas → 9
 sólidos-lei + 11 parâmetros.
 
+### 7.z Arquitetura de acoplamento palma ↔ dedos (faces exatas)
+
+A cirurgia guiada pelo auditor de cobertura reivindicou a arquitetura de
+acoplamento da palma — todas as medidas são faces exatas do B-rep citadas
+no plano:
+
+| Feature da palma | Medida | Contraparte | Folga |
+|---|---|---|---|
+| Encaixe de dedo (×4) | 6,00 | viga do proximal 5,200 | 0,80 |
+| Coroa das paredes clevis | r6,000 | lóbulo do proximal r6,000 | à face |
+| Garganta do polegar | 6,00 a 50,000° exatos | família dos encaixes | — |
+| Ranhura de elástico (×4) | 2,20, pontas r1,10 | elástico de retorno | — |
+| Aba de retenção dorsal | 2,64 | clip do proximal | — |
+| Parede do punho (×2) | 5,00 | orelhas r8,000 | — |
+
+O ciclo observação-humana → detetor-genérico repetiu-se quatro vezes nesta
+fase (escadas nas leis → emissão lisa; círculos fatiados →
+`round_regions_perp_z`; geometria por reconhecer → `unclaimed_faces`;
+planos sob lofts → estágio de aparos com validação FP-only que rejeitou 11
+de 18 candidatos por cortarem material verdadeiro).
+
 ## 8. Detalhe dos scripts
 
 ### 8.1 Módulos permanentes do pipeline (`src/step2scad/`)

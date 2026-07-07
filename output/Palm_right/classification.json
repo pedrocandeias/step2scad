@@ -4,7 +4,7 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (x-mirror of the semantic Palm_left plan (single mirror transform; params/modules shared verbatim); semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim); heuristic suggested: freeform \u2014 42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (x-mirror of the semantic Palm_left plan (single mirror transform; params/modules shared verbatim); semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim | knuckle-block mating architecture claimed as named reference params (sockets 6.00 mating the 5.20 proximal beam, elastic slots 2.2/r1.1, snap tabs 2.64, thumb clevis at exactly 50.0 deg with the same 6.00 socket family) \u2014 faces cited per param; thumb bands kept (full-width sections, see knuckleblock_palm.py) | tilt-face trims: 7 exact tilted planes shave the band staircase (FP-only, extent-bounded)); heuristic suggested: freeform \u2014 42% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     }
   ]

@@ -20,7 +20,13 @@ module tint(c) { if (show_colors) color(c) children(); else children(); }
 //   modules; cuts grouped into semantic modules; exact cylinder radii
 //   as named params | round-region surgery: 145 staircase bands
 //   replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall
-//   r6 arc sweeps) — exact faces cited per prim
+//   r6 arc sweeps) — exact faces cited per prim | knuckle-block mating
+//   architecture claimed as named reference params (sockets 6.00
+//   mating the 5.20 proximal beam, elastic slots 2.2/r1.1, snap tabs
+//   2.64, thumb clevis at exactly 50.0 deg with the same 6.00 socket
+//   family) — faces cited per param; thumb bands kept (full-width
+//   sections, see knuckleblock_palm.py) | tilt-face trims: 7 exact
+//   tilted planes shave the band staircase (FP-only, extent-bounded)
 // Anatomy (modules):
 //   palm_shell() — outer shell: constant-outline runs collapsed to single extrudes
 //   palm_cavity() — interior cavity (CUT): same run-collapse treatment as the shell
@@ -30,6 +36,7 @@ module tint(c) { if (show_colors) color(c) children(); else children(); }
 //   knuckle_pins() — knuckle pin bores + head counterbores (exact cylinder faces)
 //   wrist_cuts() — wrist axle bore (exact) + tensioner bay (measured tilted walls)
 //   tendon_tubes() — tendon channels: every reversed exact cylinder face, segment-exact
+//   tilt_face_trims() — exact tilted plane faces as bounded half-space trims: shave the...
 // --------------------------------------------------------------------
 
 // ======== PARAMETERS (every value measured; sources cited) ========
@@ -44,11 +51,31 @@ pin_counterbore3_r = 3.25;  // pin-head counterbore: exact r3.25 face 248
 // --- wrist ---
 wrist_bore_r       = 3;  // wrist axle bore: exact r3 faces 93/246 at (y=-38.95, z=12.62)
 wrist_barrel_r     = 8;  // wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)
+wrist_wall_t       = 5;  // EXACT wrist support wall thickness: x-normal plane pairs #469/#470 (left, x -38.17..-33.17, carries ear #534) and #438/#92 (right, x 18.3..23.2, carries ear #535)
 // --- thumb ---
 thumb_pin_r        = 2.5;  // thumb pin bore: exact r2.5 face 184 axis (z=10.424), cut through both ears
 thumb_cb1_r        = 2.7;  // thumb counterbore: exact r2.7 face 226 segment
 thumb_cb2_r        = 2.7;  // thumb counterbore: exact r2.7 faces 319/320 segment
 thumb_relief_r     = 7.5;  // thumb knuckle relief: exact r7.5 face 524 (o 31.196,-5.878,10.624, v ±3)
+thumb_axis_deg     = 50;  // EXACT thumb clevis frame angle: every face of the tilted family has axis/normal (0.6428, 0.766, 0) = 50.000 deg from +x
+thumb_socket_w     = 6;  // EXACT thumb throat width: tilted plane pair #539/#540 — same 6.00 as the finger sockets (design family)
+thumb_wall_t       = 5;  // EXACT thumb clevis wall thickness: tilted plane pairs #331/#539 and #540/#453
+thumb_crown_r      = 6;  // EXACT thumb wall crowns: tilted r6.000 cylinder faces #433/#541 (outer crown #210) — same r6.000 family as the finger clevis walls; kept as measured bands: the bands here are full-width palm sections (footprint carving = future anatomical re-segmentation)
+thumb_throat_r     = 7.5;  // EXACT thumb throat floor: tilted r7.5 cylinder face #524; counterbores r2.7 #226/#319/#320 and r2.5 #184
+thumb_outer_r      = 7;  // EXACT thumb clevis outer round: tilted r7.0 cylinder face #300 (same 50.0 deg frame)
+// --- socket ---
+socket_w           = 6;  // EXACT finger-socket width: x-normal plane pairs #458/#452, #451/#824, #459/#673, #637/#467 (all four sockets 6.000) — mates the measured proximal beam width 5.200 (Proximals plan beam_wall_x0/x1) with 0.80 total clearance; walls crowned r6.000 articulate the proximal r6.000 lobes flush
+// --- elastic ---
+elastic_slot_w     = 2.2;  // EXACT elastic-return slot width on each socket centerline: plane pairs #163/#188, #167/#260, #258/#166
+elastic_slot_end_r = 1.1;  // EXACT slot rounded ends: z-axis cylinder faces #186/#187/#204/#257 (2*r == elastic_slot_w)
+// --- snap ---
+snap_tab_w         = 2.64;  // EXACT dorsal snap-tab width over each socket: plane pairs #213/#306, #182/#183, #221/#225, #196/#198 (thumb: #178/#180)
+// --- deck ---
+deck_floor_z       = 4.62;  // EXACT bottom-grid ceiling plane #829 (area 3447, normal -z) — geometrically realized by the band z-boundaries (horizontal planes are exact in the y-band representation)
+// --- cavity ---
+cavity_floor_z     = 6.62;  // EXACT cavity floor plane #828 (area 2225, normal +z) — realized by the band z-boundaries
+// --- tendon ---
+tendon_tube_r      = 1.15;  // EXACT tendon-tube channel radius: the r1.15 cylinder family #4/#23/#25/#34/#36/#40/#45/#49/#60/#61/#72/#74/#96/#102/#104/#105/#108/#111/#123/#124/#129/#137/#141/#142/#143/#525 — the curved tendon paths cut by the tendon_tubes module
 fn                 = 96;  // curve resolution
 
 barrelcut_profile = [[2.5, -32.93], [22.5, -33.45], [22.5, 18.54], [2.5, 18.02]];  // (z, x) points — tensioner bay between wrist tabs: raycast-measured tilted walls (two z stations each side), back = exact shell plane
@@ -11175,7 +11202,7 @@ module palm_shell() {
             [[22.688444, 14.368353]],
             [for (k = [1 : 21]) [(22.161454) + (0.96853)*cos((57.264483) + k*((-62.780635) - (57.264483))/21), (13.548599) + (0.96853)*sin((57.264483) + k*((-62.780635) - (57.264483))/21)]]));
         intersection() {
-            // wrist_ear_L: EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
+            // wrist_ear_L: EXACT x-axis cylinder face #534 (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
             translate([-38.380124, -38.945051, 12.624202]) rotate(a=90, v=[0, 1, 0]) cylinder(h=5.389681, r=8, $fn=fn);
             union() {
                 // earL_clip0: replaced-band envelope (merged run, measured local floor)
@@ -11211,7 +11238,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // wrist_ear_R: EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
+            // wrist_ear_R: EXACT x-axis cylinder face #535 (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
             translate([18.074042, -38.945051, 12.624202]) rotate(a=90, v=[0, 1, 0]) cylinder(h=5.396209, r=8, $fn=fn);
             union() {
                 // earR_clip0: replaced-band envelope (merged run, measured local floor)
@@ -11249,7 +11276,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_0: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_0: EXACT x-axis r6.0 cylinder face #277 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([-7.460045, 33.054949, 5.242846]) cube([4, 12, (16.624202) - (5.242846)]);
                 union() {
@@ -11287,7 +11314,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_1: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_1: EXACT x-axis r6.0 cylinder face #337 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([2.539955, 33.054949, 5.243491]) cube([8, 12, (16.624202) - (5.243491)]);
                 union() {
@@ -11319,7 +11346,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_2: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_2: EXACT x-axis r6.0 cylinder face #350 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([16.539955, 33.054949, 5.08373]) cube([3, 12, (16.624202) - (5.08373)]);
                 union() {
@@ -11341,7 +11368,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_3: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_3: EXACT x-axis r6.0 cylinder face #462 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([-11.460045, 29.054949, 7.719003]) cube([4, 12, (16.624202) - (7.719003)]);
                 union() {
@@ -11361,7 +11388,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_4: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_4: EXACT x-axis r6.0 cylinder face #465 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([-21.460047, 29.054949, 5.148926]) cube([4.000002, 12, (16.624202) - (5.148926)]);
                 union() {
@@ -11395,7 +11422,7 @@ module palm_shell() {
             }
         }
         intersection() {
-            // knuckle_wall_5: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            // knuckle_wall_5: EXACT x-axis r6.0 cylinder face #623 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
             intersection() {
                 translate([-35.260046, 23.054949, 5.026876]) cube([3.800001, 12, (16.624202) - (5.026876)]);
                 union() {
@@ -16736,6 +16763,26 @@ module tendon_tubes() {
     }
 }
 
+// exact tilted plane faces as bounded half-space trims: shave the y-band staircase overshoot on ramp faces (dorsal socket ramps, wrist-back ramps, cavity facets) — faces cited per wedge; measured extent bounds prevent cutting neighbors
+module tilt_face_trims() {
+    union() {
+        // trim_f160: EXACT plane face #160 (normal [0.542, -0.455, 0.707], area 16): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([36.69995, -11.081096, 21.052185]) rotate([0, 44.995656, -40.006918]) cube([6.370193, 12.679623, 2], center=true);
+        // trim_f191: EXACT plane face #191 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([-14.464397, 32.943223, 22.88932]) rotate([0, 24.361989, 90]) cube([5.823802, 2.941295, 2], center=true);
+        // trim_f202: EXACT plane face #202 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([-28.464397, 26.943224, 22.889318]) rotate([0, 24.361989, 90]) cube([5.823803, 2.941296, 2], center=true);
+        // trim_f238: EXACT plane face #238 (normal [0.0, 0.731, 0.683], area 40): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([6.539955, 40.771021, 18.517331]) rotate([0, 46.940876, 90]) cube([5.5253, 8.3, 2], center=true);
+        // trim_f314: EXACT plane face #314 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([-0.460045, 36.942888, 22.889473]) rotate([0, 24.361989, 90]) cube([5.824537, 2.94, 2], center=true);
+        // trim_f326: EXACT plane face #326 (normal [0.0, 0.545, 0.839], area 18): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([-19.460046, 34.169225, 18.971468]) rotate([0, 33, 90]) cube([6.261544, 4.300002, 2], center=true);
+        // trim_f346: EXACT plane face #346 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent — shaves band-staircase overshoot above the true surface (FP-only)
+        translate([13.534955, 36.942888, 22.889473]) rotate([0, 24.361989, 90]) cube([5.824537, 2.939999, 2], center=true);
+    }
+}
+
 module body_0() {
     mirror([1, 0, 0]) {  // mirrored_left_palm
         difference() {
@@ -16751,6 +16798,7 @@ module body_0() {
             wrist_cuts();  // wrist_i
             thumb_clevis();  // thumb_i
             tendon_tubes();  // tubes_i
+            tilt_face_trims();  // trims_i
         }
     }
 }

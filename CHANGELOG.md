@@ -7,6 +7,27 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Palm mating-architecture recognition** (coverage-audit-driven surgery,
+  3 batches, both palms steady at 0.9637; auditor 671→583 unclaimed faces,
+  unclaimed plane area 11289→6116 mm²). The MATING TABLE (all exact faces):
+  finger sockets 6.00 ↔ proximal beam 5.200 (0.80 clearance); clevis crowns
+  r6.000 ↔ proximal lobes r6.000; thumb throat 6.00 at an exact 50.000°;
+  elastic grooves 2.20 with r1.10 tips; dorsal retention lips 2.64; wrist
+  walls 5.00 carrying the r8.000 ears. New chained stages:
+  `knuckleblock_palm.py` (16 named mating params, geometry-neutral — the
+  walls were already exact in band footprints; they lacked EXPLANATION) and
+  `planetrims_palm.py` (7 exact tilted-plane trims kept; 11 REJECTED by
+  FP-only sampling — bands sat under the plane, trimming would cut 223 mm³
+  of true material). Honest negative: thumb-clevis band replacement needs
+  anatomical re-segmentation (full-width footprints) — future work.
+
+### Fixed
+- Plane normals from features.json are UNORIENTED (reconfirmed the hard
+  way: trusting them flipped half the trim wedges inward, −11000 mm³) —
+  stages orient by two-sided containment probes. Face-selection must
+  cluster connected triangles by aligned normal (infinite planes catch
+  coincident far geometry); use triangle centroids, not sparse vertices;
+  plan-editing stages must be idempotent.
 - **Palm round-region surgery** (author-spotted failure, root-caused and
   scripted): the knuckle-post crowns and rear ears were exact B-rep faces
   all along (7 clevis walls crowned by x-axis r6.000 cylinders — the mating

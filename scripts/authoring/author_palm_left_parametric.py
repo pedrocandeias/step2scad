@@ -318,3 +318,9 @@ import subprocess
 import sys as _sys
 subprocess.run([_sys.executable, "scripts/authoring/roundregions_palm.py"],
                check=True)
+# ---- mating-architecture claim: sockets/slots/tabs/thumb frame (audit) ------
+subprocess.run([_sys.executable, "scripts/authoring/knuckleblock_palm.py"],
+               check=True)
+# ---- exact tilted-plane trims: shave band staircase on ramp faces ----------
+subprocess.run([_sys.executable, "scripts/authoring/planetrims_palm.py"],
+               check=True)

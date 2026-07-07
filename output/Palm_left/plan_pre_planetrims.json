@@ -1,11 +1,11 @@
 {
  "version": 1,
- "source": "models/phoenix_components/Palm_right.step",
+ "source": "models/phoenix_components/Palm_left.step",
  "bodies": [
   {
    "body_id": 0,
    "strategy": "csg",
-   "notes": "x-mirror of the semantic Palm_left plan (single mirror transform; params/modules shared verbatim); semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim | knuckle-block mating architecture claimed as named reference params (sockets 6.00 mating the 5.20 proximal beam, elastic slots 2.2/r1.1, snap tabs 2.64, thumb clevis at exactly 50.0 deg with the same 6.00 socket family) \u2014 faces cited per param; thumb bands kept (full-width sections, see knuckleblock_palm.py) | tilt-face trims: 7 exact tilted planes shave the band staircase (FP-only, extent-bounded)",
+   "notes": "semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim | knuckle-block mating architecture claimed as named reference params (sockets 6.00 mating the 5.20 proximal beam, elastic slots 2.2/r1.1, snap tabs 2.64, thumb clevis at exactly 50.0 deg with the same 6.00 socket family) \u2014 faces cited per param; thumb bands kept (full-width sections, see knuckleblock_palm.py)",
    "params": [
     {
      "name": "knuckle_pin1_r",
@@ -138,7 +138,6 @@
      "source": "EXACT tendon-tube channel radius: the r1.15 cylinder family #4/#23/#25/#34/#36/#40/#45/#49/#60/#61/#72/#74/#96/#102/#104/#105/#108/#111/#123/#124/#129/#137/#141/#142/#143/#525 \u2014 the curved tendon paths cut by the tendon_tubes module"
     }
    ],
-   "profiles": {},
    "modules": {
     "palm_shell": {
      "args": [],
@@ -106343,237 +106342,73 @@
        }
       ]
      }
-    },
-    "tilt_face_trims": {
-     "args": [],
-     "doc": "exact tilted plane faces as bounded half-space trims: shave the y-band staircase overshoot on ramp faces (dorsal socket ramps, wrist-back ramps, cavity facets) \u2014 faces cited per wedge; measured extent bounds prevent cutting neighbors",
-     "tree": {
-      "op": "union",
-      "children": [
-       {
-        "prim": "box",
-        "name": "trim_f160",
-        "source": "EXACT plane face #160 (normal [0.542, -0.455, 0.707], area 16): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         36.69995,
-         -11.081096,
-         21.052185
-        ],
-        "size": [
-         6.370193,
-         12.679623,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         44.995656,
-         -40.006918
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f191",
-        "source": "EXACT plane face #191 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         -14.464397,
-         32.943223,
-         22.88932
-        ],
-        "size": [
-         5.823802,
-         2.941295,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         24.361989,
-         90.0
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f202",
-        "source": "EXACT plane face #202 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         -28.464397,
-         26.943224,
-         22.889318
-        ],
-        "size": [
-         5.823803,
-         2.941296,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         24.361989,
-         90.0
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f238",
-        "source": "EXACT plane face #238 (normal [0.0, 0.731, 0.683], area 40): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         6.539955,
-         40.771021,
-         18.517331
-        ],
-        "size": [
-         5.5253,
-         8.3,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         46.940876,
-         90.0
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f314",
-        "source": "EXACT plane face #314 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         -0.460045,
-         36.942888,
-         22.889473
-        ],
-        "size": [
-         5.824537,
-         2.94,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         24.361989,
-         90.0
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f326",
-        "source": "EXACT plane face #326 (normal [0.0, 0.545, 0.839], area 18): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         -19.460046,
-         34.169225,
-         18.971468
-        ],
-        "size": [
-         6.261544,
-         4.300002,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         33.0,
-         90.0
-        ]
-       },
-       {
-        "prim": "box",
-        "name": "trim_f346",
-        "source": "EXACT plane face #346 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
-        "center": [
-         13.534955,
-         36.942888,
-         22.889473
-        ],
-        "size": [
-         5.824537,
-         2.939999,
-         2.0
-        ],
-        "rotate_deg": [
-         0,
-         24.361989,
-         90.0
-        ]
-       }
-      ]
-     }
     }
    },
    "csg": {
-    "transform": {
-     "mirror": [
-      1,
-      0,
-      0
-     ]
-    },
-    "name": "mirrored_left_palm",
-    "child": {
-     "op": "difference",
-     "children": [
-      {
-       "op": "union",
-       "children": [
-        {
-         "call": "palm_shell",
-         "name": "shell_i",
-         "args": {}
-        },
-        {
-         "prim": "cylinder",
-         "name": "wrist_barrel",
-         "source": "wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)",
-         "p0": [
-          -38.19,
-          -38.951348,
-          12.624652
-         ],
-         "p1": [
-          23.27,
-          -38.951348,
-          12.624652
-         ],
-         "r": "wrist_barrel_r"
-        }
-       ]
-      },
-      {
-       "call": "palm_cavity",
-       "name": "cavity_i",
-       "args": {}
-      },
-      {
-       "call": "bottom_grid",
-       "name": "grid_i",
-       "args": {}
-      },
-      {
-       "call": "finger_slots",
-       "name": "slots_i",
-       "args": {}
-      },
-      {
-       "call": "knuckle_pins",
-       "name": "pins_i",
-       "args": {}
-      },
-      {
-       "call": "wrist_cuts",
-       "name": "wrist_i",
-       "args": {}
-      },
-      {
-       "call": "thumb_clevis",
-       "name": "thumb_i",
-       "args": {}
-      },
-      {
-       "call": "tendon_tubes",
-       "name": "tubes_i",
-       "args": {}
-      },
-      {
-       "call": "tilt_face_trims",
-       "name": "trims_i",
-       "args": {}
-      }
-     ]
-    }
+    "op": "difference",
+    "children": [
+     {
+      "op": "union",
+      "children": [
+       {
+        "call": "palm_shell",
+        "name": "shell_i",
+        "args": {}
+       },
+       {
+        "prim": "cylinder",
+        "name": "wrist_barrel",
+        "source": "wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)",
+        "p0": [
+         -38.19,
+         -38.951348,
+         12.624652
+        ],
+        "p1": [
+         23.27,
+         -38.951348,
+         12.624652
+        ],
+        "r": "wrist_barrel_r"
+       }
+      ]
+     },
+     {
+      "call": "palm_cavity",
+      "name": "cavity_i",
+      "args": {}
+     },
+     {
+      "call": "bottom_grid",
+      "name": "grid_i",
+      "args": {}
+     },
+     {
+      "call": "finger_slots",
+      "name": "slots_i",
+      "args": {}
+     },
+     {
+      "call": "knuckle_pins",
+      "name": "pins_i",
+      "args": {}
+     },
+     {
+      "call": "wrist_cuts",
+      "name": "wrist_i",
+      "args": {}
+     },
+     {
+      "call": "thumb_clevis",
+      "name": "thumb_i",
+      "args": {}
+     },
+     {
+      "call": "tendon_tubes",
+      "name": "tubes_i",
+      "args": {}
+     }
+    ]
    }
   }
  ]

@@ -5,7 +5,7 @@
   {
    "body_id": 0,
    "strategy": "csg",
-   "notes": "semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim",
+   "notes": "semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim | knuckle-block mating architecture claimed as named reference params (sockets 6.00 mating the 5.20 proximal beam, elastic slots 2.2/r1.1, snap tabs 2.64, thumb clevis at exactly 50.0 deg with the same 6.00 socket family) \u2014 faces cited per param; thumb bands kept (full-width sections, see knuckleblock_palm.py) | tilt-face trims: 7 exact tilted planes shave the band staircase (FP-only, extent-bounded)",
    "params": [
     {
      "name": "knuckle_pin1_r",
@@ -66,6 +66,76 @@
      "name": "wrist_barrel_r",
      "value": 8.0,
      "source": "wrist barrel: exact r8 boss faces 534/535 at (y=-38.95, z=12.62); ends probe-measured (rounded, mid values)"
+    },
+    {
+     "name": "socket_w",
+     "value": 6.0,
+     "source": "EXACT finger-socket width: x-normal plane pairs #458/#452, #451/#824, #459/#673, #637/#467 (all four sockets 6.000) \u2014 mates the measured proximal beam width 5.200 (Proximals plan beam_wall_x0/x1) with 0.80 total clearance; walls crowned r6.000 articulate the proximal r6.000 lobes flush"
+    },
+    {
+     "name": "elastic_slot_w",
+     "value": 2.2,
+     "source": "EXACT elastic-return slot width on each socket centerline: plane pairs #163/#188, #167/#260, #258/#166"
+    },
+    {
+     "name": "elastic_slot_end_r",
+     "value": 1.1,
+     "source": "EXACT slot rounded ends: z-axis cylinder faces #186/#187/#204/#257 (2*r == elastic_slot_w)"
+    },
+    {
+     "name": "snap_tab_w",
+     "value": 2.64,
+     "source": "EXACT dorsal snap-tab width over each socket: plane pairs #213/#306, #182/#183, #221/#225, #196/#198 (thumb: #178/#180)"
+    },
+    {
+     "name": "thumb_axis_deg",
+     "value": 50.0,
+     "source": "EXACT thumb clevis frame angle: every face of the tilted family has axis/normal (0.6428, 0.766, 0) = 50.000 deg from +x"
+    },
+    {
+     "name": "thumb_socket_w",
+     "value": 6.0,
+     "source": "EXACT thumb throat width: tilted plane pair #539/#540 \u2014 same 6.00 as the finger sockets (design family)"
+    },
+    {
+     "name": "thumb_wall_t",
+     "value": 5.0,
+     "source": "EXACT thumb clevis wall thickness: tilted plane pairs #331/#539 and #540/#453"
+    },
+    {
+     "name": "thumb_crown_r",
+     "value": 6.0,
+     "source": "EXACT thumb wall crowns: tilted r6.000 cylinder faces #433/#541 (outer crown #210) \u2014 same r6.000 family as the finger clevis walls; kept as measured bands: the bands here are full-width palm sections (footprint carving = future anatomical re-segmentation)"
+    },
+    {
+     "name": "thumb_throat_r",
+     "value": 7.5,
+     "source": "EXACT thumb throat floor: tilted r7.5 cylinder face #524; counterbores r2.7 #226/#319/#320 and r2.5 #184"
+    },
+    {
+     "name": "wrist_wall_t",
+     "value": 5.0,
+     "source": "EXACT wrist support wall thickness: x-normal plane pairs #469/#470 (left, x -38.17..-33.17, carries ear #534) and #438/#92 (right, x 18.3..23.2, carries ear #535)"
+    },
+    {
+     "name": "thumb_outer_r",
+     "value": 7.0,
+     "source": "EXACT thumb clevis outer round: tilted r7.0 cylinder face #300 (same 50.0 deg frame)"
+    },
+    {
+     "name": "deck_floor_z",
+     "value": 4.62,
+     "source": "EXACT bottom-grid ceiling plane #829 (area 3447, normal -z) \u2014 geometrically realized by the band z-boundaries (horizontal planes are exact in the y-band representation)"
+    },
+    {
+     "name": "cavity_floor_z",
+     "value": 6.62,
+     "source": "EXACT cavity floor plane #828 (area 2225, normal +z) \u2014 realized by the band z-boundaries"
+    },
+    {
+     "name": "tendon_tube_r",
+     "value": 1.15,
+     "source": "EXACT tendon-tube channel radius: the r1.15 cylinder family #4/#23/#25/#34/#36/#40/#45/#49/#60/#61/#72/#74/#96/#102/#104/#105/#108/#111/#123/#124/#129/#137/#141/#142/#143/#525 \u2014 the curved tendon paths cut by the tendon_tubes module"
     }
    ],
    "modules": {
@@ -69924,7 +69994,7 @@
          {
           "prim": "cylinder",
           "name": "wrist_ear_L",
-          "source": "EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) \u2014 wrist pin ear; the r3 bore is cut by wrist_cuts",
+          "source": "EXACT x-axis cylinder face #534 (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) \u2014 wrist pin ear; the r3 bore is cut by wrist_cuts",
           "p0": [
            -38.380124,
            -38.945051,
@@ -70175,7 +70245,7 @@
          {
           "prim": "cylinder",
           "name": "wrist_ear_R",
-          "source": "EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) \u2014 wrist pin ear; the r3 bore is cut by wrist_cuts",
+          "source": "EXACT x-axis cylinder face #535 (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) \u2014 wrist pin ear; the r3 bore is cut by wrist_cuts",
           "p0": [
            18.074042,
            -38.945051,
@@ -70442,7 +70512,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_0",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #277 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": -7.460045,
           "u1": -3.460045,
           "s0": 33.054949,
@@ -70666,7 +70736,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_1",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #337 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": 2.539955,
           "u1": 10.539955,
           "s0": 33.054949,
@@ -70845,7 +70915,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_2",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #350 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": 16.539955,
           "u1": 19.539955,
           "s0": 33.054949,
@@ -70949,7 +71019,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_3",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #462 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": -11.460045,
           "u1": -7.460045,
           "s0": 29.054949,
@@ -71038,7 +71108,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_4",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #465 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": -21.460047,
           "u1": -17.460045,
           "s0": 29.054949,
@@ -71232,7 +71302,7 @@
           "prim": "sweep",
           "axis": "y",
           "name": "knuckle_wall_5",
-          "source": "EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
+          "source": "EXACT x-axis r6.0 cylinder face #623 crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins",
           "u0": -35.260046,
           "u1": -31.460045,
           "s0": 23.054949,
@@ -106272,6 +106342,155 @@
        }
       ]
      }
+    },
+    "tilt_face_trims": {
+     "args": [],
+     "doc": "exact tilted plane faces as bounded half-space trims: shave the y-band staircase overshoot on ramp faces (dorsal socket ramps, wrist-back ramps, cavity facets) \u2014 faces cited per wedge; measured extent bounds prevent cutting neighbors",
+     "tree": {
+      "op": "union",
+      "children": [
+       {
+        "prim": "box",
+        "name": "trim_f160",
+        "source": "EXACT plane face #160 (normal [0.542, -0.455, 0.707], area 16): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         36.69995,
+         -11.081096,
+         21.052185
+        ],
+        "size": [
+         6.370193,
+         12.679623,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         44.995656,
+         -40.006918
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f191",
+        "source": "EXACT plane face #191 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         -14.464397,
+         32.943223,
+         22.88932
+        ],
+        "size": [
+         5.823802,
+         2.941295,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         24.361989,
+         90.0
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f202",
+        "source": "EXACT plane face #202 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         -28.464397,
+         26.943224,
+         22.889318
+        ],
+        "size": [
+         5.823803,
+         2.941296,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         24.361989,
+         90.0
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f238",
+        "source": "EXACT plane face #238 (normal [0.0, 0.731, 0.683], area 40): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         6.539955,
+         40.771021,
+         18.517331
+        ],
+        "size": [
+         5.5253,
+         8.3,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         46.940876,
+         90.0
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f314",
+        "source": "EXACT plane face #314 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         -0.460045,
+         36.942888,
+         22.889473
+        ],
+        "size": [
+         5.824537,
+         2.94,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         24.361989,
+         90.0
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f326",
+        "source": "EXACT plane face #326 (normal [0.0, 0.545, 0.839], area 18): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         -19.460046,
+         34.169225,
+         18.971468
+        ],
+        "size": [
+         6.261544,
+         4.300002,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         33.0,
+         90.0
+        ]
+       },
+       {
+        "prim": "box",
+        "name": "trim_f346",
+        "source": "EXACT plane face #346 (normal [0.0, 0.413, 0.911], area 14): half-space wedge bounded to the measured face extent \u2014 shaves band-staircase overshoot above the true surface (FP-only)",
+        "center": [
+         13.534955,
+         36.942888,
+         22.889473
+        ],
+        "size": [
+         5.824537,
+         2.939999,
+         2.0
+        ],
+        "rotate_deg": [
+         0,
+         24.361989,
+         90.0
+        ]
+       }
+      ]
+     }
     }
    },
    "csg": {
@@ -106336,6 +106555,11 @@
      {
       "call": "tendon_tubes",
       "name": "tubes_i",
+      "args": {}
+     },
+     {
+      "call": "tilt_face_trims",
+      "name": "trims_i",
       "args": {}
      }
     ]

@@ -64,7 +64,8 @@ def main():
     # ---- exact regions from the B-rep faces --------------------------------
     # ears: full discs (top AND bottom on the r8 circle — verified med err
     # 0.03 at the tips); walls: r6 arc TOPS (crest z = zc + r)
-    ears = [face_span_x(faces, fi) for fi in (534, 535)]
+    ear_ids = (534, 535)
+    ears = [face_span_x(faces, fi) for fi in ear_ids]
     wall_faces = [277, 337, 350, 462, 465, 623, (292, 441)]
     walls = []
     for fi in wall_faces:
@@ -131,19 +132,20 @@ def main():
                 for j, (r0, r1, zm) in enumerate(runs)]
 
     added = []
-    for i, (x0, x1, yc, zc, r) in enumerate(ears):
+    for (fi, (x0, x1, yc, zc, r)) in zip(ear_ids, ears):
         side = "R" if x0 > 0 else "L"
         boxes = envelope_boxes((x0, x1, yc, zc, r), x0, x1, f"ear{side}")
         disc = {
             "prim": "cylinder", "name": f"wrist_ear_{side}",
-            "source": f"EXACT x-axis cylinder face (r={r}, full disc: band "
-                      f"tips matched top+bottom arcs within 0.03) — wrist "
-                      "pin ear; the r3 bore is cut by wrist_cuts",
+            "source": f"EXACT x-axis cylinder face #{fi} (r={r}, full disc: "
+                      f"band tips matched top+bottom arcs within 0.03) — "
+                      "wrist pin ear; the r3 bore is cut by wrist_cuts",
             "p0": [round(x0, 6), round(yc, 6), round(zc, 6)],
             "p1": [round(x1, 6), round(yc, 6), round(zc, 6)], "r": r}
         added.append({"op": "intersection", "children": [
             disc, {"op": "union", "children": boxes}]} if boxes else disc)
-    for i, (x0, x1, yc, zc, r) in enumerate(walls):
+    for i, (fi, (x0, x1, yc, zc, r)) in enumerate(zip(wall_faces, walls)):
+        fid = "#" + "/#".join(str(q) for q in (fi if isinstance(fi, tuple) else (fi,)))
         key = (x0, x1, yc, zc, r)
         z0 = drop_zmin.get(key, zc - r + 0.5)
         key = (x0, x1, yc, zc, r)
@@ -152,10 +154,10 @@ def main():
             continue                      # no bands matched -> nothing to fix
         sweep = {
             "prim": "sweep", "axis": "y", "name": f"knuckle_wall_{i}",
-            "source": f"EXACT x-axis r{r} cylinder face crowns this clevis "
-                      f"wall (the mating geometry of the proximal r6.000 "
-                      f"lobes); wall base z from the replaced bands; pin "
-                      "channel/counterbore cut by knuckle_pins",
+            "source": f"EXACT x-axis r{r} cylinder face {fid} crowns this "
+                      f"clevis wall (the mating geometry of the proximal "
+                      f"r6.000 lobes); wall base z from the replaced bands; "
+                      "pin channel/counterbore cut by knuckle_pins",
             "u0": round(x0, 6), "u1": round(x1, 6),
             "s0": round(yc - r, 6), "s1": round(yc + r, 6),
             "z0": round(z0, 6), "h_max": round(zc + r, 6), "steps": 1,
