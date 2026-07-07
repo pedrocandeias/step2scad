@@ -7,6 +7,21 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Palm shell re-architected to decimated control-outline lofts**
+  (author's directive: aggressive over incremental): 726 band slabs →
+  **84 skins over 382 control sections + 160 slabs** (chains <3 inherit v1
+  fragmentation). Tolerance curve measured: 0.15→0.9639/487 · 0.30→0.9641/382
+  · 0.50→0.9607/309 — 0.30 adopted. Both palms **0.9641** (−0.0013 vs the
+  skinned bands, floor 0.9600 held) with staircase geometry eliminated AS A
+  CLASS. New generic `fitting.decimate_sections_ruled` (ruled-interpolation
+  decimation for NON-convex outlines) + `pair_rings`.
+- **Measured dead-end documented** (the batch's most valuable finding):
+  lofting full re-sliced reference sections fails geometrically — ruled
+  skins between deeply concave outlines SELF-INTERSECT (Manifold resolved
+  them at −10000 mm³) — which is exactly WHY v1 fragmented sections. The
+  unused rebuild path stays in the stage with the fix identified: monotone
+  nearest-point correspondence (would also erase the remaining
+  fragment-boundary creases).
 - **Model version stamp** (author's request): every emitted `.scad` starts
   with `// VERSION: vN — <timestamp>` and `echo("*** <part> reconstruction
   vN ***")` (visible in the OpenSCAD console on load). The counter lives in

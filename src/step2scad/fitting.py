@@ -214,3 +214,114 @@ def decimate_stations(stations, tol=0.12, angles=180):
         worst_dropped = max(worst_dropped, e)
         kept.pop(k)
     return kept, worst_dropped
+
+
+# --------------------------------------------------------------------------
+# ruled-section decimation: control OUTLINES for skin lofts (non-convex OK)
+# --------------------------------------------------------------------------
+
+def _norm_ccw(poly, anchor=None):
+    """CCW closed polygon rotated to start nearest `anchor` (default: the
+    topmost vertex). Vertices preserved exactly."""
+    a = np.asarray(poly, float)
+    if np.allclose(a[0], a[-1]):
+        a = a[:-1]
+    area2 = np.sum(a[:, 0] * np.roll(a[:, 1], -1)
+                   - np.roll(a[:, 0], -1) * a[:, 1])
+    if area2 < 0:
+        a = a[::-1]
+    if anchor is None:
+        k = int(np.lexsort((a[:, 1], -a[:, 0]))[0])
+    else:
+        k = int(np.argmin(np.linalg.norm(a - anchor, axis=1)))
+    return np.roll(a, -k, axis=0)
+
+
+def _vparams(a):
+    seg = np.linalg.norm(np.roll(a, -1, axis=0) - a, axis=1)
+    cum = np.concatenate([[0.0], np.cumsum(seg)])
+    return cum[:-1] / max(cum[-1], 1e-12)
+
+
+def _sample_at(a, params):
+    seg = np.linalg.norm(np.roll(a, -1, axis=0) - a, axis=1)
+    cum = np.concatenate([[0.0], np.cumsum(seg)])
+    total = max(cum[-1], 1e-12)
+    closed = np.vstack([a, a[:1]])
+    out = np.empty((len(params), 2))
+    for k, pv in enumerate(params):
+        tv = pv * total
+        i = min(max(int(np.searchsorted(cum, tv, side="right") - 1), 0),
+                len(a) - 1)
+        f = (tv - cum[i]) / max(seg[i], 1e-12)
+        out[k] = closed[i] * (1 - f) + closed[i + 1] * f
+    return out
+
+
+def pair_rings(pa, pb, ptol=0.0015):
+    """Corner-preserving common-parameter rings for two outlines.
+    -> (ring_a, ring_b, p90_step) — correspondence by shared arclength
+    params (union of both vertex sets; uniform resampling CUTS CORNERS)."""
+    a = _norm_ccw(pa)
+    b = _norm_ccw(pb, anchor=a[0])
+    allp = np.sort(np.concatenate([_vparams(a), _vparams(b)]))
+    merged = [float(allp[0])]
+    for v in allp[1:]:
+        if v - merged[-1] > ptol:
+            merged.append(float(v))
+    params = np.array(merged)
+    ra, rb = _sample_at(a, params), _sample_at(b, params)
+    step = float(np.percentile(np.linalg.norm(rb - ra, axis=1), 90))
+    return ra, rb, step
+
+
+def decimate_sections_ruled(sections, tol=0.3, break_p90=6.0):
+    """Reduce an ordered loft chain [(s, outline), ...] to CONTROL OUTLINES.
+
+    Ruled generalization of decimate_stations for NON-convex outlines: an
+    interior section is dropped when the ruled (skin) interpolation between
+    its surviving neighbors reproduces it within `tol` (symmetric max
+    boundary distance). Chains split where consecutive correspondence jumps
+    (aligned ring p90 step > break_p90 — a topology/shape discontinuity).
+
+    -> (segments, worst_err): segments = lists of indices into `sections`
+       (each a loft chain of KEPT control outlines, >= 2 each or singleton
+       to stay a slab); worst_err = max interp error over dropped sections.
+    """
+    n = len(sections)
+    S = [float(s) for s, _ in sections]
+    P = [np.asarray(p, float) for _, p in sections]
+
+    # hard breaks: consecutive correspondence jumps
+    bounds = [0]
+    for i in range(n - 1):
+        _, _, step = pair_rings(P[i], P[i + 1])
+        if step > break_p90:
+            bounds.append(i + 1)
+    bounds.append(n)
+
+    def interp_err(i, k, j):
+        ra, rb, _ = pair_rings(P[i], P[j])
+        t = (S[k] - S[i]) / max(S[j] - S[i], 1e-12)
+        ring = ra * (1 - t) + rb * t
+        d1 = dist_to_poly(ring, P[k]).max()
+        d2 = dist_to_poly(P[k], ring).max()
+        return float(max(d1, d2))
+
+    segments = []
+    worst = 0.0
+    for b0, b1 in zip(bounds, bounds[1:]):
+        idx = list(range(b0, b1))
+        if len(idx) <= 2:
+            segments.append(idx)
+            continue
+        while len(idx) > 2:
+            errs = [(interp_err(idx[m - 1], idx[m], idx[m + 1]), m)
+                    for m in range(1, len(idx) - 1)]
+            e, m = min(errs)
+            if e >= tol:
+                break
+            worst = max(worst, e)
+            idx.pop(m)
+        segments.append(idx)
+    return segments, worst
