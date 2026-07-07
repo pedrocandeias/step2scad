@@ -7,6 +7,19 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Palm round-region surgery** (author-spotted failure, root-caused and
+  scripted): the knuckle-post crowns and rear ears were exact B-rep faces
+  all along (7 clevis walls crowned by x-axis r6.000 cylinders — the mating
+  geometry of the proximal r6.000 lobes; ears = r8.000 discs) that the band
+  stack staircased because the earlier scan fit the TESSELLATION instead of
+  reading the face list. `roundregions_palm.py` removes 145 staircase bands
+  and places 8 exact solids (each intersected with the envelope of the
+  bands it replaced — first attempt overshot 1054 mm³ where walls emerge
+  from the deck; measured, fixed). Both palms 0.9637 (−0.0004, neutral);
+  clevis crowns now read as smooth round lobes. Detection is now automatic
+  for every model: `round_regions_perp_z` in the report digest + mandatory
+  recipe check. Remaining candidates logged: one merged-footprint wall, the
+  tilted thumb-clevis family (r7.5/7.0/6.0).
 - **Distals shell on law-solids — IoU GAIN**: 0.9714 → **0.9772** (+0.0058).
   Each finger shell = pairwise control-slice hulls ∩ three WINDOWED roof
   laws that tile without gaps (straight mid-roof + valley arc [box−cyl,

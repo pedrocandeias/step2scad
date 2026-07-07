@@ -311,3 +311,10 @@ validate_plan(plan)
 json.dump(plan, open(OUT / "plan.json", "w"), indent=1)
 n_prims = sum(len(m["tree"]["children"]) for m in modules.values()) + len(pin_kids)
 print(f"wrote {OUT/'plan.json'}: {len(params)} params, {len(modules)} módulos")
+
+
+# ---- round-region surgery: exact-cylinder posts/ears (chained stage) -------
+import subprocess
+import sys as _sys
+subprocess.run([_sys.executable, "scripts/authoring/roundregions_palm.py"],
+               check=True)

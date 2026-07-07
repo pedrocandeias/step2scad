@@ -18,7 +18,9 @@ module tint(c) { if (show_colors) color(c) children(); else children(); }
 //   params/modules shared verbatim); semantic parametric palm:
 //   shell/cavity as run-collapsed + vectorized measured bands in named
 //   modules; cuts grouped into semantic modules; exact cylinder radii
-//   as named params
+//   as named params | round-region surgery: 145 staircase bands
+//   replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall
+//   r6 arc sweeps) — exact faces cited per prim
 // Anatomy (modules):
 //   palm_shell() — outer shell: constant-outline runs collapsed to single extrudes
 //   palm_cavity() — interior cavity (CUT): same run-collapse treatment as the shell
@@ -1906,130 +1908,6 @@ module palm_shell() {
             [for (k = [1 : 3]) [(8.017692) + (8.549544)*cos((0.925618) + k*((-0.950009) - (0.925618))/3), (2.927344) + (8.549544)*sin((0.925618) + k*((-0.950009) - (0.925618))/3)]],
             [[16.566531, 2.539972]],
             [[11.808271, 2.539955]]));
-        // shell_t00b271: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.352602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.305204]) linear_extrude(0.094796) polygon(concat(
-            [[11.597394, 2.539955]],
-            [[16.459585, 2.640127]],
-            [[16.459585, 3.062437]],
-            [[16.459585, 3.191297]],
-            [[16.459585, 10.073575]],
-            [[16.459585, 10.193951]],
-            [[16.459471, 10.539886]],
-            [[11.597394, 10.539955]]));
-        // shell_t00b272: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.5 (fine mesh), band [41.
-        rotate([0, -90, -90]) translate([0, 0, 41.4]) linear_extrude(0.2) polygon(concat(
-            [[11.140155, 10.539955]],
-            [[11.160039, 2.539955]],
-            [[16.301807, 2.539965]],
-            [[16.301846, 2.573354]],
-            [for (k = [1 : 3]) [(7.928009) + (8.374057)*cos((-0.531945) + k*((0.533135) - (-0.531945))/3), (2.651101) + (8.374057)*sin((-0.531945) + k*((0.533135) - (-0.531945))/3)]],
-            [[16.301767, 10.539907]]));
-        // shell_t00b273: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.7 (fine mesh), band [41.
-        rotate([0, -90, -90]) translate([0, 0, 41.6]) linear_extrude(0.2) polygon(concat(
-            [[5.243491, 2.539955]],
-            [[16.087816, 2.725879]],
-            [[16.087816, 10.441189]],
-            [for (k = [1 : 3]) [(-24.42635) + (40.514177)*cos((-0.055216) + k*((0.084433) - (-0.055216))/3), (10.480232) + (40.514177)*sin((-0.055216) + k*((0.084433) - (-0.055216))/3)]],
-            [[5.243491, 10.539955]]));
-        // shell_t00r48: constant-outline run: 5 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 41.8]) linear_extrude(0.705204) polygon(concat(
-            [[15.788776, 2.539955]],
-            [[15.788776, 10.539955]],
-            [[9.752663, 10.539955]],
-            [for (k = [1 : 3]) [(9.512147) + (9.564642)*cos((88.559226) + k*((91.451995) - (88.559226))/3), (0.977284) + (9.564642)*sin((88.559226) + k*((91.451995) - (88.559226))/3)]],
-            [[5.459692, 10.539955]],
-            [[5.459692, 2.539955]]));
-        // shell_t00b279: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.552602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 42.505204]) linear_extrude(0.094796) polygon(concat(
-            [[15.494686, 2.539955]],
-            [[6.642155, 2.539955]],
-            [for (k = [1 : 3]) [(6.234891) + (8.666498)*cos((87.307057) + k*((93.17981) - (87.307057))/3), (-6.118726) + (8.666498)*sin((87.307057) + k*((93.17981) - (87.307057))/3)]],
-            [[5.753856, 4.707983]],
-            [[5.753856, 10.539955]],
-            [[15.494686, 10.539955]]));
-        // shell_t00b280: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.7 (fine mesh), band [42.
-        rotate([0, -90, -90]) translate([0, 0, 42.6]) linear_extrude(0.2) polygon(concat(
-            [[5.860643, 2.539955]],
-            [[5.860643, 10.539955]],
-            [[8.774218, 10.539955]],
-            [for (k = [1 : 3]) [(9.078751) + (9.183464)*cos((91.899879) + k*((88.105476) - (91.899879))/3), (1.359339) + (9.183464)*sin((91.899879) + k*((88.105476) - (91.899879))/3)]],
-            [[15.387518, 10.539955]],
-            [[15.387518, 2.539955]]));
-        // shell_t00r50: constant-outline run: 4 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 42.8]) linear_extrude(0.6) polygon(concat(
-            [[6.247337, 2.539955]],
-            [[6.247337, 10.539955]],
-            [[10.473282, 10.539955]],
-            [for (k = [1 : 3]) [(10.77927) + (10.781396)*cos((91.626035) + k*((88.375945) - (91.626035))/3), (-0.239111) + (10.781396)*sin((91.626035) + k*((88.375945) - (91.626035))/3)]],
-            [[15.000962, 10.539955]],
-            [[15.000962, 2.539955]]));
-        // shell_t00b285: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.5 (fine mesh), band [43.
-        rotate([0, -90, -90]) translate([0, 0, 43.4]) linear_extrude(0.2) polygon(concat(
-            [[14.264209, 2.539955]],
-            [[14.647465, 2.539955]],
-            [[14.647465, 5.556024]],
-            [[14.647465, 10.539955]],
-            [[14.264209, 10.539955]],
-            [[14.233595, 10.539955]],
-            [[6.600844, 10.539955]],
-            [[6.600844, 2.539955]]));
-        // shell_t00r52: constant-outline run: 3 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 43.6]) linear_extrude(0.4) polygon(concat(
-            [[14.352116, 2.539955]],
-            [[7.913945, 2.539955]],
-            [for (k = [1 : 3]) [(7.408945) + (11.700972)*cos((87.527543) + k*((92.51118) - (87.527543))/3), (-9.155467) + (11.700972)*sin((87.527543) + k*((92.51118) - (87.527543))/3)]],
-            [[6.896025, 9.190771]],
-            [[6.896025, 10.539955]],
-            [[14.352116, 10.539955]]));
-        // shell_t00b289: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.1 (fine mesh), band [44.
-        rotate([0, -90, -90]) translate([0, 0, 44]) linear_extrude(0.2) polygon(concat(
-            [[13.863093, 2.539955]],
-            [[8.246639, 2.539955]],
-            [for (k = [1 : 3]) [(7.83548) + (12.932504)*cos((88.178313) + k*((91.994728) - (88.178313))/3), (-10.38748) + (12.932504)*sin((88.178313) + k*((91.994728) - (88.178313))/3)]],
-            [[7.385235, 7.252689]],
-            [[7.385235, 10.539955]],
-            [[13.863093, 10.539955]]));
-        // shell_t00b290: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.252602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.2]) linear_extrude(0.105204) polygon(concat(
-            [[13.621002, 10.539955]],
-            [[11.309293, 10.539955]],
-            [for (k = [1 : 3]) [(11.052829) + (11.06402)*cos((88.671848) + k*((91.33253) - (88.671848))/3), (-0.521772) + (11.06402)*sin((88.671848) + k*((91.33253) - (88.671848))/3)]],
-            [[7.626889, 10.522194]],
-            [[7.626889, 2.539955]],
-            [[13.621002, 2.539955]]));
-        // shell_t00r54: constant-outline run: 3 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 44.305204]) linear_extrude(0.494796) polygon(concat(
-            [[13.138915, 2.539955]],
-            [[13.138915, 10.539955]],
-            [for (k = [1 : 3]) [(12.632385) + (12.833858)*cos((87.738937) + k*((91.982803) - (87.738937))/3), (-2.288963) + (12.833858)*sin((87.738937) + k*((91.982803) - (87.738937))/3)]],
-            [[8.109031, 10.539955]],
-            [[8.109031, 2.539955]]));
-        // shell_t00b294: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.852602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.8]) linear_extrude(0.105204) polygon(concat(
-            [[12.153109, 2.539955]],
-            [[12.153109, 4.991708]],
-            [[12.153109, 10.539955]],
-            [for (k = [1 : 3]) [(11.717841) + (11.780266)*cos((87.88301) + k*((91.896163) - (87.88301))/3), (-1.235094) + (11.780266)*sin((87.88301) + k*((91.896163) - (87.88301))/3)]],
-            [[9.094888, 10.539955]],
-            [[9.094888, 2.539955]]));
-        // shell_t00b295: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.952602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.905204]) linear_extrude(0.094796) polygon(concat(
-            [[9.54007, 2.539955]],
-            [[10.868492, 2.539955]],
-            [for (k = [1 : 3]) [(11.274203) + (25.390151)*cos((90.915519) + k*((89.022102) - (90.915519))/3), (-22.848412) + (25.390151)*sin((90.915519) + k*((89.022102) - (90.915519))/3)]],
-            [[11.707562, 4.554353]],
-            [[11.707562, 10.539955]],
-            [[9.54007, 10.539955]]));
-        // shell_t00b296: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=45.001688 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 45]) linear_extrude(0.003375) polygon(concat(
-            [[9.904691, 10.539955]],
-            [[11.406578, 10.539955]],
-            [[11.349334, 2.539955]],
-            [[9.905571, 2.539955]],
-            [[9.904691, 2.539955]],
-            [[9.842966, 2.539955]],
-            [[9.842966, 3.558945]],
-            [[9.842966, 10.539955]]));
         // shell_t01b234: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=35.852602 (fine mesh), band
         rotate([0, -90, -90]) translate([0, 0, 35.8]) linear_extrude(0.105204) polygon(concat(
             [[8.257254, -9.460045]],
@@ -2332,204 +2210,18 @@ module palm_shell() {
             [[8.344375, -7.460045]],
             [[5.149113, -7.460045]],
             [[5.148397, -3.460045]]));
-        // shell_t01b273: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.7 (fine mesh), band [41.
-        rotate([0, -90, -90]) translate([0, 0, 41.6]) linear_extrude(0.2) polygon(concat(
-            [[8.734842, -5.48341]],
-            [[12.50978, -5.460045]],
-            [[12.504788, -7.460045]],
-            [[16.005184, -7.460045]],
-            [[16.005847, -3.460045]],
-            [[5.243622, -3.460045]],
-            [[5.242846, -7.460045]],
-            [[8.734842, -7.460045]]));
-        // shell_t01b274: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.852602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.8]) linear_extrude(0.105204) polygon(concat(
-            [[15.927256, -7.460045]],
-            [[15.929665, -3.460045]],
-            [[5.316443, -3.477535]],
-            [[5.318113, -7.460045]],
-            [[8.978244, -7.460045]],
-            [[8.979153, -5.460045]],
-            [[12.270066, -5.460045]],
-            [[12.270662, -7.460045]]));
-        // shell_t01b275: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.952602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.905204]) linear_extrude(0.094796) polygon(concat(
-            [[5.375098, -7.460045]],
-            [[9.160348, -7.460045]],
-            [[9.159886, -5.460045]],
-            [[12.087072, -5.460045]],
-            [[12.092113, -7.460045]],
-            [[15.876189, -7.460045]],
-            [[15.872966, -3.460045]],
-            [[5.374395, -3.460045]]));
-        // shell_t01b276: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.1 (fine mesh), band [42.
-        rotate([0, -90, -90]) translate([0, 0, 42]) linear_extrude(0.2) polygon(concat(
-            [[15.789835, -7.460045]],
-            [[11.757798, -7.460045]],
-            [[11.7477, -5.460045]],
-            [[9.499075, -5.460045]],
-            [[9.500203, -7.460045]],
-            [[5.459092, -7.460045]],
-            [[5.459802, -3.460045]],
-            [[15.789393, -3.460045]]));
-        // shell_t01b277: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.3 (fine mesh), band [42.
-        rotate([0, -90, -90]) translate([0, 0, 42.2]) linear_extrude(0.2) polygon(concat(
-            [[15.66671, -7.460045]],
-            [[10.769394, -7.460045]],
-            [[10.800946, -5.791936]],
-            [[10.636864, -5.460045]],
-            [[10.450801, -5.460045]],
-            [[10.572794, -7.460045]],
-            [[5.580725, -7.460045]],
-            [[5.579064, -3.460045]],
-            [[15.667323, -3.460045]]));
-        // shell_t01b278: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.452602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 42.4]) linear_extrude(0.105204) polygon(concat(
-            [[5.68361, -5.510389]],
-            [[5.684803, -3.460045]],
-            [for (k = [1 : 3]) [(6.277671) + (7.331271)*cos((-94.6307) + k*((-85.783341) - (-94.6307))/3), (3.859548) + (7.331271)*sin((-94.6307) + k*((-85.783341) - (-94.6307))/3)]],
-            [[15.563686, -3.460045]],
-            [[15.56684, -7.460045]],
-            [[5.684597, -7.460045]]));
-        // shell_t01b279: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.552602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 42.505204]) linear_extrude(0.094796) polygon(concat(
-            [[5.752665, -7.460045]],
-            [[14.457256, -7.460045]],
-            [for (k = [1 : 3]) [(14.958378) + (18.670849)*cos((-91.537746) + k*((-88.357377) - (-91.537746))/3), (11.207081) + (18.670849)*sin((-91.537746) + k*((-88.357377) - (-91.537746))/3)]],
-            [[15.497635, -4.738214]],
-            [[15.495772, -3.460045]],
-            [[5.754095, -3.460045]]));
-        // shell_t01b280: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.7 (fine mesh), band [42.
-        rotate([0, -90, -90]) translate([0, 0, 42.6]) linear_extrude(0.2) polygon(concat(
-            [[5.862141, -7.460045]],
-            [[5.860214, -3.460045]],
-            [[13.052721, -3.460045]],
-            [for (k = [1 : 3]) [(13.392308) + (27.144016)*cos((-90.716801) + k*((-89.288481) - (-90.716801))/3), (23.68261) + (27.144016)*sin((-90.716801) + k*((-89.288481) - (-90.716801))/3)]],
-            [[15.386102, -3.460045]],
-            [[15.385884, -7.460045]]));
-        // shell_t01b281: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=42.9 (fine mesh), band [42.
-        rotate([0, -90, -90]) translate([0, 0, 42.8]) linear_extrude(0.2) polygon(concat(
-            [[15.224918, -7.460045]],
-            [[7.577339, -7.460045]],
-            [for (k = [1 : 3]) [(6.795061) + (6.830068)*cos((-83.439512) + k*((-96.475618) - (-83.439512))/3), (-0.657932) + (6.830068)*sin((-83.439512) + k*((-96.475618) - (-83.439512))/3)]],
-            [[6.022268, -6.266081]],
-            [[6.024191, -3.460045]],
-            [[15.225234, -3.460045]]));
-        // shell_t01b282: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.052602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 43]) linear_extrude(0.105204) polygon(concat(
-            [[6.153328, -7.460045]],
-            [[6.150545, -3.581939]],
-            [for (k = [1 : 30]) [(6.478135) + (0.332037)*cos((-170.612278) + k*((-349.074491) - (-170.612278))/30), (-3.527779) + (0.332037)*sin((-170.612278) + k*((-349.074491) - (-170.612278))/30)]],
-            [[7.357499, -3.460045]],
-            [[15.095161, -3.460045]],
-            [[15.093434, -7.460045]]));
-        // shell_t01b283: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.152602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 43.105204]) linear_extrude(0.094796) polygon(concat(
-            [[6.245971, -4.904185]],
-            [[6.247134, -3.460045]],
-            [[15.000463, -3.460045]],
-            [[15.006786, -7.460045]],
-            [[7.750201, -7.460045]],
-            [for (k = [1 : 3]) [(6.998368) + (7.016182)*cos((-83.863387) + k*((-96.126333) - (-83.863387))/3), (-0.467264) + (7.016182)*sin((-83.863387) + k*((-96.126333) - (-83.863387))/3)]]));
-        // shell_t01b284: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.3 (fine mesh), band [43.
-        rotate([0, -90, -90]) translate([0, 0, 43.2]) linear_extrude(0.2) polygon(concat(
-            [[6.387063, -7.460045]],
-            [[13.929875, -7.460045]],
-            [for (k = [1 : 3]) [(14.371127) + (17.522752)*cos((-91.44277) + k*((-88.408915) - (-91.44277))/3), (10.059412) + (17.522752)*sin((-91.44277) + k*((-88.408915) - (-91.44277))/3)]],
-            [[14.862582, -4.502606]],
-            [[14.86088, -3.460045]],
-            [[6.38936, -3.460045]]));
-        // shell_t01b285: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.5 (fine mesh), band [43.
-        rotate([0, -90, -90]) translate([0, 0, 43.4]) linear_extrude(0.2) polygon(concat(
-            [[6.599143, -5.034869]],
-            [[6.600637, -3.460045]],
-            [[14.64705, -3.460045]],
-            [[14.653004, -7.460045]],
-            [[7.917229, -7.460045]],
-            [for (k = [1 : 3]) [(7.260281) + (7.264391)*cos((-84.820176) + k*((-95.19648) - (-84.820176))/3), (-0.213124) + (7.264391)*sin((-84.820176) + k*((-95.19648) - (-84.820176))/3)]]));
-        // shell_t01b286: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.652602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 43.6]) linear_extrude(0.105204) polygon(concat(
-            [[6.770159, -7.262823]],
-            [[6.773767, -3.460045]],
-            [[14.477155, -3.460045]],
-            [[14.471913, -7.460045]],
-            [[7.842405, -7.460045]],
-            [for (k = [1 : 3]) [(7.280906) + (7.284254)*cos((-85.583635) + k*((-94.017236) - (-85.583635))/3), (-0.189859) + (7.284254)*sin((-85.583635) + k*((-94.017236) - (-85.583635))/3)]]));
-        // shell_t01b287: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 43.705204]) linear_extrude(0.094796) polygon(concat(
-            [[6.898034, -7.460045]],
-            [[13.697281, -7.460045]],
-            [for (k = [1 : 3]) [(14.020998) + (16.860605)*cos((-91.100093) + k*((-88.870936) - (-91.100093))/3), (9.397951) + (16.860605)*sin((-91.100093) + k*((-88.870936) - (-91.100093))/3)]],
-            [[14.355709, -6.056753]],
-            [[14.350747, -3.460045]],
-            [[6.895378, -3.460045]]));
-        // shell_t01b288: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=43.9 (fine mesh), band [43.
-        rotate([0, -90, -90]) translate([0, 0, 43.8]) linear_extrude(0.2) polygon(concat(
-            [[7.090159, -7.460045]],
-            [[13.315883, -7.460045]],
-            [for (k = [1 : 3]) [(13.717622) + (16.299016)*cos((-91.41219) + k*((-88.460133) - (-91.41219))/3), (8.836119) + (16.299016)*sin((-91.41219) + k*((-88.460133) - (-91.41219))/3)]],
-            [[14.160318, -5.055083]],
-            [[14.15727, -3.460045]],
-            [[7.092662, -3.460045]]));
         // shell_t01b289: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.1 (fine mesh), band [44.
         rotate([0, -90, -90]) translate([0, 0, 44]) linear_extrude(0.2) polygon(concat(
             [for (k = [1 : 31]) [(9.536717) + (2.937328)*cos((-137.093237) + k*((-317.569178) - (-137.093237))/31), (-5.460291) + (2.937328)*sin((-137.093237) + k*((-317.569178) - (-137.093237))/31)]],
             [for (k = [1 : 3]) [(12.857652) + (25.076489)*cos((-92.587922) + k*((-87.703196) - (-92.587922))/3), (21.601682) + (25.076489)*sin((-92.587922) + k*((-87.703196) - (-92.587922))/3)]],
             [[13.868274, -7.460045]],
             [[7.385234, -7.460045]]));
-        // shell_t01b290: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.252602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.2]) linear_extrude(0.105204) polygon(concat(
-            [[13.61419, -7.460045]],
-            [[8.567502, -7.460045]],
-            [for (k = [1 : 3]) [(8.10361) + (8.127799)*cos((-86.730692) + k*((-93.32458) - (-86.730692))/3), (0.661) + (8.127799)*sin((-86.730692) + k*((-93.32458) - (-86.730692))/3)]],
-            [[7.626987, -4.180253]],
-            [[7.64538, -3.460045]],
-            [[13.618414, -3.460045]]));
-        // shell_t01b291: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.352602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.305204]) linear_extrude(0.094796) polygon(concat(
-            [[7.817081, -7.460045]],
-            [[12.512677, -7.460045]],
-            [for (k = [1 : 3]) [(12.969192) + (14.966115)*cos((-91.747583) + k*((-88.214954) - (-91.747583))/3), (7.5025) + (14.966115)*sin((-91.747583) + k*((-88.214954) - (-91.747583))/3)]],
-            [[13.437889, -6.475906]],
-            [[13.430683, -3.460045]],
-            [[7.817428, -3.460045]]));
-        // shell_t01b292: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.5 (fine mesh), band [44.
-        rotate([0, -90, -90]) translate([0, 0, 44.4]) linear_extrude(0.2) polygon(concat(
-            [[8.10672, -3.872429]],
-            [[8.107568, -3.460045]],
-            [[13.136738, -3.460045]],
-            [[13.061412, -7.460045]],
-            [[8.9691, -7.460045]],
-            [for (k = [1 : 3]) [(8.554855) + (8.629111)*cos((-87.249862) + k*((-92.930747) - (-87.249862))/3), (1.163611) + (8.629111)*sin((-87.249862) + k*((-92.930747) - (-87.249862))/3)]]));
         // shell_t01b293: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.7 (fine mesh), band [44.
         rotate([0, -90, -90]) translate([0, 0, 44.6]) linear_extrude(0.2) polygon(concat(
             [for (k = [1 : 31]) [(10.374611) + (2.672351)*cos((131.619933) + k*((311.631534) - (131.619933))/31), (-5.457807) + (2.672351)*sin((131.619933) + k*((311.631534) - (131.619933))/31)]],
             [for (k = [1 : 30]) [(12.399285) + (0.387108)*cos((-129.228578) + k*((48.361872) - (-129.228578))/30), (-7.159912) + (0.387108)*sin((-129.228578) + k*((48.361872) - (-129.228578))/30)]],
             [[12.645037, -3.460045]],
             [[8.599672, -3.460045]]));
-        // shell_t01b294: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.852602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.8]) linear_extrude(0.105204) polygon(concat(
-            [[9.088728, -4.699737]],
-            [[9.093337, -3.460045]],
-            [[12.151443, -3.460045]],
-            [[12.16765, -7.460045]],
-            [[9.820761, -7.460045]],
-            [for (k = [1 : 3]) [(9.482942) + (9.74579)*cos((-88.013969) + k*((-92.264492) - (-88.013969))/3), (2.281923) + (9.74579)*sin((-88.013969) + k*((-92.264492) - (-88.013969))/3)]]));
-        // shell_t01b295: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.952602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.905204]) linear_extrude(0.094796) polygon(concat(
-            [[11.711108, -7.460045]],
-            [[10.287271, -7.460045]],
-            [for (k = [1 : 3]) [(9.939609) + (10.33735)*cos((-88.073085) + k*((-92.178133) - (-88.073085))/3), (2.873599) + (10.33735)*sin((-88.073085) + k*((-92.178133) - (-88.073085))/3)]],
-            [[9.531517, -4.387622]],
-            [[9.536922, -3.460045]],
-            [[11.704448, -3.460045]]));
-        // shell_t01b296: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=45.001688 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 45]) linear_extrude(0.003375) polygon(concat(
-            [[9.833954, -7.460045]],
-            [for (k = [1 : 3]) [(10.589551) + (11.219847)*cos((-93.8591) + k*((-85.912138) - (-93.8591))/3), (3.741274) + (11.219847)*sin((-93.8591) + k*((-85.912138) - (-93.8591))/3)]],
-            [[11.414741, -3.906116]],
-            [[11.376321, -3.460045]],
-            [[9.847188, -3.460045]]));
         // shell_t02r0: constant-outline run: 5 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
         rotate([0, -90, -90]) translate([0, 0, 37.105204]) linear_extrude(0.694796) polygon(concat(
             [[7.624202, 17.539955]],
@@ -2598,14 +2290,6 @@ module palm_shell() {
             [[5.585195, 20.039955]],
             [[5.045878, 19.539955]],
             [[5.045878, 16.539955]]));
-        // shell_t02b271: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.352602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.305204]) linear_extrude(0.094796) polygon(concat(
-            [[5.083816, 19.539955]],
-            [for (k = [1 : 3]) [(32.492178) + (40.122988)*cos((133.087215) + k*((132.097582) - (133.087215))/3), (-9.762363) + (40.122988)*sin((133.087215) + k*((132.097582) - (133.087215))/3)]],
-            [[15.733234, 19.937983]],
-            [[16.459585, 19.264812]],
-            [[16.459585, 16.539955]],
-            [[5.083816, 16.539955]]));
         // shell_t02b272: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.5 (fine mesh), band [41.
         rotate([0, -90, -90]) translate([0, 0, 41.4]) linear_extrude(0.2) polygon(concat(
             [[5.148555, 19.539955]],
@@ -2767,14 +2451,6 @@ module palm_shell() {
             [[8.840273, 20.039955]],
             [[7.626889, 19.533295]],
             [[7.626889, 16.539955]]));
-        // shell_t02b291: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.352602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.305204]) linear_extrude(0.094796) polygon(concat(
-            [[13.430771, 16.539955]],
-            [[13.430771, 19.539955]],
-            [for (k = [1 : 3]) [(10.092401) + (7.639952)*cos((64.089286) + k*((70.001034) - (64.089286))/3), (12.668124) + (7.639952)*sin((64.089286) + k*((70.001034) - (64.089286))/3)]],
-            [[8.956567, 19.984799]],
-            [[7.817584, 19.539955]],
-            [[7.817584, 16.539955]]));
         // shell_t02b292: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.5 (fine mesh), band [44.
         rotate([0, -90, -90]) translate([0, 0, 44.4]) linear_extrude(0.2) polygon(concat(
             [[8.109031, 16.539955]],
@@ -2783,193 +2459,6 @@ module palm_shell() {
             [[11.383371, 20.039955]],
             [[13.138915, 19.539955]],
             [[13.138915, 16.539955]]));
-        // shell_t02b293: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.7 (fine mesh), band [44.
-        rotate([0, -90, -90]) translate([0, 0, 44.6]) linear_extrude(0.2) polygon(concat(
-            [[11.845498, 16.539955]],
-            [[12.29154, 16.539955]],
-            [[12.646875, 16.539955]],
-            [[12.646875, 17.249534]],
-            [[12.646875, 19.539955]],
-            [[9.44454, 19.772869]],
-            [[8.601115, 19.539955]],
-            [[8.601115, 16.539955]]));
-        // shell_t02b294: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.852602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.8]) linear_extrude(0.105204) polygon(concat(
-            [[12.153109, 16.539955]],
-            [[12.153109, 19.539955]],
-            [[10.86426, 19.737332]],
-            [for (k = [1 : 3]) [(10.649626) + (6.124979)*cos((87.992023) + k*((104.704309) - (87.992023))/3), (13.615461) + (6.124979)*sin((87.992023) + k*((104.704309) - (87.992023))/3)]],
-            [[9.094888, 16.539955]]));
-        // shell_t02b295: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=44.952602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 44.905204]) linear_extrude(0.094796) polygon(concat(
-            [[11.707562, 16.539955]],
-            [for (k = [1 : 3]) [(10.678836) + (11.729554)*cos((84.976343) + k*((95.557821) - (84.976343))/3), (4.837218) + (11.729554)*sin((84.976343) + k*((95.557821) - (84.976343))/3)]],
-            [[9.54007, 18.826599]],
-            [[9.54007, 19.539955]],
-            [[11.707562, 19.539955]]));
-        // shell_t02b296: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=45.001688 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 45]) linear_extrude(0.003375) polygon(concat(
-            [[9.842966, 16.922076]],
-            [[9.914122, 19.550623]],
-            [[11.406578, 19.539955]],
-            [[11.352422, 16.539955]],
-            [for (k = [1 : 3]) [(10.6065) + (11.67959)*cos((86.341109) + k*((93.74504) - (86.341109))/3), (4.875202) + (11.67959)*sin((86.341109) + k*((93.74504) - (86.341109))/3)]]));
-        // shell_t03b000: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.894796]) linear_extrude(0.3) polygon(concat(
-            [[10.866959, 23.225174]],
-            [[10.849983, 18.235229]],
-            [[12.505532, 18.278091]],
-            [[13.044931, 18.292056]],
-            [[13.062918, 18.292522]],
-            [[13.608399, 18.306644]],
-            [[14.382338, 18.326682]],
-            [[14.398671, 23.276846]]));
-        // shell_t03b001: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.594796]) linear_extrude(0.3) polygon(concat(
-            [[10.595853, 23.218911]],
-            [[10.579538, 23.218534]],
-            [[10.009165, 23.205357]],
-            [[9.850844, 23.2017]],
-            [[9.842733, 20.257108]],
-            [[9.848979, 18.209314]],
-            [[15.398663, 18.352994]],
-            [[15.407815, 23.280499]]));
-        // shell_t03b002: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.294796]) linear_extrude(0.3) polygon(concat(
-            [[16.100646, 18.371168]],
-            [[14.1131, 18.319711]],
-            [[14.049985, 18.318077]],
-            [[13.575578, 18.305794]],
-            [[13.511367, 18.304132]],
-            [[9.142528, 18.191024]],
-            [[9.147395, 23.185449]],
-            [[16.102625, 23.307018]]));
-        // shell_t03b003: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.844796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.994796]) linear_extrude(0.3) polygon(concat(
-            [[16.664932, 18.385778]],
-            [[8.764427, 18.181235]],
-            [[8.75463, 18.180981]],
-            [[8.58322, 18.176543]],
-            [[8.578045, 20.868774]],
-            [[8.582734, 23.172404]],
-            [[9.061925, 23.183474]],
-            [[16.666842, 23.336336]]));
-        // shell_t03b004: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.544796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.694796]) linear_extrude(0.3) polygon(concat(
-            [[8.109715, 18.164284]],
-            [[8.893948, 18.184588]],
-            [[8.939953, 18.185779]],
-            [[9.484863, 18.199886]],
-            [[9.551587, 18.201614]],
-            [[17.138204, 18.39803]],
-            [[17.139007, 23.364033]],
-            [[8.109568, 23.161473]]));
-        // shell_t03b005: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.244796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.394796]) linear_extrude(0.3) polygon(concat(
-            [[7.700859, 23.152031]],
-            [[7.697925, 18.153623]],
-            [[12.866683, 18.287441]],
-            [[13.028199, 18.291623]],
-            [[13.365819, 18.300364]],
-            [[13.508473, 18.304057]],
-            [[17.547239, 18.40862]],
-            [[17.547651, 23.388462]]));
-        // shell_t03b006: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.944796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.094796]) linear_extrude(0.3) polygon(concat(
-            [[7.339938, 23.143693]],
-            [[17.908508, 23.409267]],
-            [[17.911276, 18.418045]],
-            [[15.73918, 18.36181]],
-            [[15.321124, 18.350986]],
-            [[15.17092, 18.347097]],
-            [[14.792403, 18.337298]],
-            [[7.332496, 18.196453]]));
-        // shell_t03b007: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.644796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.794796]) linear_extrude(0.3) polygon(concat(
-            [[7.015499, 18.135955]],
-            [[18.233368, 18.426384]],
-            [[18.232404, 23.426666]],
-            [[17.430245, 23.381424]],
-            [[17.199694, 23.368088]],
-            [[16.832027, 23.346241]],
-            [[16.462802, 23.32674]],
-            [[7.015896, 23.136207]]));
-        // shell_t03b008: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.344796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.494796]) linear_extrude(0.3) polygon(concat(
-            [[13.220272, 18.296595]],
-            [[13.441368, 18.302319]],
-            [[13.663298, 18.308065]],
-            [[13.902334, 18.314254]],
-            [[18.521785, 18.438588]],
-            [[18.518199, 23.440612]],
-            [[6.721535, 23.056233]],
-            [[6.728198, 18.128517]]));
-        // shell_t03b009: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.044796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.194796]) linear_extrude(0.3) polygon(concat(
-            [[10.106111, 18.21597]],
-            [[10.329275, 18.221748]],
-            [[10.57941, 18.228224]],
-            [[10.841519, 18.23501]],
-            [[18.784799, 18.453565]],
-            [[18.782727, 23.451115]],
-            [[6.465947, 23.123503]],
-            [[6.464819, 18.121698]]));
-        // shell_t03b010: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.894796]) linear_extrude(0.3) polygon(concat(
-            [[6.226335, 18.115524]],
-            [[19.023535, 18.464333]],
-            [[19.019463, 23.459031]],
-            [[15.078477, 23.27417]],
-            [for (k = [1 : 3]) [(14.845472) + (11.623272)*cos((-88.85136) + k*((-91.416684) - (-88.85136))/3), (34.895211) + (11.623272)*sin((-88.85136) + k*((-91.416684) - (-88.85136))/3)]],
-            [[6.229802, 23.118047]]));
-        // shell_t03b011: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.594796]) linear_extrude(0.3) polygon(concat(
-            [[6.015647, 18.110069]],
-            [[19.233114, 18.470141]],
-            [[19.236128, 23.464732]],
-            [[10.330049, 23.21277]],
-            [[10.050217, 23.206306]],
-            [[9.824582, 23.201093]],
-            [[9.500077, 23.193596]],
-            [[6.010175, 23.112973]]));
-        // shell_t03b012: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.294796]) linear_extrude(0.3) polygon(concat(
-            [[5.820573, 23.108593]],
-            [[19.43097, 23.468129]],
-            [[19.363482, 18.473452]],
-            [[13.351894, 18.300003]],
-            [[13.026209, 18.291571]],
-            [[12.979593, 18.290364]],
-            [[12.617135, 18.28098]],
-            [[5.818687, 18.10497]]));
-        // shell_t03b013: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.844796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.994796]) linear_extrude(0.3) polygon(concat(
-            [[15.973256, 23.301613]],
-            [for (k = [1 : 3]) [(14.872798) + (28.431486)*cos((-87.781797) + k*((-86.72225) - (-87.781797))/3), (51.712041) + (28.431486)*sin((-87.781797) + k*((-86.72225) - (-87.781797))/3)]],
-            [[19.604757, 23.469575]],
-            [[19.606827, 18.474716]],
-            [[5.642812, 18.100416]],
-            [[5.643547, 23.104504]]));
-        // shell_t03b014: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.544796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.694796]) linear_extrude(0.3) polygon(concat(
-            [[19.765044, 23.469931]],
-            [[5.482404, 23.100781]],
-            [[5.485191, 18.096336]],
-            [[7.62384, 18.151705]],
-            [[7.940034, 18.159891]],
-            [[8.36452, 18.17088]],
-            [[13.697396, 18.435828]],
-            [[19.766827, 18.473325]]));
-        // shell_t03b015: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.244796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.394796]) linear_extrude(0.3) polygon(concat(
-            [[5.336726, 18.092492]],
-            [[10.620942, 18.229299]],
-            [[13.044846, 18.845369]],
-            [[14.724932, 18.33555]],
-            [[19.909987, 18.470104]],
-            [[19.90828, 23.469028]],
-            [[11.82744, 23.247363]],
-            [[5.341867, 23.097534]]));
         // shell_t03b016: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.944796 (fine mesh), ban
         rotate([0, -90, -90]) translate([0, 0, -42.094796]) linear_extrude(0.3) polygon(concat(
             [[12.619768, 19.211213]],
@@ -3271,190 +2760,6 @@ module palm_shell() {
             [[20.072511, 18.463974]],
             [[4.624202, 18.074045]],
             [[4.624202, 23.080955]]));
-        // shell_t04b000: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.894796]) linear_extrude(0.3) polygon(concat(
-            [[14.385823, -33.237368]],
-            [[14.382341, -38.238879]],
-            [[14.177918, -38.233708]],
-            [[13.614125, -38.219447]],
-            [[13.066063, -38.205584]],
-            [[13.053051, -38.205255]],
-            [[10.849975, -38.149527]],
-            [[10.879426, -33.148673]]));
-        // shell_t04b001: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.594796]) linear_extrude(0.3) polygon(concat(
-            [[13.578065, -38.218535]],
-            [[14.106824, -38.23191]],
-            [[14.131708, -38.232539]],
-            [[14.677936, -38.246356]],
-            [[15.398665, -38.264587]],
-            [[15.323065, -33.261076]],
-            [[9.844495, -33.122494]],
-            [[9.848976, -38.124207]]));
-        // shell_t04b002: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-46.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -46.294796]) linear_extrude(0.3) polygon(concat(
-            [[9.14523, -33.104806]],
-            [[11.526662, -33.165045]],
-            [[11.589504, -33.166634]],
-            [[12.056875, -33.178457]],
-            [[12.514186, -33.190024]],
-            [[16.100396, -33.280738]],
-            [[16.100645, -38.282344]],
-            [[9.142531, -38.106337]]));
-        // shell_t04b003: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.844796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.994796]) linear_extrude(0.3) polygon(concat(
-            [[12.466955, -38.190429]],
-            [[12.542942, -38.192351]],
-            [[12.984739, -38.203527]],
-            [[13.060052, -38.205432]],
-            [[16.66493, -38.296618]],
-            [[16.66363, -33.294986]],
-            [[8.584605, -33.090625]],
-            [[8.583222, -38.092189]]));
-        // shell_t04b004: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.544796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.694796]) linear_extrude(0.3) polygon(concat(
-            [[8.111016, -33.078645]],
-            [[17.137106, -33.306962]],
-            [[17.138202, -38.308589]],
-            [[13.469885, -38.215799]],
-            [[13.058049, -38.205381]],
-            [[12.961968, -38.202951]],
-            [[12.554152, -38.192635]],
-            [[8.109716, -38.080212]]));
-        // shell_t04b005: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-45.244796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.394796]) linear_extrude(0.3) polygon(concat(
-            [[7.697927, -38.069796]],
-            [[17.547239, -38.318936]],
-            [[17.546932, -33.317329]],
-            [[10.766015, -33.145804]],
-            [[10.640528, -33.14263]],
-            [[10.240168, -33.132502]],
-            [[9.795954, -33.121266]],
-            [[7.699758, -33.068243]]));
-        // shell_t04b006: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.944796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -45.094796]) linear_extrude(0.3) polygon(concat(
-            [[17.909348, -33.326496]],
-            [[17.908589, -38.328076]],
-            [[16.259495, -38.286362]],
-            [[15.748364, -38.273433]],
-            [[15.294084, -38.261942]],
-            [[15.184902, -38.25918]],
-            [[7.332558, -38.02979]],
-            [[7.418748, -33.061134]]));
-        // shell_t04b007: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.644796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.794796]) linear_extrude(0.3) polygon(concat(
-            [[18.235061, -33.334735]],
-            [[13.094235, -33.204696]],
-            [[12.897234, -33.199713]],
-            [[12.646589, -33.193373]],
-            [[12.427695, -33.187836]],
-            [[7.013506, -33.050884]],
-            [[7.015498, -38.052533]],
-            [[18.233371, -38.336292]]));
-        // shell_t04b008: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.344796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.494796]) linear_extrude(0.3) polygon(concat(
-            [[15.31979, -33.260992]],
-            [[15.509756, -33.265798]],
-            [[15.883709, -33.275257]],
-            [[16.069546, -33.279958]],
-            [[18.523433, -33.34203]],
-            [[18.526918, -38.343717]],
-            [[6.728198, -38.045266]],
-            [[6.727838, -33.043658]]));
-        // shell_t04b009: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-44.044796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -44.194796]) linear_extrude(0.3) polygon(concat(
-            [[6.46482, -38.038604]],
-            [[18.783332, -38.350203]],
-            [[18.78158, -33.34856]],
-            [[14.860135, -33.249365]],
-            [[14.620168, -33.243295]],
-            [[14.360658, -33.236731]],
-            [[14.148141, -33.231355]],
-            [[6.466039, -33.037035]]));
-        // shell_t04b010: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.894796]) linear_extrude(0.3) polygon(concat(
-            [[19.018437, -38.359178]],
-            [[17.282137, -38.31223]],
-            [[17.153104, -38.308966]],
-            [[16.630789, -38.295754]],
-            [[16.1969, -38.284779]],
-            [[6.226333, -38.032571]],
-            [[6.226134, -33.030967]],
-            [[19.02079, -33.358755]]));
-        // shell_t04b011: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.594796]) linear_extrude(0.3) polygon(concat(
-            [[6.015647, -38.027242]],
-            [[6.015163, -33.02563]],
-            [[17.038594, -33.30447]],
-            [[17.561137, -33.317688]],
-            [for (k = [1 : 3]) [(17.798573) + (8.126185)*cos((91.673678) + k*((79.793786) - (91.673678))/3), (-41.44364) + (8.126185)*sin((91.673678) + k*((79.793786) - (91.673678))/3)]],
-            [[19.214848, -38.368328]]));
-        // shell_t04b012: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-43.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -43.294796]) linear_extrude(0.3) polygon(concat(
-            [[5.818688, -38.02226]],
-            [[19.428525, -38.374506]],
-            [[19.429765, -33.383545]],
-            [[12.341205, -33.185648]],
-            [[12.295164, -33.184483]],
-            [[12.248111, -33.183293]],
-            [[11.920165, -33.174998]],
-            [[5.819979, -33.020693]]));
-        // shell_t04b013: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.844796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.994796]) linear_extrude(0.3) polygon(concat(
-            [[5.641149, -33.01617]],
-            [[19.604809, -33.386442]],
-            [[19.605208, -38.378096]],
-            [[13.145345, -38.207589]],
-            [[13.040016, -38.204925]],
-            [[12.757033, -38.197767]],
-            [[12.655041, -38.195187]],
-            [[5.642812, -38.017811]]));
-        // shell_t04b014: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.544796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.694796]) linear_extrude(0.3) polygon(concat(
-            [[19.767312, -38.379882]],
-            [[19.747872, -33.386604]],
-            [[14.184308, -33.23227]],
-            [for (k = [1 : 7]) [(14.115632) + (0.560039)*cos((82.959262) + k*((121.980435) - (82.959262))/7), (-33.788322) + (0.560039)*sin((82.959262) + k*((121.980435) - (82.959262))/7)]],
-            [[5.485442, -33.012231]],
-            [[5.485191, -38.013824]]));
-        // shell_t04b015: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-42.244796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.394796]) linear_extrude(0.3) polygon(concat(
-            [[10.61273, -33.141926]],
-            [[13.216072, -33.735955]],
-            [[14.894942, -33.250245]],
-            [[19.908764, -33.382181]],
-            [[19.908888, -38.379636]],
-            [[13.869314, -38.225902]],
-            [[5.336725, -38.010068]],
-            [[5.338192, -33.008506]]));
-        // shell_t04b016: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.944796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.094796]) linear_extrude(0.3) polygon(concat(
-            [[12.647966, -35.590894]],
-            [[12.617373, -34.070387]],
-            [[10.196286, -33.131392]],
-            [[5.212716, -33.005332]],
-            [[5.213214, -38.006944]],
-            [[20.043401, -38.376817]],
-            [[19.9697, -33.380235]],
-            [[15.102845, -33.255504]],
-            [[12.96459, -34.062571]],
-            [[12.628629, -34.070755]]));
-        // shell_t04b017: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.644796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -41.794796]) linear_extrude(0.3) polygon(concat(
-            [[15.875122, -33.275039]],
-            [for (k = [1 : 12]) [(15.642622) + (0.469324)*cos((60.305043) + k*((132.134026) - (60.305043))/12), (-33.682738) + (0.469324)*sin((60.305043) + k*((132.134026) - (60.305043))/12)]],
-            [[13.928708, -34.113261]],
-            [[13.92267, -38.227252]],
-            [[20.17384, -38.372513]],
-            [[20.173847, -33.365039]]));
-        // shell_t04b018: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.344796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -41.494796]) linear_extrude(0.3) polygon(concat(
-            [[14.416765, -38.23975]],
-            [[14.416478, -34.129198]],
-            [[15.687794, -33.270301]],
-            [[19.553903, -33.373208]],
-            [for (k = [1 : 3]) [(19.831031) + (4.121012)*cos((-93.856044) + k*((-83.405624) - (-93.856044))/3), (-29.261661) + (4.121012)*sin((-93.856044) + k*((-83.405624) - (-93.856044))/3)]],
-            [[20.304279, -38.368209]]));
         // shell_t04b019: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.044796 (fine mesh), ban
         rotate([0, -90, -90]) translate([0, 0, -41.194796]) linear_extrude(0.3) polygon(concat(
             [[14.833242, -34.094541]],
@@ -3463,36 +2768,6 @@ module palm_shell() {
             [for (k = [1 : 32]) [(20.198115) + (0.494132)*cos((128.548526) + k*((-61.404753) - (128.548526))/32), (-33.790528) + (0.494132)*sin((128.548526) + k*((-61.404753) - (128.548526))/32)]],
             [[20.434718, -38.363905]],
             [[14.760902, -38.248455]]));
-        // shell_t04b020: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.894796]) linear_extrude(0.3) polygon(concat(
-            [[20.565157, -38.359601]],
-            [[16.684041, -38.297101]],
-            [[16.543847, -38.293555]],
-            [[16.296109, -38.287288]],
-            [[15.021028, -38.255035]],
-            [[15.023204, -34.149033]],
-            [[16.078231, -33.280177]],
-            [[20.565177, -33.334616]]));
-        // shell_t04b021: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.594796]) linear_extrude(0.3) polygon(concat(
-            [[20.653782, -38.356768]],
-            [[15.219995, -38.260068]],
-            [[15.220748, -34.1555]],
-            [[16.221821, -33.283809]],
-            [[16.228533, -33.283979]],
-            [[16.581041, -33.292896]],
-            [[16.880812, -33.300478]],
-            [[20.695621, -33.317848]]));
-        // shell_t04b022: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.294796]) linear_extrude(0.3) polygon(concat(
-            [[17.116721, -33.306446]],
-            [[16.941152, -33.302005]],
-            [[16.698709, -33.295872]],
-            [[16.372508, -33.287621]],
-            [[15.371583, -34.160433]],
-            [[15.435639, -38.265523]],
-            [[20.826038, -38.342679]],
-            [[20.826065, -33.301081]]));
         // shell_t04b023: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-39.844796 (fine mesh), ban
         rotate([0, -90, -90]) translate([0, 0, -39.994796]) linear_extrude(0.3) polygon(concat(
             [[20.95648, -38.331769]],
@@ -3890,92 +3165,6 @@ module palm_shell() {
             [[7.612631, -21.460047]],
             [[7.567867, -21.460047]],
             [[4.970282, -21.460047]]));
-        // shell_t05r9: constant-outline run: 4 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 37.105204]) linear_extrude(0.6) polygon(concat(
-            [[5.148926, -21.460047]],
-            [for (k = [1 : 3]) [(6.192098) + (11.642725)*cos((-95.13337) + k*((-84.644277) - (-95.13337))/3), (-9.84792) + (11.642725)*sin((-95.13337) + k*((-84.644277) - (-95.13337))/3)]],
-            [[16.10306, -21.460047]],
-            [[16.082824, -17.460045]],
-            [[5.148926, -17.460045]]));
-        // shell_t05b247: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=37.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 37.705204]) linear_extrude(0.094796) polygon(concat(
-            [[5.267871, -17.460045]],
-            [[14.765617, -17.460045]],
-            [for (k = [1 : 3]) [(15.333775) + (15.465656)*cos((-92.104833) + k*((-87.612619) - (-92.104833))/3), (-2.001133) + (15.465656)*sin((-92.104833) + k*((-87.612619) - (-92.104833))/3)]],
-            [[15.978285, -19.179501]],
-            [[15.978285, -21.460047]],
-            [[5.267871, -21.460047]]));
-        // shell_t05b248: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=37.9 (fine mesh), band [37.
-        rotate([0, -90, -90]) translate([0, 0, 37.8]) linear_extrude(0.2) polygon(concat(
-            [[15.905053, -17.460045]],
-            [[15.905053, -21.460047]],
-            [[8.19507, -21.460047]],
-            [for (k = [1 : 3]) [(8.054201) + (12.246636)*cos((-89.340952) + k*((-90.660623) - (-89.340952))/3), (-9.213862) + (12.246636)*sin((-89.340952) + k*((-90.660623) - (-89.340952))/3)]],
-            [[5.344802, -21.460047]],
-            [[5.344802, -17.460045]]));
-        // shell_t05r11: constant-outline run: 6 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 38]) linear_extrude(0.905204) polygon(concat(
-            [[15.531028, -17.460045]],
-            [[15.531028, -21.460047]],
-            [[8.772659, -21.460047]],
-            [for (k = [1 : 3]) [(8.525263) + (12.428887)*cos((-88.859555) + k*((-91.146369) - (-88.859555))/3), (-9.032534) + (12.428887)*sin((-88.859555) + k*((-91.146369) - (-88.859555))/3)]],
-            [[5.717145, -21.460047]],
-            [[5.717145, -17.460045]]));
-        // shell_t05r12: constant-outline run: 4 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 38.905204]) linear_extrude(0.6) polygon(concat(
-            [[6.387836, -17.460045]],
-            [[6.387836, -21.460047]],
-            [[12.296523, -21.460047]],
-            [for (k = [1 : 3]) [(12.668634) + (14.474056)*cos((-91.472953) + k*((-88.526798) - (-91.472953))/3), (-6.988646) + (14.474056)*sin((-91.472953) + k*((-88.526798) - (-91.472953))/3)]],
-            [[14.857766, -21.460047]],
-            [[14.857766, -17.460045]]));
-        // shell_t05r13: constant-outline run: 3 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 39.505204]) linear_extrude(0.494796) polygon(concat(
-            [[6.828318, -17.460045]],
-            [[6.828318, -21.460047]],
-            [for (k = [1 : 3]) [(7.528841) + (12.060315)*cos((-93.327119) + k*((-86.655117) - (-93.327119))/3), (-9.410022) + (12.060315)*sin((-93.327119) + k*((-86.655117) - (-93.327119))/3)]],
-            [[14.417364, -21.460047]],
-            [[14.417364, -17.460045]]));
-        // shell_t05r14: constant-outline run: 3 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 40]) linear_extrude(0.4) polygon(concat(
-            [[13.779694, -17.460045]],
-            [[13.779694, -21.460047]],
-            [[11.436554, -21.460047]],
-            [for (k = [1 : 3]) [(10.466899) + (13.297289)*cos((-85.820868) + k*((-94.747316) - (-85.820868))/3), (-8.189694) + (13.297289)*sin((-85.820868) + k*((-94.747316) - (-85.820868))/3)]],
-            [[7.467351, -21.460047]],
-            [[7.467351, -17.460045]]));
-        // shell_t05b265: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.5 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.4]) linear_extrude(0.2) polygon(concat(
-            [[8.112089, -20.543029]],
-            [[8.112089, -21.460047]],
-            [[8.417278, -21.460047]],
-            [[13.142427, -21.460047]],
-            [[13.120215, -17.460045]],
-            [[8.922966, -17.460045]],
-            [[8.478926, -17.460045]],
-            [[8.112089, -17.460045]]));
-        // shell_t05b266: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.652602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 40.6]) linear_extrude(0.105204) polygon(concat(
-            [[8.465685, -17.460045]],
-            [[11.782546, -17.460045]],
-            [for (k = [1 : 3]) [(12.284379) + (13.056671)*cos((-92.202126) + k*((-87.84577) - (-92.202126))/3), (-4.409583) + (13.056671)*sin((-92.202126) + k*((-87.84577) - (-92.202126))/3)]],
-            [[12.775287, -18.326981]],
-            [[12.775287, -21.460047]],
-            [[8.465685, -21.460047]]));
-        // shell_t05b267: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 40.705204]) linear_extrude(0.094796) polygon(concat(
-            [[8.757091, -17.460045]],
-            [[8.757091, -21.460047]],
-            [for (k = [1 : 3]) [(9.658748) + (12.914394)*cos((-93.998533) + k*((-85.990363) - (-93.998533))/3), (-8.560998) + (12.914394)*sin((-93.998533) + k*((-85.990363) - (-93.998533))/3)]],
-            [[12.48991, -21.460047]],
-            [[12.48991, -17.460045]]));
-        // shell_t05b268: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.9 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.8]) linear_extrude(0.2) polygon(concat(
-            [[9.282516, -17.460045]],
-            [for (k = [1 : 3]) [(10.57539) + (11.95214)*cos((-96.197858) + k*((-83.376133) - (-96.197858))/3), (-5.554791) + (11.95214)*sin((-96.197858) + k*((-83.376133) - (-96.197858))/3)]],
-            [[11.957901, -19.719573]],
-            [[11.957901, -21.460047]],
-            [[9.282516, -21.460047]]));
         // shell_t06b188: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=27.25 (fine mesh), band [27
         rotate([0, -90, -90]) translate([0, 0, 27.1]) linear_extrude(0.3) polygon(concat(
             [[4.623917, -33.538315]],
@@ -4086,171 +3275,6 @@ module palm_shell() {
             [[4.970071, -31.460045]],
             [[9.121446, -31.470826]],
             [[9.121446, -32.380045]]));
-        // shell_t06b208: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=31.202602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 31.105204]) linear_extrude(0.194796) polygon(concat(
-            [[16.221466, -31.460045]],
-            [[6.42711, -31.460045]],
-            [for (k = [1 : 3]) [(5.765104) + (16.266099)*cos((-87.668245) + k*((-92.599876) - (-87.668245))/3), (-15.202235) + (16.266099)*sin((-87.668245) + k*((-92.599876) - (-87.668245))/3)]],
-            [[5.026876, -33.154149]],
-            [[5.026876, -35.260046]],
-            [[16.221466, -35.260046]]));
-        // shell_t06b209: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=31.45 (fine mesh), band [31
-        rotate([0, -90, -90]) translate([0, 0, 31.3]) linear_extrude(0.3) polygon(concat(
-            [[5.124959, -31.460045]],
-            [[14.405191, -31.460045]],
-            [for (k = [1 : 3]) [(15.295106) + (19.454909)*cos((-92.620362) + k*((-87.557962) - (-92.620362))/3), (-12.015085) + (19.454909)*sin((-92.620362) + k*((-87.557962) - (-92.620362))/3)]],
-            [[16.124384, -31.66203]],
-            [[16.124384, -35.260046]],
-            [[5.124959, -35.260046]]));
-        // shell_t06b210: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=31.652602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 31.6]) linear_extrude(0.105204) polygon(concat(
-            [[5.220949, -31.460045]],
-            [[14.717747, -31.460045]],
-            [for (k = [1 : 3]) [(15.338903) + (19.474706)*cos((-91.82742) + k*((-87.974754) - (-91.82742))/3), (-11.991315) + (19.474706)*sin((-91.82742) + k*((-87.974754) - (-91.82742))/3)]],
-            [[16.027355, -33.431025]],
-            [[16.027355, -35.260046]],
-            [[5.220949, -35.260046]]));
-        // shell_t06b211: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=31.802602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 31.705204]) linear_extrude(0.194796) polygon(concat(
-            [[15.955517, -31.460045]],
-            [[6.264261, -31.460045]],
-            [for (k = [1 : 27]) [(5.803217) + (0.517183)*cos((28.111692) + k*((188.722875) - (28.111692))/27), (-31.70634) + (0.517183)*sin((28.111692) + k*((188.722875) - (28.111692))/27)]],
-            [[5.292016, -35.260046]],
-            [[15.955517, -35.260046]]));
-        // shell_t06b212: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=32.05 (fine mesh), band [31
-        rotate([0, -90, -90]) translate([0, 0, 31.9]) linear_extrude(0.3) polygon(concat(
-            [[5.430797, -31.460045]],
-            [[14.541613, -31.460045]],
-            [for (k = [1 : 3]) [(15.167939) + (19.392214)*cos((-91.850545) + k*((-88.080379) - (-91.850545))/3), (-12.074755) + (19.392214)*sin((-91.850545) + k*((-88.080379) - (-91.850545))/3)]],
-            [[15.817661, -33.17229]],
-            [[15.817661, -35.260046]],
-            [[5.430797, -35.260046]]));
-        // shell_t06b213: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=32.252602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 32.2]) linear_extrude(0.105204) polygon(concat(
-            [[15.699745, -35.260046]],
-            [[15.643372, -31.460045]],
-            [[6.391423, -31.460045]],
-            [for (k = [1 : 3]) [(5.952922) + (16.299394)*cos((-88.458493) + k*((-91.424988) - (-88.458493))/3), (-15.165485) + (16.299394)*sin((-88.458493) + k*((-91.424988) - (-88.458493))/3)]],
-            [[5.547581, -31.508513]],
-            [[5.547581, -35.260046]]));
-        // shell_t06b214: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=32.402602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 32.305204]) linear_extrude(0.194796) polygon(concat(
-            [[5.650339, -31.460045]],
-            [[14.426747, -31.460045]],
-            [for (k = [1 : 3]) [(15.000615) + (19.311091)*cos((-91.702556) + k*((-88.226348) - (-91.702556))/3), (-12.153461) + (19.311091)*sin((-91.702556) + k*((-88.226348) - (-91.702556))/3)]],
-            [[15.598462, -32.64424]],
-            [[15.598462, -35.260046]],
-            [[5.650339, -35.260046]]));
-        // shell_t06b215: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=32.65 (fine mesh), band [32
-        rotate([0, -90, -90]) translate([0, 0, 32.5]) linear_extrude(0.3) polygon(concat(
-            [[5.820812, -31.510578]],
-            [[5.830396, -35.260046]],
-            [[15.426458, -35.260046]],
-            [[15.373709, -31.460045]],
-            [[6.532111, -31.460045]],
-            [for (k = [1 : 3]) [(6.179862) + (16.342637)*cos((-88.764951) + k*((-91.258885) - (-88.764951))/3), (-15.121203) + (16.342637)*sin((-88.764951) + k*((-91.258885) - (-88.764951))/3)]]));
-        // shell_t06b216: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=32.852602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 32.8]) linear_extrude(0.105204) polygon(concat(
-            [[5.985259, -31.460045]],
-            [[14.252933, -31.460045]],
-            [for (k = [1 : 3]) [(14.730809) + (19.183305)*cos((-91.427273) + k*((-88.410165) - (-91.427273))/3), (-12.280362) + (19.183305)*sin((-91.427273) + k*((-88.410165) - (-91.427273))/3)]],
-            [[15.263141, -33.267035]],
-            [[15.263141, -35.260046]],
-            [[5.985259, -35.260046]]));
-        // shell_t06b217: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=33.002602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 32.905204]) linear_extrude(0.194796) polygon(concat(
-            [[6.107502, -35.260046]],
-            [[6.163237, -31.460045]],
-            [[14.395097, -31.460045]],
-            [for (k = [1 : 3]) [(14.744272) + (19.18938)*cos((-91.042619) + k*((-88.818864) - (-91.042619))/3), (-12.273698) + (19.18938)*sin((-91.042619) + k*((-88.818864) - (-91.042619))/3)]],
-            [[15.139849, -34.796073]],
-            [[15.139849, -35.260046]]));
-        // shell_t06b218: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=33.25 (fine mesh), band [33
-        rotate([0, -90, -90]) translate([0, 0, 33.1]) linear_extrude(0.3) polygon(concat(
-            [[6.340806, -31.460045]],
-            [[14.006949, -31.460045]],
-            [for (k = [1 : 3]) [(14.438989) + (19.04813)*cos((-91.29959) + k*((-88.591365) - (-91.29959))/3), (-12.415697) + (19.04813)*sin((-91.29959) + k*((-88.591365) - (-91.29959))/3)]],
-            [[14.907295, -33.67114]],
-            [[14.907295, -35.260046]],
-            [[6.340806, -35.260046]]));
-        // shell_t06b219: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=33.452602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 33.4]) linear_extrude(0.105204) polygon(concat(
-            [[6.547569, -31.460045]],
-            [[13.664806, -31.460045]],
-            [for (k = [1 : 3]) [(14.179288) + (18.929965)*cos((-91.557106) + k*((-88.418827) - (-91.557106))/3), (-12.533641) + (18.929965)*sin((-91.557106) + k*((-88.418827) - (-91.557106))/3)]],
-            [[14.701727, -32.145591]],
-            [[14.701727, -35.260046]],
-            [[6.547569, -35.260046]]));
-        // shell_t06b220: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=33.602602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 33.505204]) linear_extrude(0.194796) polygon(concat(
-            [[14.531366, -31.460045]],
-            [[7.461314, -31.460045]],
-            [for (k = [1 : 29]) [(7.119899) + (0.670796)*cos((60.221364) + k*((233.031644) - (60.221364))/29), (-32.056704) + (0.670796)*sin((60.221364) + k*((233.031644) - (60.221364))/29)]],
-            [[6.7165, -35.260046]],
-            [[14.531366, -35.260046]]));
-        // shell_t06b221: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=33.85 (fine mesh), band [33
-        rotate([0, -90, -90]) translate([0, 0, 33.7]) linear_extrude(0.3) polygon(concat(
-            [[14.222738, -31.460045]],
-            [[8.240495, -31.460045]],
-            [for (k = [1 : 3]) [(7.635137) + (16.663362)*cos((-87.918612) + k*((-92.095487) - (-87.918612))/3), (-14.803278) + (16.663362)*sin((-87.918612) + k*((-92.095487) - (-87.918612))/3)]],
-            [[7.025675, -33.272079]],
-            [[7.025675, -35.260046]],
-            [[14.222738, -35.260046]]));
-        // shell_t06b222: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.052602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 34]) linear_extrude(0.105204) polygon(concat(
-            [[7.310591, -31.460045]],
-            [[12.632586, -31.460045]],
-            [for (k = [1 : 3]) [(13.286072) + (18.541408)*cos((-92.019241) + k*((-87.982896) - (-92.019241))/3), (-12.925118) + (18.541408)*sin((-92.019241) + k*((-87.982896) - (-92.019241))/3)]],
-            [[13.938866, -32.198572]],
-            [[13.938866, -35.260046]],
-            [[7.310591, -35.260046]]));
-        // shell_t06b223: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.152602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 34.105204]) linear_extrude(0.094796) polygon(concat(
-            [[13.779729, -31.460045]],
-            [[8.577399, -31.460045]],
-            [for (k = [1 : 3]) [(8.022927) + (16.759391)*cos((-88.104461) + k*((-91.896204) - (-88.104461))/3), (-14.706328) + (16.759391)*sin((-88.104461) + k*((-91.896204) - (-88.104461))/3)]],
-            [[7.46826, -32.846676]],
-            [[7.46826, -35.260046]],
-            [[13.779729, -35.260046]]));
-        // shell_t06b224: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.3 (fine mesh), band [34.
-        rotate([0, -90, -90]) translate([0, 0, 34.2]) linear_extrude(0.2) polygon(concat(
-            [[7.717753, -31.460045]],
-            [[12.257786, -31.460045]],
-            [for (k = [1 : 3]) [(12.894422) + (18.378409)*cos((-91.984628) + k*((-88.012701) - (-91.984628))/3), (-13.087849) + (18.378409)*sin((-91.984628) + k*((-88.012701) - (-91.984628))/3)]],
-            [[13.531916, -32.1508]],
-            [[13.531916, -35.260046]],
-            [[7.717753, -35.260046]]));
-        // shell_t06b225: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.5 (fine mesh), band [34.
-        rotate([0, -90, -90]) translate([0, 0, 34.4]) linear_extrude(0.2) polygon(concat(
-            [[13.140506, -31.460045]],
-            [[9.381145, -31.460045]],
-            [for (k = [1 : 3]) [(8.746146) + (16.952523)*cos((-87.854002) + k*((-92.150369) - (-87.854002))/3), (-14.51421) + (16.952523)*sin((-87.854002) + k*((-92.150369) - (-87.854002))/3)]],
-            [[8.109853, -34.695186]],
-            [[8.109853, -35.260046]],
-            [[13.140506, -35.260046]]));
-        // shell_t06b226: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.652602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 34.6]) linear_extrude(0.105204) polygon(concat(
-            [[8.466484, -31.640462]],
-            [[8.48539, -35.260046]],
-            [[12.779709, -35.260046]],
-            [[12.734343, -31.460045]],
-            [[9.392527, -31.460045]],
-            [for (k = [1 : 3]) [(8.911917) + (16.998011)*cos((-88.379996) + k*((-91.501489) - (-88.379996))/3), (-14.466519) + (16.998011)*sin((-88.379996) + k*((-91.501489) - (-88.379996))/3)]]));
-        // shell_t06b227: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 34.705204]) linear_extrude(0.094796) polygon(concat(
-            [[12.489391, -31.460045]],
-            [[9.839713, -31.460045]],
-            [for (k = [1 : 3]) [(9.301035) + (17.110951)*cos((-88.196288) + k*((-91.816337) - (-88.196288))/3), (-14.354346) + (17.110951)*sin((-88.196288) + k*((-91.816337) - (-88.196288))/3)]],
-            [[8.758585, -33.0086]],
-            [[8.758585, -35.260046]],
-            [[12.489391, -35.260046]]));
-        // shell_t06b228: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=34.9 (fine mesh), band [34.
-        rotate([0, -90, -90]) translate([0, 0, 34.8]) linear_extrude(0.2) polygon(concat(
-            [[9.286519, -31.460045]],
-            [for (k = [1 : 3]) [(10.58386) + (17.528523)*cos((-94.240888) + k*((-85.502054) - (-94.240888))/3), (-13.964566) + (17.528523)*sin((-94.240888) + k*((-85.502054) - (-94.240888))/3)]],
-            [[11.960153, -34.046814]],
-            [[11.960153, -35.260046]],
-            [[9.286519, -35.260046]]));
         // shell_t07b053: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-30.844796 (fine mesh), ban
         rotate([0, -90, -90]) translate([0, 0, -30.994796]) linear_extrude(0.3) polygon(concat(
             [[21.741832, 23.321118]],
@@ -7482,62 +6506,6 @@ module palm_shell() {
             [[13.921518, -37.921863]],
             [[4.623686, -38.084226]],
             [[4.641543, 24.503125]]));
-        // shell_t11b016: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.944796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -42.094796]) linear_extrude(0.3) polygon(concat(
-            [[20.043404, 23.466569]],
-            [[12.629707, 23.265897]],
-            [[12.63103, 19.158687]],
-            [[15.096215, 18.345163]],
-            [[15.499353, 18.3556]],
-            [[15.95664, 18.367439]],
-            [[16.37465, 18.378261]],
-            [[20.043404, 18.463461]]));
-        // shell_t11b017: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.644796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -41.794796]) linear_extrude(0.3) polygon(concat(
-            [[20.173848, 20.812608]],
-            [[20.173847, 18.455114]],
-            [[15.423788, 18.353643]],
-            [[13.926793, 19.202041]],
-            [[13.928008, 23.293689]],
-            [[18.424978, 23.434729]],
-            [[19.761573, 23.468978]],
-            [[20.173848, 23.463214]]));
-        // shell_t11b018: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.344796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -41.494796]) linear_extrude(0.3) polygon(concat(
-            [[20.30429, 18.446767]],
-            [[15.685658, 18.360423]],
-            [[14.422797, 19.218626]],
-            [[14.4191, 23.276375]],
-            [[18.478315, 23.438596]],
-            [for (k = [1 : 3]) [(19.70562) + (24.244909)*cos((92.901336) + k*((88.585065) - (92.901336))/3), (-0.777588) + (24.244909)*sin((92.901336) + k*((88.585065) - (92.901336))/3)]]));
-        // shell_t11b019: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-41.044796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -41.194796]) linear_extrude(0.3) polygon(concat(
-            [[17.227912, 18.400352]],
-            [[17.158987, 18.398568]],
-            [for (k = [1 : 14]) [(16.461433) + (2.003827)*cos((-69.766161) + k*((-148.027575) - (-69.766161))/14), (20.291016) + (2.003827)*sin((-69.766161) + k*((-148.027575) - (-69.766161))/14)]],
-            [[14.763953, 23.272313]],
-            [[20.434735, 23.455904]],
-            [[20.434733, 18.438419]]));
-        // shell_t11b020: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.744796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.894796]) linear_extrude(0.3) polygon(concat(
-            [[16.07521, 18.370509]],
-            [for (k = [1 : 3]) [(3.019299) + (19.728372)*cos((48.565829) + k*((52.538281) - (48.565829))/3), (3.579277) + (19.728372)*sin((48.565829) + k*((52.538281) - (48.565829))/3)]],
-            [[15.020216, 23.27341]],
-            [[20.565178, 23.448715]],
-            [[20.565176, 18.430072]]));
-        // shell_t11b021: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.444796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.594796]) linear_extrude(0.3) polygon(concat(
-            [for (k = [1 : 27]) [(17.922676) + (3.364004)*cos((143.49631) + k*((304.238413) - (143.49631))/27), (21.275077) + (3.364004)*sin((143.49631) + k*((304.238413) - (143.49631))/27)]],
-            [[20.468292, 18.434743]],
-            [[20.695621, 18.413123]],
-            [[20.69562, 23.441527]],
-            [[15.218615, 23.276246]]));
-        // shell_t11b022: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-40.144796 (fine mesh), ban
-        rotate([0, -90, -90]) translate([0, 0, -40.294796]) linear_extrude(0.3) polygon(concat(
-            [for (k = [1 : 27]) [(18.516355) + (3.715936)*cos((-51.677812) + k*((-211.942321) - (-51.677812))/27), (21.318353) + (3.715936)*sin((-51.677812) + k*((-211.942321) - (-51.677812))/27)]],
-            [[19.8936, 23.469255]],
-            [for (k = [1 : 3]) [(19.29482) + (27.714683)*cos((88.76201) + k*((86.832867) - (88.76201))/3), (-4.238739) + (27.714683)*sin((88.76201) + k*((86.832867) - (88.76201))/3)]],
-            [[20.826065, 18.39608]]));
         // shell_t11b023: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=-39.844796 (fine mesh), ban
         rotate([0, -90, -90]) translate([0, 0, -39.994796]) linear_extrude(0.3) polygon(concat(
             [[15.481404, 19.254046]],
@@ -7782,74 +6750,6 @@ module palm_shell() {
             [[12.95238, -18.380045]],
             [[12.95238, -17.460045]],
             [[16.644813, -17.460045]]));
-        // shell_t13b236: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.1 (fine mesh), band [36.
-        rotate([0, -90, -90]) translate([0, 0, 36]) linear_extrude(0.2) polygon(concat(
-            [[12.895054, -17.460045]],
-            [[12.895054, -18.380045]],
-            [[13.363014, -18.380045]],
-            [[13.624202, -18.380045]],
-            [[13.624202, -19.115356]],
-            [[13.624202, -21.460047]],
-            [[16.549092, -21.376385]],
-            [[16.549092, -17.460045]]));
-        // shell_t13b237: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.3 (fine mesh), band [36.
-        rotate([0, -90, -90]) translate([0, 0, 36.2]) linear_extrude(0.2) polygon(concat(
-            [[13.624202, -18.380045]],
-            [[12.787706, -18.380045]],
-            [[12.787706, -17.460045]],
-            [[15.48861, -17.460045]],
-            [[16.489125, -17.460045]],
-            [[16.489125, -20.053754]],
-            [[16.489125, -21.460047]],
-            [[13.624202, -21.460047]]));
-        // shell_t13b238: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.452602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 36.4]) linear_extrude(0.105204) polygon(concat(
-            [[12.692111, -17.460045]],
-            [[12.692111, -18.380045]],
-            [[13.459454, -18.380045]],
-            [[13.624202, -18.380045]],
-            [[13.624202, -18.843852]],
-            [[13.624202, -21.460047]],
-            [[16.45483, -21.460047]],
-            [[16.45483, -17.460045]]));
-        // shell_t13b239: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.552602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 36.505204]) linear_extrude(0.094796) polygon(concat(
-            [[12.620992, -17.460045]],
-            [[12.620992, -18.380045]],
-            [[13.624202, -18.380045]],
-            [[13.624202, -18.766852]],
-            [[13.624202, -21.460047]],
-            [[15.209454, -21.460047]],
-            [[16.432356, -21.460047]],
-            [[16.432356, -17.460045]]));
-        // shell_t13b240: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.7 (fine mesh), band [36.
-        rotate([0, -90, -90]) translate([0, 0, 36.6]) linear_extrude(0.2) polygon(concat(
-            [[16.390965, -20.619192]],
-            [[16.390965, -21.460047]],
-            [[15.823781, -21.460047]],
-            [[13.624202, -21.460047]],
-            [[13.624202, -18.380045]],
-            [[12.501172, -18.380045]],
-            [[12.501172, -17.460045]],
-            [[16.390965, -17.460045]]));
-        // shell_t13b241: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=36.9 (fine mesh), band [36.
-        rotate([0, -90, -90]) translate([0, 0, 36.8]) linear_extrude(0.2) polygon(concat(
-            [[12.306189, -17.460045]],
-            [[12.306189, -18.380045]],
-            [[13.624202, -18.380045]],
-            [[13.624202, -21.460047]],
-            [for (k = [1 : 3]) [(15.063783) + (16.029497)*cos((-95.143843) + k*((-85.476919) - (-95.143843))/3), (-5.468073) + (16.029497)*sin((-95.143843) + k*((-85.476919) - (-95.143843))/3)]],
-            [[16.328861, -17.460045]]));
-        // shell_t13b242: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=37.052602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 37]) linear_extrude(0.105204) polygon(concat(
-            [[13.638743, -21.460047]],
-            [[13.609381, -18.380045]],
-            [[12.126958, -18.369265]],
-            [[12.126958, -17.460045]],
-            [[16.253844, -17.460045]],
-            [[16.281475, -17.460045]],
-            [[16.281475, -17.542175]],
-            [[16.281475, -21.460047]]));
         // shell_t14b199: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=29.402602 (fine mesh), band
         rotate([0, -90, -90]) translate([0, 0, 29.305204]) linear_extrude(0.194796) polygon(concat(
             [[26.800405, 0.652799]],
@@ -8735,62 +7635,6 @@ module palm_shell() {
             [[12.630311, -5.460045]],
             [[13.45302, -5.460045]],
             [[13.449623, -7.460045]]));
-        // shell_t15b267: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 40.705204]) linear_extrude(0.094796) polygon(concat(
-            [[16.611053, -3.460045]],
-            [[16.378505, -3.709751]],
-            [[16.376136, -7.460045]],
-            [[13.390975, -7.460045]],
-            [[13.393741, -6.381668]],
-            [[13.391079, -5.460045]],
-            [[12.453079, -5.460045]],
-            [[12.453079, -3.460045]]));
-        // shell_t15b268: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.9 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.8]) linear_extrude(0.2) polygon(concat(
-            [[12.305859, -5.460045]],
-            [for (k = [1 : 3]) [(12.829717) + (17.687742)*cos((-91.696993) + k*((-88.491758) - (-91.696993))/3), (12.221858) + (17.687742)*sin((-91.696993) + k*((-88.491758) - (-91.696993))/3)]],
-            [[13.296184, -7.460045]],
-            [[16.328469, -7.460045]],
-            [[16.309779, -3.460045]],
-            [[12.305859, -3.460045]]));
-        // shell_t15b269: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.1 (fine mesh), band [41.
-        rotate([0, -90, -90]) translate([0, 0, 41]) linear_extrude(0.2) polygon(concat(
-            [[16.259837, -3.460045]],
-            [[16.219346, -7.460045]],
-            [[13.597075, -7.460045]],
-            [[13.148396, -7.460045]],
-            [[13.149231, -7.162867]],
-            [[13.143826, -5.460045]],
-            [[12.055318, -5.460045]],
-            [[12.055318, -3.460045]]));
-        // shell_t15b270: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.252602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.2]) linear_extrude(0.105204) polygon(concat(
-            [[16.203076, -7.460045]],
-            [[13.012343, -7.460045]],
-            [[13.018254, -5.460045]],
-            [for (k = [1 : 3]) [(12.463753) + (16.844895)*cos((-88.113791) + k*((-91.956254) - (-88.113791))/3), (11.377488) + (16.844895)*sin((-88.113791) + k*((-91.956254) - (-88.113791))/3)]],
-            [[11.900153, -3.460045]],
-            [[16.203405, -3.460045]]));
-        // shell_t15b271: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.352602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 41.305204]) linear_extrude(0.094796) polygon(concat(
-            [[12.915999, -5.460045]],
-            [[12.920602, -7.460045]],
-            [[16.161683, -7.460045]],
-            [[16.139812, -3.460045]],
-            [[11.929636, -3.460045]],
-            [[11.607925, -3.460045]],
-            [[11.607925, -3.527251]],
-            [[11.607925, -5.460045]]));
-        // shell_t15b272: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=41.5 (fine mesh), band [41.
-        rotate([0, -90, -90]) translate([0, 0, 41.4]) linear_extrude(0.2) polygon(concat(
-            [[11.123488, -5.460045]],
-            [[12.215092, -5.460045]],
-            [[12.367553, -5.460045]],
-            [[12.765278, -5.460869]],
-            [[12.75841, -7.460045]],
-            [[16.10067, -7.460045]],
-            [[16.098784, -3.460045]],
-            [[11.123488, -3.460045]]));
         // shell_t16b150: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=19.652602 (fine mesh), band
         rotate([0, -90, -90]) translate([0, 0, 19.6]) linear_extrude(0.105204) polygon(concat(
             [[23.340858, -29.513317]],
@@ -9304,72 +8148,6 @@ module palm_shell() {
             [[13.624202, -32.380045]],
             [[12.970001, -32.380045]],
             [[12.970001, -31.460045]]));
-        // shell_t17r1: constant-outline run: 7 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
-        rotate([0, -90, -90]) translate([0, 0, 28.6]) linear_extrude(1.305204) polygon(concat(
-            [[13.546069, -31.460045]],
-            [[13.114057, -31.460045]],
-            [[13.114057, -31.589705]],
-            [[13.131242, -32.380045]],
-            [[13.624202, -32.380045]],
-            [[13.624202, -35.260046]],
-            [[16.616482, -35.260046]],
-            [[16.616482, -31.460045]]));
-        // shell_t17b202: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=30.002602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 29.905204]) linear_extrude(0.194796) polygon(concat(
-            [[13.369217, -31.460045]],
-            [[12.932934, -31.460045]],
-            [[12.932934, -32.058116]],
-            [[12.932934, -32.380045]],
-            [[13.624202, -32.380045]],
-            [[13.624202, -35.260046]],
-            [[16.547445, -35.260046]],
-            [[16.547445, -31.460045]]));
-        // shell_t17b203: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=30.25 (fine mesh), band [30
-        rotate([0, -90, -90]) translate([0, 0, 30.1]) linear_extrude(0.3) polygon(concat(
-            [[13.146692, -31.460045]],
-            [[12.814668, -31.460045]],
-            [[12.814668, -31.956294]],
-            [[12.814668, -32.380045]],
-            [[13.624202, -32.380045]],
-            [[13.624202, -35.260046]],
-            [[16.499098, -35.260046]],
-            [[16.499098, -31.460045]]));
-        // shell_t17b204: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=30.452602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 30.4]) linear_extrude(0.105204) polygon(concat(
-            [[12.692111, -31.460045]],
-            [[12.692111, -32.380045]],
-            [[13.459454, -32.380045]],
-            [[13.624202, -32.380045]],
-            [[13.624202, -32.813735]],
-            [[13.624202, -35.260046]],
-            [[16.456909, -35.260046]],
-            [[16.456909, -31.460045]]));
-        // shell_t17b205: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=30.602602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 30.505204]) linear_extrude(0.194796) polygon(concat(
-            [[12.585433, -31.460045]],
-            [for (k = [1 : 31]) [(13.081628) + (0.67384)*cos((137.423073) + k*((319.457776) - (137.423073))/31), (-31.915951) + (0.67384)*sin((137.423073) + k*((319.457776) - (137.423073))/31)]],
-            [[13.624202, -32.705735]],
-            [[13.624202, -35.260046]],
-            [[16.418037, -35.260046]],
-            [[16.418037, -31.460045]]));
-        // shell_t17b206: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=30.85 (fine mesh), band [30
-        rotate([0, -90, -90]) translate([0, 0, 30.7]) linear_extrude(0.3) polygon(concat(
-            [[15.9489, -31.460045]],
-            [[16.345355, -31.460045]],
-            [[16.345355, -34.223311]],
-            [[16.345355, -35.260046]],
-            [[13.624202, -35.260046]],
-            [[13.466884, -32.380045]],
-            [[12.363703, -32.36108]],
-            [[12.363703, -31.460045]]));
-        // shell_t17b207: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=31.052602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 31]) linear_extrude(0.105204) polygon(concat(
-            [for (k = [1 : 30]) [(14.970394) + (1.963417)*cos((-48.224596) + k*((-226.117183) - (-48.224596))/30), (-33.795196) + (1.963417)*sin((-48.224596) + k*((-226.117183) - (-48.224596))/30)]],
-            [[12.126958, -32.369265]],
-            [[12.126958, -31.460045]],
-            [[16.27899, -31.460045]],
-            [[16.27899, -32.103472]],
-            [[16.27899, -35.260046]]));
         // shell_t18r0: constant-outline run: 13 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
         rotate([0, -90, -90]) translate([0, 0, 21.1]) linear_extrude(2.7) polygon(concat(
             [[4.624202, 7.978656]],
@@ -11266,45 +10044,6 @@ module palm_shell() {
             [[6.624202, 11.533801]],
             [[6.24424, 11.533801]],
             [[4.624202, 11.533801]]));
-        // shell_t80b264: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.3 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.2]) linear_extrude(0.2) polygon(concat(
-            [[13.536933, -11.281511]],
-            [[13.536572, -11.460045]],
-            [[7.719003, -11.460045]],
-            [[7.774517, -7.460045]],
-            [[13.138577, -7.460045]],
-            [for (k = [1 : 3]) [(13.327503) + (15.597678)*cos((-90.693987) + k*((-89.25665) - (-90.693987))/3), (8.136989) + (15.597678)*sin((-90.693987) + k*((-89.25665) - (-90.693987))/3)]]));
-        // shell_t80b265: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.5 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.4]) linear_extrude(0.2) polygon(concat(
-            [[13.136622, -7.460045]],
-            [[8.686094, -7.460045]],
-            [for (k = [1 : 3]) [(8.419274) + (8.475871)*cos((-88.196103) + k*((-92.08777) - (-88.196103))/3), (1.011948) + (8.475871)*sin((-88.196103) + k*((-92.08777) - (-88.196103))/3)]],
-            [[8.105801, -9.278958]],
-            [[8.112089, -11.460045]],
-            [[13.142427, -11.460045]]));
-        // shell_t80b266: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.652602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 40.6]) linear_extrude(0.105204) polygon(concat(
-            [[12.775287, -11.460045]],
-            [[10.807258, -11.460045]],
-            [for (k = [1 : 3]) [(9.620916) + (9.77892)*cos((-83.049117) + k*((-96.770312) - (-83.049117))/3), (-1.729106) + (9.77892)*sin((-83.049117) + k*((-96.770312) - (-83.049117))/3)]],
-            [[8.475714, -7.460045]],
-            [[12.782391, -7.460045]]));
-        // shell_t80b267: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.752602 (fine mesh), band
-        rotate([0, -90, -90]) translate([0, 0, 40.705204]) linear_extrude(0.094796) polygon(concat(
-            [[12.491966, -7.460045]],
-            [[9.579165, -7.460045]],
-            [for (k = [1 : 3]) [(9.181859) + (9.370803)*cos((-87.571001) + k*((-92.603959) - (-87.571001))/3), (1.906085) + (9.370803)*sin((-87.571001) + k*((-92.603959) - (-87.571001))/3)]],
-            [[8.749297, -9.235808]],
-            [[8.757091, -11.460045]],
-            [[12.48991, -11.460045]]));
-        // shell_t80b268: measured organic band (no clean law) — shell outline slab: measured outer section loop at y=40.9 (fine mesh), band [40.
-        rotate([0, -90, -90]) translate([0, 0, 40.8]) linear_extrude(0.2) polygon(concat(
-            [[11.957901, -11.460045]],
-            [[11.887721, -7.460045]],
-            [[10.02687, -7.460045]],
-            [for (k = [1 : 3]) [(9.681025) + (9.998561)*cos((-88.017969) + k*((-92.239665) - (-88.017969))/3), (2.533535) + (9.998561)*sin((-88.017969) + k*((-92.239665) - (-88.017969))/3)]],
-            [[9.276736, -10.183243]],
-            [[9.282516, -11.460045]]));
         // shell_t81r0: constant-outline run: 4 measured bands collapsed (mutual offsets < 0.06, std < 0.045; middle band profile)
         rotate([0, -90, -90]) translate([0, 0, -3.094796]) linear_extrude(2.4) polygon(concat(
             [[6.624202, -11.164806]],
@@ -12435,6 +11174,262 @@ module palm_shell() {
             [for (k = [1 : 3]) [(23.787234) + (1.392735)*cos((-148.734405) + k*((-161.669813) - (-148.734405))/3), (13.425177) + (1.392735)*sin((-148.734405) + k*((-161.669813) - (-148.734405))/3)]],
             [[22.688444, 14.368353]],
             [for (k = [1 : 21]) [(22.161454) + (0.96853)*cos((57.264483) + k*((-62.780635) - (57.264483))/21), (13.548599) + (0.96853)*sin((57.264483) + k*((-62.780635) - (57.264483))/21)]]));
+        intersection() {
+            // wrist_ear_L: EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
+            translate([-38.380124, -38.945051, 12.624202]) rotate(a=90, v=[0, 1, 0]) cylinder(h=5.389681, r=8, $fn=fn);
+            union() {
+                // earL_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -46.894796, 10.849975]) cube([5.489681, 0.3, 40]);
+                // earL_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -46.594796, 9.844495]) cube([5.489681, 0.3, 40]);
+                // earL_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -46.294796, 9.142531]) cube([5.489681, 0.3, 40]);
+                // earL_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -45.994796, 8.583222]) cube([5.489681, 0.3, 40]);
+                // earL_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -45.694796, 8.109716]) cube([5.489681, 0.3, 40]);
+                // earL_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -45.394796, 7.697927]) cube([5.489681, 0.3, 40]);
+                // earL_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -45.094796, 7.332558]) cube([5.489681, 0.6, 40]);
+                // earL_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -44.494796, 6.727838]) cube([5.489681, 0.6, 40]);
+                // earL_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -43.894796, 6.226134]) cube([5.489681, 0.6, 40]);
+                // earL_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -43.294796, 5.818688]) cube([5.489681, 0.9, 40]);
+                // earL_clip10: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -42.394796, 5.336725]) cube([5.489681, 0.6, 40]);
+                // earL_clip11: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -41.794796, 13.92267]) cube([5.489681, 0.3, 40]);
+                // earL_clip12: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -41.494796, 14.416478]) cube([5.489681, 0.3, 40]);
+                // earL_clip13: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -40.894796, 15.021028]) cube([5.489681, 0.6, 40]);
+                // earL_clip14: replaced-band envelope (merged run, measured local floor)
+                translate([-38.430124, -40.294796, 15.371583]) cube([5.489681, 0.3, 40]);
+            }
+        }
+        intersection() {
+            // wrist_ear_R: EXACT x-axis cylinder face (r=8.0, full disc: band tips matched top+bottom arcs within 0.03) — wrist pin ear; the r3 bore is cut by wrist_cuts
+            translate([18.074042, -38.945051, 12.624202]) rotate(a=90, v=[0, 1, 0]) cylinder(h=5.396209, r=8, $fn=fn);
+            union() {
+                // earR_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -46.894796, 10.849983]) cube([5.496209, 0.3, 40]);
+                // earR_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -46.594796, 9.842733]) cube([5.496209, 0.3, 40]);
+                // earR_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -46.294796, 9.142528]) cube([5.496209, 0.3, 40]);
+                // earR_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -45.994796, 8.578045]) cube([5.496209, 0.3, 40]);
+                // earR_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -45.694796, 8.109568]) cube([5.496209, 0.3, 40]);
+                // earR_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -45.394796, 7.697925]) cube([5.496209, 0.3, 40]);
+                // earR_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -45.094796, 7.332496]) cube([5.496209, 0.6, 40]);
+                // earR_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -44.494796, 6.721535]) cube([5.496209, 0.6, 40]);
+                // earR_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -43.894796, 6.226335]) cube([5.496209, 0.6, 40]);
+                // earR_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -43.294796, 5.818687]) cube([5.496209, 0.9, 40]);
+                // earR_clip10: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -42.394796, 5.336726]) cube([5.496209, 0.3, 40]);
+                // earR_clip11: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -42.094796, 12.629707]) cube([5.496209, 0.3, 40]);
+                // earR_clip12: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -41.794796, 13.926793]) cube([5.496209, 0.3, 40]);
+                // earR_clip13: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -41.494796, 14.4191]) cube([5.496209, 0.6, 40]);
+                // earR_clip14: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -40.894796, 15.018711]) cube([5.496209, 0.3, 40]);
+                // earR_clip15: replaced-band envelope (merged run, measured local floor)
+                translate([18.024042, -40.594796, 14.558986]) cube([5.496209, 0.6, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_0: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([-7.460045, 33.054949, 5.242846]) cube([4, 12, (16.624202) - (5.242846)]);
+                union() {
+                    translate([(-7.460045) - 1, 39.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (4) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall0_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 40.705204, 12.453079]) cube([4.1, 0.294796, 40]);
+                // wall0_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 41, 12.055318]) cube([4.1, 0.305204, 40]);
+                // wall0_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 41.305204, 11.607925]) cube([4.1, 0.094796, 40]);
+                // wall0_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 41.4, 11.123488]) cube([4.1, 0.2, 40]);
+                // wall0_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 41.6, 5.242846]) cube([4.1, 0.8, 40]);
+                // wall0_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 42.4, 5.68361]) cube([4.1, 0.6, 40]);
+                // wall0_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 43, 6.146416]) cube([4.1, 0.4, 40]);
+                // wall0_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 43.4, 6.599143]) cube([4.1, 0.4, 40]);
+                // wall0_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 43.8, 7.090159]) cube([4.1, 0.2, 40]);
+                // wall0_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 44.2, 7.626987]) cube([4.1, 0.2, 40]);
+                // wall0_clip10: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 44.4, 8.10672]) cube([4.1, 0.2, 40]);
+                // wall0_clip11: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 44.8, 9.088728]) cube([4.1, 0.105204, 40]);
+                // wall0_clip12: replaced-band envelope (merged run, measured local floor)
+                translate([-7.510045, 44.905204, 9.531517]) cube([4.1, 0.098171, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_1: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([2.539955, 33.054949, 5.243491]) cube([8, 12, (16.624202) - (5.243491)]);
+                union() {
+                    translate([(2.539955) - 1, 39.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (8) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall1_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 41.305204, 11.597394]) cube([8.1, 0.094796, 40]);
+                // wall1_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 41.4, 11.140155]) cube([8.1, 0.2, 40]);
+                // wall1_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 41.6, 5.243491]) cube([8.1, 0.905204, 40]);
+                // wall1_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 42.505204, 5.753856]) cube([8.1, 0.294796, 40]);
+                // wall1_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 42.8, 6.247337]) cube([8.1, 0.6, 40]);
+                // wall1_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 43.4, 6.600844]) cube([8.1, 0.6, 40]);
+                // wall1_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 44, 7.385235]) cube([8.1, 0.305204, 40]);
+                // wall1_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 44.305204, 8.109031]) cube([8.1, 0.494796, 40]);
+                // wall1_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 44.8, 9.094888]) cube([8.1, 0.105204, 40]);
+                // wall1_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([2.489955, 44.905204, 9.54007]) cube([8.1, 0.098171, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_2: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([16.539955, 33.054949, 5.08373]) cube([3, 12, (16.624202) - (5.08373)]);
+                union() {
+                    translate([(16.539955) - 1, 39.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (3) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall2_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([16.489955, 41.305204, 5.08373]) cube([3.1, 0.094796, 40]);
+                // wall2_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([16.489955, 44.305204, 7.817584]) cube([3.1, 0.094796, 40]);
+                // wall2_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([16.489955, 44.6, 8.601115]) cube([3.1, 0.2, 40]);
+                // wall2_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([16.489955, 44.8, 9.094888]) cube([3.1, 0.105204, 40]);
+                // wall2_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([16.489955, 44.905204, 9.54007]) cube([3.1, 0.098171, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_3: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([-11.460045, 29.054949, 7.719003]) cube([4, 12, (16.624202) - (7.719003)]);
+                union() {
+                    translate([(-11.460045) - 1, 35.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (4) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall3_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([-11.510045, 40.2, 7.719003]) cube([4.1, 0.2, 40]);
+                // wall3_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([-11.510045, 40.4, 8.105801]) cube([4.1, 0.2, 40]);
+                // wall3_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([-11.510045, 40.6, 8.468085]) cube([4.1, 0.2, 40]);
+                // wall3_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([-11.510045, 40.8, 9.276736]) cube([4.1, 0.2, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_4: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([-21.460047, 29.054949, 5.148926]) cube([4.000002, 12, (16.624202) - (5.148926)]);
+                union() {
+                    translate([(-21.460047) - 1, 35.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (4.000002) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall4_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 36, 12.895054]) cube([4.100002, 0.6, 40]);
+                // wall4_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 36.6, 12.501172]) cube([4.100002, 0.4, 40]);
+                // wall4_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 37, 12.126958]) cube([4.100002, 0.105204, 40]);
+                // wall4_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 37.105204, 5.148926]) cube([4.100002, 0.894796, 40]);
+                // wall4_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 38, 5.717145]) cube([4.100002, 0.905204, 40]);
+                // wall4_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 38.905204, 6.387836]) cube([4.100002, 0.6, 40]);
+                // wall4_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 39.505204, 6.828318]) cube([4.100002, 0.494796, 40]);
+                // wall4_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 40, 7.467351]) cube([4.100002, 0.4, 40]);
+                // wall4_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 40.4, 8.112089]) cube([4.100002, 0.2, 40]);
+                // wall4_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 40.6, 8.465685]) cube([4.100002, 0.2, 40]);
+                // wall4_clip10: replaced-band envelope (merged run, measured local floor)
+                translate([-21.510047, 40.8, 9.282516]) cube([4.100002, 0.2, 40]);
+            }
+        }
+        intersection() {
+            // knuckle_wall_5: EXACT x-axis r6.0 cylinder face crowns this clevis wall (the mating geometry of the proximal r6.000 lobes); wall base z from the replaced bands; pin channel/counterbore cut by knuckle_pins
+            intersection() {
+                translate([-35.260046, 23.054949, 5.026876]) cube([3.800001, 12, (16.624202) - (5.026876)]);
+                union() {
+                    translate([(-35.260046) - 1, 29.054949, 10.624202]) rotate([0, 90, 0]) cylinder(h = (3.800001) + 2, r = 6, $fn = 4*fn);
+                    translate([-500, -500, (10.624202) - 1000]) cube([1000, 1000, 1000]);
+                }
+            }
+            union() {
+                // wall5_clip0: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 28.6, 13.114057]) cube([3.900001, 1.8, 40]);
+                // wall5_clip1: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 30.4, 12.692111]) cube([3.900001, 0.6, 40]);
+                // wall5_clip2: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 31, 12.126958]) cube([3.900001, 0.105204, 40]);
+                // wall5_clip3: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 31.105204, 5.026876]) cube([3.900001, 0.794796, 40]);
+                // wall5_clip4: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 31.9, 5.430797]) cube([3.900001, 0.6, 40]);
+                // wall5_clip5: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 32.5, 5.820812]) cube([3.900001, 0.6, 40]);
+                // wall5_clip6: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 33.1, 6.340806]) cube([3.900001, 0.6, 40]);
+                // wall5_clip7: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 33.7, 7.025675]) cube([3.900001, 0.405204, 40]);
+                // wall5_clip8: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 34.105204, 7.46826]) cube([3.900001, 0.294796, 40]);
+                // wall5_clip9: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 34.4, 8.109853]) cube([3.900001, 0.2, 40]);
+                // wall5_clip10: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 34.6, 8.466484]) cube([3.900001, 0.2, 40]);
+                // wall5_clip11: replaced-band envelope (merged run, measured local floor)
+                translate([-35.310046, 34.8, 9.286519]) cube([3.900001, 0.2, 40]);
+            }
+        }
     }
 }
 

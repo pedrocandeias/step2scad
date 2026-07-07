@@ -4,7 +4,7 @@
     {
       "body_id": 0,
       "strategy": "csg",
-      "reasoning": "agent plan (semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params); heuristic suggested: freeform \u2014 41% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
+      "reasoning": "agent plan (semantic parametric palm: shell/cavity as run-collapsed + vectorized measured bands in named modules; cuts grouped into semantic modules; exact cylinder radii as named params | round-region surgery: 145 staircase bands replaced by 8 exact solids (2 wrist-ear r8 discs, 7 knuckle-wall r6 arc sweeps) \u2014 exact faces cited per prim); heuristic suggested: freeform \u2014 41% of surface area is free-form (bspline/bezier/\u2026) \u2014 loft or polyhedron fallback for those regions.",
       "suggested_strategy": "freeform"
     }
   ]
