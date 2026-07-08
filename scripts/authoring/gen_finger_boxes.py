@@ -33,7 +33,25 @@ pts = np.c_[gx.ravel(), gy.ravel(), gz.ravel()]
 occ = ref.contains(pts).reshape(len(xs), len(ys), len(zs))
 # the real pin bores are already hollow in the reference -> occ is False inside
 # them, so the boxes leave them open for free (no manual clearing needed).
-print(f"grelha {occ.shape}  ocupadas {occ.sum()} / {occ.size}")
+# EXCLUDE the round crown discs from the boxes (fingers.py adds them as smooth
+# r6 cylinders instead of stairy voxels). Crown = within r6 of (py,z10.62) for
+# each flanking tine's x-range, at each pin.
+TINES = [(-35.3, -31.5), (-25.5, -17.5), (-11.5, -3.5), (2.5, 10.5), (16.5, 20.0)]
+CROWNS = [(0, 1, 29.1), (1, 2, 35.1), (2, 3, 39.1), (3, 4, 39.1)]
+CR_R, PIN_Z = 6.0, 10.62
+crown_x = []
+for li, ri, py in CROWNS:
+    crown_x.append((TINES[li][0], TINES[li][1], py))
+    crown_x.append((TINES[ri][0], TINES[ri][1], py))
+for i, x in enumerate(xs):
+    for cx0, cx1, py in crown_x:
+        if not (cx0 - 0.3 <= x <= cx1 + 0.3):
+            continue
+        for j, y in enumerate(ys):
+            for k, z in enumerate(zs):
+                if (y - py) ** 2 + (z - PIN_Z) ** 2 <= CR_R ** 2:
+                    occ[i, j, k] = False
+print(f"grelha {occ.shape}  ocupadas {occ.sum()} / {occ.size} (coroas excluídas)")
 
 # greedy maximal-box cover
 boxes = []

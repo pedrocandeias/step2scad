@@ -208,650 +208,20 @@
           "prim": "box",
           "name": "fbox000",
           "min": [
-           -35.0,
-           27.0,
-           6.62
+           -23.0,
+           31.5,
+           16.12
           ],
           "size": [
-           4.0,
-           7.0,
-           1.5
+           6.0,
+           0.5,
+           0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
           "name": "fbox001",
-          "min": [
-           -35.0,
-           27.0,
-           8.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           8.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox002",
-          "min": [
-           -35.0,
-           27.5,
-           14.12
-          ],
-          "size": [
-           4.0,
-           6.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox003",
-          "min": [
-           -35.0,
-           27.5,
-           15.12
-          ],
-          "size": [
-           4.0,
-           6.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox004",
-          "min": [
-           -35.0,
-           27.5,
-           15.62
-          ],
-          "size": [
-           4.0,
-           5.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox005",
-          "min": [
-           -35.0,
-           27.5,
-           16.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox006",
-          "min": [
-           -35.0,
-           31.5,
-           8.12
-          ],
-          "size": [
-           4.0,
-           3.0,
-           6.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox007",
-          "min": [
-           -35.0,
-           34.0,
-           7.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox008",
-          "min": [
-           -35.0,
-           34.5,
-           8.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           5.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox009",
-          "min": [
-           -35.0,
-           35.0,
-           10.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox010",
-          "min": [
-           -32.0,
-           27.5,
-           8.12
-          ],
-          "size": [
-           1.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox011",
-          "min": [
-           -32.0,
-           27.5,
-           8.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox012",
-          "min": [
-           -32.0,
-           27.5,
-           12.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox013",
-          "min": [
-           -32.0,
-           28.0,
-           13.12
-          ],
-          "size": [
-           1.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox014",
-          "min": [
-           -32.0,
-           31.0,
-           8.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox015",
-          "min": [
-           -32.0,
-           31.0,
-           12.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox016",
-          "min": [
-           -25.0,
-           27.0,
-           6.62
-          ],
-          "size": [
-           2.0,
-           6.0,
-           2.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox017",
-          "min": [
-           -25.0,
-           27.0,
-           8.62
-          ],
-          "size": [
-           2.0,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox018",
-          "min": [
-           -25.0,
-           27.0,
-           9.12
-          ],
-          "size": [
-           2.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox019",
-          "min": [
-           -25.0,
-           27.0,
-           12.12
-          ],
-          "size": [
-           2.0,
-           0.5,
-           4.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox020",
-          "min": [
-           -25.0,
-           27.5,
-           12.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           4.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox021",
-          "min": [
-           -25.0,
-           28.0,
-           13.12
-          ],
-          "size": [
-           2.0,
-           1.0,
-           3.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox022",
-          "min": [
-           -25.0,
-           29.0,
-           13.62
-          ],
-          "size": [
-           2.0,
-           4.0,
-           2.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox023",
-          "min": [
-           -25.0,
-           29.0,
-           15.62
-          ],
-          "size": [
-           8.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox024",
-          "min": [
-           -25.0,
-           29.0,
-           16.12
-          ],
-          "size": [
-           8.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox025",
-          "min": [
-           -25.0,
-           29.5,
-           13.12
-          ],
-          "size": [
-           2.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox026",
-          "min": [
-           -25.0,
-           31.0,
-           8.62
-          ],
-          "size": [
-           2.0,
-           2.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox027",
-          "min": [
-           -25.0,
-           31.0,
-           12.62
-          ],
-          "size": [
-           2.0,
-           2.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox028",
-          "min": [
-           -25.0,
-           31.5,
-           9.12
-          ],
-          "size": [
-           2.0,
-           1.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox029",
-          "min": [
-           -25.0,
-           31.5,
-           11.62
-          ],
-          "size": [
-           2.0,
-           1.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox030",
-          "min": [
-           -25.0,
-           32.0,
-           10.62
-          ],
-          "size": [
-           2.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox031",
-          "min": [
-           -23.0,
-           27.0,
-           13.62
-          ],
-          "size": [
-           6.0,
-           1.0,
-           3.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox032",
-          "min": [
-           -23.0,
-           28.0,
-           14.12
-          ],
-          "size": [
-           6.0,
-           5.0,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox033",
-          "min": [
-           -23.0,
-           28.0,
-           15.62
-          ],
-          "size": [
-           6.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox034",
-          "min": [
-           -23.0,
-           30.5,
-           6.62
-          ],
-          "size": [
-           6.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox035",
-          "min": [
-           -23.0,
-           30.5,
-           13.62
-          ],
-          "size": [
-           6.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox036",
-          "min": [
-           -23.0,
-           31.0,
-           7.12
-          ],
-          "size": [
-           6.0,
-           2.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox037",
-          "min": [
-           -23.0,
-           31.5,
-           8.12
-          ],
-          "size": [
-           6.0,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox038",
-          "min": [
-           -23.0,
-           31.5,
-           13.12
-          ],
-          "size": [
-           6.0,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox039",
-          "min": [
-           -23.0,
-           31.5,
-           16.12
-          ],
-          "size": [
-           6.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox040",
-          "min": [
-           -23.0,
-           32.0,
-           8.62
-          ],
-          "size": [
-           6.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox041",
-          "min": [
-           -23.0,
-           32.0,
-           12.12
-          ],
-          "size": [
-           6.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox042",
-          "min": [
-           -23.0,
-           32.5,
-           9.62
-          ],
-          "size": [
-           6.0,
-           0.5,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox043",
           "min": [
            -21.5,
            32.0,
@@ -862,176 +232,11 @@
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox044",
-          "min": [
-           -21.0,
-           27.0,
-           6.62
-          ],
-          "size": [
-           43.0,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox045",
-          "min": [
-           -21.0,
-           27.0,
-           7.12
-          ],
-          "size": [
-           43.0,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox046",
-          "min": [
-           -21.0,
-           27.0,
-           7.62
-          ],
-          "size": [
-           43.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox047",
-          "min": [
-           -21.0,
-           27.0,
-           8.12
-          ],
-          "size": [
-           4.0,
-           4.5,
-           5.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox048",
-          "min": [
-           -21.0,
-           27.5,
-           7.62
-          ],
-          "size": [
-           4.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox049",
-          "min": [
-           -21.0,
-           28.0,
-           7.12
-          ],
-          "size": [
-           4.0,
-           3.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox050",
-          "min": [
-           -21.0,
-           28.0,
-           13.62
-          ],
-          "size": [
-           4.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox051",
-          "min": [
-           -21.0,
-           28.5,
-           6.62
-          ],
-          "size": [
-           4.0,
-           2.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox052",
-          "min": [
-           -21.0,
-           31.5,
-           8.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           4.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox053",
-          "min": [
-           -21.0,
-           32.0,
-           9.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox054",
-          "min": [
-           -21.0,
-           32.5,
-           15.62
-          ],
-          "size": [
-           4.0,
-           6.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox055",
+          "name": "fbox002",
           "min": [
            -21.0,
            32.5,
@@ -1039,224 +244,59 @@
           ],
           "size": [
            4.0,
-           5.0,
+           0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox056",
+          "name": "fbox003",
           "min": [
-           -21.0,
-           33.0,
+           -17.0,
+           27.0,
            6.62
           ],
           "size": [
-           4.0,
-           7.0,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox057",
-          "min": [
-           -21.0,
-           33.0,
-           8.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           7.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox058",
-          "min": [
-           -21.0,
-           33.5,
-           14.12
-          ],
-          "size": [
-           4.0,
-           6.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox059",
-          "min": [
-           -21.0,
-           33.5,
-           15.12
-          ],
-          "size": [
-           4.0,
-           6.0,
+           39.0,
+           1.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox060",
+          "name": "fbox004",
           "min": [
-           -21.0,
-           37.5,
-           8.12
+           -17.0,
+           27.0,
+           7.12
           ],
           "size": [
-           4.0,
-           3.0,
-           6.0
+           39.0,
+           1.0,
+           0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox061",
+          "name": "fbox005",
           "min": [
-           -21.0,
-           40.0,
+           -17.0,
+           27.0,
            7.62
           ],
           "size": [
-           4.0,
+           39.0,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox062",
-          "min": [
-           -21.0,
-           40.5,
-           8.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           5.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox063",
-          "min": [
-           -21.0,
-           41.0,
-           10.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox064",
-          "min": [
-           -18.0,
-           33.5,
-           8.12
-          ],
-          "size": [
-           1.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox065",
-          "min": [
-           -18.0,
-           33.5,
-           8.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox066",
-          "min": [
-           -18.0,
-           33.5,
-           12.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox067",
-          "min": [
-           -18.0,
-           34.0,
-           13.12
-          ],
-          "size": [
-           1.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox068",
-          "min": [
-           -18.0,
-           37.0,
-           8.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox069",
-          "min": [
-           -18.0,
-           37.0,
-           12.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox070",
+          "name": "fbox006",
           "min": [
            -11.5,
            27.0,
@@ -1267,11 +307,11 @@
            0.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox071",
+          "name": "fbox007",
           "min": [
            -11.0,
            27.5,
@@ -1279,14 +319,14 @@
           ],
           "size": [
            33.0,
-           4.0,
+           2.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox072",
+          "name": "fbox008",
           "min": [
            -11.0,
            27.5,
@@ -1297,11 +337,11 @@
            1.0,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox073",
+          "name": "fbox009",
           "min": [
            -11.0,
            28.0,
@@ -1309,14 +349,14 @@
           ],
           "size": [
            33.0,
-           4.0,
+           2.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox074",
+          "name": "fbox010",
           "min": [
            -11.0,
            28.5,
@@ -1324,14 +364,14 @@
           ],
           "size": [
            33.0,
-           3.5,
+           2.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox075",
+          "name": "fbox011",
           "min": [
            -11.0,
            28.5,
@@ -1342,11 +382,11 @@
            0.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox076",
+          "name": "fbox012",
           "min": [
            -11.0,
            29.0,
@@ -1354,1094 +394,224 @@
           ],
           "size": [
            9.5,
-           2.0,
-           8.5
+           1.0,
+           0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox077",
+          "name": "fbox013",
+          "min": [
+           -11.0,
+           29.0,
+           8.62
+          ],
+          "size": [
+           9.5,
+           0.5,
+           8.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox014",
+          "min": [
+           -11.0,
+           29.5,
+           13.12
+          ],
+          "size": [
+           9.5,
+           0.5,
+           3.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox015",
+          "min": [
+           -11.0,
+           30.0,
+           14.12
+          ],
+          "size": [
+           9.5,
+           0.5,
+           2.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox016",
+          "min": [
+           -11.0,
+           30.5,
+           14.62
+          ],
+          "size": [
+           9.5,
+           0.5,
+           2.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox017",
           "min": [
            -11.0,
            31.0,
-           8.12
+           15.12
           ],
           "size": [
            8.0,
-           1.0,
-           8.5
+           0.5,
+           1.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox078",
+          "name": "fbox018",
           "min": [
            -11.0,
            31.5,
-           7.62
-          ],
-          "size": [
-           8.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox079",
-          "min": [
-           -11.0,
-           32.0,
-           6.62
-          ],
-          "size": [
-           2.0,
-           8.0,
-           2.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox080",
-          "min": [
-           -11.0,
-           32.0,
-           8.62
-          ],
-          "size": [
-           2.0,
-           2.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox081",
-          "min": [
-           -11.0,
-           32.0,
-           9.12
-          ],
-          "size": [
-           2.0,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox082",
-          "min": [
-           -11.0,
-           32.0,
-           9.62
-          ],
-          "size": [
-           2.0,
-           1.0,
-           7.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox083",
-          "min": [
-           -11.0,
-           33.0,
-           12.12
-          ],
-          "size": [
-           2.0,
-           0.5,
-           4.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox084",
-          "min": [
-           -11.0,
-           33.5,
-           12.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           4.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox085",
-          "min": [
-           -11.0,
-           34.0,
-           13.12
-          ],
-          "size": [
-           2.0,
-           1.0,
-           3.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox086",
-          "min": [
-           -11.0,
-           35.0,
-           13.62
-          ],
-          "size": [
-           2.0,
-           5.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox087",
-          "min": [
-           -11.0,
-           35.0,
-           14.12
-          ],
-          "size": [
-           8.0,
-           5.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox088",
-          "min": [
-           -11.0,
-           35.0,
-           15.12
-          ],
-          "size": [
-           8.0,
-           4.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox089",
-          "min": [
-           -11.0,
-           35.0,
            15.62
           ],
           "size": [
            8.0,
-           3.5,
-           0.5
+           0.5,
+           1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox090",
+          "name": "fbox019",
           "min": [
            -11.0,
-           35.0,
+           32.0,
            16.12
           ],
           "size": [
            8.0,
-           2.5,
+           1.0,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox091",
+          "name": "fbox020",
           "min": [
-           -11.0,
-           35.5,
-           13.12
-          ],
-          "size": [
-           2.0,
-           5.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox092",
-          "min": [
-           -11.0,
-           37.0,
+           -3.0,
+           29.5,
            8.62
           ],
           "size": [
-           2.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox093",
-          "min": [
-           -11.0,
-           37.0,
-           12.62
-          ],
-          "size": [
-           2.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox094",
-          "min": [
-           -11.0,
-           37.5,
-           9.12
-          ],
-          "size": [
-           2.0,
-           3.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox095",
-          "min": [
-           -11.0,
-           37.5,
-           11.62
-          ],
-          "size": [
-           2.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox096",
-          "min": [
-           -11.0,
-           38.0,
-           10.62
-          ],
-          "size": [
-           2.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox097",
-          "min": [
-           -11.0,
-           40.0,
-           7.62
-          ],
-          "size": [
-           4.0,
-           0.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox098",
-          "min": [
-           -11.0,
-           41.0,
-           10.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox099",
-          "min": [
-           -9.0,
-           32.0,
-           12.12
-          ],
-          "size": [
-           6.0,
-           0.5,
+           1.5,
+           1.5,
            4.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox100",
+          "name": "fbox021",
           "min": [
-           -9.0,
-           32.5,
-           13.12
-          ],
-          "size": [
-           6.0,
-           0.5,
-           3.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox101",
-          "min": [
-           -9.0,
-           33.0,
-           13.62
-          ],
-          "size": [
-           6.0,
-           1.0,
-           3.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox102",
-          "min": [
-           -9.0,
-           34.0,
-           14.12
-          ],
-          "size": [
-           6.0,
-           1.0,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox103",
-          "min": [
-           -9.0,
-           36.5,
-           6.62
-          ],
-          "size": [
-           2.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox104",
-          "min": [
-           -9.0,
-           36.5,
-           13.62
-          ],
-          "size": [
-           6.0,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox105",
-          "min": [
-           -9.0,
-           37.0,
-           7.12
-          ],
-          "size": [
-           2.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox106",
-          "min": [
-           -9.0,
-           37.5,
-           8.12
-          ],
-          "size": [
-           2.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox107",
-          "min": [
-           -9.0,
-           37.5,
-           13.12
-          ],
-          "size": [
-           2.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox108",
-          "min": [
-           -9.0,
-           38.0,
-           8.62
-          ],
-          "size": [
-           2.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox109",
-          "min": [
-           -9.0,
-           38.0,
-           12.12
-          ],
-          "size": [
-           2.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox110",
-          "min": [
-           -9.0,
-           38.0,
-           13.62
-          ],
-          "size": [
-           2.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox111",
-          "min": [
-           -9.0,
-           38.5,
-           9.62
-          ],
-          "size": [
-           2.0,
-           2.5,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox112",
-          "min": [
-           -9.0,
-           41.0,
-           10.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox113",
-          "min": [
-           -7.5,
-           37.5,
-           16.12
-          ],
-          "size": [
-           4.5,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox114",
-          "min": [
-           -7.0,
-           32.0,
-           6.62
-          ],
-          "size": [
-           29.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox115",
-          "min": [
-           -7.0,
-           32.0,
-           7.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           5.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox116",
-          "min": [
-           -7.0,
-           32.5,
-           6.62
-          ],
-          "size": [
-           4.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox117",
-          "min": [
-           -7.0,
-           32.5,
-           12.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox118",
-          "min": [
-           -7.0,
-           33.0,
-           13.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox119",
-          "min": [
-           -7.0,
-           34.0,
-           13.62
-          ],
-          "size": [
-           4.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox120",
-          "min": [
-           -7.0,
-           38.0,
-           16.12
-          ],
-          "size": [
-           4.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox121",
-          "min": [
-           -7.0,
-           38.5,
-           15.62
-          ],
-          "size": [
-           4.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox122",
-          "min": [
-           -7.0,
-           39.5,
-           15.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox123",
-          "min": [
-           -7.0,
-           40.0,
-           14.12
-          ],
-          "size": [
-           4.0,
-           4.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox124",
-          "min": [
-           -7.0,
-           40.5,
-           6.62
-          ],
-          "size": [
-           4.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox125",
-          "min": [
-           -7.0,
-           40.5,
-           13.62
-          ],
-          "size": [
-           4.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox126",
-          "min": [
-           -7.0,
-           41.0,
-           7.12
-          ],
-          "size": [
-           4.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox127",
-          "min": [
-           -7.0,
-           41.5,
-           8.12
-          ],
-          "size": [
-           4.0,
-           3.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox128",
-          "min": [
-           -7.0,
-           41.5,
-           13.12
-          ],
-          "size": [
-           4.0,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox129",
-          "min": [
-           -7.0,
-           42.0,
-           8.62
-          ],
-          "size": [
-           4.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox130",
-          "min": [
-           -7.0,
-           42.0,
-           12.12
-          ],
-          "size": [
-           4.0,
-           3.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox131",
-          "min": [
-           -7.0,
-           42.5,
-           9.62
-          ],
-          "size": [
-           4.0,
-           2.5,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox132",
-          "min": [
-           -7.0,
-           44.0,
+           -3.0,
+           30.0,
            7.62
           ],
           "size": [
-           4.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox133",
-          "min": [
-           -7.0,
-           45.0,
-           10.12
-          ],
-          "size": [
-           4.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox134",
-          "min": [
-           -5.0,
-           36.0,
-           6.62
-          ],
-          "size": [
-           2.0,
-           4.5,
-           2.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox135",
-          "min": [
-           -5.0,
-           36.0,
-           8.62
-          ],
-          "size": [
-           2.0,
-           2.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox136",
-          "min": [
-           -5.0,
-           36.0,
-           9.12
-          ],
-          "size": [
-           2.0,
+           25.0,
            1.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox137",
+          "name": "fbox022",
           "min": [
-           -5.0,
-           36.0,
-           9.62
-          ],
-          "size": [
-           2.0,
-           1.0,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox138",
-          "min": [
-           -5.0,
-           36.5,
-           12.12
-          ],
-          "size": [
-           2.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox139",
-          "min": [
-           -5.0,
-           37.0,
-           13.12
-          ],
-          "size": [
-           2.0,
-           4.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox140",
-          "min": [
-           -5.0,
-           37.5,
-           12.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox141",
-          "min": [
-           -5.0,
-           38.0,
-           13.62
-          ],
-          "size": [
-           2.0,
-           2.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox142",
-          "min": [
-           -5.0,
-           40.5,
-           7.12
-          ],
-          "size": [
-           2.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox143",
-          "min": [
-           -5.0,
-           41.0,
+           -3.0,
+           30.0,
            8.12
           ],
           "size": [
-           2.0,
-           0.5,
+           1.5,
+           1.0,
+           0.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox023",
+          "min": [
+           -3.0,
+           30.0,
+           13.12
+          ],
+          "size": [
+           1.5,
+           1.0,
            1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox144",
+          "name": "fbox024",
           "min": [
-           -5.0,
-           41.0,
-           12.62
+           -3.0,
+           30.5,
+           7.12
           ],
           "size": [
-           2.0,
-           1.0,
+           25.0,
+           1.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox145",
+          "name": "fbox025",
           "min": [
-           -5.0,
-           41.5,
-           8.62
+           -3.0,
+           30.5,
+           14.12
           ],
           "size": [
-           2.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox146",
-          "min": [
-           -5.0,
-           41.5,
-           11.62
-          ],
-          "size": [
-           2.0,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox147",
-          "min": [
-           -5.0,
-           41.5,
-           12.12
-          ],
-          "size": [
-           2.0,
+           1.5,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox148",
+          "name": "fbox026",
           "min": [
-           -5.0,
-           42.0,
-           9.62
+           -3.0,
+           31.0,
+           6.62
           ],
           "size": [
-           2.0,
-           0.5,
-           2.0
+           25.0,
+           1.5,
+           0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox149",
+          "name": "fbox027",
           "min": [
            0.5,
            28.5,
@@ -2452,11 +622,11 @@
            0.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox150",
+          "name": "fbox028",
           "min": [
            1.0,
            29.0,
@@ -2467,11 +637,11 @@
            2.0,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox151",
+          "name": "fbox029",
           "min": [
            2.5,
            31.0,
@@ -2482,11 +652,11 @@
            0.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox152",
+          "name": "fbox030",
           "min": [
            3.0,
            31.5,
@@ -2494,14 +664,14 @@
           ],
           "size": [
            8.0,
-           13.0,
+           2.5,
            1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox153",
+          "name": "fbox031",
           "min": [
            3.0,
            31.5,
@@ -2509,44 +679,14 @@
           ],
           "size": [
            8.0,
-           6.5,
-           0.5
+           2.0,
+           8.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox154",
-          "min": [
-           3.0,
-           31.5,
-           9.12
-          ],
-          "size": [
-           8.0,
-           6.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox155",
-          "min": [
-           3.0,
-           31.5,
-           9.62
-          ],
-          "size": [
-           8.0,
-           5.5,
-           7.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox156",
+          "name": "fbox032",
           "min": [
            3.0,
            32.0,
@@ -2554,14 +694,14 @@
           ],
           "size": [
            8.0,
-           12.0,
+           2.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox157",
+          "name": "fbox033",
           "min": [
            3.0,
            32.5,
@@ -2569,239 +709,119 @@
           ],
           "size": [
            8.0,
-           11.5,
+           2.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox158",
+          "name": "fbox034",
           "min": [
            3.0,
-           37.0,
-           12.12
-          ],
-          "size": [
-           8.0,
-           0.5,
-           4.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox159",
-          "min": [
-           3.0,
-           37.5,
-           12.62
-          ],
-          "size": [
-           8.0,
-           0.5,
-           4.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox160",
-          "min": [
-           3.0,
-           38.0,
+           33.5,
            13.12
           ],
           "size": [
            8.0,
-           1.0,
+           0.5,
            3.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox161",
+          "name": "fbox035",
           "min": [
            3.0,
-           39.0,
-           13.62
-          ],
-          "size": [
-           8.0,
-           5.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox162",
-          "min": [
-           3.0,
-           39.0,
+           34.0,
            14.12
           ],
           "size": [
            8.0,
-           5.0,
-           1.0
+           0.5,
+           2.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox163",
+          "name": "fbox036",
           "min": [
            3.0,
-           39.0,
+           34.5,
+           14.62
+          ],
+          "size": [
+           8.0,
+           0.5,
+           2.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox037",
+          "min": [
+           3.0,
+           35.0,
            15.12
           ],
           "size": [
            8.0,
-           4.5,
-           0.5
+           0.5,
+           1.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox164",
+          "name": "fbox038",
           "min": [
            3.0,
-           39.0,
+           35.5,
            15.62
           ],
           "size": [
            8.0,
-           3.5,
-           0.5
+           0.5,
+           1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox165",
+          "name": "fbox039",
           "min": [
            3.0,
-           39.0,
+           36.0,
            16.12
           ],
           "size": [
            8.0,
-           3.0,
+           1.0,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox166",
-          "min": [
-           3.0,
-           39.5,
-           13.12
-          ],
-          "size": [
-           8.0,
-           5.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox167",
-          "min": [
-           3.0,
-           41.0,
-           8.62
-          ],
-          "size": [
-           8.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox168",
-          "min": [
-           3.0,
-           41.0,
-           12.62
-          ],
-          "size": [
-           8.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox169",
+          "name": "fbox040",
           "min": [
            3.0,
            41.5,
-           9.12
-          ],
-          "size": [
-           8.0,
-           3.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox170",
-          "min": [
-           3.0,
-           41.5,
-           11.62
-          ],
-          "size": [
-           8.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox171",
-          "min": [
-           3.0,
-           42.0,
-           10.62
-          ],
-          "size": [
-           8.0,
-           3.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox172",
-          "min": [
-           3.0,
-           45.0,
-           10.12
+           16.12
           ],
           "size": [
            8.0,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox173",
+          "name": "fbox041",
           "min": [
            14.5,
            28.5,
@@ -2812,11 +832,11 @@
            2.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox174",
+          "name": "fbox042",
           "min": [
            16.5,
            31.0,
@@ -2827,11 +847,11 @@
            0.5,
            8.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox175",
+          "name": "fbox043",
           "min": [
            17.0,
            31.5,
@@ -2842,11 +862,11 @@
            1.5,
            7.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox176",
+          "name": "fbox044",
           "min": [
            17.0,
            31.5,
@@ -2857,11 +877,11 @@
            1.0,
            1.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox177",
+          "name": "fbox045",
           "min": [
            17.0,
            31.5,
@@ -2872,11 +892,11 @@
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox178",
+          "name": "fbox046",
           "min": [
            17.0,
            32.0,
@@ -2887,11 +907,11 @@
            1.0,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox179",
+          "name": "fbox047",
           "min": [
            17.0,
            32.0,
@@ -2902,11 +922,11 @@
            1.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox180",
+          "name": "fbox048",
           "min": [
            17.0,
            32.5,
@@ -2917,11 +937,11 @@
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox181",
+          "name": "fbox049",
           "min": [
            17.0,
            32.5,
@@ -2932,11 +952,11 @@
            1.5,
            1.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox182",
+          "name": "fbox050",
           "min": [
            17.0,
            33.0,
@@ -2945,13 +965,58 @@
           "size": [
            4.5,
            1.5,
-           8.0
+           1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox183",
+          "name": "fbox051",
+          "min": [
+           17.0,
+           33.0,
+           7.62
+          ],
+          "size": [
+           4.5,
+           1.0,
+           1.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox052",
+          "min": [
+           17.0,
+           33.0,
+           8.62
+          ],
+          "size": [
+           4.5,
+           0.5,
+           6.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox053",
+          "min": [
+           17.0,
+           33.5,
+           13.12
+          ],
+          "size": [
+           4.5,
+           0.5,
+           1.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox054",
           "min": [
            17.0,
            33.5,
@@ -2962,11 +1027,26 @@
            1.0,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox184",
+          "name": "fbox055",
+          "min": [
+           17.0,
+           34.0,
+           14.12
+          ],
+          "size": [
+           4.5,
+           0.5,
+           0.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox056",
           "min": [
            17.0,
            34.0,
@@ -2974,595 +1054,318 @@
           ],
           "size": [
            4.0,
+           1.0,
+           1.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox057",
+          "min": [
+           17.0,
+           34.5,
+           6.62
+          ],
+          "size": [
+           4.0,
+           0.5,
+           0.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox058",
+          "min": [
+           17.0,
+           34.5,
+           16.12
+          ],
+          "size": [
+           3.5,
+           1.0,
+           0.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox059",
+          "min": [
+           17.0,
+           35.0,
+           15.12
+          ],
+          "size": [
+           3.5,
+           0.5,
+           1.0
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox060",
+          "min": [
+           17.0,
+           35.5,
+           15.62
+          ],
+          "size": [
+           3.5,
+           0.5,
+           0.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox061",
+          "min": [
+           17.0,
+           35.5,
+           16.12
+          ],
+          "size": [
+           3.0,
            1.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox185",
-          "min": [
-           17.0,
-           34.0,
-           15.12
-          ],
-          "size": [
-           4.0,
-           1.0,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox186",
-          "min": [
-           17.0,
-           34.5,
-           6.62
-          ],
-          "size": [
-           4.0,
-           1.0,
-           8.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox187",
-          "min": [
-           17.0,
-           34.5,
-           16.12
-          ],
-          "size": [
-           3.5,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox188",
-          "min": [
-           17.0,
-           35.0,
-           15.12
-          ],
-          "size": [
-           3.5,
-           7.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox189",
-          "min": [
-           17.0,
-           35.0,
-           15.62
-          ],
-          "size": [
-           3.5,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox190",
-          "min": [
-           17.0,
-           35.5,
-           6.62
-          ],
-          "size": [
-           3.5,
-           7.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox191",
-          "min": [
-           17.0,
-           35.5,
-           8.12
-          ],
-          "size": [
-           3.5,
-           2.0,
-           7.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox192",
-          "min": [
-           17.0,
-           35.5,
-           16.12
-          ],
-          "size": [
-           3.0,
-           6.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox193",
-          "min": [
-           17.0,
-           36.0,
-           15.62
-          ],
-          "size": [
-           3.0,
-           6.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox194",
-          "min": [
-           17.0,
-           37.5,
-           8.12
-          ],
-          "size": [
-           1.0,
-           7.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox195",
-          "min": [
-           17.0,
-           37.5,
-           8.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox196",
-          "min": [
-           17.0,
-           37.5,
-           12.62
-          ],
-          "size": [
-           1.0,
-           0.5,
-           2.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox197",
-          "min": [
-           17.0,
-           38.0,
-           13.12
-          ],
-          "size": [
-           1.0,
-           6.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox198",
-          "min": [
-           17.0,
-           38.0,
-           14.12
-          ],
-          "size": [
-           3.5,
-           5.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox199",
-          "min": [
-           17.0,
-           38.0,
-           14.62
-          ],
-          "size": [
-           3.5,
-           5.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox200",
-          "min": [
-           17.0,
-           41.0,
-           8.62
-          ],
-          "size": [
-           1.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox201",
-          "min": [
-           17.0,
-           41.0,
-           12.62
-          ],
-          "size": [
-           1.0,
-           4.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox202",
+          "name": "fbox062",
           "min": [
            17.0,
            41.5,
-           9.12
-          ],
-          "size": [
-           3.5,
-           3.0,
-           3.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox203",
-          "min": [
-           17.0,
-           42.5,
-           15.12
-          ],
-          "size": [
-           3.0,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox204",
-          "min": [
-           17.0,
-           43.0,
-           6.62
-          ],
-          "size": [
-           3.0,
-           1.0,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox205",
-          "min": [
-           17.0,
-           43.0,
-           14.62
-          ],
-          "size": [
-           3.0,
-           1.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox206",
-          "min": [
-           17.0,
-           43.5,
-           14.12
+           16.12
           ],
           "size": [
            3.0,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox207",
+          "name": "fbox063",
           "min": [
-           17.0,
-           44.0,
+           20.5,
+           33.5,
+           8.62
+          ],
+          "size": [
+           1.0,
+           1.0,
+           4.5
+          ],
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
+         },
+         {
+          "prim": "box",
+          "name": "fbox064",
+          "min": [
+           20.5,
+           34.0,
            7.62
           ],
           "size": [
-           3.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox208",
-          "min": [
-           17.0,
-           44.5,
-           9.12
-          ],
-          "size": [
-           3.0,
-           0.5,
-           3.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox209",
-          "min": [
-           17.0,
-           45.0,
-           10.12
-          ],
-          "size": [
-           3.0,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox210",
-          "min": [
-           18.0,
-           37.5,
-           14.12
-          ],
-          "size": [
-           2.5,
+           1.0,
            0.5,
            1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox211",
+          "name": "fbox065",
           "min": [
-           18.0,
-           41.5,
-           8.12
-          ],
-          "size": [
-           2.5,
-           2.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox212",
-          "min": [
-           18.0,
-           41.5,
-           12.62
-          ],
-          "size": [
-           2.5,
-           3.0,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox213",
-          "min": [
-           18.0,
-           41.5,
+           20.5,
+           34.0,
            13.12
           ],
           "size": [
-           2.5,
-           2.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox214",
-          "min": [
-           18.0,
-           44.0,
-           8.12
-          ],
-          "size": [
-           2.0,
+           1.0,
            0.5,
            1.0
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox215",
+          "name": "fbox066",
           "min": [
-           18.0,
-           44.0,
-           13.12
-          ],
-          "size": [
-           2.0,
-           0.5,
-           1.0
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox216",
-          "min": [
-           18.0,
-           44.5,
-           8.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox217",
-          "min": [
-           18.0,
-           44.5,
-           12.62
-          ],
-          "size": [
-           2.0,
-           0.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox218",
-          "min": [
-           20.0,
-           38.0,
-           15.62
-          ],
-          "size": [
-           0.5,
-           3.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox219",
-          "min": [
-           20.0,
-           38.5,
-           16.12
-          ],
-          "size": [
-           0.5,
-           1.5,
-           0.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
-         },
-         {
-          "prim": "box",
-          "name": "fbox220",
-          "min": [
-           20.0,
-           43.0,
+           20.5,
+           34.5,
            7.12
           ],
           "size": [
            0.5,
-           0.5,
-           1.0
+           1.0,
+           7.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox221",
+          "name": "fbox067",
           "min": [
-           20.0,
-           43.5,
-           7.62
+           20.5,
+           35.0,
+           6.62
           ],
           "size": [
            0.5,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
           "prim": "box",
-          "name": "fbox222",
+          "name": "fbox068",
           "min": [
-           20.0,
-           44.0,
-           8.62
+           20.5,
+           35.0,
+           14.62
           ],
           "size": [
            0.5,
            0.5,
            0.5
           ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "source": "finger occupancy box (exact ref interior, crowns excluded)"
          },
          {
-          "prim": "box",
-          "name": "fbox223",
-          "min": [
+          "prim": "cylinder",
+          "name": "crown_pinky_L",
+          "p0": [
+           -35.3,
+           29.1,
+           10.62
+          ],
+          "p1": [
+           -31.5,
+           29.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "pinky crown L: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_pinky_R",
+          "p0": [
+           -25.5,
+           29.1,
+           10.62
+          ],
+          "p1": [
+           -17.5,
+           29.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "pinky crown R: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_ring_L",
+          "p0": [
+           -25.5,
+           35.1,
+           10.62
+          ],
+          "p1": [
+           -17.5,
+           35.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "ring crown L: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_ring_R",
+          "p0": [
+           -11.5,
+           35.1,
+           10.62
+          ],
+          "p1": [
+           -3.5,
+           35.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "ring crown R: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_middle_L",
+          "p0": [
+           -11.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           -3.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "middle crown L: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_middle_R",
+          "p0": [
+           2.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           10.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "middle crown R: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_index_L",
+          "p0": [
+           2.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           10.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "index crown L: smooth exact r6 (no stairs)"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_index_R",
+          "p0": [
+           16.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
            20.0,
-           44.5,
-           10.12
+           39.1,
+           10.62
           ],
-          "size": [
-           0.5,
-           0.5,
-           1.5
-          ],
-          "source": "finger occupancy box (exact ref interior, 0.5mm greedy-merged)"
+          "r": 6.0,
+          "source": "index crown R: smooth exact r6 (no stairs)"
          },
          {
           "op": "hull",
@@ -5400,6 +3203,70 @@
          3.0
         ],
         "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_pinky",
+        "p0": [
+         -36.3,
+         29.1,
+         10.62
+        ],
+        "p1": [
+         -16.5,
+         29.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "pinky pin bore: exact round r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_ring",
+        "p0": [
+         -26.5,
+         35.1,
+         10.62
+        ],
+        "p1": [
+         -2.5,
+         35.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "ring pin bore: exact round r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_middle",
+        "p0": [
+         -12.5,
+         39.1,
+         10.62
+        ],
+        "p1": [
+         11.5,
+         39.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "middle pin bore: exact round r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_index",
+        "p0": [
+         1.5,
+         39.1,
+         10.62
+        ],
+        "p1": [
+         21.0,
+         39.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "index pin bore: exact round r2.5 x-axis"
        },
        {
         "prim": "cylinder",
