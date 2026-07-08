@@ -208,71 +208,92 @@
           "op": "difference",
           "children": [
            {
-            "op": "union",
+            "op": "difference",
             "children": [
              {
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "neck_pinky",
+                "min": [
+                 -33.6,
+                 14.1,
+                 6.62
+                ],
+                "size": [
+                 15.0,
+                 15.0,
+                 4.0
+                ],
+                "source": "pinky finger neck (low base tying the fork into the body)"
+               },
+               {
+                "prim": "cylinder",
+                "name": "knuckle_pinky",
+                "p0": [
+                 -33.6,
+                 29.1,
+                 10.62
+                ],
+                "p1": [
+                 -18.6,
+                 29.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "pinky knuckle crown: exact r6 x-axis at y29"
+               }
+              ]
+             },
+             {
               "prim": "box",
-              "name": "neck_pinky",
+              "name": "slot_pinky",
               "min": [
-               -33.1,
-               14.1,
-               6.62
+               -29.1,
+               17.1,
+               5.62
               ],
               "size": [
-               14.0,
-               15.0,
-               4.0
+               6.0,
+               21.0,
+               17.62
               ],
-              "source": "pinky finger neck (low base tying the fork into the body)"
+              "source": "pinky fork slot (tab pocket between the two prongs)"
              },
              {
               "prim": "cylinder",
-              "name": "knuckle_pinky",
+              "name": "bore_pinky",
               "p0": [
-               -33.1,
+               -34.6,
                29.1,
                10.62
               ],
               "p1": [
-               -19.1,
+               -17.6,
                29.1,
                10.62
               ],
-              "r": 6.0,
-              "source": "pinky knuckle crown: exact r6.000 x-axis at y29 z10.6"
+              "r": 2.5,
+              "source": "pinky pin bore: exact r2.5 x-axis"
              }
             ]
            },
            {
-            "prim": "box",
-            "name": "slot_pinky",
-            "min": [
-             -28.35,
-             17.1,
-             5.62
-            ],
-            "size": [
-             4.5,
-             21.0,
-             16.62
-            ],
-            "source": "pinky fork slot (tab pocket between the two prongs)"
-           },
-           {
             "prim": "cylinder",
-            "name": "bore_pinky",
+            "name": "pinky_cbore",
             "p0": [
-             -34.1,
+             -22.5,
              29.1,
              10.62
             ],
             "p1": [
-             -18.1,
+             -19.0,
              29.1,
              10.62
             ],
-            "r": 2.5,
-            "source": "pinky pin bore: exact r2.5 (faces #228/#286/#338...)"
+            "r": 3.25,
+            "source": "pinky counterbore: exact r3.25 (#248) pin-head recess"
            }
           ]
          },
@@ -311,7 +332,7 @@
                10.62
               ],
               "r": 6.0,
-              "source": "ring knuckle crown: exact r6.000 x-axis at y35 z10.6"
+              "source": "ring knuckle crown: exact r6 x-axis at y35"
              }
             ]
            },
@@ -326,7 +347,7 @@
             "size": [
              4.5,
              21.0,
-             16.62
+             17.62
             ],
             "source": "ring fork slot (tab pocket between the two prongs)"
            },
@@ -344,7 +365,7 @@
              10.62
             ],
             "r": 2.5,
-            "source": "ring pin bore: exact r2.5 (faces #228/#286/#338...)"
+            "source": "ring pin bore: exact r2.5 x-axis"
            }
           ]
          },
@@ -383,7 +404,7 @@
                10.62
               ],
               "r": 6.0,
-              "source": "middle knuckle crown: exact r6.000 x-axis at y39 z10.6"
+              "source": "middle knuckle crown: exact r6 x-axis at y39"
              }
             ]
            },
@@ -398,7 +419,7 @@
             "size": [
              4.5,
              21.0,
-             16.62
+             17.62
             ],
             "source": "middle fork slot (tab pocket between the two prongs)"
            },
@@ -416,7 +437,7 @@
              10.62
             ],
             "r": 2.5,
-            "source": "middle pin bore: exact r2.5 (faces #228/#286/#338...)"
+            "source": "middle pin bore: exact r2.5 x-axis"
            }
           ]
          },
@@ -430,12 +451,12 @@
               "prim": "box",
               "name": "neck_index",
               "min": [
-               4.3,
+               4.85,
                24.1,
                6.62
               ],
               "size": [
-               14.0,
+               13.0,
                15.0,
                4.0
               ],
@@ -445,17 +466,17 @@
               "prim": "cylinder",
               "name": "knuckle_index",
               "p0": [
-               4.3,
+               4.85,
                39.1,
                10.62
               ],
               "p1": [
-               18.3,
+               17.85,
                39.1,
                10.62
               ],
               "r": 6.0,
-              "source": "index knuckle crown: exact r6.000 x-axis at y39 z10.6"
+              "source": "index knuckle crown: exact r6 x-axis at y39"
              }
             ]
            },
@@ -463,14 +484,14 @@
             "prim": "box",
             "name": "slot_index",
             "min": [
-             9.05,
+             9.1,
              27.1,
              5.62
             ],
             "size": [
              4.5,
              21.0,
-             16.62
+             17.62
             ],
             "source": "index fork slot (tab pocket between the two prongs)"
            },
@@ -478,17 +499,17 @@
             "prim": "cylinder",
             "name": "bore_index",
             "p0": [
-             3.3,
+             3.85,
              39.1,
              10.62
             ],
             "p1": [
-             19.3,
+             18.85,
              39.1,
              10.62
             ],
             "r": 2.5,
-            "source": "index pin bore: exact r2.5 (faces #228/#286/#338...)"
+            "source": "index pin bore: exact r2.5 x-axis"
            }
           ]
          },
@@ -609,77 +630,118 @@
           },
           "name": "thumb",
           "child": {
-           "op": "difference",
+           "op": "union",
            "children": [
             {
-             "op": "union",
+             "prim": "box",
+             "name": "thumb_housing",
+             "min": [
+              -15.0,
+              -8.5,
+              0.0
+             ],
+             "size": [
+              22.0,
+              17.0,
+              8.0
+             ],
+             "source": "thumb mount housing: tilted walled base (\u00b150\u00b0 side walls, planes #453/#539/#540/#331)"
+            },
+            {
+             "op": "difference",
              "children": [
               {
-               "prim": "box",
-               "name": "thumb_lug",
-               "min": [
-                -3.0,
-                -7.5,
-                -6.0
-               ],
-               "size": [
-                6.0,
-                15.0,
-                10.0
-               ],
-               "source": "thumb lug plate (paddle rising from the base to the tip)"
+               "op": "union",
+               "children": [
+                {
+                 "prim": "box",
+                 "name": "thumb_lug",
+                 "min": [
+                  -3.0,
+                  -7.5,
+                  0.0
+                 ],
+                 "size": [
+                  6.0,
+                  15.0,
+                  4.0
+                 ],
+                 "source": "thumb lug paddle (rises from the housing to the pin)"
+                },
+                {
+                 "prim": "cylinder",
+                 "name": "thumb_crown",
+                 "p0": [
+                  -3.0,
+                  0.0,
+                  4.0
+                 ],
+                 "p1": [
+                  3.0,
+                  0.0,
+                  4.0
+                 ],
+                 "r": 7.5,
+                 "source": "thumb lug rounded tip: exact r7.5 (face #524) at z10.6"
+                }
+               ]
               },
               {
                "prim": "cylinder",
-               "name": "thumb_crown",
+               "name": "thumb_bore",
                "p0": [
-                -3.0,
+                -4.0,
                 0.0,
                 4.0
                ],
                "p1": [
-                3.0,
+                4.0,
                 0.0,
                 4.0
                ],
-               "r": 7.5,
-               "source": "thumb lug rounded tip: exact r7.5 (face #524) at z10.6"
+               "r": 2.7,
+               "source": "thumb lower pivot bore: exact r2.7 (faces #226/#184)"
               }
              ]
-            },
-            {
-             "prim": "cylinder",
-             "name": "thumb_bore",
-             "p0": [
-              -4.0,
-              0.0,
-              4.0
-             ],
-             "p1": [
-              4.0,
-              0.0,
-              4.0
-             ],
-             "r": 2.7,
-             "source": "thumb pivot bore: exact r2.7 (faces #226/#184)"
             }
            ]
           }
          },
          {
-          "prim": "box",
-          "name": "thumb_base",
-          "min": [
-           22.0,
-           -18.0,
-           6.62
-          ],
-          "size": [
-           13.0,
-           20.0,
-           8.0
-          ],
-          "source": "thumb mount base (bulk joining the lug to the palm body)"
+          "op": "difference",
+          "children": [
+           {
+            "prim": "box",
+            "name": "thumb_tower",
+            "min": [
+             33.0,
+             -16.0,
+             6.62
+            ],
+            "size": [
+             9.0,
+             10.0,
+             12.98
+            ],
+            "source": "thumb upper tower: raised block carrying the 2nd saddle pin"
+           },
+           {
+            "prim": "cylinder",
+            "name": "thumb_upbore",
+            "p0": [
+             33.91,
+             -6.92,
+             16.6
+            ],
+            "p1": [
+             44.69,
+             -15.88,
+             16.6
+            ],
+            "r": 3.0,
+            "source": "thumb upper pin bore (face #300 region)"
+           }
+          ]
          }
         ]
        },
@@ -2287,6 +2349,38 @@
          3.0
         ],
         "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "ring_cbore_L",
+        "p0": [
+         -19.1,
+         35.1,
+         10.62
+        ],
+        "p1": [
+         -17.5,
+         35.1,
+         10.62
+        ],
+        "r": 3.25,
+        "source": "ring pin-head counterbore L: exact r3.25 (#249/#318)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "ring_cbore_R",
+        "p0": [
+         -5.1,
+         35.1,
+         10.62
+        ],
+        "p1": [
+         -6.7,
+         35.1,
+         10.62
+        ],
+        "r": 3.25,
+        "source": "ring pin-head counterbore R: exact r3.25 (#249/#318)"
        },
        {
         "prim": "cylinder",
