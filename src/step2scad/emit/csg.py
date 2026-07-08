@@ -332,7 +332,7 @@ def _emit_sem_node(node: dict, lines: list[str], depth: int, fn_var: str,
         tf = node["transform"]
         chain = []
         for key, word in (("translate", "translate"), ("rotate_deg", "rotate"),
-                          ("mirror", "mirror")):
+                          ("mirror", "mirror"), ("scale", "scale")):
             if key in tf:
                 chain.append(f"{word}({_svec(tf[key])})")
         tag = f"  // {node['name']}" if node.get("name") else ""

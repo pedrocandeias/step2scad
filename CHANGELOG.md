@@ -7,6 +7,16 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **`scale` transform** (plan schema + emitter): enables scaled/flattened
+  primitives (e.g. a flattened-sphere "esfera espalmada" dome). Regressions
+  unchanged (Arm_Guard 0.9844, Distals 0.9772).
+- **Palm_left COARSE big-primitive variant** (author's directive: smooth
+  form over IoU fidelity) — `scripts/authoring/palm_primitive.py` builds the
+  palm from a handful of large measured primitives: flat base plate + body
+  box + flattened-sphere dome + tube finger sockets + disc wrist ears +
+  tilted thumb block (two parallel boxes + bored top). Emitted as a SEPARATE
+  slug (`Palm_left_primitive`) so the committed loft palm (0.9641) is
+  untouched. Low IoU by design; the deliverable is a clean editable form.
 - **Canonical-arch palm shell — measured tradeoff (experiment, unchained)**:
   `archloft_palm.py` lofts ONE continuous canonical-arch skin (V2-template
   architecture: 31 stations, fixed-role 72/56-pt arches, monotone

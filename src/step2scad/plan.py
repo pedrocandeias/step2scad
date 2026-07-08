@@ -225,9 +225,9 @@ def _validate_node(node: dict, where: str, names: set[str],
     if isinstance(node, dict) and "transform" in node:
         t = node["transform"]
         _require(isinstance(t, dict) and t, where, "'transform' must be a "
-                 "non-empty object (translate/rotate_deg/mirror)")
+                 "non-empty object (translate/rotate_deg/mirror/scale)")
         for key in t:
-            _require(key in ("translate", "rotate_deg", "mirror"), where,
+            _require(key in ("translate", "rotate_deg", "mirror", "scale"), where,
                      f"unknown transform key {key!r}")
             _require(_is_vec_e(t[key]), where, f"transform {key} must be [x,y,z]")
             _resolve_vec(t[key], scope, where, key)

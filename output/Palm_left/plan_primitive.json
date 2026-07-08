@@ -1,0 +1,407 @@
+{
+ "version": 1,
+ "source": "models/phoenix_components/Palm_left.step",
+ "bodies": [
+  {
+   "body_id": 0,
+   "strategy": "csg",
+   "params": [
+    {
+     "name": "z_bot",
+     "value": 4.62,
+     "source": "exact bottom plane #829 (flat underside)"
+    },
+    {
+     "name": "z_deck",
+     "value": 6.62,
+     "source": "exact deck plane #828 (palmar plate top)"
+    },
+    {
+     "name": "z_apex",
+     "value": 29.3,
+     "source": "measured dome apex (broad cap)"
+    },
+    {
+     "name": "sock_r",
+     "value": 6.0,
+     "source": "exact r6.000 finger-socket tubes"
+    },
+    {
+     "name": "ear_r",
+     "value": 8.0,
+     "source": "exact r8.000 wrist-ear discs"
+    },
+    {
+     "name": "thumb_ang",
+     "value": 50.0,
+     "source": "thumb tilt (oblique faces normal 0.64,0.77 \u2248 50\u00b0)"
+    }
+   ],
+   "notes": "COARSE big-primitive reconstruction (author's directive: smooth form over IoU). Base plate + body box + flattened-sphere dome + tube sockets + disc ears + tilted thumb block. All dims measured; expect lower IoU by design.",
+   "csg": {
+    "op": "intersection",
+    "children": [
+     {
+      "op": "difference",
+      "children": [
+       {
+        "op": "union",
+        "children": [
+         {
+          "prim": "box",
+          "name": "base_plate",
+          "min": [
+           -38.0,
+           -42.0,
+           4.62
+          ],
+          "size": [
+           60.0,
+           78.0,
+           2.0
+          ],
+          "source": "flat palmar floor: exact planes #829 (z4.62) / #828 (z6.62); palm-proper footprint (not the full bbox)"
+         },
+         {
+          "prim": "box",
+          "name": "body_block",
+          "min": [
+           -36.0,
+           -40.0,
+           6.62
+          ],
+          "size": [
+           54.0,
+           72.0,
+           10.0
+          ],
+          "source": "main palm body \u2014 coarse box; dorsal hump added by the dome"
+         },
+         {
+          "transform": {
+           "translate": [
+            -6.0,
+            -3.0,
+            6.0
+           ],
+           "scale": [
+            34.0,
+            40.0,
+            23.3
+           ]
+          },
+          "name": "dome",
+          "child": {
+           "prim": "sphere",
+           "name": "dome_unit",
+           "center": [
+            0,
+            0,
+            0
+           ],
+           "r": 1.0,
+           "source": "flattened-sphere dorsal dome (esfera espalmada): apex z\u224829.3, broad low cap over the palm"
+          }
+         },
+         {
+          "prim": "cylinder",
+          "name": "sock_pinky",
+          "p0": [
+           -29.0,
+           39.05,
+           10.62
+          ],
+          "p1": [
+           -13.0,
+           39.05,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "pinky finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+         },
+         {
+          "prim": "cylinder",
+          "name": "sock_ring",
+          "p0": [
+           -15.9,
+           39.05,
+           10.62
+          ],
+          "p1": [
+           0.1,
+           39.05,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "ring finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+         },
+         {
+          "prim": "cylinder",
+          "name": "sock_middle",
+          "p0": [
+           -2.5,
+           39.05,
+           10.62
+          ],
+          "p1": [
+           13.5,
+           39.05,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "middle finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+         },
+         {
+          "prim": "cylinder",
+          "name": "sock_index",
+          "p0": [
+           8.2,
+           39.05,
+           10.62
+          ],
+          "p1": [
+           24.2,
+           39.05,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "index finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+         },
+         {
+          "prim": "cylinder",
+          "name": "ear_L",
+          "p0": [
+           -38.9,
+           -38.95,
+           12.62
+          ],
+          "p1": [
+           -33.9,
+           -38.95,
+           12.62
+          ],
+          "r": 8.0,
+          "source": "wrist ear L: exact r8.000 disc (faces #534/#535) at y-38.95 z12.62"
+         },
+         {
+          "prim": "cylinder",
+          "name": "ear_R",
+          "p0": [
+           17.5,
+           -38.95,
+           12.62
+          ],
+          "p1": [
+           12.5,
+           -38.95,
+           12.62
+          ],
+          "r": 8.0,
+          "source": "wrist ear R: exact r8.000 disc (faces #534/#535) at y-38.95 z12.62"
+         },
+         {
+          "transform": {
+           "translate": [
+            30.0,
+            -7.0,
+            4.62
+           ],
+           "rotate_deg": [
+            0,
+            0,
+            50.0
+           ]
+          },
+          "name": "thumb",
+          "child": {
+           "op": "difference",
+           "children": [
+            {
+             "op": "union",
+             "children": [
+              {
+               "prim": "box",
+               "name": "thumb_wall_a",
+               "min": [
+                -9.0,
+                -3.5,
+                0.0
+               ],
+               "size": [
+                18.0,
+                3.0,
+                18.0
+               ],
+               "source": "thumb clevis wall A \u2014 parallel box"
+              },
+              {
+               "prim": "box",
+               "name": "thumb_wall_b",
+               "min": [
+                -9.0,
+                0.5,
+                0.0
+               ],
+               "size": [
+                18.0,
+                3.0,
+                18.0
+               ],
+               "source": "thumb clevis wall B \u2014 parallel box"
+              },
+              {
+               "prim": "box",
+               "name": "thumb_top",
+               "min": [
+                -9.0,
+                -6.5,
+                14.0
+               ],
+               "size": [
+                18.0,
+                13.0,
+                8.0
+               ],
+               "source": "thumb top box bridging the walls (bored below)"
+              }
+             ]
+            },
+            {
+             "prim": "cylinder",
+             "name": "thumb_bore",
+             "p0": [
+              -2.0,
+              0.0,
+              18.0
+             ],
+             "p1": [
+              16.0,
+              0.0,
+              18.0
+             ],
+             "r": 2.7,
+             "source": "thumb pivot bore: exact r2.7 (faces #226/#319)"
+            }
+           ]
+          }
+         }
+        ]
+       },
+       {
+        "prim": "cylinder",
+        "name": "sock_bore_pinky",
+        "p0": [
+         -30.0,
+         39.05,
+         10.62
+        ],
+        "p1": [
+         -12.0,
+         39.05,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "pinky pin bore: exact r2.5 (faces #228/#234/#286...)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "sock_bore_ring",
+        "p0": [
+         -16.9,
+         39.05,
+         10.62
+        ],
+        "p1": [
+         1.1,
+         39.05,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "ring pin bore: exact r2.5 (faces #228/#234/#286...)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "sock_bore_middle",
+        "p0": [
+         -3.5,
+         39.05,
+         10.62
+        ],
+        "p1": [
+         14.5,
+         39.05,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "middle pin bore: exact r2.5 (faces #228/#234/#286...)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "sock_bore_index",
+        "p0": [
+         7.2,
+         39.05,
+         10.62
+        ],
+        "p1": [
+         25.2,
+         39.05,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "index pin bore: exact r2.5 (faces #228/#234/#286...)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "ear_bore_L",
+        "p0": [
+         -40.9,
+         -38.95,
+         12.62
+        ],
+        "p1": [
+         -31.9,
+         -38.95,
+         12.62
+        ],
+        "r": 3.0,
+        "source": "wrist ear L pin bore: exact r3.0 (faces #93/#246)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "ear_bore_R",
+        "p0": [
+         15.5,
+         -38.95,
+         12.62
+        ],
+        "p1": [
+         14.5,
+         -38.95,
+         12.62
+        ],
+        "r": 3.0,
+        "source": "wrist ear R pin bore: exact r3.0 (faces #93/#246)"
+       }
+      ]
+     },
+     {
+      "prim": "box",
+      "name": "envelope",
+      "min": [
+       -42.0,
+       -48.0,
+       4.62
+      ],
+      "size": [
+       84.0,
+       93.0,
+       30.68
+      ],
+      "source": "envelope: clip to measured bbox (flat bottom at z4.62)"
+     }
+    ]
+   }
+  }
+ ]
+}
