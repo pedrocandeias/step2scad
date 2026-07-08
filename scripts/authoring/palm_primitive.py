@@ -40,9 +40,9 @@ add.append(box("base_plate", (-38, -42, Z_BOT), (60, 78, Z_DECK - Z_BOT),
 # The palm is an arched shell running along Y, ~5mm wall, open underneath.
 # Crown section (y=0): floor z6.6, INNER ceiling z29.1, OUTER top z34.1.
 # Modelled as an outer scaled Y-cylinder (ellipse XZ arch) minus an inner one.
-X_C, Z_BASE = -8.0, Z_DECK           # arch centre x (leaves +X for the thumb)
-VX_OUT, VZ_OUT = 32.0, 27.6          # outer half-width / height -> top z34.2
-VX_IN,  VZ_IN  = 27.0, 22.5          # inner (5mm wall at crown & sides)
+X_C, Z_BASE = -3.0, Z_DECK           # arch centre x (measured span -40..34)
+VX_OUT, VZ_OUT = 37.0, 28.0          # wider+flatter: half-width 37, top z34.6
+VX_IN,  VZ_IN  = 32.0, 23.0          # inner (5mm wall at crown & sides)
 Y0, Y1 = -34.0, 30.0                 # central body only; fingers/wrist project
 vault_outer = {"transform": {"translate": [X_C, 0, Z_BASE],
                              "scale": [VX_OUT, 1, VZ_OUT]}, "name": "vault_outer",
@@ -96,24 +96,28 @@ for cx, nm in EARS:
 # --- 6. thumb (+X): two parallel boxes + a bored top box, in a tilted frame ---
 # thumb axis tilted ≈50° (oblique planes normal (0.64,0.77)); bbox x[24,42]
 # y[-20,5] z[4.6,24.6]. Modelled in a rotate-Z frame about its base centre.
-TH_C = [29.0, -8.0, 4.62]         # thumb base centre (measured region)
+# Measured clevis crown r7.5 (#524) centred (31,-6,z10.6) on the tilted pin
+# axis (0.64,0.77,0)=50°; pivot bore r2.7 (#226). Built in a local frame
+# (pin along local X) then rotated 50° about Z and placed at the deck.
+TH_C = [31.0, -6.0, Z_DECK]       # crown centre xy, base at the deck
 TH_ANG = 50.0                     # tilt (oblique faces normal 0.64,0.77)
-# thumb clevis: two prong boxes (the fork tines), a rounded top bridging them
-# (half-cylinder = the keyhole crown), pivot bore through the crown, U-slot
-# between the prongs. Built in a local frame, then tilted/placed.
-PW, PGAP, PH, PL = 3.0, 3.4, 16.0, 15.0   # prong width, slot gap, height, length
-crown_z, crown_r = PH, (PGAP / 2 + PW)     # crown radius spans both prongs
+CR_R, PIN_Z = 7.5, 10.62 - Z_DECK  # crown radius; pin height above the deck
+PW, PGAP, PL = 3.5, 4.0, 15.0      # prong width, slot gap, length along pin
 thumb = {"op": "difference", "children": [
     {"op": "union", "children": [
-        box("thumb_prong_a", (-PL/2, PGAP/2, 0), (PL, PW, PH),
-            "thumb fork prong A (parallel box)"),
-        box("thumb_prong_b", (-PL/2, -PGAP/2 - PW, 0), (PL, PW, PH),
-            "thumb fork prong B (parallel box)"),
-        cyl("thumb_crown", (-PL/2, 0, crown_z), (PL/2, 0, crown_z), crown_r,
-            "thumb keyhole crown: half-cylinder bridging the prongs"),
+        # two prongs rising from the deck to the pin, flanking the fork slot
+        box("thumb_prong_a", (-PL/2, PGAP/2, 0), (PL, PW, PIN_Z + CR_R),
+            "thumb fork prong A"),
+        box("thumb_prong_b", (-PL/2, -PGAP/2 - PW, 0), (PL, PW, PIN_Z + CR_R),
+            "thumb fork prong B"),
+        # rounded keyhole crown (r7.5) around the pin axis, bridging the prongs
+        cyl("thumb_crown", (-PL/2, 0, PIN_Z), (PL/2, 0, PIN_Z), CR_R,
+            "thumb clevis crown: exact r7.5 (face #524) at z10.6"),
     ]},
-    cyl("thumb_bore", (-PL/2 - 1, 0, crown_z), (PL/2 + 1, 0, crown_z), 2.7,
-        "thumb pivot bore: exact r2.7 (faces #226/#319)"),
+    box("thumb_slot", (-PL/2 - 1, -PGAP/2, 0), (PL + 2, PGAP, PIN_Z + 1),
+        "thumb fork slot (U-gap between the prongs, open to the deck)"),
+    cyl("thumb_bore", (-PL/2 - 1, 0, PIN_Z), (PL/2 + 1, 0, PIN_Z), 2.7,
+        "thumb pivot bore: exact r2.7 (faces #226/#184)"),
 ]}
 add.append({"transform": {"translate": TH_C, "rotate_deg": [0, 0, TH_ANG]},
             "name": "thumb", "child": thumb})

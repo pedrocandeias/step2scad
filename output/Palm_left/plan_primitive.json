@@ -71,14 +71,14 @@
              {
               "transform": {
                "translate": [
-                -8.0,
+                -3.0,
                 0,
                 6.62
                ],
                "scale": [
-                32.0,
+                37.0,
                 1,
-                27.6
+                28.0
                ]
               },
               "name": "vault_outer",
@@ -119,14 +119,14 @@
            {
             "transform": {
              "translate": [
-              -8.0,
+              -3.0,
               0,
               6.62
              ],
              "scale": [
-              27.0,
+              32.0,
               1,
-              22.5
+              23.0
              ]
             },
             "name": "vault_inner",
@@ -472,9 +472,9 @@
          {
           "transform": {
            "translate": [
-            29.0,
-            -8.0,
-            4.62
+            31.0,
+            -6.0,
+            6.62
            ],
            "rotate_deg": [
             0,
@@ -494,30 +494,30 @@
                "name": "thumb_prong_a",
                "min": [
                 -7.5,
-                1.7,
+                2.0,
                 0.0
                ],
                "size": [
                 15.0,
-                3.0,
-                16.0
+                3.5,
+                11.5
                ],
-               "source": "thumb fork prong A (parallel box)"
+               "source": "thumb fork prong A"
               },
               {
                "prim": "box",
                "name": "thumb_prong_b",
                "min": [
                 -7.5,
-                -4.7,
+                -5.5,
                 0.0
                ],
                "size": [
                 15.0,
-                3.0,
-                16.0
+                3.5,
+                11.5
                ],
-               "source": "thumb fork prong B (parallel box)"
+               "source": "thumb fork prong B"
               },
               {
                "prim": "cylinder",
@@ -525,17 +525,32 @@
                "p0": [
                 -7.5,
                 0.0,
-                16.0
+                4.0
                ],
                "p1": [
                 7.5,
                 0.0,
-                16.0
+                4.0
                ],
-               "r": 4.7,
-               "source": "thumb keyhole crown: half-cylinder bridging the prongs"
+               "r": 7.5,
+               "source": "thumb clevis crown: exact r7.5 (face #524) at z10.6"
               }
              ]
+            },
+            {
+             "prim": "box",
+             "name": "thumb_slot",
+             "min": [
+              -8.5,
+              -2.0,
+              0.0
+             ],
+             "size": [
+              17.0,
+              4.0,
+              5.0
+             ],
+             "source": "thumb fork slot (U-gap between the prongs, open to the deck)"
             },
             {
              "prim": "cylinder",
@@ -543,15 +558,15 @@
              "p0": [
               -8.5,
               0.0,
-              16.0
+              4.0
              ],
              "p1": [
               8.5,
               0.0,
-              16.0
+              4.0
              ],
              "r": 2.7,
-             "source": "thumb pivot bore: exact r2.7 (faces #226/#319)"
+             "source": "thumb pivot bore: exact r2.7 (faces #226/#184)"
             }
            ]
           }
