@@ -7,6 +7,17 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Canonical-arch palm shell — measured tradeoff (experiment, unchained)**:
+  `archloft_palm.py` lofts ONE continuous canonical-arch skin (V2-template
+  architecture: 31 stations, fixed-role 72/56-pt arches, monotone
+  correspondence) — this ELIMINATES the control-loft fragment creases but
+  scores 0.9413, below the 0.95 spec. Localized the gap: a spatially uniform
+  ~0.25mm-RMS sheet over the entire dorsal surface (FP 1080 + FN 1542 mm3,
+  net -317), i.e. a single smooth arch per station cannot represent the
+  surface's real ±0.25mm detail (the hand template accepts ~1.25mm silhouette
+  for the same reason). Decision (author): ship the control-loft 0.9641
+  (passes spec, has creases); keep archloft as an auditable finding.
+  Fidelity-vs-smoothness is a genuine tradeoff at the palm dome.
 - **Palm shell re-architected to decimated control-outline lofts**
   (author's directive: aggressive over incremental): 726 band slabs →
   **84 skins over 382 control sections + 160 slabs** (chains <3 inherit v1
