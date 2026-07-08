@@ -229,32 +229,32 @@
               "prim": "box",
               "name": "neck_pinky",
               "min": [
-               -25.5,
-               26.0,
+               -31.5,
+               16.0,
                6.62
               ],
               "size": [
-               9.0,
+               11.0,
                14.0,
                10.0
               ],
-              "source": "pinky finger neck: ties the knuckle back into the body"
+              "source": "pinky finger neck (ties the fork into the body)"
              },
              {
               "prim": "cylinder",
               "name": "knuckle_pinky",
               "p0": [
-               -25.5,
-               40.0,
+               -31.5,
+               30.0,
                10.62
               ],
               "p1": [
-               -16.5,
-               40.0,
+               -20.5,
+               30.0,
                10.62
               ],
               "r": 6.0,
-              "source": "pinky knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+              "source": "pinky knuckle crown: exact r6.000 x-axis at y30 z10.6"
              }
             ]
            },
@@ -262,14 +262,14 @@
             "prim": "box",
             "name": "slot_pinky",
             "min": [
-             -22.2,
-             30.0,
+             -28.0,
+             20.0,
              5.62
             ],
             "size": [
-             2.4,
-             18.0,
-             9.0
+             4.0,
+             14.0,
+             10.0
             ],
             "source": "pinky fork slot (splits the knuckle into two prongs)"
            },
@@ -277,17 +277,17 @@
             "prim": "cylinder",
             "name": "bore_pinky",
             "p0": [
-             -26.5,
-             40.0,
+             -32.5,
+             30.0,
              10.62
             ],
             "p1": [
-             -15.5,
-             40.0,
+             -19.5,
+             30.0,
              10.62
             ],
             "r": 2.5,
-            "source": "pinky pin bore: exact r2.5 (faces #228/#234/#286...)"
+            "source": "pinky pin bore: exact r2.5 (faces #228/#286/#338...)"
            }
           ]
          },
@@ -301,32 +301,32 @@
               "prim": "box",
               "name": "neck_ring",
               "min": [
-               -12.4,
-               26.0,
+               -17.5,
+               21.0,
                6.62
               ],
               "size": [
-               9.0,
+               11.0,
                14.0,
                10.0
               ],
-              "source": "ring finger neck: ties the knuckle back into the body"
+              "source": "ring finger neck (ties the fork into the body)"
              },
              {
               "prim": "cylinder",
               "name": "knuckle_ring",
               "p0": [
-               -12.4,
-               40.0,
+               -17.5,
+               35.0,
                10.62
               ],
               "p1": [
-               -3.4,
-               40.0,
+               -6.5,
+               35.0,
                10.62
               ],
               "r": 6.0,
-              "source": "ring knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+              "source": "ring knuckle crown: exact r6.000 x-axis at y35 z10.6"
              }
             ]
            },
@@ -334,14 +334,14 @@
             "prim": "box",
             "name": "slot_ring",
             "min": [
-             -9.1,
-             30.0,
+             -14.0,
+             25.0,
              5.62
             ],
             "size": [
-             2.4,
-             18.0,
-             9.0
+             4.0,
+             14.0,
+             10.0
             ],
             "source": "ring fork slot (splits the knuckle into two prongs)"
            },
@@ -349,17 +349,17 @@
             "prim": "cylinder",
             "name": "bore_ring",
             "p0": [
-             -13.4,
-             40.0,
+             -18.5,
+             35.0,
              10.62
             ],
             "p1": [
-             -2.4,
-             40.0,
+             -5.5,
+             35.0,
              10.62
             ],
             "r": 2.5,
-            "source": "ring pin bore: exact r2.5 (faces #228/#234/#286...)"
+            "source": "ring pin bore: exact r2.5 (faces #228/#286/#338...)"
            }
           ]
          },
@@ -373,32 +373,32 @@
               "prim": "box",
               "name": "neck_middle",
               "min": [
-               1.0,
-               26.0,
+               -8.5,
+               25.0,
                6.62
               ],
               "size": [
-               9.0,
+               11.0,
                14.0,
                10.0
               ],
-              "source": "middle finger neck: ties the knuckle back into the body"
+              "source": "middle finger neck (ties the fork into the body)"
              },
              {
               "prim": "cylinder",
               "name": "knuckle_middle",
               "p0": [
-               1.0,
-               40.0,
+               -8.5,
+               39.0,
                10.62
               ],
               "p1": [
-               10.0,
-               40.0,
+               2.5,
+               39.0,
                10.62
               ],
               "r": 6.0,
-              "source": "middle knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+              "source": "middle knuckle crown: exact r6.000 x-axis at y39 z10.6"
              }
             ]
            },
@@ -406,14 +406,14 @@
             "prim": "box",
             "name": "slot_middle",
             "min": [
-             4.3,
-             30.0,
+             -5.0,
+             29.0,
              5.62
             ],
             "size": [
-             2.4,
-             18.0,
-             9.0
+             4.0,
+             14.0,
+             10.0
             ],
             "source": "middle fork slot (splits the knuckle into two prongs)"
            },
@@ -421,17 +421,17 @@
             "prim": "cylinder",
             "name": "bore_middle",
             "p0": [
-             0.0,
-             40.0,
+             -9.5,
+             39.0,
              10.62
             ],
             "p1": [
-             11.0,
-             40.0,
+             3.5,
+             39.0,
              10.62
             ],
             "r": 2.5,
-            "source": "middle pin bore: exact r2.5 (faces #228/#234/#286...)"
+            "source": "middle pin bore: exact r2.5 (faces #228/#286/#338...)"
            }
           ]
          },
@@ -445,32 +445,32 @@
               "prim": "box",
               "name": "neck_index",
               "min": [
-               11.7,
+               5.5,
                26.0,
                6.62
               ],
               "size": [
-               9.0,
+               11.0,
                14.0,
                10.0
               ],
-              "source": "index finger neck: ties the knuckle back into the body"
+              "source": "index finger neck (ties the fork into the body)"
              },
              {
               "prim": "cylinder",
               "name": "knuckle_index",
               "p0": [
-               11.7,
+               5.5,
                40.0,
                10.62
               ],
               "p1": [
-               20.7,
+               16.5,
                40.0,
                10.62
               ],
               "r": 6.0,
-              "source": "index knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+              "source": "index knuckle crown: exact r6.000 x-axis at y40 z10.6"
              }
             ]
            },
@@ -478,14 +478,14 @@
             "prim": "box",
             "name": "slot_index",
             "min": [
-             15.0,
+             9.0,
              30.0,
              5.62
             ],
             "size": [
-             2.4,
-             18.0,
-             9.0
+             4.0,
+             14.0,
+             10.0
             ],
             "source": "index fork slot (splits the knuckle into two prongs)"
            },
@@ -493,17 +493,17 @@
             "prim": "cylinder",
             "name": "bore_index",
             "p0": [
-             10.7,
+             4.5,
              40.0,
              10.62
             ],
             "p1": [
-             21.7,
+             17.5,
              40.0,
              10.62
             ],
             "r": 2.5,
-            "source": "index pin bore: exact r2.5 (faces #228/#234/#286...)"
+            "source": "index pin bore: exact r2.5 (faces #228/#286/#338...)"
            }
           ]
          },

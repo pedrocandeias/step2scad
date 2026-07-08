@@ -88,24 +88,29 @@ if SHOW_VAULT:
                 "keep the arch above the deck (open underneath)")]},
         vault_inner]})
 
-# --- 4. finger clevises (+Y): 4 projecting forks (knuckle crown + neck + slot)
-# Each finger = an x-axis r6 rounded knuckle crown at the +Y edge, a neck box
-# tying it back to the body, a central slot splitting it into a fork, and the
-# r2.5 pin bore. Projects forward from the vault (measured knuckle y39, z10.6).
-FINGERS = [(-21.0, "pinky"), (-7.9, "ring"), (5.5, "middle"), (16.2, "index")]
-KN_Y, KN_Z, KN_R, KN_HW = 40.0, 10.62, 6.0, 4.5   # knuckle y/z/radius/half-width X
-for cx, nm in FINGERS:
+# --- 4. finger clevises (+Y): 4 projecting FORKS on the measured knuckle line
+# Each finger = two prongs (r6 x-axis crowns ~11mm apart) with a central fork
+# slot and the r2.5 pin bore. The knuckle LINE IS ANGLED (measured): index at
+# y40 stepping back to pinky at y30 (the fingers fan forward). Crown z10.6.
+# (cx = clevis centre x, ky = knuckle y) — all measured from the r6/r2.5 faces.
+FINGERS = [(-26.0, 30.0, "pinky"), (-12.0, 35.0, "ring"),
+           (-3.0, 39.0, "middle"), (11.0, 40.0, "index")]
+KN_Z, KN_R, KN_HW, SLOT_W = 10.62, 6.0, 5.5, 4.0   # knuckle z/radius/half-width/slot
+for cx, ky, nm in FINGERS:
+    y0 = ky - 14.0                                  # neck root (into the body)
     clevis = {"op": "difference", "children": [
         {"op": "union", "children": [
-            box(f"neck_{nm}", (cx - KN_HW, 26.0, Z_DECK), (2 * KN_HW, KN_Y - 26.0, KN_Z + KN_R - Z_DECK),
-                f"{nm} finger neck: ties the knuckle back into the body"),
-            cyl(f"knuckle_{nm}", (cx - KN_HW, KN_Y, KN_Z), (cx + KN_HW, KN_Y, KN_Z), KN_R,
-                f"{nm} knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"),
+            box(f"neck_{nm}", (cx - KN_HW, y0, Z_DECK),
+                (2 * KN_HW, ky - y0, KN_Z + KN_R - Z_DECK),
+                f"{nm} finger neck (ties the fork into the body)"),
+            cyl(f"knuckle_{nm}", (cx - KN_HW, ky, KN_Z), (cx + KN_HW, ky, KN_Z),
+                KN_R, f"{nm} knuckle crown: exact r6.000 x-axis at y{ky:.0f} z10.6"),
         ]},
-        box(f"slot_{nm}", (cx - 1.2, 30.0, Z_DECK - 1), (2.4, 18.0, KN_R + 3),
+        box(f"slot_{nm}", (cx - SLOT_W/2, y0 + 4, Z_DECK - 1),
+            (SLOT_W, ky - y0, KN_R + 4),
             f"{nm} fork slot (splits the knuckle into two prongs)"),
-        cyl(f"bore_{nm}", (cx - KN_HW - 1, KN_Y, KN_Z), (cx + KN_HW + 1, KN_Y, KN_Z), 2.5,
-            f"{nm} pin bore: exact r2.5 (faces #228/#234/#286...)"),
+        cyl(f"bore_{nm}", (cx - KN_HW - 1, ky, KN_Z), (cx + KN_HW + 1, ky, KN_Z),
+            2.5, f"{nm} pin bore: exact r2.5 (faces #228/#286/#338...)"),
     ]}
     add.append(clevis)
 
