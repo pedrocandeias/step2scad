@@ -615,76 +615,35 @@
              "op": "union",
              "children": [
               {
-               "op": "union",
-               "children": [
-                {
-                 "prim": "box",
-                 "name": "thumb_shaft_a",
-                 "min": [
-                  2.25,
-                  -7.5,
-                  0.0
-                 ],
-                 "size": [
-                  4.0,
-                  15.0,
-                  4.0
-                 ],
-                 "source": "thumb prong a shaft (deck -> pin)"
-                },
-                {
-                 "prim": "cylinder",
-                 "name": "thumb_crown_a",
-                 "p0": [
-                  2.25,
-                  0.0,
-                  4.0
-                 ],
-                 "p1": [
-                  6.25,
-                  0.0,
-                  4.0
-                 ],
-                 "r": 7.5,
-                 "source": "thumb prong a keyhole crown: exact r7.5 (face #524)"
-                }
-               ]
+               "prim": "box",
+               "name": "thumb_lug",
+               "min": [
+                -3.0,
+                -7.5,
+                -6.0
+               ],
+               "size": [
+                6.0,
+                15.0,
+                10.0
+               ],
+               "source": "thumb lug plate (paddle rising from the base to the tip)"
               },
               {
-               "op": "union",
-               "children": [
-                {
-                 "prim": "box",
-                 "name": "thumb_shaft_b",
-                 "min": [
-                  -6.25,
-                  -7.5,
-                  0.0
-                 ],
-                 "size": [
-                  4.0,
-                  15.0,
-                  4.0
-                 ],
-                 "source": "thumb prong b shaft (deck -> pin)"
-                },
-                {
-                 "prim": "cylinder",
-                 "name": "thumb_crown_b",
-                 "p0": [
-                  -6.25,
-                  0.0,
-                  4.0
-                 ],
-                 "p1": [
-                  -2.25,
-                  0.0,
-                  4.0
-                 ],
-                 "r": 7.5,
-                 "source": "thumb prong b keyhole crown: exact r7.5 (face #524)"
-                }
-               ]
+               "prim": "cylinder",
+               "name": "thumb_crown",
+               "p0": [
+                -3.0,
+                0.0,
+                4.0
+               ],
+               "p1": [
+                3.0,
+                0.0,
+                4.0
+               ],
+               "r": 7.5,
+               "source": "thumb lug rounded tip: exact r7.5 (face #524) at z10.6"
               }
              ]
             },
@@ -692,12 +651,12 @@
              "prim": "cylinder",
              "name": "thumb_bore",
              "p0": [
-              -7.25,
+              -4.0,
               0.0,
               4.0
              ],
              "p1": [
-              7.25,
+              4.0,
               0.0,
               4.0
              ],
@@ -709,18 +668,18 @@
          },
          {
           "prim": "box",
-          "name": "thumb_neck",
+          "name": "thumb_base",
           "min": [
-           18.0,
-           -14.0,
+           22.0,
+           -18.0,
            6.62
           ],
           "size": [
-           16.0,
-           14.0,
-           5.0
+           13.0,
+           20.0,
+           8.0
           ],
-          "source": "thumb base connector into the palm body"
+          "source": "thumb mount base (bulk joining the lug to the palm body)"
          }
         ]
        },
