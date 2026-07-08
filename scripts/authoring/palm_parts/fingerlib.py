@@ -36,16 +36,17 @@ def build_clevis(cx, ky, nm, kn_z=10.62, kn_r=6.0, kn_hw=7.0, slot_w=4.5,
             f"{nm} finger neck (low base tying the fork into the body)"),
         knuckle,
     ]}
-    # fork slot = a ROUNDED U-channel (not a sharp rectangle): a box up to the
-    # pin height capped by a Y-axis half-cylinder, so the tab pocket reads as a
-    # round-topped slot under the round crown (matches the reference clevis).
+    # fork slot = the tab pocket: FULL-HEIGHT and OPEN top-to-bottom so the two
+    # prongs stay separate (measured: the reference pocket is open; the high
+    # z17-18 bridge belongs to the VAULT, not the knuckle — do NOT cap it, that
+    # bridges the prongs solid). Front (+Y) open, back corner rounded.
     sy0, sy1 = y0 + 3, ky + kn_r
     cuts = [
         box(f"slot_{nm}", (cx - slot_w/2, sy0, Z_DECK - 1),
-            (slot_w, sy1 - sy0, kn_z - (Z_DECK - 1)),
-            f"{nm} fork slot channel (tab pocket, up to the pin height)"),
-        cyl(f"slot_cap_{nm}", (cx, sy0, kn_z), (cx, sy1, kn_z), slot_w/2,
-            f"{nm} fork slot rounded top (U-slot, radius = slot half-width)"),
+            (slot_w, sy1 - sy0, top_z + 1),
+            f"{nm} fork slot (open tab pocket, full height between the prongs)"),
+        cyl(f"slot_back_{nm}", (cx, sy0, kn_z), (cx, sy0, top_z), slot_w/2,
+            f"{nm} fork slot rounded back corner"),
     ]
     if bore == "slot" and bore_slot:
         ly, dia = bore_slot

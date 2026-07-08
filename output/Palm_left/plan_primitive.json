@@ -257,13 +257,13 @@
               "size": [
                6.0,
                18.0,
-               5.0
+               17.62
               ],
-              "source": "pinky fork slot channel (tab pocket, up to the pin height)"
+              "source": "pinky fork slot (open tab pocket, full height between the prongs)"
              },
              {
               "prim": "cylinder",
-              "name": "slot_cap_pinky",
+              "name": "slot_back_pinky",
               "p0": [
                -26.1,
                17.1,
@@ -271,11 +271,11 @@
               ],
               "p1": [
                -26.1,
-               35.1,
-               10.62
+               17.1,
+               16.62
               ],
               "r": 3.0,
-              "source": "pinky fork slot rounded top (U-slot, radius = slot half-width)"
+              "source": "pinky fork slot rounded back corner"
              },
              {
               "prim": "cylinder",
@@ -332,7 +332,7 @@
                15.0,
                4.0
               ],
-              "source": "ring finger neck (low base tying the fork into the body)"
+              "source": "ring finger neck (low base into the body)"
              },
              {
               "prim": "cylinder",
@@ -348,40 +348,45 @@
                10.62
               ],
               "r": 6.0,
-              "source": "ring knuckle crown: exact r6 x-axis at y35"
+              "source": "ring knuckle tube: exact r6 x-axis (crowns #462/#465)"
              }
             ]
            },
            {
-            "prim": "box",
-            "name": "slot_ring",
-            "min": [
-             -14.35,
-             23.1,
-             5.62
-            ],
-            "size": [
-             4.5,
-             18.0,
-             5.0
-            ],
-            "source": "ring fork slot channel (tab pocket, up to the pin height)"
-           },
-           {
-            "prim": "cylinder",
-            "name": "slot_cap_ring",
-            "p0": [
-             -12.1,
-             23.1,
-             10.62
-            ],
-            "p1": [
-             -12.1,
-             41.1,
-             10.62
-            ],
-            "r": 2.25,
-            "source": "ring fork slot rounded top (U-slot, radius = slot half-width)"
+            "op": "union",
+            "children": [
+             {
+              "prim": "box",
+              "name": "slot_ring",
+              "min": [
+               -14.6,
+               23.1,
+               5.62
+              ],
+              "size": [
+               5.0,
+               19.0,
+               18.62
+              ],
+              "source": "ring tab slot channel (full height -> prongs stay separate)"
+             },
+             {
+              "prim": "cylinder",
+              "name": "slot_ring_back",
+              "p0": [
+               -12.1,
+               23.1,
+               8.12
+              ],
+              "p1": [
+               -12.1,
+               23.1,
+               17.62
+              ],
+              "r": 2.5,
+              "source": "ring slot rounded back corner (clean pocket end)"
+             }
+            ]
            },
            {
             "prim": "cylinder",
@@ -397,7 +402,39 @@
              10.62
             ],
             "r": 2.5,
-            "source": "ring pin bore: exact r2.5 x-axis"
+            "source": "ring pin bore: exact r2.5 (#286)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "ring_cbore_L",
+            "p0": [
+             -19.1,
+             35.1,
+             10.62
+            ],
+            "p1": [
+             -17.5,
+             35.1,
+             10.62
+            ],
+            "r": 3.25,
+            "source": "ring counterbore L: exact r3.25 (#249/#318)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "ring_cbore_R",
+            "p0": [
+             -5.1,
+             35.1,
+             10.62
+            ],
+            "p1": [
+             -6.7,
+             35.1,
+             10.62
+            ],
+            "r": 3.25,
+            "source": "ring counterbore R: exact r3.25 (#249/#318)"
            }
           ]
          },
@@ -451,13 +488,13 @@
             "size": [
              4.5,
              18.0,
-             5.0
+             17.62
             ],
-            "source": "middle fork slot channel (tab pocket, up to the pin height)"
+            "source": "middle fork slot (open tab pocket, full height between the prongs)"
            },
            {
             "prim": "cylinder",
-            "name": "slot_cap_middle",
+            "name": "slot_back_middle",
             "p0": [
              -3.1,
              27.1,
@@ -465,11 +502,11 @@
             ],
             "p1": [
              -3.1,
-             45.1,
-             10.62
+             27.1,
+             16.62
             ],
             "r": 2.25,
-            "source": "middle fork slot rounded top (U-slot, radius = slot half-width)"
+            "source": "middle fork slot rounded back corner"
            },
            {
             "prim": "cylinder",
@@ -539,13 +576,13 @@
             "size": [
              4.5,
              18.0,
-             5.0
+             17.62
             ],
-            "source": "index fork slot channel (tab pocket, up to the pin height)"
+            "source": "index fork slot (open tab pocket, full height between the prongs)"
            },
            {
             "prim": "cylinder",
-            "name": "slot_cap_index",
+            "name": "slot_back_index",
             "p0": [
              11.35,
              27.1,
@@ -553,11 +590,11 @@
             ],
             "p1": [
              11.35,
-             45.1,
-             10.62
+             27.1,
+             16.62
             ],
             "r": 2.25,
-            "source": "index fork slot rounded top (U-slot, radius = slot half-width)"
+            "source": "index fork slot rounded back corner"
            },
            {
             "prim": "cylinder",
@@ -2413,38 +2450,6 @@
          3.0
         ],
         "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
-       },
-       {
-        "prim": "cylinder",
-        "name": "ring_cbore_L",
-        "p0": [
-         -19.1,
-         35.1,
-         10.62
-        ],
-        "p1": [
-         -17.5,
-         35.1,
-         10.62
-        ],
-        "r": 3.25,
-        "source": "ring pin-head counterbore L: exact r3.25 (#249/#318)"
-       },
-       {
-        "prim": "cylinder",
-        "name": "ring_cbore_R",
-        "p0": [
-         -5.1,
-         35.1,
-         10.62
-        ],
-        "p1": [
-         -6.7,
-         35.1,
-         10.62
-        ],
-        "r": 3.25,
-        "source": "ring pin-head counterbore R: exact r3.25 (#249/#318)"
        },
        {
         "prim": "cylinder",
