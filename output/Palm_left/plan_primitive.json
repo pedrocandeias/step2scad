@@ -205,488 +205,207 @@
           "source": "flat palmar floor: measured outline (ref z5.3, simplified) between exact planes #829/#828"
          },
          {
-          "op": "difference",
-          "children": [
-           {
-            "op": "union",
-            "children": [
-             {
-              "op": "hull",
-              "children": [
-               {
-                "prim": "box",
-                "name": "wall_outer_body",
-                "min": [
-                 -34.0,
-                 28.0,
-                 6.62
-                ],
-                "size": [
-                 3.0,
-                 2.0,
-                 10.88
-                ],
-                "source": "pinky outer channel wall (body end, rises to z18)"
-               },
-               {
-                "prim": "box",
-                "name": "wall_outer_front",
-                "min": [
-                 -34.0,
-                 33.5,
-                 6.62
-                ],
-                "size": [
-                 3.0,
-                 2.0,
-                 4.88
-                ],
-                "source": "pinky outer channel wall (knuckle end, z12)"
-               }
-              ]
-             },
-             {
-              "op": "hull",
-              "children": [
-               {
-                "prim": "box",
-                "name": "wall_inner_body",
-                "min": [
-                 -21.0,
-                 28.0,
-                 6.62
-                ],
-                "size": [
-                 3.5,
-                 2.0,
-                 11.88
-                ],
-                "source": "pinky inner channel wall (body end, rises to z18)"
-               },
-               {
-                "prim": "box",
-                "name": "wall_inner_front",
-                "min": [
-                 -21.0,
-                 39.0,
-                 6.62
-                ],
-                "size": [
-                 3.5,
-                 2.0,
-                 4.88
-                ],
-                "source": "pinky inner channel wall (knuckle end, z12)"
-               }
-              ]
-             },
-             {
-              "prim": "box",
-              "name": "neck_pinky",
-              "min": [
-               -35.2,
-               26.8,
-               6.62
-              ],
-              "size": [
-               17.8,
-               9.0,
-               4.0
-              ],
-              "source": "pinky neck (low base under the pin, tying the fork to the body)"
-             },
-             {
-              "prim": "cylinder",
-              "name": "knuckle_pinky",
-              "p0": [
-               -35.2,
-               35.8,
-               10.62
-              ],
-              "p1": [
-               -17.4,
-               35.8,
-               10.62
-              ],
-              "r": 6.0,
-              "source": "pinky knuckle crown: r6 x-axis at y35.8 z10.6"
-             }
-            ]
-           },
-           {
-            "prim": "box",
-            "name": "slot_pinky",
-            "min": [
-             -31.3,
-             29.8,
-             5.62
-            ],
-            "size": [
-             10.0,
-             12.0,
-             18.62
-            ],
-            "source": "pinky fork slot: open tab pocket, full height between the prongs"
-           },
-           {
-            "prim": "cylinder",
-            "name": "bore_pinky",
-            "p0": [
-             -36.2,
-             35.8,
-             10.62
-            ],
-            "p1": [
-             -16.4,
-             35.8,
-             10.62
-            ],
-            "r": 2.5,
-            "source": "pinky pin bore: exact round r2.5 (#234)"
-           },
-           {
-            "prim": "cylinder",
-            "name": "cbore_pinky",
-            "p0": [
-             -22.5,
-             35.8,
-             10.62
-            ],
-            "p1": [
-             -19.0,
-             35.8,
-             10.62
-            ],
-            "r": 3.25,
-            "source": "pinky counterbore: exact r3.25 (#248) pin-head recess"
-           }
-          ]
+          "prim": "box",
+          "name": "tine0",
+          "min": [
+           -35.3,
+           27.0,
+           6.62
+          ],
+          "size": [
+           3.8,
+           8.1,
+           8.38
+          ],
+          "source": "finger tine 0: exact wall x[-35.3,-31.5] (from the +X/-X plane pair) deck->z15"
          },
          {
-          "op": "difference",
-          "children": [
-           {
-            "op": "union",
-            "children": [
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "ring_wall_L",
-                "min": [
-                 -19.1,
-                 20.0,
-                 6.62
-                ],
-                "size": [
-                 4.0,
-                 24.0,
-                 7.38
-                ],
-                "source": "ring channel wall L: side plate x[-19.1,-15.1] deck->z14 (planes #673/#459)"
-               },
-               {
-                "prim": "cylinder",
-                "name": "ring_crown_L",
-                "p0": [
-                 -19.1,
-                 35.1,
-                 10.62
-                ],
-                "p1": [
-                 -15.1,
-                 35.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "ring knuckle crown L: exact r6 x-axis (#465/#462)"
-               }
-              ]
-             },
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "ring_wall_R",
-                "min": [
-                 -9.1,
-                 20.0,
-                 6.62
-                ],
-                "size": [
-                 4.0,
-                 24.0,
-                 7.38
-                ],
-                "source": "ring channel wall R: side plate x[-9.1,-5.1] deck->z14 (planes #673/#459)"
-               },
-               {
-                "prim": "cylinder",
-                "name": "ring_crown_R",
-                "p0": [
-                 -9.1,
-                 35.1,
-                 10.62
-                ],
-                "p1": [
-                 -5.1,
-                 35.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "ring knuckle crown R: exact r6 x-axis (#465/#462)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "prim": "cylinder",
-            "name": "ring_bore",
-            "p0": [
-             -21.1,
-             35.1,
-             10.62
-            ],
-            "p1": [
-             -3.1,
-             35.1,
-             10.62
-            ],
-            "r": 2.5,
-            "source": "ring pin bore: exact r2.5 x-axis (#286) \u2014 round hole"
-           },
-           {
-            "prim": "cylinder",
-            "name": "ring_cbore_L",
-            "p0": [
-             -19.1,
-             35.1,
-             10.62
-            ],
-            "p1": [
-             -17.5,
-             35.1,
-             10.62
-            ],
-            "r": 3.25,
-            "source": "ring counterbore L: exact r3.25 (#249/#318)"
-           },
-           {
-            "prim": "cylinder",
-            "name": "ring_cbore_R",
-            "p0": [
-             -5.1,
-             35.1,
-             10.62
-            ],
-            "p1": [
-             -6.7,
-             35.1,
-             10.62
-            ],
-            "r": 3.25,
-            "source": "ring counterbore R: exact r3.25 (#249/#318)"
-           }
-          ]
+          "prim": "box",
+          "name": "tine1",
+          "min": [
+           -25.5,
+           27.0,
+           6.62
+          ],
+          "size": [
+           8.0,
+           14.1,
+           8.38
+          ],
+          "source": "finger tine 1: exact wall x[-25.5,-17.5] (from the +X/-X plane pair) deck->z15"
          },
          {
-          "op": "difference",
-          "children": [
-           {
-            "op": "union",
-            "children": [
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "mid_wall_L",
-                "min": [
-                 -7.2,
-                 24.0,
-                 6.62
-                ],
-                "size": [
-                 3.6,
-                 21.0,
-                 7.38
-                ],
-                "source": "middle channel wall L: side plate x[-7.2,-3.6] deck->z14 (#458)"
-               },
-               {
-                "prim": "cylinder",
-                "name": "mid_crown_L",
-                "p0": [
-                 -7.2,
-                 39.1,
-                 10.62
-                ],
-                "p1": [
-                 -3.6,
-                 39.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "middle knuckle crown L: exact r6 x-axis (#277/#337)"
-               }
-              ]
-             },
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "mid_wall_R",
-                "min": [
-                 2.8,
-                 24.0,
-                 6.62
-                ],
-                "size": [
-                 6.0,
-                 21.0,
-                 7.38
-                ],
-                "source": "middle channel wall R: side plate x[2.8,8.8] deck->z14 (#458)"
-               },
-               {
-                "prim": "cylinder",
-                "name": "mid_crown_R",
-                "p0": [
-                 2.8,
-                 39.1,
-                 10.62
-                ],
-                "p1": [
-                 8.8,
-                 39.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "middle knuckle crown R: exact r6 x-axis (#277/#337)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "prim": "cylinder",
-            "name": "mid_bore",
-            "p0": [
-             -9.0,
-             39.1,
-             10.62
-            ],
-            "p1": [
-             10.0,
-             39.1,
-             10.62
-            ],
-            "r": 2.5,
-            "source": "middle pin bore: exact round r2.5 (#228) x-axis"
-           }
-          ]
+          "prim": "box",
+          "name": "tine2",
+          "min": [
+           -11.5,
+           27.0,
+           6.62
+          ],
+          "size": [
+           8.0,
+           18.1,
+           8.38
+          ],
+          "source": "finger tine 2: exact wall x[-11.5,-3.5] (from the +X/-X plane pair) deck->z15"
          },
          {
-          "op": "difference",
-          "children": [
-           {
-            "op": "union",
-            "children": [
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "index_wall_L",
-                "min": [
-                 2.5,
-                 30.0,
-                 6.62
-                ],
-                "size": [
-                 8.0,
-                 14.0,
-                 7.38
-                ],
-                "source": "index channel wall L: side plate x[2.5,10.5] deck->z14"
-               },
-               {
-                "prim": "cylinder",
-                "name": "index_crown_L",
-                "p0": [
-                 2.5,
-                 39.1,
-                 10.62
-                ],
-                "p1": [
-                 10.5,
-                 39.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "index knuckle crown L: exact r6 x-axis (#350)"
-               }
-              ]
-             },
-             {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "index_wall_R",
-                "min": [
-                 16.5,
-                 30.0,
-                 6.62
-                ],
-                "size": [
-                 3.5,
-                 14.0,
-                 7.38
-                ],
-                "source": "index channel wall R: side plate x[16.5,20.0] deck->z14"
-               },
-               {
-                "prim": "cylinder",
-                "name": "index_crown_R",
-                "p0": [
-                 16.5,
-                 39.1,
-                 10.62
-                ],
-                "p1": [
-                 20.0,
-                 39.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "index knuckle crown R: exact r6 x-axis (#350)"
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "prim": "cylinder",
-            "name": "index_bore",
-            "p0": [
-             1.0,
-             39.1,
-             10.62
-            ],
-            "p1": [
-             21.0,
-             39.1,
-             10.62
-            ],
-            "r": 2.5,
-            "source": "index pin bore: exact round r2.5 (#338) x-axis"
-           }
-          ]
+          "prim": "box",
+          "name": "tine3",
+          "min": [
+           2.5,
+           27.0,
+           6.62
+          ],
+          "size": [
+           8.0,
+           18.1,
+           8.38
+          ],
+          "source": "finger tine 3: exact wall x[2.5,10.5] (from the +X/-X plane pair) deck->z15"
+         },
+         {
+          "prim": "box",
+          "name": "tine4",
+          "min": [
+           16.5,
+           27.0,
+           6.62
+          ],
+          "size": [
+           3.5,
+           18.1,
+           8.38
+          ],
+          "source": "finger tine 4: exact wall x[16.5,20.0] (from the +X/-X plane pair) deck->z15"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_pinky_L",
+          "p0": [
+           -35.3,
+           29.1,
+           10.62
+          ],
+          "p1": [
+           -31.5,
+           29.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "pinky crown on left tine: exact r6 x-axis at y29"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_pinky_R",
+          "p0": [
+           -25.5,
+           29.1,
+           10.62
+          ],
+          "p1": [
+           -17.5,
+           29.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "pinky crown on right tine: exact r6 x-axis at y29"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_ring_L",
+          "p0": [
+           -25.5,
+           35.1,
+           10.62
+          ],
+          "p1": [
+           -17.5,
+           35.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "ring crown on left tine: exact r6 x-axis at y35"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_ring_R",
+          "p0": [
+           -11.5,
+           35.1,
+           10.62
+          ],
+          "p1": [
+           -3.5,
+           35.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "ring crown on right tine: exact r6 x-axis at y35"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_middle_L",
+          "p0": [
+           -11.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           -3.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "middle crown on left tine: exact r6 x-axis at y39"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_middle_R",
+          "p0": [
+           2.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           10.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "middle crown on right tine: exact r6 x-axis at y39"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_index_L",
+          "p0": [
+           2.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           10.5,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "index crown on left tine: exact r6 x-axis at y39"
+         },
+         {
+          "prim": "cylinder",
+          "name": "crown_index_R",
+          "p0": [
+           16.5,
+           39.1,
+           10.62
+          ],
+          "p1": [
+           20.0,
+           39.1,
+           10.62
+          ],
+          "r": 6.0,
+          "source": "index crown on right tine: exact r6 x-axis at y39"
          },
          {
           "op": "hull",
@@ -2524,6 +2243,70 @@
          3.0
         ],
         "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_pinky",
+        "p0": [
+         -36.3,
+         29.1,
+         10.62
+        ],
+        "p1": [
+         -16.5,
+         29.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "pinky pin bore: exact r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_ring",
+        "p0": [
+         -26.5,
+         35.1,
+         10.62
+        ],
+        "p1": [
+         -2.5,
+         35.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "ring pin bore: exact r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_middle",
+        "p0": [
+         -12.5,
+         39.1,
+         10.62
+        ],
+        "p1": [
+         11.5,
+         39.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "middle pin bore: exact r2.5 x-axis"
+       },
+       {
+        "prim": "cylinder",
+        "name": "bore_index",
+        "p0": [
+         1.5,
+         39.1,
+         10.62
+        ],
+        "p1": [
+         21.0,
+         39.1,
+         10.62
+        ],
+        "r": 2.5,
+        "source": "index pin bore: exact r2.5 x-axis"
        },
        {
         "prim": "cylinder",
