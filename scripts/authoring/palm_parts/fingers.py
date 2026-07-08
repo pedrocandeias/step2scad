@@ -10,12 +10,14 @@ Centres measured from the r6/r2.5 x-axis faces.
 """
 from palm_parts.common import Z_DECK, box, cyl
 
-# (cx = clevis centre x, ky = knuckle y) — measured from the r6/r2.5 faces
-FINGERS = [(-26.0, 30.0, "pinky"), (-12.0, 35.0, "ring"),
-           (-3.0, 39.0, "middle"), (11.0, 40.0, "index")]
+# (cx = clevis centre x, ky = knuckle y) — the MIDPOINT of each finger's two
+# measured r6 crown prongs (pinky -31.1/-21.1, ring -17.1/-7.1, middle
+# -7.9/1.7, index 6.5/16.2) at their measured knuckle y (29/35/39/39).
+FINGERS = [(-26.1, 29.1, "pinky"), (-12.1, 35.1, "ring"),
+           (-3.1, 39.1, "middle"), (11.3, 39.1, "index")]
 KN_Z = 10.62     # pin / crown centre height (exact r2.5/r6 faces)
 KN_R = 6.0       # knuckle crown radius (exact r6 faces)
-KN_HW = 6.0      # clevis half-width in X (measured crown pair span ~11mm)
+KN_HW = 7.0      # clevis half-width in X (measured prong-pair span ~10mm)
 SLOT_W = 4.5     # fork slot gap (tab pocket)
 NECK_LEN = 15.0  # how far the neck reaches back into the body
 

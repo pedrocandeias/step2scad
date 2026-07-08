@@ -214,12 +214,12 @@
               "prim": "box",
               "name": "neck_pinky",
               "min": [
-               -32.0,
-               15.0,
+               -33.1,
+               14.1,
                6.62
               ],
               "size": [
-               12.0,
+               14.0,
                15.0,
                4.0
               ],
@@ -229,17 +229,17 @@
               "prim": "cylinder",
               "name": "knuckle_pinky",
               "p0": [
-               -32.0,
-               30.0,
+               -33.1,
+               29.1,
                10.62
               ],
               "p1": [
-               -20.0,
-               30.0,
+               -19.1,
+               29.1,
                10.62
               ],
               "r": 6.0,
-              "source": "pinky knuckle crown: exact r6.000 x-axis at y30 z10.6"
+              "source": "pinky knuckle crown: exact r6.000 x-axis at y29 z10.6"
              }
             ]
            },
@@ -247,8 +247,8 @@
             "prim": "box",
             "name": "slot_pinky",
             "min": [
-             -28.25,
-             18.0,
+             -28.35,
+             17.1,
              5.62
             ],
             "size": [
@@ -262,13 +262,13 @@
             "prim": "cylinder",
             "name": "bore_pinky",
             "p0": [
-             -33.0,
-             30.0,
+             -34.1,
+             29.1,
              10.62
             ],
             "p1": [
-             -19.0,
-             30.0,
+             -18.1,
+             29.1,
              10.62
             ],
             "r": 2.5,
@@ -286,12 +286,12 @@
               "prim": "box",
               "name": "neck_ring",
               "min": [
-               -18.0,
-               20.0,
+               -19.1,
+               20.1,
                6.62
               ],
               "size": [
-               12.0,
+               14.0,
                15.0,
                4.0
               ],
@@ -301,13 +301,13 @@
               "prim": "cylinder",
               "name": "knuckle_ring",
               "p0": [
-               -18.0,
-               35.0,
+               -19.1,
+               35.1,
                10.62
               ],
               "p1": [
-               -6.0,
-               35.0,
+               -5.1,
+               35.1,
                10.62
               ],
               "r": 6.0,
@@ -319,8 +319,8 @@
             "prim": "box",
             "name": "slot_ring",
             "min": [
-             -14.25,
-             23.0,
+             -14.35,
+             23.1,
              5.62
             ],
             "size": [
@@ -334,13 +334,13 @@
             "prim": "cylinder",
             "name": "bore_ring",
             "p0": [
-             -19.0,
-             35.0,
+             -20.1,
+             35.1,
              10.62
             ],
             "p1": [
-             -5.0,
-             35.0,
+             -4.1,
+             35.1,
              10.62
             ],
             "r": 2.5,
@@ -358,12 +358,12 @@
               "prim": "box",
               "name": "neck_middle",
               "min": [
-               -9.0,
-               24.0,
+               -10.1,
+               24.1,
                6.62
               ],
               "size": [
-               12.0,
+               14.0,
                15.0,
                4.0
               ],
@@ -373,13 +373,13 @@
               "prim": "cylinder",
               "name": "knuckle_middle",
               "p0": [
-               -9.0,
-               39.0,
+               -10.1,
+               39.1,
                10.62
               ],
               "p1": [
-               3.0,
-               39.0,
+               3.9,
+               39.1,
                10.62
               ],
               "r": 6.0,
@@ -391,8 +391,8 @@
             "prim": "box",
             "name": "slot_middle",
             "min": [
-             -5.25,
-             27.0,
+             -5.35,
+             27.1,
              5.62
             ],
             "size": [
@@ -406,13 +406,13 @@
             "prim": "cylinder",
             "name": "bore_middle",
             "p0": [
-             -10.0,
-             39.0,
+             -11.1,
+             39.1,
              10.62
             ],
             "p1": [
-             4.0,
-             39.0,
+             4.9,
+             39.1,
              10.62
             ],
             "r": 2.5,
@@ -430,12 +430,12 @@
               "prim": "box",
               "name": "neck_index",
               "min": [
-               5.0,
-               25.0,
+               4.3,
+               24.1,
                6.62
               ],
               "size": [
-               12.0,
+               14.0,
                15.0,
                4.0
               ],
@@ -445,17 +445,17 @@
               "prim": "cylinder",
               "name": "knuckle_index",
               "p0": [
-               5.0,
-               40.0,
+               4.3,
+               39.1,
                10.62
               ],
               "p1": [
-               17.0,
-               40.0,
+               18.3,
+               39.1,
                10.62
               ],
               "r": 6.0,
-              "source": "index knuckle crown: exact r6.000 x-axis at y40 z10.6"
+              "source": "index knuckle crown: exact r6.000 x-axis at y39 z10.6"
              }
             ]
            },
@@ -463,8 +463,8 @@
             "prim": "box",
             "name": "slot_index",
             "min": [
-             8.75,
-             28.0,
+             9.05,
+             27.1,
              5.62
             ],
             "size": [
@@ -478,13 +478,13 @@
             "prim": "cylinder",
             "name": "bore_index",
             "p0": [
-             4.0,
-             40.0,
+             3.3,
+             39.1,
              10.62
             ],
             "p1": [
-             18.0,
-             40.0,
+             19.3,
+             39.1,
              10.62
             ],
             "r": 2.5,
@@ -508,22 +508,22 @@
              5.0,
              15.38
             ],
-            "source": "wrist wall L ear-end (low): x[-38,-34]"
+            "source": "wrist wall L ear-end (low, top z22): x[-38,-34]"
            },
            {
             "prim": "box",
             "name": "wrist_wall_L_body",
             "min": [
              -38.5,
-             -17.0,
+             -28.0,
              6.62
             ],
             "size": [
              5.0,
-             3.0,
+             14.0,
              23.38
             ],
-            "source": "wrist wall L body-end (high, rises to the dome rim z30)"
+            "source": "wrist wall L plateau (top z30, from y-28 to the body)"
            }
           ]
          },
@@ -559,22 +559,22 @@
              5.0,
              15.38
             ],
-            "source": "wrist wall R ear-end (low): x[18,22]"
+            "source": "wrist wall R ear-end (low, top z22): x[18,22]"
            },
            {
             "prim": "box",
             "name": "wrist_wall_R_body",
             "min": [
              17.5,
-             -17.0,
+             -28.0,
              6.62
             ],
             "size": [
              5.0,
-             3.0,
-             23.38
+             14.0,
+             21.38
             ],
-            "source": "wrist wall R body-end (high, rises to the dome rim z30)"
+            "source": "wrist wall R plateau (top z28, from y-28 to the body)"
            }
           ]
          },
@@ -685,1653 +685,1608 @@
        },
        {
         "prim": "box",
-        "name": "vent_0_0",
+        "name": "vent_000",
         "min": [
-         -30.055,
-         -27.665,
+         14.105,
+         6.865,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_1",
+        "name": "vent_001",
         "min": [
-         -29.565,
-         -23.525,
+         14.105,
+         -2.995,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_2",
+        "name": "vent_002",
         "min": [
-         -30.055,
-         -18.405,
+         21.345,
+         -0.275,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_3",
+        "name": "vent_003",
         "min": [
-         -29.565,
-         -14.265,
+         -5.035,
+         -18.255,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_4",
+        "name": "vent_004",
         "min": [
-         -30.055,
-         -9.145,
+         -5.035,
+         11.185,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_5",
+        "name": "vent_005",
         "min": [
-         -29.565,
-         -5.005,
+         -5.035,
+         1.455,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_6",
+        "name": "vent_006",
         "min": [
-         -30.055,
-         0.115,
+         -5.035,
+         -8.405,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_7",
+        "name": "vent_007",
         "min": [
-         -29.565,
-         4.255,
+         -5.035,
+         -28.165,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_8",
+        "name": "vent_008",
         "min": [
-         -30.055,
-         9.375,
+         9.405,
+         21.355,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_9",
+        "name": "vent_009",
         "min": [
-         -29.565,
-         13.515,
+         14.495,
+         16.505,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_0_10",
+        "name": "vent_010",
         "min": [
-         -30.055,
-         18.635,
+         14.195,
+         -18.365,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_0",
+        "name": "vent_011",
         "min": [
-         -25.425,
-         -27.665,
+         13.935,
+         -22.935,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_1",
+        "name": "vent_012",
         "min": [
-         -24.935,
-         -23.525,
+         0.055,
+         21.795,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_2",
+        "name": "vent_013",
         "min": [
-         -25.425,
-         -18.405,
+         -20.225,
+         16.725,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_3",
+        "name": "vent_014",
         "min": [
-         -24.935,
-         -14.265,
+         14.655,
+         -13.525,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_4",
+        "name": "vent_015",
         "min": [
-         -25.425,
-         -9.145,
+         13.275,
+         20.515,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_5",
+        "name": "vent_016",
         "min": [
-         -24.935,
-         -5.005,
+         -14.875,
+         11.665,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_6",
+        "name": "vent_017",
         "min": [
-         -25.425,
-         0.115,
+         -14.875,
+         1.805,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_7",
+        "name": "vent_018",
         "min": [
-         -24.935,
-         4.255,
+         -14.875,
+         -8.045,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_8",
+        "name": "vent_019",
         "min": [
-         -25.425,
-         9.375,
+         -14.875,
+         -17.895,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_9",
+        "name": "vent_020",
         "min": [
-         -24.935,
-         13.515,
+         -14.875,
+         -27.825,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_1_10",
+        "name": "vent_021",
         "min": [
-         -25.425,
-         18.635,
+         -30.085,
+         -22.455,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_0",
+        "name": "vent_022",
         "min": [
-         -20.795,
-         -27.665,
+         -30.085,
+         7.095,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_1",
+        "name": "vent_023",
         "min": [
-         -20.305,
-         -23.525,
+         -30.085,
+         -2.755,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_2",
+        "name": "vent_024",
         "min": [
-         -20.795,
-         -18.405,
+         -30.085,
+         -12.605,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_3",
+        "name": "vent_025",
         "min": [
-         -20.305,
-         -14.265,
+         -10.435,
+         16.715,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_4",
+        "name": "vent_026",
         "min": [
-         -20.795,
-         -9.145,
+         -10.435,
+         6.865,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_5",
+        "name": "vent_027",
         "min": [
-         -20.305,
-         -5.005,
+         -10.435,
+         -2.995,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_6",
+        "name": "vent_028",
         "min": [
-         -20.795,
-         0.115,
+         -10.435,
+         -12.845,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_7",
+        "name": "vent_029",
         "min": [
-         -20.305,
-         4.255,
+         -10.435,
+         -22.695,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_8",
+        "name": "vent_030",
         "min": [
-         -20.795,
-         9.375,
+         -5.435,
+         16.715,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_9",
+        "name": "vent_031",
         "min": [
-         -20.305,
-         13.515,
+         -5.435,
+         -12.685,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_2_10",
+        "name": "vent_032",
         "min": [
-         -20.795,
-         18.635,
+         -5.435,
+         -22.455,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_0",
+        "name": "vent_033",
         "min": [
-         -16.165,
-         -27.665,
+         -5.435,
+         6.865,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_1",
+        "name": "vent_034",
         "min": [
-         -15.675,
-         -23.525,
+         -5.435,
+         -2.995,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_2",
+        "name": "vent_035",
         "min": [
-         -16.165,
-         -18.405,
+         -24.565,
+         -18.375,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_3",
+        "name": "vent_036",
         "min": [
-         -15.675,
-         -14.265,
+         -24.565,
+         11.305,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_4",
+        "name": "vent_037",
         "min": [
-         -16.165,
-         -9.145,
+         -24.565,
+         1.335,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_5",
+        "name": "vent_038",
         "min": [
-         -15.675,
-         -5.005,
+         -24.565,
+         -8.405,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_6",
+        "name": "vent_039",
         "min": [
-         -16.165,
-         0.115,
+         -24.565,
+         -28.165,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_7",
+        "name": "vent_040",
         "min": [
-         -15.675,
-         4.255,
+         9.695,
+         -27.935,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_8",
+        "name": "vent_041",
         "min": [
-         -16.165,
-         9.375,
+         9.695,
+         11.665,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_9",
+        "name": "vent_042",
         "min": [
-         -15.675,
-         13.515,
+         9.695,
+         -18.255,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_3_10",
+        "name": "vent_043",
         "min": [
-         -16.165,
-         18.635,
+         9.695,
+         -8.165,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_0",
+        "name": "vent_044",
         "min": [
-         -11.535,
-         -27.665,
+         9.695,
+         1.695,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_1",
+        "name": "vent_045",
         "min": [
-         -11.045,
-         -23.525,
+         4.505,
+         21.805,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_2",
+        "name": "vent_046",
         "min": [
-         -11.535,
-         -18.405,
+         -9.875,
+         20.875,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_3",
+        "name": "vent_047",
         "min": [
-         -11.045,
-         -14.265,
+         4.575,
+         11.545,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_4",
+        "name": "vent_048",
         "min": [
-         -11.535,
-         -9.145,
+         4.575,
+         -18.375,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_5",
+        "name": "vent_049",
         "min": [
-         -11.045,
-         -5.005,
+         4.575,
+         -8.395,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_6",
+        "name": "vent_050",
         "min": [
-         -11.535,
-         0.115,
+         4.575,
+         1.695,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_7",
+        "name": "vent_051",
         "min": [
-         -11.045,
-         4.255,
+         4.575,
+         -28.045,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_8",
+        "name": "vent_052",
         "min": [
-         -11.535,
-         9.375,
+         -24.965,
+         -12.685,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_9",
+        "name": "vent_053",
         "min": [
-         -11.045,
-         13.515,
+         -24.965,
+         -22.455,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_4_10",
+        "name": "vent_054",
         "min": [
-         -11.535,
-         18.635,
+         -24.965,
+         6.865,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_0",
+        "name": "vent_055",
         "min": [
-         -6.905,
-         -27.665,
+         -24.965,
+         -2.995,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_1",
+        "name": "vent_056",
         "min": [
-         -6.415,
-         -23.525,
+         -9.835,
+         -27.935,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_2",
+        "name": "vent_057",
         "min": [
-         -6.905,
-         -18.405,
+         -9.835,
+         11.665,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_3",
+        "name": "vent_058",
         "min": [
-         -6.415,
-         -14.265,
+         -9.835,
+         -18.375,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_4",
+        "name": "vent_059",
         "min": [
-         -6.905,
-         -9.145,
+         -9.835,
+         -8.165,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_5",
+        "name": "vent_060",
         "min": [
-         -6.415,
-         -5.005,
+         -9.835,
+         1.805,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_6",
+        "name": "vent_061",
         "min": [
-         -6.905,
-         0.115,
+         -24.005,
+         25.995,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_7",
+        "name": "vent_062",
         "min": [
-         -6.415,
-         4.255,
+         -0.905,
+         16.715,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_8",
+        "name": "vent_063",
         "min": [
-         -6.905,
-         9.375,
+         -0.905,
+         6.945,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_9",
+        "name": "vent_064",
         "min": [
-         -6.415,
-         13.515,
+         -0.905,
+         -22.455,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_5_10",
+        "name": "vent_065",
         "min": [
-         -6.905,
-         18.635,
+         -0.905,
+         -2.915,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_0",
+        "name": "vent_066",
         "min": [
-         -2.275,
-         -27.665,
+         -0.905,
+         -12.765,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_1",
+        "name": "vent_067",
         "min": [
-         -1.785,
-         -23.525,
+         4.095,
+         -22.455,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_2",
+        "name": "vent_068",
         "min": [
-         -2.275,
-         -18.405,
+         4.095,
+         16.955,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_3",
+        "name": "vent_069",
         "min": [
-         -1.785,
-         -14.265,
+         4.095,
+         7.095,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_4",
+        "name": "vent_070",
         "min": [
-         -2.275,
-         -9.145,
+         4.095,
+         -2.755,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_5",
+        "name": "vent_071",
         "min": [
-         -1.785,
-         -5.005,
+         4.095,
+         -12.605,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_6",
+        "name": "vent_072",
         "min": [
-         -2.275,
-         0.115,
+         -5.125,
+         20.935,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_7",
+        "name": "vent_073",
         "min": [
-         -1.785,
-         4.255,
+         -29.175,
+         10.735,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_8",
+        "name": "vent_074",
         "min": [
-         -2.275,
-         9.375,
+         -29.375,
+         -27.935,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_9",
+        "name": "vent_075",
         "min": [
-         -1.785,
-         13.515,
+         -29.375,
+         -18.255,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_6_10",
+        "name": "vent_076",
         "min": [
-         -2.275,
-         18.635,
+         -29.375,
+         -8.285,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_0",
+        "name": "vent_077",
         "min": [
-         2.355,
-         -27.665,
+         -29.375,
+         1.805,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_1",
+        "name": "vent_078",
         "min": [
-         2.845,
-         -23.525,
+         -0.225,
+         11.665,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_2",
+        "name": "vent_079",
         "min": [
-         2.355,
-         -18.405,
+         -0.225,
+         1.805,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_3",
+        "name": "vent_080",
         "min": [
-         2.845,
-         -14.265,
+         -0.225,
+         -8.045,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_4",
+        "name": "vent_081",
         "min": [
-         2.355,
-         -9.145,
+         -0.225,
+         -18.015,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_5",
+        "name": "vent_082",
         "min": [
-         2.845,
-         -5.005,
+         -0.225,
+         -27.825,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_6",
+        "name": "vent_083",
         "min": [
-         2.355,
-         0.115,
+         -20.445,
+         6.945,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_7",
+        "name": "vent_084",
         "min": [
-         2.845,
-         4.255,
+         -20.445,
+         -22.455,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_8",
+        "name": "vent_085",
         "min": [
-         2.355,
-         9.375,
+         -20.445,
+         -2.915,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_9",
+        "name": "vent_086",
         "min": [
-         2.845,
-         13.515,
+         -20.445,
+         -12.765,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_7_10",
+        "name": "vent_087",
         "min": [
-         2.355,
-         18.635,
+         -15.435,
+         -22.455,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_0",
+        "name": "vent_088",
         "min": [
-         6.985,
-         -27.665,
+         -15.435,
+         16.955,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_1",
+        "name": "vent_089",
         "min": [
-         7.475,
-         -23.525,
+         -15.435,
+         7.095,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_2",
+        "name": "vent_090",
         "min": [
-         6.985,
-         -18.405,
+         -15.435,
+         -2.755,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_3",
+        "name": "vent_091",
         "min": [
-         7.475,
-         -14.265,
+         -15.435,
+         -12.605,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_4",
+        "name": "vent_092",
         "min": [
-         6.985,
-         -9.145,
+         9.215,
+         16.715,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_5",
+        "name": "vent_093",
         "min": [
-         7.475,
-         -5.005,
+         9.215,
+         -12.685,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_6",
+        "name": "vent_094",
         "min": [
-         6.985,
-         0.115,
+         9.215,
+         -22.455,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_7",
+        "name": "vent_095",
         "min": [
-         7.475,
-         4.255,
+         9.215,
+         6.865,
          4.12
         ],
         "size": [
+         3.21,
          2.13,
-         3.11,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_8",
+        "name": "vent_096",
         "min": [
-         6.985,
-         9.375,
+         9.215,
+         -2.995,
          4.12
         ],
         "size": [
-         3.11,
+         3.21,
          2.13,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_9",
+        "name": "vent_097",
         "min": [
-         7.475,
-         13.515,
+         13.735,
+         -28.055,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_8_10",
+        "name": "vent_098",
         "min": [
-         6.985,
-         18.635,
+         -10.085,
+         32.125,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_0",
+        "name": "vent_099",
         "min": [
-         11.615,
-         -27.665,
+         -19.765,
+         11.545,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_1",
+        "name": "vent_100",
         "min": [
-         12.105,
-         -23.525,
+         -19.765,
+         1.805,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_2",
+        "name": "vent_101",
         "min": [
-         11.615,
-         -18.405,
+         -19.765,
+         -8.045,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_3",
+        "name": "vent_102",
         "min": [
-         12.105,
-         -14.265,
+         -19.765,
+         -18.015,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_4",
+        "name": "vent_103",
         "min": [
-         11.615,
-         -9.145,
+         -19.765,
+         -27.825,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_5",
+        "name": "vent_104",
         "min": [
-         12.105,
-         -5.005,
+         14.425,
+         11.665,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_6",
+        "name": "vent_105",
         "min": [
-         11.615,
-         0.115,
+         14.425,
+         1.805,
          4.12
         ],
         "size": [
-         3.11,
          2.13,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "box",
-        "name": "vent_9_7",
+        "name": "vent_106",
         "min": [
-         12.105,
-         4.255,
+         14.425,
+         -8.045,
          4.12
         ],
         "size": [
          2.13,
-         3.11,
+         3.21,
          3.0
         ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
-       },
-       {
-        "prim": "box",
-        "name": "vent_9_8",
-        "min": [
-         11.615,
-         9.375,
-         4.12
-        ],
-        "size": [
-         3.11,
-         2.13,
-         3.0
-        ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
-       },
-       {
-        "prim": "box",
-        "name": "vent_9_9",
-        "min": [
-         12.105,
-         13.515,
-         4.12
-        ],
-        "size": [
-         2.13,
-         3.11,
-         3.0
-        ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
-       },
-       {
-        "prim": "box",
-        "name": "vent_9_10",
-        "min": [
-         11.615,
-         18.635,
-         4.12
-        ],
-        "size": [
-         3.11,
-         2.13,
-         3.0
-        ],
-        "source": "basket-weave vent slot (3.11x2.13, pitch 4.63)"
+        "source": "basket-weave vent slot (measured 3.21x2.13, exact centre + orientation from ref z5.3)"
        },
        {
         "prim": "cylinder",
