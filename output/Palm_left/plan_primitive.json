@@ -438,20 +438,50 @@
           ]
          },
          {
+          "prim": "box",
+          "name": "wrist_wall_L",
+          "min": [
+           -38.5,
+           -38.95,
+           6.62
+          ],
+          "size": [
+           5.0,
+           22.95,
+           13.38
+          ],
+          "source": "wrist gauntlet wall L: measured side wall (planes #438/#92 or #469/#470) x[-38,-34]"
+         },
+         {
           "prim": "cylinder",
           "name": "ear_L",
           "p0": [
-           -38.9,
+           -38.5,
            -38.95,
            12.62
           ],
           "p1": [
-           -33.9,
+           -33.5,
            -38.95,
            12.62
           ],
           "r": 8.0,
           "source": "wrist ear L: exact r8.000 disc (faces #534/#535) at y-38.95 z12.62"
+         },
+         {
+          "prim": "box",
+          "name": "wrist_wall_R",
+          "min": [
+           17.5,
+           -38.95,
+           6.62
+          ],
+          "size": [
+           5.0,
+           22.95,
+           13.38
+          ],
+          "source": "wrist gauntlet wall R: measured side wall (planes #438/#92 or #469/#470) x[18,22]"
          },
          {
           "prim": "cylinder",
@@ -462,7 +492,7 @@
            12.62
           ],
           "p1": [
-           12.5,
+           22.5,
            -38.95,
            12.62
           ],
@@ -577,12 +607,12 @@
         "prim": "cylinder",
         "name": "ear_bore_L",
         "p0": [
-         -40.9,
+         -40.5,
          -38.95,
          12.62
         ],
         "p1": [
-         -31.9,
+         -31.5,
          -38.95,
          12.62
         ],
@@ -598,7 +628,7 @@
          12.62
         ],
         "p1": [
-         14.5,
+         24.5,
          -38.95,
          12.62
         ],
