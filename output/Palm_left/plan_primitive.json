@@ -60,48 +60,94 @@
            78.0,
            2.0
           ],
-          "source": "flat palmar floor: exact planes #829 (z4.62) / #828 (z6.62); palm-proper footprint (not the full bbox)"
+          "source": "flat palmar floor: exact planes #829 (z4.62) / #828 (z6.62)"
          },
          {
-          "prim": "box",
-          "name": "body_block",
-          "min": [
-           -36.0,
-           -40.0,
-           6.62
-          ],
-          "size": [
-           54.0,
-           72.0,
-           10.0
-          ],
-          "source": "main palm body \u2014 coarse box; dorsal hump added by the dome"
-         },
-         {
-          "transform": {
-           "translate": [
-            -6.0,
-            -3.0,
-            6.0
-           ],
-           "scale": [
-            34.0,
-            40.0,
-            23.3
-           ]
-          },
-          "name": "dome",
-          "child": {
-           "prim": "sphere",
-           "name": "dome_unit",
-           "center": [
-            0,
-            0,
-            0
-           ],
-           "r": 1.0,
-           "source": "flattened-sphere dorsal dome (esfera espalmada): apex z\u224829.3, broad low cap over the palm"
-          }
+          "op": "difference",
+          "children": [
+           {
+            "op": "intersection",
+            "children": [
+             {
+              "transform": {
+               "translate": [
+                -2.0,
+                0,
+                6.62
+               ],
+               "scale": [
+                39.0,
+                1,
+                27.6
+               ]
+              },
+              "name": "vault_outer",
+              "child": {
+               "prim": "cylinder",
+               "name": "vault_o",
+               "p0": [
+                0.0,
+                -44.0,
+                0.0
+               ],
+               "p1": [
+                0.0,
+                40.0,
+                0.0
+               ],
+               "r": 1.0,
+               "source": "outer arch (esfera espalmada em Y): ellipse XZ, top z34.2"
+              }
+             },
+             {
+              "prim": "box",
+              "name": "vault_clip",
+              "min": [
+               -42.0,
+               -44.0,
+               6.62
+              ],
+              "size": [
+               84.0,
+               84.0,
+               40.0
+              ],
+              "source": "keep the arch above the deck (open underneath)"
+             }
+            ]
+           },
+           {
+            "transform": {
+             "translate": [
+              -2.0,
+              0,
+              6.62
+             ],
+             "scale": [
+              34.0,
+              1,
+              22.5
+             ]
+            },
+            "name": "vault_inner",
+            "child": {
+             "prim": "cylinder",
+             "name": "vault_i",
+             "p0": [
+              0.0,
+              -41.0,
+              0.0
+             ],
+             "p1": [
+              0.0,
+              37.0,
+              0.0
+             ],
+             "r": 1.0,
+             "source": "inner cavity: 5mm wall, inner ceiling z29.1 (measured)"
+            }
+           }
+          ]
          },
          {
           "prim": "cylinder",
@@ -202,8 +248,8 @@
          {
           "transform": {
            "translate": [
-            30.0,
-            -7.0,
+            29.0,
+            -8.0,
             4.62
            ],
            "rotate_deg": [
@@ -221,48 +267,49 @@
              "children": [
               {
                "prim": "box",
-               "name": "thumb_wall_a",
+               "name": "thumb_prong_a",
                "min": [
-                -9.0,
-                -3.5,
+                -7.5,
+                1.7,
                 0.0
                ],
                "size": [
-                18.0,
+                15.0,
                 3.0,
-                18.0
+                16.0
                ],
-               "source": "thumb clevis wall A \u2014 parallel box"
+               "source": "thumb fork prong A (parallel box)"
               },
               {
                "prim": "box",
-               "name": "thumb_wall_b",
+               "name": "thumb_prong_b",
                "min": [
-                -9.0,
-                0.5,
+                -7.5,
+                -4.7,
                 0.0
                ],
                "size": [
-                18.0,
+                15.0,
                 3.0,
-                18.0
+                16.0
                ],
-               "source": "thumb clevis wall B \u2014 parallel box"
+               "source": "thumb fork prong B (parallel box)"
               },
               {
-               "prim": "box",
-               "name": "thumb_top",
-               "min": [
-                -9.0,
-                -6.5,
-                14.0
+               "prim": "cylinder",
+               "name": "thumb_crown",
+               "p0": [
+                -7.5,
+                0.0,
+                16.0
                ],
-               "size": [
-                18.0,
-                13.0,
-                8.0
+               "p1": [
+                7.5,
+                0.0,
+                16.0
                ],
-               "source": "thumb top box bridging the walls (bored below)"
+               "r": 4.7,
+               "source": "thumb keyhole crown: half-cylinder bridging the prongs"
               }
              ]
             },
@@ -270,14 +317,14 @@
              "prim": "cylinder",
              "name": "thumb_bore",
              "p0": [
-              -2.0,
+              -8.5,
               0.0,
-              18.0
+              16.0
              ],
              "p1": [
-              16.0,
+              8.5,
               0.0,
-              18.0
+              16.0
              ],
              "r": 2.7,
              "source": "thumb pivot bore: exact r2.7 (faces #226/#319)"

@@ -32,24 +32,32 @@ cyl = lambda name, p0, p1, r, src: {
 add = []   # unioned material
 cut = []   # subtracted holes
 
-# --- 1. base plate: the flat bottom the user wants clean (one box, palm-sized)
+# --- 1. base plate: the flat palmar floor (one box) ---
 add.append(box("base_plate", (-38, -42, Z_BOT), (60, 78, Z_DECK - Z_BOT),
-               "flat palmar floor: exact planes #829 (z4.62) / #828 (z6.62); "
-               "palm-proper footprint (not the full bbox)"))
+               "flat palmar floor: exact planes #829 (z4.62) / #828 (z6.62)"))
 
-# --- 2. body block: the main palm mass (a parallelepiped) ---
-add.append(box("body_block", (-36, -40, Z_DECK), (54, 72, 10.0),
-               "main palm body — coarse box; dorsal hump added by the dome"))
-
-# --- 3. dorsal dome: a FLATTENED SPHERE (esfera espalmada) capping the top ---
-# broad low cap covering the palm footprint, springing from the body top.
-add.append({"transform": {"translate": [-6.0, -3.0, 6.0],
-                          "scale": [34.0, 40.0, 23.3]},
-            "name": "dome",
-            "child": {"prim": "sphere", "name": "dome_unit",
-                      "center": [0, 0, 0], "r": 1.0,
-                      "source": "flattened-sphere dorsal dome (esfera "
-                      "espalmada): apex z≈29.3, broad low cap over the palm"}})
+# --- 2+3. dorsal body = HOLLOW ARCH VAULT (measured, not a solid dome) -------
+# The palm is an arched shell running along Y, ~5mm wall, open underneath.
+# Crown section (y=0): floor z6.6, INNER ceiling z29.1, OUTER top z34.1.
+# Modelled as an outer scaled Y-cylinder (ellipse XZ arch) minus an inner one.
+X_C, Z_BASE = -2.0, Z_DECK           # arch centre x, springs from the deck
+VX_OUT, VZ_OUT = 39.0, 27.6          # outer half-width / height -> top z34.2
+VX_IN,  VZ_IN  = 34.0, 22.5          # inner (5mm wall at crown & sides)
+Y0, Y1 = -44.0, 40.0                 # vault length along Y
+vault_outer = {"transform": {"translate": [X_C, 0, Z_BASE],
+                             "scale": [VX_OUT, 1, VZ_OUT]}, "name": "vault_outer",
+    "child": cyl("vault_o", (0, Y0, 0), (0, Y1, 0), 1.0,
+                 "outer arch (esfera espalmada em Y): ellipse XZ, top z34.2")}
+vault_inner = {"transform": {"translate": [X_C, 0, Z_BASE],
+                             "scale": [VX_IN, 1, VZ_IN]}, "name": "vault_inner",
+    "child": cyl("vault_i", (0, Y0 + 3, 0), (0, Y1 - 3, 0), 1.0,
+                 "inner cavity: 5mm wall, inner ceiling z29.1 (measured)")}
+# the arch shell = outer minus inner, kept above the deck (open bottom)
+add.append({"op": "difference", "children": [
+    {"op": "intersection", "children": [vault_outer,
+        box("vault_clip", (-42, Y0, Z_DECK), (84, Y1 - Y0, 40),
+            "keep the arch above the deck (open underneath)")]},
+    vault_inner]})
 
 # --- 4. finger sockets (+Y knuckle): 4 tubes (x-axis r6) at the finger x's ---
 FINGERS = [(-21.0, "pinky"), (-7.9, "ring"), (5.5, "middle"), (16.2, "index")]
@@ -79,23 +87,27 @@ for cx, nm in EARS:
 # --- 6. thumb (+X): two parallel boxes + a bored top box, in a tilted frame ---
 # thumb axis tilted ≈50° (oblique planes normal (0.64,0.77)); bbox x[24,42]
 # y[-20,5] z[4.6,24.6]. Modelled in a rotate-Z frame about its base centre.
-TH_C = [30.0, -7.0, 4.62]         # thumb base centre (measured region)
-TH_ANG = 50.0
-thumb = {"op": "union", "children": [
-    # two parallel side plates (walls of the thumb clevis)
-    box("thumb_wall_a", (-9, -3.5, 0), (18, 3.0, 18),
-        "thumb clevis wall A — parallel box"),
-    box("thumb_wall_b", (-9, 3.5 - 3.0, 0), (18, 3.0, 18),
-        "thumb clevis wall B — parallel box"),
-    # top box bridging the two walls, with the pivot bore
-    box("thumb_top", (-9, -6.5, 14), (18, 13, 8),
-        "thumb top box bridging the walls (bored below)"),
+TH_C = [29.0, -8.0, 4.62]         # thumb base centre (measured region)
+TH_ANG = 50.0                     # tilt (oblique faces normal 0.64,0.77)
+# thumb clevis: two prong boxes (the fork tines), a rounded top bridging them
+# (half-cylinder = the keyhole crown), pivot bore through the crown, U-slot
+# between the prongs. Built in a local frame, then tilted/placed.
+PW, PGAP, PH, PL = 3.0, 3.4, 16.0, 15.0   # prong width, slot gap, height, length
+crown_z, crown_r = PH, (PGAP / 2 + PW)     # crown radius spans both prongs
+thumb = {"op": "difference", "children": [
+    {"op": "union", "children": [
+        box("thumb_prong_a", (-PL/2, PGAP/2, 0), (PL, PW, PH),
+            "thumb fork prong A (parallel box)"),
+        box("thumb_prong_b", (-PL/2, -PGAP/2 - PW, 0), (PL, PW, PH),
+            "thumb fork prong B (parallel box)"),
+        cyl("thumb_crown", (-PL/2, 0, crown_z), (PL/2, 0, crown_z), crown_r,
+            "thumb keyhole crown: half-cylinder bridging the prongs"),
+    ]},
+    cyl("thumb_bore", (-PL/2 - 1, 0, crown_z), (PL/2 + 1, 0, crown_z), 2.7,
+        "thumb pivot bore: exact r2.7 (faces #226/#319)"),
 ]}
-thumb_bored = {"op": "difference", "children": [thumb,
-    cyl("thumb_bore", (-2, 0, 18), (16, 0, 18), 2.7,
-        "thumb pivot bore: exact r2.7 (faces #226/#319)")]}
 add.append({"transform": {"translate": TH_C, "rotate_deg": [0, 0, TH_ANG]},
-            "name": "thumb", "child": thumb_bored})
+            "name": "thumb", "child": thumb})
 
 # --- 7. clip the whole solid to the true height (flat-bottom, flat dome trim)
 solid = {"op": "difference", "children": [{"op": "union", "children": add}] + cut}
