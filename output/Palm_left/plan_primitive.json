@@ -24,7 +24,7 @@
     {
      "name": "sock_r",
      "value": 6.0,
-     "source": "exact r6.000 finger-socket tubes"
+     "source": "exact r6.000 finger knuckle crowns"
     },
     {
      "name": "ear_r",
@@ -71,12 +71,12 @@
              {
               "transform": {
                "translate": [
-                -2.0,
+                -8.0,
                 0,
                 6.62
                ],
                "scale": [
-                39.0,
+                32.0,
                 1,
                 27.6
                ]
@@ -87,12 +87,12 @@
                "name": "vault_o",
                "p0": [
                 0.0,
-                -44.0,
+                -34.0,
                 0.0
                ],
                "p1": [
                 0.0,
-                40.0,
+                30.0,
                 0.0
                ],
                "r": 1.0,
@@ -104,12 +104,12 @@
               "name": "vault_clip",
               "min": [
                -42.0,
-               -44.0,
+               -34.0,
                6.62
               ],
               "size": [
                84.0,
-               84.0,
+               64.0,
                40.0
               ],
               "source": "keep the arch above the deck (open underneath)"
@@ -119,12 +119,12 @@
            {
             "transform": {
              "translate": [
-              -2.0,
+              -8.0,
               0,
               6.62
              ],
              "scale": [
-              34.0,
+              27.0,
               1,
               22.5
              ]
@@ -135,12 +135,12 @@
              "name": "vault_i",
              "p0": [
               0.0,
-              -41.0,
+              -31.0,
               0.0
              ],
              "p1": [
               0.0,
-              37.0,
+              27.0,
               0.0
              ],
              "r": 1.0,
@@ -150,68 +150,292 @@
           ]
          },
          {
-          "prim": "cylinder",
-          "name": "sock_pinky",
-          "p0": [
-           -29.0,
-           39.05,
-           10.62
-          ],
-          "p1": [
-           -13.0,
-           39.05,
-           10.62
-          ],
-          "r": 6.0,
-          "source": "pinky finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+          "op": "difference",
+          "children": [
+           {
+            "op": "union",
+            "children": [
+             {
+              "prim": "box",
+              "name": "neck_pinky",
+              "min": [
+               -25.5,
+               26.0,
+               6.62
+              ],
+              "size": [
+               9.0,
+               14.0,
+               10.0
+              ],
+              "source": "pinky finger neck: ties the knuckle back into the body"
+             },
+             {
+              "prim": "cylinder",
+              "name": "knuckle_pinky",
+              "p0": [
+               -25.5,
+               40.0,
+               10.62
+              ],
+              "p1": [
+               -16.5,
+               40.0,
+               10.62
+              ],
+              "r": 6.0,
+              "source": "pinky knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+             }
+            ]
+           },
+           {
+            "prim": "box",
+            "name": "slot_pinky",
+            "min": [
+             -22.2,
+             30.0,
+             5.62
+            ],
+            "size": [
+             2.4,
+             18.0,
+             9.0
+            ],
+            "source": "pinky fork slot (splits the knuckle into two prongs)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "bore_pinky",
+            "p0": [
+             -26.5,
+             40.0,
+             10.62
+            ],
+            "p1": [
+             -15.5,
+             40.0,
+             10.62
+            ],
+            "r": 2.5,
+            "source": "pinky pin bore: exact r2.5 (faces #228/#234/#286...)"
+           }
+          ]
          },
          {
-          "prim": "cylinder",
-          "name": "sock_ring",
-          "p0": [
-           -15.9,
-           39.05,
-           10.62
-          ],
-          "p1": [
-           0.1,
-           39.05,
-           10.62
-          ],
-          "r": 6.0,
-          "source": "ring finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+          "op": "difference",
+          "children": [
+           {
+            "op": "union",
+            "children": [
+             {
+              "prim": "box",
+              "name": "neck_ring",
+              "min": [
+               -12.4,
+               26.0,
+               6.62
+              ],
+              "size": [
+               9.0,
+               14.0,
+               10.0
+              ],
+              "source": "ring finger neck: ties the knuckle back into the body"
+             },
+             {
+              "prim": "cylinder",
+              "name": "knuckle_ring",
+              "p0": [
+               -12.4,
+               40.0,
+               10.62
+              ],
+              "p1": [
+               -3.4,
+               40.0,
+               10.62
+              ],
+              "r": 6.0,
+              "source": "ring knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+             }
+            ]
+           },
+           {
+            "prim": "box",
+            "name": "slot_ring",
+            "min": [
+             -9.1,
+             30.0,
+             5.62
+            ],
+            "size": [
+             2.4,
+             18.0,
+             9.0
+            ],
+            "source": "ring fork slot (splits the knuckle into two prongs)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "bore_ring",
+            "p0": [
+             -13.4,
+             40.0,
+             10.62
+            ],
+            "p1": [
+             -2.4,
+             40.0,
+             10.62
+            ],
+            "r": 2.5,
+            "source": "ring pin bore: exact r2.5 (faces #228/#234/#286...)"
+           }
+          ]
          },
          {
-          "prim": "cylinder",
-          "name": "sock_middle",
-          "p0": [
-           -2.5,
-           39.05,
-           10.62
-          ],
-          "p1": [
-           13.5,
-           39.05,
-           10.62
-          ],
-          "r": 6.0,
-          "source": "middle finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+          "op": "difference",
+          "children": [
+           {
+            "op": "union",
+            "children": [
+             {
+              "prim": "box",
+              "name": "neck_middle",
+              "min": [
+               1.0,
+               26.0,
+               6.62
+              ],
+              "size": [
+               9.0,
+               14.0,
+               10.0
+              ],
+              "source": "middle finger neck: ties the knuckle back into the body"
+             },
+             {
+              "prim": "cylinder",
+              "name": "knuckle_middle",
+              "p0": [
+               1.0,
+               40.0,
+               10.62
+              ],
+              "p1": [
+               10.0,
+               40.0,
+               10.62
+              ],
+              "r": 6.0,
+              "source": "middle knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+             }
+            ]
+           },
+           {
+            "prim": "box",
+            "name": "slot_middle",
+            "min": [
+             4.3,
+             30.0,
+             5.62
+            ],
+            "size": [
+             2.4,
+             18.0,
+             9.0
+            ],
+            "source": "middle fork slot (splits the knuckle into two prongs)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "bore_middle",
+            "p0": [
+             0.0,
+             40.0,
+             10.62
+            ],
+            "p1": [
+             11.0,
+             40.0,
+             10.62
+            ],
+            "r": 2.5,
+            "source": "middle pin bore: exact r2.5 (faces #228/#234/#286...)"
+           }
+          ]
          },
          {
-          "prim": "cylinder",
-          "name": "sock_index",
-          "p0": [
-           8.2,
-           39.05,
-           10.62
-          ],
-          "p1": [
-           24.2,
-           39.05,
-           10.62
-          ],
-          "r": 6.0,
-          "source": "index finger socket: exact r6.000 x-axis clevis tube (faces #277/#337/#350...) at y39.05 z10.62"
+          "op": "difference",
+          "children": [
+           {
+            "op": "union",
+            "children": [
+             {
+              "prim": "box",
+              "name": "neck_index",
+              "min": [
+               11.7,
+               26.0,
+               6.62
+              ],
+              "size": [
+               9.0,
+               14.0,
+               10.0
+              ],
+              "source": "index finger neck: ties the knuckle back into the body"
+             },
+             {
+              "prim": "cylinder",
+              "name": "knuckle_index",
+              "p0": [
+               11.7,
+               40.0,
+               10.62
+              ],
+              "p1": [
+               20.7,
+               40.0,
+               10.62
+              ],
+              "r": 6.0,
+              "source": "index knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"
+             }
+            ]
+           },
+           {
+            "prim": "box",
+            "name": "slot_index",
+            "min": [
+             15.0,
+             30.0,
+             5.62
+            ],
+            "size": [
+             2.4,
+             18.0,
+             9.0
+            ],
+            "source": "index fork slot (splits the knuckle into two prongs)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "bore_index",
+            "p0": [
+             10.7,
+             40.0,
+             10.62
+            ],
+            "p1": [
+             21.7,
+             40.0,
+             10.62
+            ],
+            "r": 2.5,
+            "source": "index pin bore: exact r2.5 (faces #228/#234/#286...)"
+           }
+          ]
          },
          {
           "prim": "cylinder",
@@ -333,70 +557,6 @@
           }
          }
         ]
-       },
-       {
-        "prim": "cylinder",
-        "name": "sock_bore_pinky",
-        "p0": [
-         -30.0,
-         39.05,
-         10.62
-        ],
-        "p1": [
-         -12.0,
-         39.05,
-         10.62
-        ],
-        "r": 2.5,
-        "source": "pinky pin bore: exact r2.5 (faces #228/#234/#286...)"
-       },
-       {
-        "prim": "cylinder",
-        "name": "sock_bore_ring",
-        "p0": [
-         -16.9,
-         39.05,
-         10.62
-        ],
-        "p1": [
-         1.1,
-         39.05,
-         10.62
-        ],
-        "r": 2.5,
-        "source": "ring pin bore: exact r2.5 (faces #228/#234/#286...)"
-       },
-       {
-        "prim": "cylinder",
-        "name": "sock_bore_middle",
-        "p0": [
-         -3.5,
-         39.05,
-         10.62
-        ],
-        "p1": [
-         14.5,
-         39.05,
-         10.62
-        ],
-        "r": 2.5,
-        "source": "middle pin bore: exact r2.5 (faces #228/#234/#286...)"
-       },
-       {
-        "prim": "cylinder",
-        "name": "sock_bore_index",
-        "p0": [
-         7.2,
-         39.05,
-         10.62
-        ],
-        "p1": [
-         25.2,
-         39.05,
-         10.62
-        ],
-        "r": 2.5,
-        "source": "index pin bore: exact r2.5 (faces #228/#234/#286...)"
        },
        {
         "prim": "cylinder",

@@ -40,10 +40,10 @@ add.append(box("base_plate", (-38, -42, Z_BOT), (60, 78, Z_DECK - Z_BOT),
 # The palm is an arched shell running along Y, ~5mm wall, open underneath.
 # Crown section (y=0): floor z6.6, INNER ceiling z29.1, OUTER top z34.1.
 # Modelled as an outer scaled Y-cylinder (ellipse XZ arch) minus an inner one.
-X_C, Z_BASE = -2.0, Z_DECK           # arch centre x, springs from the deck
-VX_OUT, VZ_OUT = 39.0, 27.6          # outer half-width / height -> top z34.2
-VX_IN,  VZ_IN  = 34.0, 22.5          # inner (5mm wall at crown & sides)
-Y0, Y1 = -44.0, 40.0                 # vault length along Y
+X_C, Z_BASE = -8.0, Z_DECK           # arch centre x (leaves +X for the thumb)
+VX_OUT, VZ_OUT = 32.0, 27.6          # outer half-width / height -> top z34.2
+VX_IN,  VZ_IN  = 27.0, 22.5          # inner (5mm wall at crown & sides)
+Y0, Y1 = -34.0, 30.0                 # central body only; fingers/wrist project
 vault_outer = {"transform": {"translate": [X_C, 0, Z_BASE],
                              "scale": [VX_OUT, 1, VZ_OUT]}, "name": "vault_outer",
     "child": cyl("vault_o", (0, Y0, 0), (0, Y1, 0), 1.0,
@@ -59,17 +59,26 @@ add.append({"op": "difference", "children": [
             "keep the arch above the deck (open underneath)")]},
     vault_inner]})
 
-# --- 4. finger sockets (+Y knuckle): 4 tubes (x-axis r6) at the finger x's ---
+# --- 4. finger clevises (+Y): 4 projecting forks (knuckle crown + neck + slot)
+# Each finger = an x-axis r6 rounded knuckle crown at the +Y edge, a neck box
+# tying it back to the body, a central slot splitting it into a fork, and the
+# r2.5 pin bore. Projects forward from the vault (measured knuckle y39, z10.6).
 FINGERS = [(-21.0, "pinky"), (-7.9, "ring"), (5.5, "middle"), (16.2, "index")]
-SOCK_Y, SOCK_Z, SOCK_R, SOCK_HW = 39.05, 10.62, 6.0, 8.0
+KN_Y, KN_Z, KN_R, KN_HW = 40.0, 10.62, 6.0, 4.5   # knuckle y/z/radius/half-width X
 for cx, nm in FINGERS:
-    add.append(cyl(f"sock_{nm}", (cx - SOCK_HW, SOCK_Y, SOCK_Z),
-                   (cx + SOCK_HW, SOCK_Y, SOCK_Z), SOCK_R,
-                   f"{nm} finger socket: exact r6.000 x-axis clevis tube "
-                   "(faces #277/#337/#350...) at y39.05 z10.62"))
-    cut.append(cyl(f"sock_bore_{nm}", (cx - SOCK_HW - 1, SOCK_Y, SOCK_Z),
-                   (cx + SOCK_HW + 1, SOCK_Y, SOCK_Z), 2.5,
-                   f"{nm} pin bore: exact r2.5 (faces #228/#234/#286...)"))
+    clevis = {"op": "difference", "children": [
+        {"op": "union", "children": [
+            box(f"neck_{nm}", (cx - KN_HW, 26.0, Z_DECK), (2 * KN_HW, KN_Y - 26.0, KN_Z + KN_R - Z_DECK),
+                f"{nm} finger neck: ties the knuckle back into the body"),
+            cyl(f"knuckle_{nm}", (cx - KN_HW, KN_Y, KN_Z), (cx + KN_HW, KN_Y, KN_Z), KN_R,
+                f"{nm} knuckle crown: exact r6.000 x-axis (faces #277/#337/#350...)"),
+        ]},
+        box(f"slot_{nm}", (cx - 1.2, 30.0, Z_DECK - 1), (2.4, 18.0, KN_R + 3),
+            f"{nm} fork slot (splits the knuckle into two prongs)"),
+        cyl(f"bore_{nm}", (cx - KN_HW - 1, KN_Y, KN_Z), (cx + KN_HW + 1, KN_Y, KN_Z), 2.5,
+            f"{nm} pin bore: exact r2.5 (faces #228/#234/#286...)"),
+    ]}
+    add.append(clevis)
 
 # --- 5. wrist ears (-Y): 2 discs (short fat x-axis cylinders r8) + bores ---
 EARS = [(-38.9, "L"), (17.5, "R")]
@@ -121,7 +130,7 @@ params = [
     {"name": "z_bot", "value": Z_BOT, "source": "exact bottom plane #829 (flat underside)"},
     {"name": "z_deck", "value": Z_DECK, "source": "exact deck plane #828 (palmar plate top)"},
     {"name": "z_apex", "value": Z_APEX, "source": "measured dome apex (broad cap)"},
-    {"name": "sock_r", "value": SOCK_R, "source": "exact r6.000 finger-socket tubes"},
+    {"name": "sock_r", "value": KN_R, "source": "exact r6.000 finger knuckle crowns"},
     {"name": "ear_r", "value": EAR_R, "source": "exact r8.000 wrist-ear discs"},
     {"name": "thumb_ang", "value": TH_ANG, "source": "thumb tilt (oblique faces normal 0.64,0.77 ≈ 50°)"},
 ]
