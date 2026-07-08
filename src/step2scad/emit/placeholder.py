@@ -197,10 +197,15 @@ def emit_scad(
         lines += [
             "// --- Display options ---",
             "show_colors   = true;    // tint top-level features (preview aid)",
-            "show_original = false;   // ghost the original tessellation overlay",
+            "show_original = false;   // ghost the reference overlay on/off (F5)",
+            "ghost_alpha   = 0.25;    // ghost transparency: 0 invisible .. 1 solid",
+            'ghost_color   = [0.55, 0.70, 1.0];  // ghost tint (RGB)',
             f'original_stl  = "{name}_ref.stl";',
             "module tint(c) { if (show_colors) color(c) children(); "
             "else children(); }",
+            "module ghost() { if (show_original) "
+            "color([ghost_color[0], ghost_color[1], ghost_color[2], ghost_alpha]) "
+            "import(original_stl); }",
             "",
         ]
     modules = []
@@ -249,6 +254,6 @@ def emit_scad(
     for m in modules:
         lines.append(f"{m}();")
     if any_semantic:
-        lines.append("if (show_original) %import(original_stl);")
+        lines.append("ghost();  // transparent reference overlay (show_original)")
     lines.append("")
     return "\n".join(lines)
