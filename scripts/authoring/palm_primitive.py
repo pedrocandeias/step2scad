@@ -17,6 +17,9 @@ from pathlib import Path
 OUT = Path("output/Palm_left")
 R = lambda x: round(float(x), 3)
 
+# ---- build flags ----
+SHOW_VAULT = False   # hide the dorsal arch for now (refine the rest first)
+
 # ---- measured anchors (from features.json exact faces + ref tessellation) ----
 Z_BOT   = 4.62      # exact bottom plane #829 (flat underside)
 Z_DECK  = 6.62      # exact deck plane #828 (top of the palmar plate, ~2mm)
@@ -78,11 +81,12 @@ vault_inner = {"transform": {"translate": [X_C, 0, Z_BASE],
     "child": cyl("vault_i", (0, Y0 + 3, 0), (0, Y1 - 3, 0), 1.0,
                  "inner cavity: 5mm wall, inner ceiling z29.1 (measured)")}
 # the arch shell = outer minus inner, kept above the deck (open bottom)
-add.append({"op": "difference", "children": [
-    {"op": "intersection", "children": [vault_outer,
-        box("vault_clip", (-42, Y0, Z_DECK), (84, Y1 - Y0, 40),
-            "keep the arch above the deck (open underneath)")]},
-    vault_inner]})
+if SHOW_VAULT:
+    add.append({"op": "difference", "children": [
+        {"op": "intersection", "children": [vault_outer,
+            box("vault_clip", (-42, Y0, Z_DECK), (84, Y1 - Y0, 40),
+                "keep the arch above the deck (open underneath)")]},
+        vault_inner]})
 
 # --- 4. finger clevises (+Y): 4 projecting forks (knuckle crown + neck + slot)
 # Each finger = an x-axis r6 rounded knuckle crown at the +Y edge, a neck box
