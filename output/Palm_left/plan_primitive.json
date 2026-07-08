@@ -208,104 +208,99 @@
           "op": "difference",
           "children": [
            {
-            "op": "difference",
+            "op": "union",
             "children": [
              {
-              "op": "union",
-              "children": [
-               {
-                "prim": "box",
-                "name": "neck_pinky",
-                "min": [
-                 -33.6,
-                 14.1,
-                 6.62
-                ],
-                "size": [
-                 15.0,
-                 15.0,
-                 4.0
-                ],
-                "source": "pinky finger neck (low base tying the fork into the body)"
-               },
-               {
-                "prim": "cylinder",
-                "name": "knuckle_pinky",
-                "p0": [
-                 -33.6,
-                 29.1,
-                 10.62
-                ],
-                "p1": [
-                 -18.6,
-                 29.1,
-                 10.62
-                ],
-                "r": 6.0,
-                "source": "pinky knuckle crown: exact r6 x-axis at y29"
-               }
-              ]
-             },
-             {
               "prim": "box",
-              "name": "slot_pinky",
+              "name": "neck_pinky",
               "min": [
-               -29.1,
-               17.1,
-               5.62
+               -35.2,
+               26.8,
+               6.62
               ],
               "size": [
-               6.0,
-               18.0,
-               17.62
+               17.8,
+               9.0,
+               4.0
               ],
-              "source": "pinky fork slot (open tab pocket, full height between the prongs)"
+              "source": "pinky neck (low base tying the fork into the body)"
              },
              {
               "prim": "cylinder",
-              "name": "slot_back_pinky",
+              "name": "knuckle_pinky",
               "p0": [
-               -26.1,
-               17.1,
+               -35.2,
+               35.8,
                10.62
               ],
               "p1": [
-               -26.1,
-               17.1,
-               16.62
-              ],
-              "r": 3.0,
-              "source": "pinky fork slot rounded back corner"
-             },
-             {
-              "prim": "cylinder",
-              "name": "bore_pinky",
-              "p0": [
-               -34.6,
-               29.1,
+               -17.4,
+               35.8,
                10.62
               ],
-              "p1": [
-               -17.6,
-               29.1,
-               10.62
-              ],
-              "r": 2.5,
-              "source": "pinky pin bore: exact r2.5 x-axis"
+              "r": 6.0,
+              "source": "pinky knuckle crown: r6 x-axis at y35.8 z10.6"
              }
             ]
            },
            {
+            "prim": "box",
+            "name": "slot_pinky",
+            "min": [
+             -31.3,
+             29.8,
+             5.62
+            ],
+            "size": [
+             10.0,
+             12.0,
+             18.62
+            ],
+            "source": "pinky fork slot: open tab pocket, full height between the prongs"
+           },
+           {
             "prim": "cylinder",
-            "name": "pinky_cbore",
+            "name": "slot_back_pinky",
+            "p0": [
+             -26.3,
+             29.8,
+             10.62
+            ],
+            "p1": [
+             -26.3,
+             29.8,
+             16.62
+            ],
+            "r": 5.0,
+            "source": "pinky slot rounded back corner (z-axis)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "bore_pinky",
+            "p0": [
+             -36.2,
+             35.8,
+             10.62
+            ],
+            "p1": [
+             -16.4,
+             35.8,
+             10.62
+            ],
+            "r": 2.5,
+            "source": "pinky pin bore: exact round r2.5 (#234)"
+           },
+           {
+            "prim": "cylinder",
+            "name": "cbore_pinky",
             "p0": [
              -22.5,
-             29.1,
+             35.8,
              10.62
             ],
             "p1": [
              -19.0,
-             29.1,
+             35.8,
              10.62
             ],
             "r": 3.25,
@@ -448,32 +443,32 @@
               "prim": "box",
               "name": "neck_middle",
               "min": [
-               -10.1,
+               -7.75,
                24.1,
                6.62
               ],
               "size": [
-               14.0,
+               15.0,
                15.0,
                4.0
               ],
-              "source": "middle finger neck (low base tying the fork into the body)"
+              "source": "middle finger neck (low base into the body)"
              },
              {
               "prim": "cylinder",
               "name": "knuckle_middle",
               "p0": [
-               -10.1,
+               -7.75,
                39.1,
                10.62
               ],
               "p1": [
-               3.9,
+               7.25,
                39.1,
                10.62
               ],
               "r": 6.0,
-              "source": "middle knuckle crown: exact r6 x-axis at y39"
+              "source": "middle knuckle crown: exact r6 x-axis (#277/#337) at y39 z10.6"
              }
             ]
            },
@@ -481,48 +476,32 @@
             "prim": "box",
             "name": "slot_middle",
             "min": [
-             -5.35,
+             -3.5,
              27.1,
              5.62
             ],
             "size": [
-             4.5,
+             6.5,
              18.0,
-             17.62
+             12.0
             ],
-            "source": "middle fork slot (open tab pocket, full height between the prongs)"
-           },
-           {
-            "prim": "cylinder",
-            "name": "slot_back_middle",
-            "p0": [
-             -3.1,
-             27.1,
-             10.62
-            ],
-            "p1": [
-             -3.1,
-             27.1,
-             16.62
-            ],
-            "r": 2.25,
-            "source": "middle fork slot rounded back corner"
+            "source": "middle fork slot: OPEN tab pocket (measured 0 material), width 6.5"
            },
            {
             "prim": "cylinder",
             "name": "bore_middle",
             "p0": [
-             -11.1,
+             -8.75,
              39.1,
              10.62
             ],
             "p1": [
-             4.9,
+             8.25,
              39.1,
              10.62
             ],
             "r": 2.5,
-            "source": "middle pin bore: exact r2.5 x-axis"
+            "source": "middle pin bore: exact round r2.5 (#228) x-axis"
            }
           ]
          },
@@ -534,83 +513,83 @@
             "children": [
              {
               "prim": "box",
-              "name": "neck_index",
+              "name": "index_neck_L",
               "min": [
-               4.85,
-               24.1,
+               2.5,
+               33.5,
                6.62
               ],
               "size": [
-               13.0,
-               15.0,
+               8.0,
+               5.6,
                4.0
               ],
-              "source": "index finger neck (low base tying the fork into the body)"
+              "source": "index tine L neck (deck->pin) x[2.5,10.5]"
              },
              {
               "prim": "cylinder",
-              "name": "knuckle_index",
+              "name": "index_crown_L",
               "p0": [
-               4.85,
+               2.5,
                39.1,
                10.62
               ],
               "p1": [
-               17.85,
+               10.5,
                39.1,
                10.62
               ],
               "r": 6.0,
-              "source": "index knuckle crown: exact r6 x-axis at y39"
+              "source": "index tine L round crown: exact r6 (#350)"
+             },
+             {
+              "prim": "box",
+              "name": "index_neck_R",
+              "min": [
+               16.5,
+               33.5,
+               6.62
+              ],
+              "size": [
+               3.5,
+               5.6,
+               4.0
+              ],
+              "source": "index tine R neck (deck->pin) x[16.5,20.0]"
+             },
+             {
+              "prim": "cylinder",
+              "name": "index_crown_R",
+              "p0": [
+               16.5,
+               39.1,
+               10.62
+              ],
+              "p1": [
+               20.0,
+               39.1,
+               10.62
+              ],
+              "r": 6.0,
+              "source": "index tine R round crown: exact r6 (#350)"
              }
             ]
            },
            {
-            "prim": "box",
-            "name": "slot_index",
-            "min": [
-             9.1,
-             27.1,
-             5.62
-            ],
-            "size": [
-             4.5,
-             18.0,
-             17.62
-            ],
-            "source": "index fork slot (open tab pocket, full height between the prongs)"
-           },
-           {
             "prim": "cylinder",
-            "name": "slot_back_index",
+            "name": "index_bore",
             "p0": [
-             11.35,
-             27.1,
-             10.62
-            ],
-            "p1": [
-             11.35,
-             27.1,
-             16.62
-            ],
-            "r": 2.25,
-            "source": "index fork slot rounded back corner"
-           },
-           {
-            "prim": "cylinder",
-            "name": "bore_index",
-            "p0": [
-             3.85,
+             1.0,
              39.1,
              10.62
             ],
             "p1": [
-             18.85,
+             21.0,
              39.1,
              10.62
             ],
             "r": 2.5,
-            "source": "index pin bore: exact r2.5 x-axis"
+            "source": "index pin bore: exact r2.5 x-axis (#338) \u2014 round hole"
            }
           ]
          },
