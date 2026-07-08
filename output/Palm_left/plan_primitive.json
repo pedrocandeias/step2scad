@@ -211,6 +211,76 @@
             "op": "union",
             "children": [
              {
+              "op": "hull",
+              "children": [
+               {
+                "prim": "box",
+                "name": "wall_outer_body",
+                "min": [
+                 -34.0,
+                 28.0,
+                 6.62
+                ],
+                "size": [
+                 3.0,
+                 2.0,
+                 10.88
+                ],
+                "source": "pinky outer channel wall (body end, rises to z18)"
+               },
+               {
+                "prim": "box",
+                "name": "wall_outer_front",
+                "min": [
+                 -34.0,
+                 33.5,
+                 6.62
+                ],
+                "size": [
+                 3.0,
+                 2.0,
+                 4.88
+                ],
+                "source": "pinky outer channel wall (knuckle end, z12)"
+               }
+              ]
+             },
+             {
+              "op": "hull",
+              "children": [
+               {
+                "prim": "box",
+                "name": "wall_inner_body",
+                "min": [
+                 -21.0,
+                 28.0,
+                 6.62
+                ],
+                "size": [
+                 3.5,
+                 2.0,
+                 11.88
+                ],
+                "source": "pinky inner channel wall (body end, rises to z18)"
+               },
+               {
+                "prim": "box",
+                "name": "wall_inner_front",
+                "min": [
+                 -21.0,
+                 39.0,
+                 6.62
+                ],
+                "size": [
+                 3.5,
+                 2.0,
+                 4.88
+                ],
+                "source": "pinky inner channel wall (knuckle end, z12)"
+               }
+              ]
+             },
+             {
               "prim": "box",
               "name": "neck_pinky",
               "min": [
@@ -223,7 +293,7 @@
                9.0,
                4.0
               ],
-              "source": "pinky neck (low base tying the fork into the body)"
+              "source": "pinky neck (low base under the pin, tying the fork to the body)"
              },
              {
               "prim": "cylinder",
@@ -257,22 +327,6 @@
              18.62
             ],
             "source": "pinky fork slot: open tab pocket, full height between the prongs"
-           },
-           {
-            "prim": "cylinder",
-            "name": "slot_back_pinky",
-            "p0": [
-             -26.3,
-             29.8,
-             10.62
-            ],
-            "p1": [
-             -26.3,
-             29.8,
-             16.62
-            ],
-            "r": 5.0,
-            "source": "pinky slot rounded back corner (z-axis)"
            },
            {
             "prim": "cylinder",
@@ -315,89 +369,94 @@
             "op": "union",
             "children": [
              {
-              "prim": "box",
-              "name": "neck_ring",
-              "min": [
-               -19.1,
-               20.1,
-               6.62
-              ],
-              "size": [
-               14.0,
-               15.0,
-               4.0
-              ],
-              "source": "ring finger neck (low base into the body)"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "ring_wall_L",
+                "min": [
+                 -19.1,
+                 20.0,
+                 6.62
+                ],
+                "size": [
+                 4.0,
+                 24.0,
+                 7.38
+                ],
+                "source": "ring channel wall L: side plate x[-19.1,-15.1] deck->z14 (planes #673/#459)"
+               },
+               {
+                "prim": "cylinder",
+                "name": "ring_crown_L",
+                "p0": [
+                 -19.1,
+                 35.1,
+                 10.62
+                ],
+                "p1": [
+                 -15.1,
+                 35.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "ring knuckle crown L: exact r6 x-axis (#465/#462)"
+               }
+              ]
              },
              {
-              "prim": "cylinder",
-              "name": "knuckle_ring",
-              "p0": [
-               -19.1,
-               35.1,
-               10.62
-              ],
-              "p1": [
-               -5.1,
-               35.1,
-               10.62
-              ],
-              "r": 6.0,
-              "source": "ring knuckle tube: exact r6 x-axis (crowns #462/#465)"
-             }
-            ]
-           },
-           {
-            "op": "union",
-            "children": [
-             {
-              "prim": "box",
-              "name": "slot_ring",
-              "min": [
-               -14.6,
-               23.1,
-               5.62
-              ],
-              "size": [
-               5.0,
-               19.0,
-               18.62
-              ],
-              "source": "ring tab slot channel (full height -> prongs stay separate)"
-             },
-             {
-              "prim": "cylinder",
-              "name": "slot_ring_back",
-              "p0": [
-               -12.1,
-               23.1,
-               8.12
-              ],
-              "p1": [
-               -12.1,
-               23.1,
-               17.62
-              ],
-              "r": 2.5,
-              "source": "ring slot rounded back corner (clean pocket end)"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "ring_wall_R",
+                "min": [
+                 -9.1,
+                 20.0,
+                 6.62
+                ],
+                "size": [
+                 4.0,
+                 24.0,
+                 7.38
+                ],
+                "source": "ring channel wall R: side plate x[-9.1,-5.1] deck->z14 (planes #673/#459)"
+               },
+               {
+                "prim": "cylinder",
+                "name": "ring_crown_R",
+                "p0": [
+                 -9.1,
+                 35.1,
+                 10.62
+                ],
+                "p1": [
+                 -5.1,
+                 35.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "ring knuckle crown R: exact r6 x-axis (#465/#462)"
+               }
+              ]
              }
             ]
            },
            {
             "prim": "cylinder",
-            "name": "bore_ring",
+            "name": "ring_bore",
             "p0": [
-             -20.1,
+             -21.1,
              35.1,
              10.62
             ],
             "p1": [
-             -4.1,
+             -3.1,
              35.1,
              10.62
             ],
             "r": 2.5,
-            "source": "ring pin bore: exact r2.5 (#286)"
+            "source": "ring pin bore: exact r2.5 x-axis (#286) \u2014 round hole"
            },
            {
             "prim": "cylinder",
@@ -440,63 +499,89 @@
             "op": "union",
             "children": [
              {
-              "prim": "box",
-              "name": "neck_middle",
-              "min": [
-               -7.75,
-               24.1,
-               6.62
-              ],
-              "size": [
-               15.0,
-               15.0,
-               4.0
-              ],
-              "source": "middle finger neck (low base into the body)"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "mid_wall_L",
+                "min": [
+                 -7.2,
+                 24.0,
+                 6.62
+                ],
+                "size": [
+                 3.6,
+                 21.0,
+                 7.38
+                ],
+                "source": "middle channel wall L: side plate x[-7.2,-3.6] deck->z14 (#458)"
+               },
+               {
+                "prim": "cylinder",
+                "name": "mid_crown_L",
+                "p0": [
+                 -7.2,
+                 39.1,
+                 10.62
+                ],
+                "p1": [
+                 -3.6,
+                 39.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "middle knuckle crown L: exact r6 x-axis (#277/#337)"
+               }
+              ]
              },
              {
-              "prim": "cylinder",
-              "name": "knuckle_middle",
-              "p0": [
-               -7.75,
-               39.1,
-               10.62
-              ],
-              "p1": [
-               7.25,
-               39.1,
-               10.62
-              ],
-              "r": 6.0,
-              "source": "middle knuckle crown: exact r6 x-axis (#277/#337) at y39 z10.6"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "mid_wall_R",
+                "min": [
+                 2.8,
+                 24.0,
+                 6.62
+                ],
+                "size": [
+                 6.0,
+                 21.0,
+                 7.38
+                ],
+                "source": "middle channel wall R: side plate x[2.8,8.8] deck->z14 (#458)"
+               },
+               {
+                "prim": "cylinder",
+                "name": "mid_crown_R",
+                "p0": [
+                 2.8,
+                 39.1,
+                 10.62
+                ],
+                "p1": [
+                 8.8,
+                 39.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "middle knuckle crown R: exact r6 x-axis (#277/#337)"
+               }
+              ]
              }
             ]
            },
            {
-            "prim": "box",
-            "name": "slot_middle",
-            "min": [
-             -3.5,
-             27.1,
-             5.62
-            ],
-            "size": [
-             6.5,
-             18.0,
-             12.0
-            ],
-            "source": "middle fork slot: OPEN tab pocket (measured 0 material), width 6.5"
-           },
-           {
             "prim": "cylinder",
-            "name": "bore_middle",
+            "name": "mid_bore",
             "p0": [
-             -8.75,
+             -9.0,
              39.1,
              10.62
             ],
             "p1": [
-             8.25,
+             10.0,
              39.1,
              10.62
             ],
@@ -512,66 +597,76 @@
             "op": "union",
             "children": [
              {
-              "prim": "box",
-              "name": "index_neck_L",
-              "min": [
-               2.5,
-               33.5,
-               6.62
-              ],
-              "size": [
-               8.0,
-               5.6,
-               4.0
-              ],
-              "source": "index tine L neck (deck->pin) x[2.5,10.5]"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "index_wall_L",
+                "min": [
+                 2.5,
+                 30.0,
+                 6.62
+                ],
+                "size": [
+                 8.0,
+                 14.0,
+                 7.38
+                ],
+                "source": "index channel wall L: side plate x[2.5,10.5] deck->z14"
+               },
+               {
+                "prim": "cylinder",
+                "name": "index_crown_L",
+                "p0": [
+                 2.5,
+                 39.1,
+                 10.62
+                ],
+                "p1": [
+                 10.5,
+                 39.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "index knuckle crown L: exact r6 x-axis (#350)"
+               }
+              ]
              },
              {
-              "prim": "cylinder",
-              "name": "index_crown_L",
-              "p0": [
-               2.5,
-               39.1,
-               10.62
-              ],
-              "p1": [
-               10.5,
-               39.1,
-               10.62
-              ],
-              "r": 6.0,
-              "source": "index tine L round crown: exact r6 (#350)"
-             },
-             {
-              "prim": "box",
-              "name": "index_neck_R",
-              "min": [
-               16.5,
-               33.5,
-               6.62
-              ],
-              "size": [
-               3.5,
-               5.6,
-               4.0
-              ],
-              "source": "index tine R neck (deck->pin) x[16.5,20.0]"
-             },
-             {
-              "prim": "cylinder",
-              "name": "index_crown_R",
-              "p0": [
-               16.5,
-               39.1,
-               10.62
-              ],
-              "p1": [
-               20.0,
-               39.1,
-               10.62
-              ],
-              "r": 6.0,
-              "source": "index tine R round crown: exact r6 (#350)"
+              "op": "union",
+              "children": [
+               {
+                "prim": "box",
+                "name": "index_wall_R",
+                "min": [
+                 16.5,
+                 30.0,
+                 6.62
+                ],
+                "size": [
+                 3.5,
+                 14.0,
+                 7.38
+                ],
+                "source": "index channel wall R: side plate x[16.5,20.0] deck->z14"
+               },
+               {
+                "prim": "cylinder",
+                "name": "index_crown_R",
+                "p0": [
+                 16.5,
+                 39.1,
+                 10.62
+                ],
+                "p1": [
+                 20.0,
+                 39.1,
+                 10.62
+                ],
+                "r": 6.0,
+                "source": "index knuckle crown R: exact r6 x-axis (#350)"
+               }
+              ]
              }
             ]
            },
@@ -589,7 +684,7 @@
              10.62
             ],
             "r": 2.5,
-            "source": "index pin bore: exact r2.5 x-axis (#338) \u2014 round hole"
+            "source": "index pin bore: exact round r2.5 (#338) x-axis"
            }
           ]
          },
