@@ -609,9 +609,10 @@
              19.0,
              20.0
             ],
-            "source": "left prong"
+            "source": "left prong (Red)"
            }
-          }
+          },
+          "color": "Red"
          },
          {
           "transform": {
@@ -648,9 +649,10 @@
              17.0,
              20.0
             ],
-            "source": "right prong"
+            "source": "right prong (Blue)"
            }
-          }
+          },
+          "color": "Blue"
          },
          {
           "transform": {
@@ -687,9 +689,10 @@
              11.0,
              3.0
             ],
-            "source": "top bridge"
+            "source": "top bridge (Green)"
            }
-          }
+          },
+          "color": "Green"
          }
         ]
        },

@@ -328,6 +328,15 @@ def _emit_sem_prim(node: dict, lines: list[str], depth: int, fn_var: str,
 def _emit_sem_node(node: dict, lines: list[str], depth: int, fn_var: str,
                    modules: dict, prefix: str, profiles: dict) -> None:
     ind = _IND * depth
+    if isinstance(node, dict) and "color" in node:
+        c = node["color"]
+        cstr = f'"{c}"' if isinstance(c, str) else _svec(c)
+        tag = f"  // {node['name']}" if node.get("name") else ""
+        lines.append(f"{ind}color({cstr}) {{{tag}")
+        inner = {k: v for k, v in node.items() if k != "color"}
+        _emit_sem_node(inner, lines, depth + 1, fn_var, modules, prefix, profiles)
+        lines.append(f"{ind}}}")
+        return
     if "transform" in node:
         tf = node["transform"]
         chain = []

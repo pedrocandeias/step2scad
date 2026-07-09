@@ -7,6 +7,11 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Per-part `color` field** (plan schema + emitter): any node may carry
+  `"color": "<name>"` or `[r,g,b]`, emitted as `color(...) { ... }` so
+  individual pieces are visually distinguishable (author needs to point at
+  parts to adjust). Cosmetic; geometry/IoU unaffected (Arm_Guard 0.9844).
+  Piloted on the thumb: left prong Red, right prong Blue, top bridge Green.
 - **`scale` transform** (plan schema + emitter): enables scaled/flattened
   primitives (e.g. a flattened-sphere "esfera espalmada" dome). Regressions
   unchanged (Arm_Guard 0.9844, Distals 0.9772).

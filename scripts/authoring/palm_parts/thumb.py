@@ -10,20 +10,23 @@ from palm_parts.common import box, cyl
 R = lambda x: round(float(x), 3)
 
 
-def _gbox(name, x, y, z, w, l, h, rot, tilt, az, src):
+def _gbox(name, x, y, z, w, l, h, rot, tilt, az, src, color=None):
     """box(w,l,h) at (x,y,z), rot(tilt about Y, rot about Z), grown up (az)."""
-    return {"transform": {"translate": [R(x), R(y), R(z)], "rotate_deg": [0, R(tilt), R(rot)]},
+    node = {"transform": {"translate": [R(x), R(y), R(z)], "rotate_deg": [0, R(tilt), R(rot)]},
             "name": name,
             "child": {"transform": {"translate": [0, 0, R(az*h/2)]},
                       "child": box(name, [-w/2, -l/2, -h/2], [w, l, h], src)}}
+    if color:
+        node["color"] = color
+    return node
 
 
 def build():
     add = [
-        _gbox("th_prong_L", 27.3, -9.0, 0, 5.2, 19, 20, 50, 0, 1, "left prong"),
-        _gbox("th_prong_R", 33.5, 0.0, 0, 5.0, 17, 20, 50, 0, 1, "right prong"),
+        _gbox("th_prong_L", 27.3, -9.0, 0, 5.2, 19, 20, 50, 0, 1, "left prong (Red)", "Red"),
+        _gbox("th_prong_R", 33.5, 0.0, 0, 5.0, 17, 20, 50, 0, 1, "right prong (Blue)", "Blue"),
         # top bridge parallelepiped connecting the two prongs
-        _gbox("th_bridge", 30.4, -4.5, 20, 9, 11, 3, 50, 0, -1, "top bridge"),
+        _gbox("th_bridge", 30.4, -4.5, 20, 9, 11, 3, 50, 0, -1, "top bridge (Green)", "Green"),
     ]
     # round pin bore through both prongs, on the 50deg pin axis
     bc = [28.7, -9.6, 5.8]
