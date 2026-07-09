@@ -1,32 +1,35 @@
-"""Finger knuckles (garras) — HYBRID: exact occupancy boxes + smooth crowns.
+"""Finger knuckles (garras) — EXACT Y-Z PROFILE extrudes (clean, no stairs).
 
-The intricate interleaved finger clevis (solid tine bases splitting into thin
-prongs) is reconstructed from finger_boxes.json (reference interior on a 0.5mm
-grid, greedily merged into maximal boxes — gen_finger_boxes.py), with the
-round crown discs EXCLUDED from the boxes and added here as smooth exact r6
-cylinders (no voxel stairs on the curves). The r2.5 pin bores are cut as exact
-round cylinders. No loft, no stairs on the round features.
+Each tine is a wall roughly prismatic along X. fingers reads
+finger_profiles.json (its measured Y-Z silhouette — base + rounded crown top,
+from gen_finger_profiles.py) and extrudes it along X for the tine's x-range:
+smooth surfaces, no voxel stairs, no loft. The r2.5 pin bores are cut as exact
+round cylinders through the tines.
 """
 import json
 
-from palm_parts.common import OUT, box, cyl
+from palm_parts.common import OUT, R, cyl
 
 TINES = [(-35.3, -31.5), (-25.5, -17.5), (-11.5, -3.5), (2.5, 10.5), (16.5, 20.0)]
 FINGERS = [(0, 1, 29.1, "pinky"), (1, 2, 35.1, "ring"),
            (2, 3, 39.1, "middle"), (3, 4, 39.1, "index")]
-KN_Z, KN_R, BORE_R = 10.62, 6.0, 2.5
+KN_Z, BORE_R = 10.62, 2.5
 
 
 def build():
-    boxes = json.load(open(OUT / "finger_boxes.json"))
-    add = [box(f"fbox{i:03d}", mn, sz,
-               "finger occupancy box (exact ref interior, crowns excluded)")
-           for i, (mn, sz) in enumerate(boxes)]
+    profiles = json.load(open(OUT / "finger_profiles.json"))
+    add = []
+    for i, (x0, x1) in enumerate(TINES):
+        prof = profiles.get(str(i))
+        if not prof:
+            continue
+        add.append({"prim": "extrude", "axis": "x", "name": f"tine{i}",
+                    "profile": [[R(p[0]), R(p[1])] for p in prof],
+                    "z0": R(x0), "z1": R(x1),
+                    "source": f"finger tine {i}: measured Y-Z silhouette "
+                    f"extruded along X x[{x0},{x1}] (base + rounded crown)"})
     cut = []
     for li, ri, py, nm in FINGERS:
-        for side, (x0, x1) in (("L", TINES[li]), ("R", TINES[ri])):
-            add.append(cyl(f"crown_{nm}_{side}", (x0, py, KN_Z), (x1, py, KN_Z),
-                           KN_R, f"{nm} crown {side}: smooth exact r6 (no stairs)"))
         xl0 = TINES[li][0]
         xr1 = TINES[ri][1]
         cut.append(cyl(f"bore_{nm}", (xl0 - 1, py, KN_Z), (xr1 + 1, py, KN_Z),
