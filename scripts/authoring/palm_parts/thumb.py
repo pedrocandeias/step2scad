@@ -1,35 +1,34 @@
-"""Thumb (polegar) — X-SLICE profile extrudes (clean, follows the taper).
-
-The thumb narrows sharply along X and is a non-prismatic saddle; a solid box
-over-fills. Instead reads thumb_profiles.json (per-X-slice measured Y-Z
-silhouettes, gen_thumb_profiles.py) and extrudes each slice along X — follows
-the real taper/shape, no stairs, no voxels. The r7.5 lug crown (#524) is kept
-as a smooth cylinder and the r2.7/r2.5 pin bores cut as round cylinders.
+"""Thumb (polegar) — 3 parts (author's description): two parallelepipeds (a
+left prong and a right prong) with an OPEN space between them, bridged by a
+third parallelepiped on top connecting the two. Plus the round pin bore
+through both prongs. Tilted 50deg about Z, placed at the measured thumb
+position (dialed in the hand template Palm_left_V2_thumb.scad). Clean simple
+primitives, no stairs, no slices.
 """
-import json
+from palm_parts.common import box, cyl
 
-from palm_parts.common import OUT, R, Z_DECK, box, cyl
+R = lambda x: round(float(x), 3)
+
+
+def _gbox(name, x, y, z, w, l, h, rot, tilt, az, src):
+    """box(w,l,h) at (x,y,z), rot(tilt about Y, rot about Z), grown up (az)."""
+    return {"transform": {"translate": [R(x), R(y), R(z)], "rotate_deg": [0, R(tilt), R(rot)]},
+            "name": name,
+            "child": {"transform": {"translate": [0, 0, R(az*h/2)]},
+                      "child": box(name, [-w/2, -l/2, -h/2], [w, l, h], src)}}
 
 
 def build():
-    slices = json.load(open(OUT / "thumb_profiles.json"))
-    add = [{"prim": "extrude", "axis": "x", "name": f"thslice{i:02d}",
-            "profile": [[R(p[0]), R(p[1])] for p in s["profile"]],
-            "z0": R(s["x0"]), "z1": R(s["x1"]),
-            "source": f"thumb X-slice x[{s['x0']},{s['x1']}]: measured Y-Z "
-            "silhouette (follows the taper)"}
-           for i, s in enumerate(slices)]
-    # lower pivot bore r2.7 (#226) along the 50deg pin axis, + r2.5 (#184)
-    cut = [cyl("thumb_bore", (28.0 - 6*0.64, -11.7 - 6*0.77, 10.4),
-               (28.0 + 10*0.64, -11.7 + 10*0.77, 10.4), 2.7,
-               "thumb pivot bore: exact r2.7 (#226) on the 50deg pin axis"),
-           cyl("thumb_upbore", (39.3 - 7*0.77, -11.4 + 7*0.64, 16.6),
-               (39.3 + 5*0.77, -11.4 - 5*0.64, 16.6), 3.0,
-               "thumb upper pin bore (#300 region)")]
-    # template keyhole: rect slot (opens the clevis) at bc rotated 50.3deg
-    bc=[28.7,-9.6,5.8]
-    cut.append({"transform":{"translate":bc,"rotate_deg":[0,0,50.3]},"name":"th_slot",
-        "child":{"transform":{"translate":[11,0,0]},
-            "child":box("th_slot",[-4,-1.95,-2.95],[8,3.9,5.9],
-                        "keyhole rect slot (open clevis) from the template")}})
+    add = [
+        _gbox("th_prong_L", 27.3, -9.0, 0, 5.2, 19, 20, 50, 0, 1, "left prong"),
+        _gbox("th_prong_R", 33.5, 0.0, 0, 5.0, 17, 20, 50, 0, 1, "right prong"),
+        # top bridge parallelepiped connecting the two prongs
+        _gbox("th_bridge", 30.4, -4.5, 20, 9, 11, 3, 50, 0, -1, "top bridge"),
+    ]
+    # round pin bore through both prongs, on the 50deg pin axis
+    bc = [28.7, -9.6, 5.8]
+    cut = [{"transform": {"translate": bc, "rotate_deg": [0, 0, 50.3]}, "name": "th_bore",
+            "child": {"transform": {"rotate_deg": [0, 90, 0]},
+                      "child": cyl("th_bore", [0, 0, -8], [0, 0, 8], 2.6,
+                                   "thumb pin bore r2.6 through both prongs")}}]
     return add, cut
