@@ -17,7 +17,7 @@ import numpy as np
 import trimesh
 
 OUT = Path("output/Palm_left")
-TINES = [(-35.3, -31.5), (-25.5, -17.5), (-11.5, -3.5), (2.5, 10.5), (16.5, 20.0)]
+TINES = [(-35.3, -31.5), (-25.2, -17.5), (-11.2, -3.5), (-3.5, 2.5), (2.5, 10.5), (10.5, 16.5), (16.5, 21.8)]  # 7 tines: 2 isolated + connected block sliced (only 2 real slots stay empty)
 Z0, Z1 = 6.62, 16.6
 Y0, Y1 = 27.0, 46.0
 STEP = 0.25

@@ -284,9 +284,9 @@
             6.62
            ]
           ],
-          "z0": -25.5,
+          "z0": -25.2,
           "z1": -17.5,
-          "source": "finger tine 1: measured Y-Z silhouette extruded along X x[-25.5,-17.5] (base + rounded crown)"
+          "source": "finger tine 1: measured Y-Z silhouette extruded along X x[-25.2,-17.5] (base + rounded crown)"
          },
          {
           "prim": "extrude",
@@ -322,9 +322,9 @@
             6.62
            ]
           ],
-          "z0": -11.5,
+          "z0": -11.2,
           "z1": -3.5,
-          "source": "finger tine 2: measured Y-Z silhouette extruded along X x[-11.5,-3.5] (base + rounded crown)"
+          "source": "finger tine 2: measured Y-Z silhouette extruded along X x[-11.2,-3.5] (base + rounded crown)"
          },
          {
           "prim": "extrude",
@@ -340,29 +340,21 @@
             16.37
            ],
            [
-            41.25,
+            31.0,
             16.37
            ],
            [
-            43.5,
-            14.62
+            31.0,
+            7.62
            ],
            [
-            44.75,
-            12.37
-           ],
-           [
-            45.0,
-            9.87
-           ],
-           [
-            43.5,
+            32.0,
             6.62
            ]
           ],
-          "z0": 2.5,
-          "z1": 10.5,
-          "source": "finger tine 3: measured Y-Z silhouette extruded along X x[2.5,10.5] (base + rounded crown)"
+          "z0": -3.5,
+          "z1": 2.5,
+          "source": "finger tine 3: measured Y-Z silhouette extruded along X x[-3.5,2.5] (base + rounded crown)"
          },
          {
           "prim": "extrude",
@@ -398,9 +390,77 @@
             6.62
            ]
           ],
+          "z0": 2.5,
+          "z1": 10.5,
+          "source": "finger tine 4: measured Y-Z silhouette extruded along X x[2.5,10.5] (base + rounded crown)"
+         },
+         {
+          "prim": "extrude",
+          "axis": "x",
+          "name": "tine5",
+          "profile": [
+           [
+            27.0,
+            6.62
+           ],
+           [
+            27.0,
+            16.37
+           ],
+           [
+            31.0,
+            16.37
+           ],
+           [
+            31.0,
+            7.62
+           ],
+           [
+            32.0,
+            6.62
+           ]
+          ],
+          "z0": 10.5,
+          "z1": 16.5,
+          "source": "finger tine 5: measured Y-Z silhouette extruded along X x[10.5,16.5] (base + rounded crown)"
+         },
+         {
+          "prim": "extrude",
+          "axis": "x",
+          "name": "tine6",
+          "profile": [
+           [
+            27.0,
+            6.62
+           ],
+           [
+            27.0,
+            16.37
+           ],
+           [
+            41.25,
+            16.37
+           ],
+           [
+            43.5,
+            14.62
+           ],
+           [
+            44.75,
+            12.37
+           ],
+           [
+            45.0,
+            9.87
+           ],
+           [
+            43.5,
+            6.62
+           ]
+          ],
           "z0": 16.5,
-          "z1": 20.0,
-          "source": "finger tine 4: measured Y-Z silhouette extruded along X x[16.5,20.0] (base + rounded crown)"
+          "z1": 21.8,
+          "source": "finger tine 6: measured Y-Z silhouette extruded along X x[16.5,21.8] (base + rounded crown)"
          },
          {
           "prim": "extrude",
@@ -2288,12 +2348,12 @@
         "prim": "cylinder",
         "name": "bore_pinky",
         "p0": [
-         -36.3,
+         -36.0,
          29.1,
          10.62
         ],
         "p1": [
-         -16.5,
+         -16.0,
          29.1,
          10.62
         ],
@@ -2304,12 +2364,12 @@
         "prim": "cylinder",
         "name": "bore_ring",
         "p0": [
-         -26.5,
+         -26.0,
          35.1,
          10.62
         ],
         "p1": [
-         -2.5,
+         -6.0,
          35.1,
          10.62
         ],
@@ -2320,12 +2380,12 @@
         "prim": "cylinder",
         "name": "bore_middle",
         "p0": [
-         -12.5,
+         -12.0,
          39.1,
          10.62
         ],
         "p1": [
-         11.5,
+         3.0,
          39.1,
          10.62
         ],
@@ -2336,12 +2396,12 @@
         "prim": "cylinder",
         "name": "bore_index",
         "p0": [
-         1.5,
+         1.0,
          39.1,
          10.62
         ],
         "p1": [
-         21.0,
+         22.0,
          39.1,
          10.62
         ],

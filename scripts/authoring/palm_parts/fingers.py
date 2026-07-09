@@ -10,9 +10,10 @@ import json
 
 from palm_parts.common import OUT, R, cyl
 
-TINES = [(-35.3, -31.5), (-25.5, -17.5), (-11.5, -3.5), (2.5, 10.5), (16.5, 20.0)]
-FINGERS = [(0, 1, 29.1, "pinky"), (1, 2, 35.1, "ring"),
-           (2, 3, 39.1, "middle"), (3, 4, 39.1, "index")]
+TINES = [(-35.3, -31.5), (-25.2, -17.5), (-11.2, -3.5), (-3.5, 2.5), (2.5, 10.5), (10.5, 16.5), (16.5, 21.8)]  # 7 tines: 2 isolated + connected block sliced (only 2 real slots stay empty)
+# (x_lo, x_hi, pin_y, name) — bores drilled through the tines at each pin
+FINGERS = [(-35, -17, 29.1, "pinky"), (-25, -7, 35.1, "ring"),
+           (-11, 2, 39.1, "middle"), (2, 21, 39.1, "index")]
 KN_Z, BORE_R = 10.62, 2.5
 
 
@@ -29,9 +30,7 @@ def build():
                     "source": f"finger tine {i}: measured Y-Z silhouette "
                     f"extruded along X x[{x0},{x1}] (base + rounded crown)"})
     cut = []
-    for li, ri, py, nm in FINGERS:
-        xl0 = TINES[li][0]
-        xr1 = TINES[ri][1]
-        cut.append(cyl(f"bore_{nm}", (xl0 - 1, py, KN_Z), (xr1 + 1, py, KN_Z),
+    for xl, xh, py, nm in FINGERS:
+        cut.append(cyl(f"bore_{nm}", (xl - 1, py, KN_Z), (xh + 1, py, KN_Z),
                        BORE_R, f"{nm} pin bore: exact round r2.5 x-axis"))
     return add, cut
