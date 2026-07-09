@@ -16,16 +16,18 @@ TH_ANG = 50.0                      # tilt (oblique walls normal 0.64,0.77)
 CR_R = 7.5                         # lower lug tip crown radius (#524)
 PIN_Z = 10.62 - Z_DECK             # lower pin height above the deck
 T = 6.0                            # lug plate thickness (along the pin)
-WALL_H = 8.0                       # walled-housing height above the deck
+WALL_H = 13.5                      # walled-housing height (measured: thumb is
+                                   # densest at z17-19, tops ~z23) -> raise it
 
 
 def build():
     # --- local (50°-tilted) frame: pin along local X, seated on the deck ---
     # walled housing base: a tilted block (its faces ARE the ±50° side walls),
-    # reaching from the body (-local-x) out under the lug
+    # reaching from the body (-local-x) out under the lug. Measured envelope
+    # x[22,42] y[-24,4] rising to ~z20 -> a taller tilted housing.
     housing = box("thumb_housing", (-15, -8.5, 0), (22, 17, WALL_H),
                   "thumb mount housing: tilted walled base (±50° side walls, "
-                  "planes #453/#539/#540/#331)")
+                  "planes #453/#539/#540/#331), raised to the measured top")
     # lower lug paddle rising to the pin, rounded r7.5 tip, pivot bore r2.7
     lug = {"op": "difference", "children": [
         {"op": "union", "children": [
