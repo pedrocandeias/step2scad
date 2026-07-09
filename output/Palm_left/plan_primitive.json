@@ -532,19 +532,54 @@
            "op": "union",
            "children": [
             {
-             "prim": "box",
-             "name": "thumb_housing",
-             "min": [
-              -15.0,
-              -8.5,
-              0.0
-             ],
-             "size": [
-              22.0,
-              17.0,
-              13.5
-             ],
-             "source": "thumb mount housing: tilted walled base (\u00b150\u00b0 side walls, planes #453/#539/#540/#331), raised to the measured top"
+             "op": "difference",
+             "children": [
+              {
+               "prim": "box",
+               "name": "thumb_housing",
+               "min": [
+                -16.0,
+                -6.5,
+                0.0
+               ],
+               "size": [
+                24.0,
+                13.5,
+                16.4
+               ],
+               "source": "thumb housing: tilted mass shaped to the measured envelope (\u00b150deg walls #453/#539/#540/#331), up to z23"
+              },
+              {
+               "prim": "box",
+               "name": "thumb_void1",
+               "min": [
+                -17.0,
+                -3.0,
+                1.38
+               ],
+               "size": [
+                26.0,
+                3.5,
+                3.6
+               ],
+               "source": "thumb clevis void: measured hollow at localY[-3,0] z8-11"
+              },
+              {
+               "prim": "box",
+               "name": "thumb_void2",
+               "min": [
+                -17.0,
+                -6.6,
+                -0.02
+               ],
+               "size": [
+                16.0,
+                2.8,
+                2.4
+               ],
+               "source": "thumb lower-left void: measured empty at localY[-6.6,-4] z6.6-9"
+              }
+             ]
             },
             {
              "op": "difference",
@@ -565,7 +600,7 @@
                   15.0,
                   4.0
                  ],
-                 "source": "thumb lug paddle (rises from the housing to the pin)"
+                 "source": "thumb lug paddle rising to the pin"
                 },
                 {
                  "prim": "cylinder",
@@ -581,7 +616,7 @@
                   4.0
                  ],
                  "r": 7.5,
-                 "source": "thumb lug rounded tip: exact r7.5 (face #524) at z10.6"
+                 "source": "thumb lug rounded tip: exact r7.5 (#524) at z10.6"
                 }
                ]
               },
@@ -599,7 +634,7 @@
                 4.0
                ],
                "r": 2.7,
-               "source": "thumb lower pivot bore: exact r2.7 (faces #226/#184)"
+               "source": "thumb lower pivot bore: exact r2.7 (#226/#184)"
               }
              ]
             }
@@ -622,7 +657,7 @@
              10.0,
              12.98
             ],
-            "source": "thumb upper tower: raised block carrying the 2nd saddle pin"
+            "source": "thumb upper tower: 2nd saddle pin block"
            },
            {
             "prim": "cylinder",
@@ -638,7 +673,7 @@
              16.6
             ],
             "r": 3.0,
-            "source": "thumb upper pin bore (face #300 region)"
+            "source": "thumb upper pin bore (#300 region)"
            }
           ]
          }
