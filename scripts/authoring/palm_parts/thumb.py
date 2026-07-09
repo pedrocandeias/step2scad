@@ -1,17 +1,48 @@
-"""Thumb (polegar) — 3 parts (author's description): two parallelepipeds (a
-left prong and a right prong) with an OPEN space between them, bridged by a
-third parallelepiped on top connecting the two. Plus the round pin bore
-through both prongs. Tilted 50deg about Z, placed at the measured thumb
-position (dialed in the hand template Palm_left_V2_thumb.scad). Clean simple
-primitives, no stairs, no slices.
+"""Thumb (polegar) — 3 parts (author's description): a left prong and a right
+prong with an OPEN space between them, bridged by a third box on top. The
+prongs have a QUARTER-CIRCLE bottom (front-bottom corner rounded). Tuned
+against the ghost: the left (Red) prong receded, the right (Blue) prong moved
+toward the left. Plus the round pin bore. Tilted 50deg. Clean primitives.
+
+Adjust knobs: L_X/L_Y (red position), R_X/R_Y (blue position), RC (bottom
+quarter-circle radius), prong sizes W/L/H.
 """
+import numpy as np
+
 from palm_parts.common import box, cyl
 
 R = lambda x: round(float(x), 3)
 
+# --- prong placement (tuned to the ghost) ---
+L_X, L_Y = 25.8, -9.0          # red (left) prong — RECEDED (was x27.3)
+R_X, R_Y = 33.5, -3.0          # blue (right) prong — moved toward red (was y0)
+W, PL, PH = 5.2, 19.0, 20.0    # prong thickness / length / height
+RC = 4.0                       # bottom quarter-circle radius
+ANG = 50.0
+
+
+def _prong_profile(rc):
+    """(l,h) profile: rectangle with the FRONT-BOTTOM corner a quarter circle."""
+    l, h = PL, PH
+    pts = [[-l/2, -h/2]]                       # back-bottom
+    for a in np.linspace(-90, 0, 10):         # front-bottom quarter arc
+        pts.append([l/2 - rc + rc*np.cos(np.radians(a)),
+                    -h/2 + rc + rc*np.sin(np.radians(a))])
+    pts += [[l/2, h/2], [-l/2, h/2]]           # front-top, back-top
+    return [[R(p[0]), R(p[1])] for p in pts]
+
+
+def _prong(name, x, y, color):
+    prof = _prong_profile(RC)
+    block = {"prim": "extrude", "axis": "x", "name": name,
+             "profile": prof, "z0": R(-W/2), "z1": R(W/2),
+             "source": f"{name}: prong, quarter-circle bottom, extruded along x"}
+    return {"transform": {"translate": [R(x), R(y), 0], "rotate_deg": [0, 0, ANG]},
+            "name": name, "color": color,
+            "child": {"transform": {"translate": [0, 0, R(PH/2)]}, "child": block}}
+
 
 def _gbox(name, x, y, z, w, l, h, rot, tilt, az, src, color=None):
-    """box(w,l,h) at (x,y,z), rot(tilt about Y, rot about Z), grown up (az)."""
     node = {"transform": {"translate": [R(x), R(y), R(z)], "rotate_deg": [0, R(tilt), R(rot)]},
             "name": name,
             "child": {"transform": {"translate": [0, 0, R(az*h/2)]},
@@ -23,12 +54,10 @@ def _gbox(name, x, y, z, w, l, h, rot, tilt, az, src, color=None):
 
 def build():
     add = [
-        _gbox("th_prong_L", 27.3, -9.0, 0, 5.2, 19, 20, 50, 0, 1, "left prong (Red)", "Red"),
-        _gbox("th_prong_R", 33.5, 0.0, 0, 5.0, 17, 20, 50, 0, 1, "right prong (Blue)", "Blue"),
-        # top bridge parallelepiped connecting the two prongs
-        _gbox("th_bridge", 30.4, -4.5, 20, 9, 11, 3, 50, 0, -1, "top bridge (Green)", "Green"),
+        _prong("th_prong_L", L_X, L_Y, "Red"),
+        _prong("th_prong_R", R_X, R_Y, "Blue"),
+        _gbox("th_bridge", 30.4, -6.0, 20, 9, 11, 3, 50, 0, -1, "top bridge (Green)", "Green"),
     ]
-    # round pin bore through both prongs, on the 50deg pin axis
     bc = [28.7, -9.6, 5.8]
     cut = [{"transform": {"translate": bc, "rotate_deg": [0, 0, 50.3]}, "name": "th_bore",
             "child": {"transform": {"rotate_deg": [0, 90, 0]},

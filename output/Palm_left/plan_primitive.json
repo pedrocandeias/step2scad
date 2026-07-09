@@ -577,17 +577,18 @@
          {
           "transform": {
            "translate": [
-            27.3,
+            25.8,
             -9.0,
-            0.0
+            0
            ],
            "rotate_deg": [
             0,
-            0.0,
+            0,
             50.0
            ]
           },
           "name": "th_prong_L",
+          "color": "Red",
           "child": {
            "transform": {
             "translate": [
@@ -597,37 +598,84 @@
             ]
            },
            "child": {
-            "prim": "box",
+            "prim": "extrude",
+            "axis": "x",
             "name": "th_prong_L",
-            "min": [
-             -2.6,
-             -9.5,
-             -10.0
+            "profile": [
+             [
+              -9.5,
+              -10.0
+             ],
+             [
+              5.5,
+              -10.0
+             ],
+             [
+              6.195,
+              -9.939
+             ],
+             [
+              6.868,
+              -9.759
+             ],
+             [
+              7.5,
+              -9.464
+             ],
+             [
+              8.071,
+              -9.064
+             ],
+             [
+              8.564,
+              -8.571
+             ],
+             [
+              8.964,
+              -8.0
+             ],
+             [
+              9.259,
+              -7.368
+             ],
+             [
+              9.439,
+              -6.695
+             ],
+             [
+              9.5,
+              -6.0
+             ],
+             [
+              9.5,
+              10.0
+             ],
+             [
+              -9.5,
+              10.0
+             ]
             ],
-            "size": [
-             5.2,
-             19.0,
-             20.0
-            ],
-            "source": "left prong (Red)"
+            "z0": -2.6,
+            "z1": 2.6,
+            "source": "th_prong_L: prong, quarter-circle bottom, extruded along x"
            }
-          },
-          "color": "Red"
+          }
          },
          {
           "transform": {
            "translate": [
             33.5,
-            0.0,
-            0.0
+            -3.0,
+            0
            ],
            "rotate_deg": [
             0,
-            0.0,
+            0,
             50.0
            ]
           },
           "name": "th_prong_R",
+          "color": "Blue",
           "child": {
            "transform": {
             "translate": [
@@ -637,28 +685,74 @@
             ]
            },
            "child": {
-            "prim": "box",
+            "prim": "extrude",
+            "axis": "x",
             "name": "th_prong_R",
-            "min": [
-             -2.5,
-             -8.5,
-             -10.0
+            "profile": [
+             [
+              -9.5,
+              -10.0
+             ],
+             [
+              5.5,
+              -10.0
+             ],
+             [
+              6.195,
+              -9.939
+             ],
+             [
+              6.868,
+              -9.759
+             ],
+             [
+              7.5,
+              -9.464
+             ],
+             [
+              8.071,
+              -9.064
+             ],
+             [
+              8.564,
+              -8.571
+             ],
+             [
+              8.964,
+              -8.0
+             ],
+             [
+              9.259,
+              -7.368
+             ],
+             [
+              9.439,
+              -6.695
+             ],
+             [
+              9.5,
+              -6.0
+             ],
+             [
+              9.5,
+              10.0
+             ],
+             [
+              -9.5,
+              10.0
+             ]
             ],
-            "size": [
-             5.0,
-             17.0,
-             20.0
-            ],
-            "source": "right prong (Blue)"
+            "z0": -2.6,
+            "z1": 2.6,
+            "source": "th_prong_R: prong, quarter-circle bottom, extruded along x"
            }
-          },
-          "color": "Blue"
+          }
          },
          {
           "transform": {
            "translate": [
             30.4,
-            -4.5,
+            -6.0,
             20.0
            ],
            "rotate_deg": [
