@@ -7,6 +7,26 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Distals body0 8-part grid via SHARED measured-outline loft** —
+  `output/Distals/parts/`: one `outline.scad` (50 X-Z convex section
+  outlines measured from the reference tessellation, lofted with ruled
+  hulls — no band stacks) is the outer form for ALL 8 grid parts; each part
+  subtracts only its measured interior voids (`voids.scad`). Grid total IoU
+  0.825 → **0.986** (per part: y0_z0 0.978 · y0_z1 0.975 · y1_z0 0.968 ·
+  y1_z1 0.983 · y2_z0 0.993 · y2_z1 0.995 · y3_z0 0.993 · y3_z1 0.997;
+  volumes within ~2%). Outer envelope covers the whole body to FN 5.6 mm³.
+  New tools: `scripts/outline_loft.py` (generator) and
+  `scripts/probe_columns.py` (occupied-z-interval column probe — reads the
+  interior structure that section outlines bridge over).
+- **Distals interior measured, not assumed** (probe columns): the "bore" is
+  a **keyhole slot** (empty band z 6.1–10.3; short in the left plate
+  y −17.75..−13.05, long through the right prong y −18.45..−12.12 with
+  diagonal end caps) plus a **counterbore** on the outer left face
+  (enlarged profile, constant to x≈−29.3) — the old circular r2.75/r2.25
+  bores both over- and under-cut. Open dorsal slot y −7..3.87 over a
+  sloping cavity floor (z 9.6→13.05) crossed by a **bridge strap**
+  y −1.35..1.3; the central fenda really ends at y −8.9 with a measured
+  ramp; back-bottom flange groove y −20.26..−20.12.
 - **Per-part `color` field** (plan schema + emitter): any node may carry
   `"color": "<name>"` or `[r,g,b]`, emitted as `color(...) { ... }` so
   individual pieces are visually distinguishable (author needs to point at
@@ -82,6 +102,11 @@ versions are project milestones (no releases published yet).
   anatomical re-segmentation (full-width footprints) — future work.
 
 ### Fixed
+- ⚠ measurement trap (reconfirmed on Distals parts): voxel `contains()`
+  diagnostics report **phantom FN** on non-watertight part meshes caused by
+  exactly-coincident CSG faces (e.g. a guide-post top flush with the channel
+  void top). Re-probe with small offsets before acting on a single column;
+  avoid exact tangency in emitted CSG (nudge overlaps by 0.01).
 - Plane normals from features.json are UNORIENTED (reconfirmed the hard
   way: trusting them flipped half the trim wedges inward, −11000 mm³) —
   stages orient by two-sided containment probes. Face-selection must

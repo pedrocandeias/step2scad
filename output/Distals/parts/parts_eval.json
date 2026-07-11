@@ -1,0 +1,19 @@
+{
+  "method": "voxel contains (pitch 0.35) per grid cell vs reference cell tessellation",
+  "date": "2026-07-12",
+  "architecture": "shared measured-outline loft (outline.scad, 50 X-Z convex section stations) + per-part measured interior voids (voids.scad)",
+  "outer_envelope_check": {"fn_mm3_vs_whole_body": 5.6, "fp_mm3_internal_voids": 1427.7},
+  "caveat": "contains() reports phantom FN on non-watertight part meshes (coincident CSG faces); per-part figures are lower bounds — verified by offset re-probe + ghost overlays",
+  "parts": {
+    "part_y0_z0": {"iou": 0.978, "vol": 435, "ref_vol": 429},
+    "part_y0_z1": {"iou": 0.975, "vol": 275, "ref_vol": 272},
+    "part_y1_z0": {"iou": 0.968, "vol": 921, "ref_vol": 915},
+    "part_y1_z1": {"iou": 0.983, "vol": 416, "ref_vol": 419},
+    "part_y2_z0": {"iou": 0.993, "vol": 987, "ref_vol": 992},
+    "part_y2_z1": {"iou": 0.995, "vol": 677, "ref_vol": 675},
+    "part_y3_z0": {"iou": 0.993, "vol": 144, "ref_vol": 144},
+    "part_y3_z1": {"iou": 0.997, "vol": 792, "ref_vol": 793}
+  },
+  "total_iou": 0.986,
+  "previous_total_iou": 0.825
+}
