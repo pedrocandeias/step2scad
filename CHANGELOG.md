@@ -12,12 +12,19 @@ versions are project milestones (no releases published yet).
   outlines measured from the reference tessellation, lofted with ruled
   hulls — no band stacks) is the outer form for ALL 8 grid parts; each part
   subtracts only its measured interior voids (`voids.scad`). Grid total IoU
-  0.825 → **0.986** (per part: y0_z0 0.978 · y0_z1 0.975 · y1_z0 0.968 ·
-  y1_z1 0.983 · y2_z0 0.993 · y2_z1 0.995 · y3_z0 0.993 · y3_z1 0.997;
-  volumes within ~2%). Outer envelope covers the whole body to FN 5.6 mm³.
-  New tools: `scripts/outline_loft.py` (generator) and
-  `scripts/probe_columns.py` (occupied-z-interval column probe — reads the
-  interior structure that section outlines bridge over).
+  0.825 → **0.9888** boolean(openscad-native-csg) (per part: y0_z0 0.9792 ·
+  y0_z1 0.9817 · y1_z0 0.9802 · y1_z1 0.9888 · y2_z0 0.9931 · y2_z1 0.9931 ·
+  y3_z0 0.9960 · y3_z1 0.9965; volumes within ~1%). Outer envelope covers
+  the whole body to FN 5.6 mm³. New tools: `scripts/outline_loft.py`
+  (generator) and `scripts/probe_columns.py` (occupied-z-interval column
+  probe — reads the interior structure that section outlines bridge over).
+- **Parts reunited as ONE piece** — `output/Distals/parts/body0_whole.scad`:
+  same shared outer form minus the UNION of the measured voids (no cell
+  seams), poste-guia and dorsal bridge added back. **IoU 0.9890**
+  boolean(openscad-native-csg) vs the whole body0, volume +0.27%. The fenda
+  transition was re-measured for the reunion (ramp with a knee 1.9→5.65 at
+  y −8.5..−8.3, full-material front at y −7.85, floor hump z 10.20) — one
+  shared `fenda_full()` void now serves both grid cells and the whole.
 - **Distals interior measured, not assumed** (probe columns): the "bore" is
   a **keyhole slot** (empty band z 6.1–10.3; short in the left plate
   y −17.75..−13.05, long through the right prong y −18.45..−12.12 with

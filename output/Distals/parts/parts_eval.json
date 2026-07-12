@@ -1,19 +1,20 @@
 {
-  "method": "voxel contains (pitch 0.35) per grid cell vs reference cell tessellation",
+  "method": "boolean(openscad-native-csg) per grid cell vs reference cell tessellation",
   "date": "2026-07-12",
-  "architecture": "shared measured-outline loft (outline.scad, 50 X-Z convex section stations) + per-part measured interior voids (voids.scad)",
+  "architecture": "shared measured-outline loft (outline.scad, 50 X-Z convex section stations) + measured interior voids (voids.scad); body0_whole.scad = the 8 parts reunited as ONE piece (same outer form minus the union of the voids)",
   "outer_envelope_check": {"fn_mm3_vs_whole_body": 5.6, "fp_mm3_internal_voids": 1427.7},
-  "caveat": "contains() reports phantom FN on non-watertight part meshes (coincident CSG faces); per-part figures are lower bounds — verified by offset re-probe + ghost overlays",
+  "note": "voxel contains() reports phantom FN on these non-watertight CSG meshes — boolean(openscad-native-csg) is the trusted metric (CLAUDE.md trap)",
   "parts": {
-    "part_y0_z0": {"iou": 0.978, "vol": 435, "ref_vol": 429},
-    "part_y0_z1": {"iou": 0.975, "vol": 275, "ref_vol": 272},
-    "part_y1_z0": {"iou": 0.968, "vol": 921, "ref_vol": 915},
-    "part_y1_z1": {"iou": 0.983, "vol": 416, "ref_vol": 419},
-    "part_y2_z0": {"iou": 0.993, "vol": 987, "ref_vol": 992},
-    "part_y2_z1": {"iou": 0.995, "vol": 677, "ref_vol": 675},
-    "part_y3_z0": {"iou": 0.993, "vol": 144, "ref_vol": 144},
-    "part_y3_z1": {"iou": 0.997, "vol": 792, "ref_vol": 793}
+    "part_y0_z0": {"iou": 0.9792, "i": 428, "u": 437},
+    "part_y0_z1": {"iou": 0.9817, "i": 271, "u": 276},
+    "part_y1_z0": {"iou": 0.9802, "i": 910, "u": 929},
+    "part_y1_z1": {"iou": 0.9888, "i": 416, "u": 420},
+    "part_y2_z0": {"iou": 0.9931, "i": 986, "u": 993},
+    "part_y2_z1": {"iou": 0.9931, "i": 674, "u": 678},
+    "part_y3_z0": {"iou": 0.9960, "i": 144, "u": 144},
+    "part_y3_z1": {"iou": 0.9965, "i": 791, "u": 794}
   },
-  "total_iou": 0.986,
+  "total_iou": 0.9888,
+  "whole_piece": {"file": "body0_whole.scad", "iou": 0.9890, "volume": 4650.7, "reference_volume": 4638.1},
   "previous_total_iou": 0.825
 }

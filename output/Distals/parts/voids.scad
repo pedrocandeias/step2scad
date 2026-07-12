@@ -33,25 +33,26 @@ module keyhole_slots() {
 module back_groove() yz_prism(-33, 16) polygon([
   [-20.26, 1.25], [-20.22, 2.55], [-20.18, 3.25], [-20.12, 4.50], [-20.26, 4.50]]);
 
-// ---- fenda central + rampa (a fenda real acaba em y=-8.9 com rampa medida) ----
-module fenda_z0() {                          // celula z0: fenda + rampa + bolsa
+// ---- fenda central + transicao (a fenda acaba em y=-8.9; rampa com joelho,
+// bolsa sob o piso e frente cheia em y=-7.85 — tudo medido por colunas z) ----
+module fenda_full() {
   translate([cx0, -22, 0]) cube([cx1 - cx0, 13.1, 16]);   // fenda ate y=-8.9
-  yz_prism(cx0, cx1 - cx0) polygon([                       // rampa medida
-    [-8.9, 1.15], [-8.5, 1.90], [-8.0, 6.80], [-7.55, 8.80], [-8.9, 8.80]]);
+  yz_prism(cx0, cx1 - cx0) polygon([                       // vazio da transicao:
+    [-8.9, 1.15], [-8.5, 1.90], [-8.3, 5.65], [-8.1, 6.30],   // rampa (joelho medido)
+    [-8.0, 6.80], [-7.9, 7.55], [-7.85, 8.20],                // frente cheia y-7.85
+    [-7.9, 8.90], [-8.0, 9.60], [-8.04, 9.60],                // sob o piso (bolsa)
+    [-8.04, 16.0], [-8.9, 16.0]]);
 }
-module fenda_z1() {                          // celula z1: fenda ate y=-8.2
-  translate([cx0, -22, 0]) cube([cx1 - cx0, 13.8, 16]);
-  yz_prism(cx0, cx1 - cx0) polygon([                       // bolsa sob o piso
-    [-8.2, 8.60], [-7.6, 8.60], [-7.95, 9.55]]);
-}
+module fenda_z0() fenda_full();              // celulas z0/z1: o cellbox recorta
+module fenda_z1() fenda_full();
 
 // ---- cavidade central: vazio acima do PISO medido (o teto e' a ponte) ----
 // piso medido (topo do material inferior) por y; vazio = acima do piso.
 module cavity_void() yz_prism(cx0, cx1 - cx0) polygon([
-  [-8.2, 9.55], [-8.0, 9.60], [-7.5, 10.15], [-6.0, 10.10], [-4.0, 9.95],
+  [-8.05, 9.70], [-7.9, 10.10], [-7.8, 10.20], [-7.5, 10.15], [-6.0, 10.10], [-4.0, 9.95],
   [-2.0, 9.85], [-1.0, 9.75], [0.5, 9.70], [1.0, 9.75], [1.5, 9.90],
   [1.8, 10.05], [2.2, 10.25], [3.0, 11.00], [3.5, 11.85], [3.87, 13.05],
-  [3.87, 16.0], [-8.2, 16.0]]);
+  [3.87, 16.0], [-8.05, 16.0]]);
 // ponte (strap) dorsal medida: y[-1.35,1.35], por cima da cavidade
 module bridge() yz_prism(cx0, cx1 - cx0) polygon([
   [-1.35, 13.30], [-1.0, 12.00], [-0.5, 11.75], [0.2, 11.70], [0.5, 11.80],
