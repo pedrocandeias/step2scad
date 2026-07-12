@@ -7,6 +7,58 @@ versions are project milestones (no releases published yet).
 ## [Unreleased]
 
 ### Added
+- **Distals body0 8-part grid via SHARED measured-outline loft** —
+  `output/Distals/parts/`: one `outline.scad` (50 X-Z convex section
+  outlines measured from the reference tessellation, lofted with ruled
+  hulls — no band stacks) is the outer form for ALL 8 grid parts; each part
+  subtracts only its measured interior voids (`voids.scad`). Grid total IoU
+  0.825 → **0.9888** boolean(openscad-native-csg) (per part: y0_z0 0.9792 ·
+  y0_z1 0.9817 · y1_z0 0.9802 · y1_z1 0.9888 · y2_z0 0.9931 · y2_z1 0.9931 ·
+  y3_z0 0.9960 · y3_z1 0.9965; volumes within ~1%). Outer envelope covers
+  the whole body to FN 5.6 mm³. New tools: `scripts/outline_loft.py`
+  (generator) and `scripts/probe_columns.py` (occupied-z-interval column
+  probe — reads the interior structure that section outlines bridge over).
+- **Distals body0 FUSED PARAMETRIC model** —
+  `output/Distals/parts/body0_parametric.scad`, **IoU 0.9634**
+  boolean(openscad-native-csg) (spec ≥0.95 met; cost vs the station loft
+  0.9907 quantified at 0.0273). Every X-Z section = hull of 4 circles with
+  corners computed by circle-circle intersection (closed-form, no point
+  dumps; short-arc traversal with outward tie-break for near-flat arcs —
+  fitted flat arcs have an unstable center side and CCW-forcing swept 350°).
+  Three measured regimes from a 109-station law scan (`arc_fits.json`):
+  DOME y[9.2,21.6] fully LAW-driven (silhouette zmax = arc R14.38 rms 0.113;
+  side-circle cx/cz/r arc laws rms 0.03-0.14; zmin linear rms 0.156); MID
+  y[-19.2,9.2] has NO single law (side radius 12→21→6 non-monotonic) → 12
+  semantic named control stations (st_keyhole, st_fenda_end, st_bridge, …,
+  4 editable circles each); BACK control stations + flange-as-feature.
+  Residual analysis: the remaining 0.027 is a distributed ~0.2mm shell on
+  the MID flanks — the 4-arc-per-section representation itself (fit p90
+  0.2-0.3mm), not station spacing; next moves if needed: 6-arc MID sections,
+  refit dome side-r law.
+- **Canal void corrected to measured vertical walls** (voids.scad
+  `canal_void()`): the bottom channel's outer walls are vertical at
+  x −28.08/−22.08 (probed: −28.15 solid, −27.9 open to z3.65) with an arched
+  roof (r2 pair, springline z2.82) — the old hull-of-cylinders rounded the
+  bottom corners inward. part_y1_z0 0.9802→**0.9894**, part_y2_z0 0.9927;
+  parts total **0.9910**; whole piece **0.9907**. (Trap: the switch silently
+  no-opped in part_y2_z0 until `include <voids.scad>` was added — OpenSCAD
+  ignores unknown modules with only a warning.)
+- **Parts reunited as ONE piece** — `output/Distals/parts/body0_whole.scad`:
+  same shared outer form minus the UNION of the measured voids (no cell
+  seams), poste-guia and dorsal bridge added back. **IoU 0.9890**
+  boolean(openscad-native-csg) vs the whole body0, volume +0.27%. The fenda
+  transition was re-measured for the reunion (ramp with a knee 1.9→5.65 at
+  y −8.5..−8.3, full-material front at y −7.85, floor hump z 10.20) — one
+  shared `fenda_full()` void now serves both grid cells and the whole.
+- **Distals interior measured, not assumed** (probe columns): the "bore" is
+  a **keyhole slot** (empty band z 6.1–10.3; short in the left plate
+  y −17.75..−13.05, long through the right prong y −18.45..−12.12 with
+  diagonal end caps) plus a **counterbore** on the outer left face
+  (enlarged profile, constant to x≈−29.3) — the old circular r2.75/r2.25
+  bores both over- and under-cut. Open dorsal slot y −7..3.87 over a
+  sloping cavity floor (z 9.6→13.05) crossed by a **bridge strap**
+  y −1.35..1.3; the central fenda really ends at y −8.9 with a measured
+  ramp; back-bottom flange groove y −20.26..−20.12.
 - **Per-part `color` field** (plan schema + emitter): any node may carry
   `"color": "<name>"` or `[r,g,b]`, emitted as `color(...) { ... }` so
   individual pieces are visually distinguishable (author needs to point at
@@ -82,6 +134,11 @@ versions are project milestones (no releases published yet).
   anatomical re-segmentation (full-width footprints) — future work.
 
 ### Fixed
+- ⚠ measurement trap (reconfirmed on Distals parts): voxel `contains()`
+  diagnostics report **phantom FN** on non-watertight part meshes caused by
+  exactly-coincident CSG faces (e.g. a guide-post top flush with the channel
+  void top). Re-probe with small offsets before acting on a single column;
+  avoid exact tangency in emitted CSG (nudge overlaps by 0.01).
 - Plane normals from features.json are UNORIENTED (reconfirmed the hard
   way: trusting them flipped half the trim wedges inward, −11000 mm³) —
   stages orient by two-sided containment probes. Face-selection must
