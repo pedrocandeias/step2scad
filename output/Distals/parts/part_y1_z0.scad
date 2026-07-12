@@ -12,8 +12,7 @@ include <voids.scad>
 module solid() union() { difference() {
   outer_body();
   fenda_z0();                                               // fenda ate y=-8.9 + rampa
-  hull() for (cx = [-26.08, -24.08])                        // canal medido
-    translate([cx, -9.61, 2.82]) rotate([-90, 0, 0]) cylinder(h = 11.85, r = 2.0);
+  canal_void();                                             // canal medido (paredes verticais)
 }
   translate([-26.39, -8.42, 1.1]) cube([2.65, 8.72, 3.73]); // poste-guia (topo 0.01 acima do canal p/ CSG limpo)
 }

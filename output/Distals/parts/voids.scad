@@ -33,6 +33,14 @@ module keyhole_slots() {
 module back_groove() yz_prism(-33, 16) polygon([
   [-20.26, 1.25], [-20.22, 2.55], [-20.18, 3.25], [-20.12, 4.50], [-20.26, 4.50]]);
 
+// canal do fundo: paredes exteriores VERTICAIS em x-28.08/-22.08 (medido:
+// x-28.15 solido, x-27.9 aberto ate 3.65) + teto em arco (par r2, springline z2.82)
+module canal_void(y0 = -9.61, len = 11.85) {
+  hull() for (cx = [-26.08, -24.08])
+    translate([cx, y0, 2.82]) rotate([-90, 0, 0]) cylinder(h = len, r = 2.0);
+  translate([-28.08, y0, 0.6]) cube([6.0, len, 2.22]);   // ate a springline
+}
+
 // ---- fenda central + transicao (a fenda acaba em y=-8.9; rampa com joelho,
 // bolsa sob o piso e frente cheia em y=-7.85 — tudo medido por colunas z) ----
 module fenda_full() {

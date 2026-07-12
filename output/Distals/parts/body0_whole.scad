@@ -14,8 +14,7 @@ module solid() union() {
     fenda_full();        // fenda + transicao medida (rampa com joelho, bolsa)
     keyhole_slots();     // ranhura keyhole (curta esq. + rebaixo na face + longa dir.)
     back_groove();       // ranhura atras do rebordo do fundo
-    hull() for (cx = [-26.08, -24.08])                      // canal (par de ranhuras r2)
-      translate([cx, -9.61, 2.82]) rotate([-90, 0, 0]) cylinder(h = 11.85, r = 2.0);
+    canal_void();        // canal do fundo (paredes verticais + teto em arco)
     cavity_void();       // vazio acima do piso medido (slot dorsal aberto)
   }
   translate([-26.39, -8.42, 1.1]) cube([2.65, 8.72, 3.73]); // poste-guia

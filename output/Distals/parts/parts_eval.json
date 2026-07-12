@@ -1,20 +1,25 @@
 {
-  "method": "boolean(openscad-native-csg) per grid cell vs reference cell tessellation",
+  "method": "boolean(openscad-native-csg) vs reference tessellation",
   "date": "2026-07-12",
-  "architecture": "shared measured-outline loft (outline.scad, 50 X-Z convex section stations) + measured interior voids (voids.scad); body0_whole.scad = the 8 parts reunited as ONE piece (same outer form minus the union of the voids)",
-  "outer_envelope_check": {"fn_mm3_vs_whole_body": 5.6, "fp_mm3_internal_voids": 1427.7},
-  "note": "voxel contains() reports phantom FN on these non-watertight CSG meshes — boolean(openscad-native-csg) is the trusted metric (CLAUDE.md trap)",
+  "architecture": "shared measured outer form + measured interior voids (voids.scad). Three variants: (1) parts on outline.scad station loft; (2) body0_whole.scad = parts reunited, one piece; (3) body0_parametric.scad = FUSED PARAMETRIC model (sections = hull of 4 circles via circle-circle corner intersections; DOME y[9.2,21.6] fully law-driven, arc/linear laws rms 0.03-0.17; MID via 12 semantic named control stations; BACK control stations + flange feature)",
   "parts": {
     "part_y0_z0": {"iou": 0.9792, "i": 428, "u": 437},
     "part_y0_z1": {"iou": 0.9817, "i": 271, "u": 276},
-    "part_y1_z0": {"iou": 0.9802, "i": 910, "u": 929},
+    "part_y1_z0": {"iou": 0.9894, "i": 910, "u": 920},
     "part_y1_z1": {"iou": 0.9888, "i": 416, "u": 420},
-    "part_y2_z0": {"iou": 0.9931, "i": 986, "u": 993},
+    "part_y2_z0": {"iou": 0.9927, "i": 985, "u": 992},
     "part_y2_z1": {"iou": 0.9931, "i": 674, "u": 678},
     "part_y3_z0": {"iou": 0.9960, "i": 144, "u": 144},
     "part_y3_z1": {"iou": 0.9965, "i": 791, "u": 794}
   },
-  "total_iou": 0.9888,
-  "whole_piece": {"file": "body0_whole.scad", "iou": 0.9890, "volume": 4650.7, "reference_volume": 4638.1},
+  "total_iou": 0.9910,
+  "whole_piece": {"file": "body0_whole.scad", "iou": 0.9907},
+  "parametric": {
+    "file": "body0_parametric.scad",
+    "iou": 0.9634,
+    "cost_vs_station_loft": 0.0273,
+    "residual_analysis": "dominant residual is a distributed ~0.2mm shell on the MID-zone flanks: the per-section 4-arc representation itself (fit p90 0.2-0.3mm there), not station spacing; DOME laws hold at rms 0.03-0.17. Next candidates if >0.9634 needed: 6-arc sections in MID, refit dome side-radius law, densify control stations",
+    "author_policy": "parametric editable form preferred while >=0.95 and cost quantified (spec met)"
+  },
   "previous_total_iou": 0.825
 }

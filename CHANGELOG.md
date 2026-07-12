@@ -18,6 +18,31 @@ versions are project milestones (no releases published yet).
   the whole body to FN 5.6 mm³. New tools: `scripts/outline_loft.py`
   (generator) and `scripts/probe_columns.py` (occupied-z-interval column
   probe — reads the interior structure that section outlines bridge over).
+- **Distals body0 FUSED PARAMETRIC model** —
+  `output/Distals/parts/body0_parametric.scad`, **IoU 0.9634**
+  boolean(openscad-native-csg) (spec ≥0.95 met; cost vs the station loft
+  0.9907 quantified at 0.0273). Every X-Z section = hull of 4 circles with
+  corners computed by circle-circle intersection (closed-form, no point
+  dumps; short-arc traversal with outward tie-break for near-flat arcs —
+  fitted flat arcs have an unstable center side and CCW-forcing swept 350°).
+  Three measured regimes from a 109-station law scan (`arc_fits.json`):
+  DOME y[9.2,21.6] fully LAW-driven (silhouette zmax = arc R14.38 rms 0.113;
+  side-circle cx/cz/r arc laws rms 0.03-0.14; zmin linear rms 0.156); MID
+  y[-19.2,9.2] has NO single law (side radius 12→21→6 non-monotonic) → 12
+  semantic named control stations (st_keyhole, st_fenda_end, st_bridge, …,
+  4 editable circles each); BACK control stations + flange-as-feature.
+  Residual analysis: the remaining 0.027 is a distributed ~0.2mm shell on
+  the MID flanks — the 4-arc-per-section representation itself (fit p90
+  0.2-0.3mm), not station spacing; next moves if needed: 6-arc MID sections,
+  refit dome side-r law.
+- **Canal void corrected to measured vertical walls** (voids.scad
+  `canal_void()`): the bottom channel's outer walls are vertical at
+  x −28.08/−22.08 (probed: −28.15 solid, −27.9 open to z3.65) with an arched
+  roof (r2 pair, springline z2.82) — the old hull-of-cylinders rounded the
+  bottom corners inward. part_y1_z0 0.9802→**0.9894**, part_y2_z0 0.9927;
+  parts total **0.9910**; whole piece **0.9907**. (Trap: the switch silently
+  no-opped in part_y2_z0 until `include <voids.scad>` was added — OpenSCAD
+  ignores unknown modules with only a warning.)
 - **Parts reunited as ONE piece** — `output/Distals/parts/body0_whole.scad`:
   same shared outer form minus the UNION of the measured voids (no cell
   seams), poste-guia and dorsal bridge added back. **IoU 0.9890**
